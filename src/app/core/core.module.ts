@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { NgZorroAntdModule } from './ng-zorro-antd.module';
 
 
 
 @NgModule({
   declarations: [
     SiteLayoutComponent,
-    AuthLayoutComponent
+
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgZorroAntdModule
   ],
   exports: [
     SiteLayoutComponent,
-    AuthLayoutComponent
+    NgZorroAntdModule
   ]
 })
 export class CoreModule { }
