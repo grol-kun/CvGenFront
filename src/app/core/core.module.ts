@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthComponent } from './auth/auth.component';
+import { SiteLayoutComponent } from './site-layout/site-layout.component';
 
 
 
 @NgModule({
   declarations: [
-    AuthComponent
+    SiteLayoutComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class AuthModule { }
+export class CoreModule { }
