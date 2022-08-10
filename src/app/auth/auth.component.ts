@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeToggleService } from '../core/services/theme/theme-toggle.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthComponent implements OnInit {
 
-  constructor() { }
+  constructor(private themeToggleService: ThemeToggleService) { }
 
   ngOnInit(): void {
   }
 
+  toggleTheme() {
+    this.themeToggleService.toggle();
+  }
+
+  isDark(): boolean {
+    return this.themeToggleService.isDarkThemeSelected();
+  }
 }
