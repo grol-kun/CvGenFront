@@ -1,40 +1,50 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 
 const routes: Routes = [
+
   {
-    path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-    title: 'Auth'
+    path: '', component: AuthComponent, children: [
+      { path: '', redirectTo: '/auth', pathMatch: 'full' },
+      { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
+    ]
   },
   {
-    path: 'projects',
-    loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule),
-    title: 'Projects'
-  },
-  {
-    path: 'employees',
-    loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule),
-    title: 'Employees'
-  },
-  {
-    path: 'cvs',
-    loadChildren: () => import('./cvs/cvs.module').then(m => m.CvsModule),
-    title: 'CVs'
-  },
-  {
-    path: 'entities',
-    loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule),
-    title: 'Entities'
-  },
-  {
-    path: '**',
-    redirectTo: '404',
-  },
-  {
-    path: '404',
-    redirectTo: ''
+    path: '', component: SiteLayoutComponent, /* canActivate: [AuthGuard], */ children: [
+      {
+        path: 'projects',
+        loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule),
+        title: 'Projects'
+      },
+      {
+        path: 'employees',
+        loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule),
+        title: 'Employees'
+      },
+      {
+        path: 'cvs',
+        loadChildren: () => import('./cvs/cvs.module').then(m => m.CvsModule),
+        title: 'CVs'
+      },
+      {
+        path: 'entities',
+        loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule),
+        title: 'Entities'
+      }
+    ]
   }
+
+  /*
+   {
+     path: '**',
+     redirectTo: '404',
+   },
+   {
+     path: '404',
+     redirectTo: ''
+   } */
 ];
 
 @NgModule({
