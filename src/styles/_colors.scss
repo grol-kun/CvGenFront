@@ -2,32 +2,8 @@
 @import 'palettes/dark';
 
 $colors: (
-  --background-primary: (
-    $background-primary-light,
-    $background-primary-dark,
-  ),
-  --background-secondary: (
-    $background-secondary-light,
-    $background-secondary-dark,
-  ),
-  --text-primary: (
-    $text-primary-light,
-    $text-primary-dark,
-  ),
-  --text-secondary: (
-    $text-secondary-light,
-    $text-secondary-dark,
-  ),
-  --status-okay: (
-    $status-okay-light,
-    $status-okay-dark,
-  ),
-  --status-error: (
-    $status-error-light,
-    $status-error-dark,
-  ),
-  --bsc-primary: (
-    $bsc-primary-light,
-    $bsc-primary-dark,
+  --background-auth: (
+    $background-auth-light,
+    $background-auth-dark,
   ),
 );

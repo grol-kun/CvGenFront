@@ -5,7 +5,7 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    background: #F0F2F5 url(/assets/background.jpg) no-repeat center center;
+    background: var(--background-auth) url(/assets/background.jpg) no-repeat center center;
     background-size: contain;
     background-blend-mode: darken;
 }
