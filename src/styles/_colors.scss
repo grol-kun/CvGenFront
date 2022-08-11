@@ -1,0 +1,9 @@
+@import 'palettes/light';
+@import 'palettes/dark';
+
+$colors: (
+  --background-auth: (
+    $background-auth-light,
+    $background-auth-dark,
+  ),
+);
