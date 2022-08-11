@@ -1,15 +1,9 @@
-@import "styles/normalize";
-@import "styles/scrollbar";
-@import "styles/colors";
-@import "styles/animations";
-@import "styles/theme";
-@import "styles/typography";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import 'styles/normalize';
+@import 'styles/scrollbar';
+@import 'styles/colors';
+@import 'styles/animations';
+@import 'styles/theme';
+@import 'styles/typography';
 
 body {
   height: 100vh;
