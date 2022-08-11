@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
-import { AuthComponent } from './auth/auth.component';
-import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 
 const routes: Routes = [
   {
