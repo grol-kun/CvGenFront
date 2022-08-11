@@ -1,40 +1,51 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthComponent } from './auth/auth.component';
 import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
 
 const routes: Routes = [
-
   {
-    path: '', component: AuthComponent, children: [
+    path: '',
+    component: AuthComponent,
+    children: [
       { path: '', redirectTo: '/auth', pathMatch: 'full' },
-      { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
-    ]
+      {
+        path: 'auth',
+        loadChildren: () =>
+          import('./auth/auth.module').then((m) => m.AuthModule),
+      },
+    ],
   },
   {
-    path: '', component: SiteLayoutComponent, /* canActivate: [AuthGuard], */ children: [
+    path: '',
+    component: SiteLayoutComponent,
+    /* canActivate: [AuthGuard], */ children: [
       {
         path: 'projects',
-        loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule),
-        title: 'Projects'
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
+        title: 'Projects',
       },
       {
         path: 'employees',
-        loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule),
-        title: 'Employees'
+        loadChildren: () =>
+          import('./employees/employees.module').then((m) => m.EmployeesModule),
+        title: 'Employees',
       },
       {
         path: 'cvs',
-        loadChildren: () => import('./cvs/cvs.module').then(m => m.CvsModule),
-        title: 'CVs'
+        loadChildren: () => import('./cvs/cvs.module').then((m) => m.CvsModule),
+        title: 'CVs',
       },
       {
         path: 'entities',
-        loadChildren: () => import('./entities/entities.module').then(m => m.EntitiesModule),
-        title: 'Entities'
-      }
-    ]
-  }
+        loadChildren: () =>
+          import('./entities/entities.module').then((m) => m.EntitiesModule),
+        title: 'Entities',
+      },
+    ],
+  },
 
   /*
    {
@@ -49,6 +60,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

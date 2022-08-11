@@ -1,13 +1,8 @@
-
 import { NgModule } from '@angular/core';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 
 @NgModule({
-  exports: [
-    NzLayoutModule,
-  ]
+  exports: [NzLayoutModule],
 })
-export class NgZorroAntdModule {
-
-}
+export class NgZorroAntdModule { }
