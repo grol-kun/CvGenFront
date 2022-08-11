@@ -1,8 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class StorageService {
-
   get(key: string): any {
     return localStorage ? localStorage.getItem(key) : null;
   }
@@ -12,5 +11,4 @@ export class StorageService {
       localStorage.setItem(key, value);
     }
   }
-
 }

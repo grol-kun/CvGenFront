@@ -4,14 +4,12 @@ import { ThemeToggleService } from '../core/services/theme/theme-toggle.service'
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
+  constructor(private themeToggleService: ThemeToggleService) {}
 
-  constructor(private themeToggleService: ThemeToggleService) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleTheme() {
     this.themeToggleService.toggle();
