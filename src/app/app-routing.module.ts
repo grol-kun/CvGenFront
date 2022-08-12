@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
-import { SiteLayoutComponent } from './core/layouts/site-layout/site-layout.component';
+import { SiteLayoutComponent } from './site-layout/site-layout.component';
 
 const routes: Routes = [
   {
@@ -62,4 +62,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
