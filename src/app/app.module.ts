@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StorageService } from './core/services/theme/theme-local-storage.service';
-import { ThemeToggleService } from './core/services/theme/theme-toggle.service';
+import { StorageService } from './shared/services/theme/theme-local-storage.service';
+import { ThemeToggleService } from './shared/services/theme/theme-toggle.service';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -49,4 +49,4 @@ export function themeFactory(themeService: ThemeToggleService) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
