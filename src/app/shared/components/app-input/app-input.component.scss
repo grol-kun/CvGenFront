@@ -1,0 +1,50 @@
+.input-component {
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  margin: 16px 0;
+  :host {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .input-component__label {
+    font-size: 12px;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: flex-start;
+
+    .input-component__asterisk {
+      margin-left: 10px;
+    }
+  }
+
+  .input-component__asterisk {
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSong;
+    font-weight: 400;
+  }
+
+  .input-component__error-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    //margin-top: 4px;
+
+    max-height: 36px;
+    overflow: hidden;
+
+    .input-component__error-message {
+      position: absolute;
+      top: 48px;
+      color: #ff4d4f;
+      line-height: 18px;
+      font-size: 12px;
+    }
+  }
+}

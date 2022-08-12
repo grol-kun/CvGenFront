@@ -1,0 +1,21 @@
+<div class="input-component">
+  <div class="input-component__label">
+    <label [textContent]="label"></label>
+    <span class="input-component__asterisk">*</span>
+  </div>
+
+  <input nz-input [placeholder]="placeholder" [formControl]="control" />
+
+  <div class="input-component__error-wrapper">
+    <span class="input-component__error-message" *ngIf="control.errors?.['required'] && control?.touched">
+      Please, specify the {{ label | lowercase }}
+    </span>
+    <span
+      class="input-component__error-message"
+      *ngIf="!control.errors?.['required'] && control.errors?.['lengthError'] && control?.touched"
+    >
+      lengthError: {{ label | lowercase }} should be from {{control.errors?.['lengthError'].min}} to
+      {{control.errors?.['lengthError'].max}}
+    </span>
+  </div>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
 import { ThemeToggleService } from '../core/services/theme/theme-toggle.service';
 
 @Component({
@@ -7,9 +8,21 @@ import { ThemeToggleService } from '../core/services/theme/theme-toggle.service'
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private themeToggleService: ThemeToggleService) {}
+  form!: FormGroup;
+  checked = true;
 
-  ngOnInit(): void {}
+  constructor(
+    private themeToggleService: ThemeToggleService,
+    private fb: FormBuilder,
+  ) { }
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      user: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+    }, { updateOn: 'blur' });
+  }
+
 
   toggleTheme() {
     this.themeToggleService.toggle();
@@ -18,4 +31,6 @@ export class AuthComponent implements OnInit {
   isDark(): boolean {
     return this.themeToggleService.isDarkThemeSelected();
   }
+
+
 }

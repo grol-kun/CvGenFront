@@ -13,6 +13,8 @@ import { CoreModule } from './core/core.module';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppInputModule } from './shared/components/app-input/app-input.module';
 
 registerLocaleData(en);
 
@@ -28,12 +30,17 @@ export function themeFactory(themeService: ThemeToggleService) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppInputModule
   ],
   providers: [
     ThemeToggleService,
@@ -49,4 +56,4 @@ export function themeFactory(themeService: ThemeToggleService) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
