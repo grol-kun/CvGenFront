@@ -1,1 +1,13 @@
-<p>projects works!</p>
+<div class="auth">
+  <form [formGroup]="form" class="auth__form">
+    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
+    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
+    <app-textarea
+      formControlName="anoter"
+      label="Anoter"
+      placeholder="anoter"
+      [minRows]="3"
+      [maxRows]="6"
+    ></app-textarea>
+  </form>
+</div>

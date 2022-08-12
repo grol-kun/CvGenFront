@@ -1,0 +1,29 @@
+<div class="input-component">
+  <div class="input-component__label">
+    <label [textContent]="label"></label>
+    <span class="input-component__label__asterisk">*</span>
+  </div>
+
+  <textarea
+    nz-input
+    [placeholder]="placeholder"
+    [formControl]="$any(ngControl.control)"
+    [nzAutosize]="rowsSize"
+  ></textarea>
+
+  <div class="input-component__error-wrapper">
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors?.['required'] && ngControl.control?.touched"
+    >
+      Please, specify the {{ label | lowercase }}
+    </span>
+
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors?.['minlength'] && ngControl.control?.touched"
+    >
+      The {{ label | lowercase }} can't be less than {{ngControl.control?.errors?.['minlength'].requiredLength}} symbols
+    </span>
+  </div>
+</div>
