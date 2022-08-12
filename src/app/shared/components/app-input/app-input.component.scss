@@ -4,14 +4,14 @@
   position: relative;
   margin: 18px 0;
 
-  .input-component__label {
+  &__label {
     font-size: 12px;
     line-height: 22px;
     color: rgba(0, 0, 0, 0.85);
     display: flex;
     justify-content: flex-start;
 
-    .input-component__asterisk {
+    &__asterisk {
       margin-left: 10px;
       color: var(--error-color);
       font-size: 14px;
@@ -25,7 +25,7 @@
     height: 32px;
   }
 
-  .input-component__error-wrapper {
+  &__error-wrapper {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -33,7 +33,7 @@
     overflow: hidden;
     min-height: 18px;
 
-    .input-component__error-message {
+    &__error-message {
       top: 55px;
       color: var(--error-color);
       line-height: 18px;
