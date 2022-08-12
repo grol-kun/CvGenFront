@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Self } from '@angular/core';
 import { FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ThemeToggleService } from '../core/services/theme/theme-toggle.service';
+import { ThemeToggleService } from '../shared/services/theme/theme-toggle.service';
 
 @Component({
   selector: 'app-auth',
