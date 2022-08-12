@@ -36,13 +36,11 @@ export class AppInputComponent implements OnInit, ControlValueAccessor, Validato
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.onChange(value);
-        this.onTouched();
       })
   }
 
   writeValue(value: any): void {
     this.control.setValue(value, { emitEvent: false });
-    this.onTouched();
   }
 
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
