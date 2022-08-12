@@ -1,19 +1,13 @@
-<div class="auth-form__wrapper">
-  <form [formGroup]="form" class="auth-form">
-    <app-input formControlName="user" [label]="'Username'" [placeholder]="'имя пользователя'" class="auth-form__input">
-    </app-input>
-    <app-input
-      formControlName="password"
-      [label]="'Password'"
-      [placeholder]="'пароль'"
-      class="auth-form__input"
-    ></app-input>
+<div class="auth">
+  <form [formGroup]="form" class="auth__form">
+    <app-input formControlName="user" label="Username" placeholder="имя пользователя"> </app-input>
+    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
   </form>
 
-  <div class="auth-form__checkbox">
+  <div class="auth__checkbox">
     <label nz-checkbox [(ngModel)]="checked">Remember me</label>
-    <a nz-button nzType="link" class="auth-form__link-button">Forgot your password?</a>
+    <a nz-button nzType="link" class="auth__link-button">Forgot your password?</a>
   </div>
 
-  <button nz-button nzType="primary" class="auth-form__button">Login</button>
+  <button nz-button nzType="primary" class="auth__button">Login</button>
 </div>

@@ -6,4 +6,8 @@ $colors: (
     $background-auth-light,
     $background-auth-dark,
   ),
+  --error-color: (
+    $error-color-light,
+    $error-color-dark,
+  ),
 );

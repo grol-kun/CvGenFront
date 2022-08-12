@@ -1,7 +1,7 @@
 import { FormControl } from "@angular/forms";
 
 export function validateLength(control: FormControl) {
-  let err = {
+  const err = {
     lengthError: {
       given: control.value,
       max: 10,
@@ -9,5 +9,5 @@ export function validateLength(control: FormControl) {
     }
   };
 
-  return (control.value.length > 10 || control.value.length < 3) ? err : null;
+  return (control.value && (control.value.length > 10 || control.value.length < 3)) ? err : null;
 }

@@ -10,7 +10,7 @@
   background-blend-mode: darken;
 }
 
-.auth-form__wrapper {
+.auth {
   width: 360px;
   height: 276px;
   margin: 0 auto;
@@ -18,21 +18,21 @@
   justify-content: space-around;
   flex-direction: column;
 
-  .auth-form {
+  &__form {
     width: 100%;
   }
 
-  .auth-form__checkbox {
+  &__checkbox {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    .auth-form__link-button {
+    &__link-button {
       padding: 0;
     }
   }
 
-  .auth-form__button {
+  &__button {
     height: 40px;
   }
 }
