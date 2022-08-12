@@ -5,7 +5,6 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { AppTextareaModule } from '../shared/components/app-textarea/app-textarea.module';
 import { AppInputModule } from '../shared/components/app-input/app-input.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     AppTextareaModule,
     AppInputModule,
     ReactiveFormsModule,
-    FormsModule,
-    NzButtonModule
+    FormsModule
   ],
 })
 export class ProjectsModule { }

@@ -14,7 +14,6 @@ import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { AppInputModule } from './shared/components/app-input/app-input.module';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 
 registerLocaleData(en);
@@ -41,7 +40,6 @@ export function themeFactory(themeService: ThemeToggleService) {
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    //AppInputModule,
     SiteLayoutModule
   ],
   providers: [
