@@ -12,7 +12,6 @@ export class ProjectsComponent implements OnInit {
   form!: FormGroup;
   checked = true;
   private destroy$ = new Subject<void>();
-  currentForm?: FormGroup;
 
   constructor(
     private themeToggleService: ThemeToggleService,
@@ -26,7 +25,7 @@ export class ProjectsComponent implements OnInit {
       anoter: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       data: [null, [Validators.required]]
     });
-    this.loging();
+    this.logForm();
   }
 
   toggleTheme() {
@@ -42,7 +41,7 @@ export class ProjectsComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  loging() {
+  logForm() {
     this.form.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {

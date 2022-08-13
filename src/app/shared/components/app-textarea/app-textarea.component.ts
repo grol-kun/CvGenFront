@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-textarea',
@@ -7,11 +8,13 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   styleUrls: ['./app-textarea.component.scss'],
 })
 export class AppTextareaComponent implements ControlValueAccessor, OnInit {
-  @Input() public label?= 'Input';
-  @Input() public placeholder?= 'placeholder';
+  @Input() public label: string = 'Textarea';
+  @Input() public placeholder: string = 'placeholder';
   @Input() public minRows = 3;
   @Input() public maxRows = 6;
   public rowsSize!: { minRows: number, maxRows: number };
+  private destroy$ = new Subject<void>();
+  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
@@ -21,14 +24,22 @@ export class AppTextareaComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.rowsSize = { minRows: this.minRows, maxRows: this.maxRows };
+    this.control!.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.onChange(value);
+      })
   }
 
   registerOnChange = (fn: (value: any) => {}) => this.onChange = fn;
   registerOnTouched = (fn: () => {}) => this.onTouched = fn;
 
   writeValue(value: any): void {
-    if (value) {
-      this.ngControl.control?.setValue(value, { emitEvent: false });
-    }
+    this.control.setValue(value, { emitEvent: false });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

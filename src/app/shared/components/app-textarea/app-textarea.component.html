@@ -5,23 +5,24 @@
   </div>
 
   <textarea
+    class="nz-textarea"
     nz-input
     [placeholder]="placeholder"
-    [formControl]="$any(ngControl.control)"
+    [formControl]="control"
     [nzAutosize]="rowsSize"
   ></textarea>
 
   <div class="input-component__error-wrapper">
     <span
       class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['required'] && ngControl.control?.touched"
+      *ngIf="ngControl.control?.errors?.['required'] && control.touched"
     >
       Please, specify the {{ label | lowercase }}
     </span>
 
     <span
       class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['minlength'] && ngControl.control?.touched"
+      *ngIf="ngControl.control?.errors?.['minlength'] && control.touched"
     >
       The {{ label | lowercase }} can't be less than {{ngControl.control?.errors?.['minlength'].requiredLength}} symbols
     </span>

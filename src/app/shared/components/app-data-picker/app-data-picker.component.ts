@@ -1,5 +1,6 @@
 import { Component, Input, Self } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-app-data-picker',
@@ -7,9 +8,11 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['./app-data-picker.component.scss']
 })
 export class AppDataPickerComponent {
-  date = null;
-  @Input() public label?= 'Input';
-  @Input() public placeholder!: string | string[];
+  date?: Date;
+  @Input() public label: string = 'Date';
+  @Input() public placeholder: string | string[] = 'placeholder';
+  private destroy$ = new Subject<void>();
+  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
@@ -22,10 +25,20 @@ export class AppDataPickerComponent {
   registerOnChange = (fn: (value: any) => {}) => this.onChange = fn;
   registerOnTouched = (fn: () => {}) => this.onTouched = fn;
 
-  writeValue(value: any): void {
-    if (value) {
-      this.ngControl.control?.setValue(value, { emitEvent: false });
-    }
+  ngOnInit(): void {
+    this.control!.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.onChange(value);
+      })
   }
 
+  writeValue(value: any): void {
+    this.control.setValue(value, { emitEvent: false });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
