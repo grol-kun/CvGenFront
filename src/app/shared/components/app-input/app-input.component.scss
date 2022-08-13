@@ -7,13 +7,13 @@
   &__label {
     font-size: 12px;
     line-height: 22px;
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--text-primary);
     display: flex;
     justify-content: flex-start;
 
     &__asterisk {
       margin-left: 10px;
-      color: var(--error-color);
+      color: var(--status-error);
       font-size: 14px;
       font-family: SimSong;
       font-weight: 400;
@@ -35,7 +35,7 @@
 
     &__error-message {
       top: 55px;
-      color: var(--error-color);
+      color: var(--status-error);
       line-height: 18px;
       font-size: 12px;
     }

@@ -1,11 +1,17 @@
 @import 'styles/normalize';
 @import 'styles/scrollbar';
-@import 'styles/colors';
-@import 'styles/animations';
-@import 'styles/theme';
 @import 'styles/typography';
+@import 'styles/variables';
 
 body {
   height: 100vh;
   width: 100vw;
+}
+
+[data-theme='dark'] {
+  @include dark();
+}
+
+[data-theme='light'] {
+  @include light();
 }

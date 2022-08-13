@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, Self } from '@angular/core';
-import { FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ThemeToggleService } from '../shared/services/theme/theme-toggle.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,25 +13,14 @@ export class AuthComponent implements OnInit {
   private destroy$ = new Subject<void>();
   currentForm?: FormGroup;
 
-  constructor(
-    private themeToggleService: ThemeToggleService,
-    private fb: FormBuilder,
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]]
+      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     });
-    this.loging();
-  }
-
-  toggleTheme() {
-    this.themeToggleService.toggle();
-  }
-
-  isDark(): boolean {
-    return this.themeToggleService.isDarkThemeSelected();
+    this.logging();
   }
 
   ngOnDestroy(): void {
@@ -40,11 +28,9 @@ export class AuthComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  loging() {
-    this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        console.log(this.form);
-      })
+  logging() {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      console.log(this.form);
+    });
   }
 }

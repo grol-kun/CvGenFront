@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StorageService } from './shared/services/theme/theme-local-storage.service';
-import { ThemeToggleService } from './shared/services/theme/theme-toggle.service';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -16,24 +14,18 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppInputModule } from './shared/components/app-input/app-input.module';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
+import { ThemeModule } from './shared/theme/theme.module';
+import { ThemeService } from './shared/theme/theme.service';
 
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
-  (key) => antDesignIcons[key]
-);
-
-export function themeFactory(themeService: ThemeToggleService) {
-  return () => themeService.setThemeOnStart();
-}
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesignIcons[key]);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,15 +34,15 @@ export function themeFactory(themeService: ThemeToggleService) {
     FormsModule,
     ReactiveFormsModule,
     AppInputModule,
-    SiteLayoutModule
+    SiteLayoutModule,
+    ThemeModule,
   ],
   providers: [
-    ThemeToggleService,
-    StorageService,
+    ThemeService,
     {
       provide: APP_INITIALIZER,
-      useFactory: themeFactory,
-      deps: [ThemeToggleService],
+      useFactory: (themeService: ThemeService) => () => themeService.startTheme(),
+      deps: [ThemeService],
       multi: true,
     },
     { provide: NZ_I18N, useValue: en_US },
@@ -58,4 +50,4 @@ export function themeFactory(themeService: ThemeToggleService) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
