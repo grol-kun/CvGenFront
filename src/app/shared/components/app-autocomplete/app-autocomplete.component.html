@@ -5,7 +5,13 @@
   </div>
 
   <div class="example-input">
-    <input [placeholder]="placeholder" nz-input [formControl]="$any(ngControl.control)" [nzAutocomplete]="auto" />
+    <input
+      class="nz-autocomplete"
+      [placeholder]="placeholder"
+      nz-input
+      [formControl]="control"
+      [nzAutocomplete]="auto"
+    />
     <nz-autocomplete #auto [compareWith]="compareFun">
       <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
         {{ option.label }}
@@ -16,14 +22,14 @@
   <div class="input-component__error-wrapper">
     <span
       class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['required'] && ngControl.control?.touched"
+      *ngIf="ngControl.control?.errors?.['required'] && control.touched"
     >
       Please, specify the {{ label | lowercase }}
     </span>
 
     <span
       class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['minlength'] && ngControl.control?.touched"
+      *ngIf="ngControl.control?.errors?.['minlength'] && control.touched"
     >
       The {{ label | lowercase }} can't be less than {{ngControl.control?.errors?.['minlength'].requiredLength}} symbols
     </span>
