@@ -1,0 +1,37 @@
+<div class="input-component">
+  <div class="input-component__label">
+    <label [textContent]="label"></label>
+    <span class="input-component__label__asterisk">*</span>
+  </div>
+
+  <div class="example-input">
+    <input
+      class="nz-autocomplete"
+      [placeholder]="placeholder"
+      nz-input
+      [formControl]="control"
+      [nzAutocomplete]="auto"
+    />
+    <nz-autocomplete #auto [compareWith]="compareFun">
+      <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
+        {{ option.label }}
+      </nz-auto-option>
+    </nz-autocomplete>
+  </div>
+
+  <div class="input-component__error-wrapper">
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors?.['required'] && control.touched"
+    >
+      Please, specify the {{ label | lowercase }}
+    </span>
+
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors?.['minlength'] && control.touched"
+    >
+      The {{ label | lowercase }} can't be less than {{ngControl.control?.errors?.['minlength'].requiredLength}} symbols
+    </span>
+  </div>
+</div>
