@@ -24,7 +24,7 @@ export class ProjectsComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       anoter: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       data: [null, [Validators.required]],
-      auto: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]]
+      auto: ['', [Validators.required]]
     });
     this.logForm();
   }
