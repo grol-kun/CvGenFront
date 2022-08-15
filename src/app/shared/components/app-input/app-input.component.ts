@@ -4,11 +4,11 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-input',
   templateUrl: './app-input.component.html',
-  styleUrls: ['./app-input.component.scss', '../../../../styles/cva/cva.scss'],
+  styleUrls: ['./app-input.component.scss'],
 })
 export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() label: string = 'Input';
-  @Input() placeholder: string = 'placeholder';
+  @Input() label = 'Input';
+  @Input() placeholder = 'placeholder';
   control = new FormControl();
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => { };
@@ -26,7 +26,7 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.onChange(value);
-      })
+      });
   }
 
   writeValue(value: any): void {

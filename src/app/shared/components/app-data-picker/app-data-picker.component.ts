@@ -5,11 +5,11 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-app-data-picker',
   templateUrl: './app-data-picker.component.html',
-  styleUrls: ['./app-data-picker.component.scss', '../../../../styles/cva/cva.scss']
+  styleUrls: ['./app-data-picker.component.scss']
 })
 export class AppDataPickerComponent {
-  @Input() label: string = 'Date';
-  @Input() placeholder: string = 'placeholder';
+  @Input() label = 'Date';
+  @Input() placeholder = 'placeholder';
   control = new FormControl();
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => { };
@@ -29,7 +29,7 @@ export class AppDataPickerComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.onChange(value);
-      })
+      });
   }
 
   writeValue(value: any): void {

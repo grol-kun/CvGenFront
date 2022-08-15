@@ -12,7 +12,7 @@ interface Option {
 @Component({
   selector: 'app-app-autocomplete',
   templateUrl: './app-autocomplete.component.html',
-  styleUrls: ['./app-autocomplete.component.scss', '../../../../styles/cva/cva.scss']
+  styleUrls: ['./app-autocomplete.component.scss']
 })
 export class AppAutocompleteComponent implements ControlValueAccessor {
   @Input() label = 'Autocomplete';
@@ -21,7 +21,6 @@ export class AppAutocompleteComponent implements ControlValueAccessor {
   private onChange = (value: any) => { };
   private onTouched = () => { };
   control = new FormControl();
-
 
   //For example,too....
   inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
@@ -42,10 +41,7 @@ export class AppAutocompleteComponent implements ControlValueAccessor {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.onChange(value);
-        console.log(`value ${value}`);
-        console.log(`control`, this.control);
-        console.log(`ngControl`, this.ngControl);
-      })
+      });
   }
 
   writeValue(value: any): void {

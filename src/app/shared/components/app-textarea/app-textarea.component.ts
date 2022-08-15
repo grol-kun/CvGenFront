@@ -7,11 +7,11 @@ import { RowsSize } from '../../models/interfaces/rowsSize';
 @Component({
   selector: 'app-textarea',
   templateUrl: './app-textarea.component.html',
-  styleUrls: ['./app-textarea.component.scss', '../../../../styles/cva/cva.scss'],
+  styleUrls: ['./app-textarea.component.scss'],
 })
 export class AppTextareaComponent implements ControlValueAccessor, OnInit {
-  @Input() label: string = 'Textarea';
-  @Input() placeholder: string = 'placeholder';
+  @Input() label = 'Textarea';
+  @Input() placeholder = 'placeholder';
   @Input() minRows = DEFAULT_MIN_ROWS_VALUE;
   @Input() maxRows = DEFAULT_MAX_ROWS_VALUE;
   rowsSize!: RowsSize;
@@ -30,7 +30,7 @@ export class AppTextareaComponent implements ControlValueAccessor, OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.onChange(value);
-      })
+      });
   }
 
   registerOnChange = (fn: (value: any) => {}) => this.onChange = fn;
