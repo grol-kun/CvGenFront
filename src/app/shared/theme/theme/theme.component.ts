@@ -11,8 +11,8 @@ import { ThemeService } from '../theme.service';
 export class ThemeComponent {
   public isDark$!: Observable<boolean>;
   constructor(private themeService: ThemeService) {
-    this.themeService.isDarkTheme.subscribe((isDark: any) => {
-      this.isDark$ = isDark;
+    this.themeService.isDarkTheme.subscribe(() => {
+      this.isDark$! = this.themeService.isDarkTheme;
     });
   }
 
