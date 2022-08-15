@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+}
+
+.theme-toggle__control {
+  background: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  &__option {
+    width: 100%;
+    height: 100%;
+    &__image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

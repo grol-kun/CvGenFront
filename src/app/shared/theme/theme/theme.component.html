@@ -1,0 +1,11 @@
+<button class="theme-toggle__control" (click)="toggle()">
+  <span class="theme-toggle__control__option">
+    <ng-container
+      *ngTemplateOutlet="myTmpl; context: { $implicit: !(isDark$ | async) ? 'moon' : 'sun' }"
+    ></ng-container>
+  </span>
+</button>
+
+<ng-template #myTmpl let-name>
+  <img class="theme-toggle__control__option__image" src="./assets/svgs/{{ name }}.svg" [alt]="name" />
+</ng-template>
