@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { AppAutocompleteComponent } from './app-autocomplete.component';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 
 @NgModule({
   declarations: [
-    AppAutocompleteComponent,
+    AppAutocompleteComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NzAutocompleteModule
+    NzAutocompleteModule,
+    ApplicationPipesModule
   ],
   exports: [
     AppAutocompleteComponent

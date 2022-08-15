@@ -10,7 +10,6 @@ import { ThemeToggleService } from '../shared/services/theme/theme-toggle.servic
 })
 export class ProjectsComponent implements OnInit {
   form!: FormGroup;
-  checked = true;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -26,7 +25,6 @@ export class ProjectsComponent implements OnInit {
       data: [null, [Validators.required]],
       auto: ['', [Validators.required]]
     });
-    this.logForm();
   }
 
   toggleTheme() {
@@ -40,13 +38,5 @@ export class ProjectsComponent implements OnInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  logForm() {
-    this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        console.log(this.form);
-      })
   }
 }

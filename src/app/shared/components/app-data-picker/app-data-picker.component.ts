@@ -11,6 +11,7 @@ export class AppDataPickerComponent {
   @Input() label = 'Date';
   @Input() placeholder = 'placeholder';
   control = new FormControl();
+  customError = { required: 'It is necessary to input the date' };
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => { };
   private onTouched = () => { };

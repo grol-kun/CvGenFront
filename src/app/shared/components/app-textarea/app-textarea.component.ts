@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { DEFAULT_MAX_ROWS_VALUE, DEFAULT_MIN_ROWS_VALUE } from '../../models/constants';
+import { DEFAULT_MAX_ROWS_VALUE, DEFAULT_MIN_ROWS_VALUE } from '../../models/constants/constants';
 import { RowsSize } from '../../models/interfaces/rowsSize';
 
 @Component({
