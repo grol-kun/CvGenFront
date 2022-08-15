@@ -4,7 +4,12 @@
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <input class="nz-input" nz-input [placeholder]="placeholder" [formControl]="control" />
+  <input class="nz-autocomplete" [placeholder]="placeholder" nz-input [formControl]="control" [nzAutocomplete]="auto" />
+  <nz-autocomplete #auto [compareWith]="compareFn">
+    <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
+      {{ option.label }}
+    </nz-auto-option>
+  </nz-autocomplete>
 
   <div class="input-component__error-wrapper">
     <span

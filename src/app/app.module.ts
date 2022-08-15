@@ -12,7 +12,6 @@ import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppInputModule } from './shared/components/app-input/app-input.module';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ThemeModule } from './shared/theme/theme.module';
 import { ThemeService } from './shared/theme/theme.service';
@@ -33,7 +32,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    AppInputModule,
     SiteLayoutModule,
     ThemeModule,
   ],

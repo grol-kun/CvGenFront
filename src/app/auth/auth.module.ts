@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AppInputModule } from '../shared/components/app-input/app-input.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ThemeModule } from '../shared/theme/theme.module';
@@ -15,7 +15,6 @@ import { ThemeModule } from '../shared/theme/theme.module';
     AuthRoutingModule,
     AppInputModule,
     ReactiveFormsModule,
-    FormsModule,
     NzButtonModule,
     NzCheckboxModule,
     ThemeModule,

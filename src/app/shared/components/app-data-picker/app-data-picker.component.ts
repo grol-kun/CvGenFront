@@ -1,20 +1,23 @@
-import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { Component, Input, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
+
 @Component({
-  selector: 'app-input',
-  templateUrl: './app-input.component.html',
-  styleUrls: ['./app-input.component.scss'],
+  selector: 'app-app-data-picker',
+  templateUrl: './app-data-picker.component.html',
+  styleUrls: ['./app-data-picker.component.scss']
 })
-export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() label = 'Input';
+export class AppDataPickerComponent {
+  @Input() label = 'Date';
   @Input() placeholder = 'placeholder';
   control = new FormControl();
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor(
+    @Self() public ngControl: NgControl
+  ) {
     this.ngControl.valueAccessor = this;
   }
 
@@ -37,5 +40,4 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

@@ -8,9 +8,8 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  form!: FormGroup;
-  checked = true;
   private destroy$ = new Subject<void>();
+  form!: FormGroup;
   currentForm?: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -19,8 +18,9 @@ export class AuthComponent implements OnInit {
     this.form = this.fb.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      remember: [false]
     });
-    this.logging();
+    this.justForTests();
   }
 
   ngOnDestroy(): void {
@@ -28,9 +28,11 @@ export class AuthComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  logging() {
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      console.log(this.form);
-    });
+  justForTests() {
+    this.form.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        console.log(this.form);
+      })
   }
 }
