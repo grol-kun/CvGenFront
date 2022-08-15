@@ -1,23 +1,15 @@
 <div class="input-component">
-  <div class="input-component__label">
-    <label [textContent]="label"></label>
-    <span class="input-component__label__asterisk">*</span>
+  <div class="input-component__label-wrapper">
+    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
+    <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <div class="example-input">
-    <input
-      class="nz-autocomplete"
-      [placeholder]="placeholder"
-      nz-input
-      [formControl]="control"
-      [nzAutocomplete]="auto"
-    />
-    <nz-autocomplete #auto [compareWith]="compareFun">
-      <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
-        {{ option.label }}
-      </nz-auto-option>
-    </nz-autocomplete>
-  </div>
+  <input class="nz-autocomplete" [placeholder]="placeholder" nz-input [formControl]="control" [nzAutocomplete]="auto" />
+  <nz-autocomplete #auto [compareWith]="compareFn">
+    <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
+      {{ option.label }}
+    </nz-auto-option>
+  </nz-autocomplete>
 
   <div class="input-component__error-wrapper">
     <span

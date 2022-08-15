@@ -12,15 +12,16 @@ interface Option {
 @Component({
   selector: 'app-app-autocomplete',
   templateUrl: './app-autocomplete.component.html',
-  styleUrls: ['./app-autocomplete.component.scss']
+  styleUrls: ['./app-autocomplete.component.scss', '../../../../styles/cva/cva.scss']
 })
 export class AppAutocompleteComponent implements ControlValueAccessor {
-  @Input() public label: string = 'Autocomplete';
-  @Input() public placeholder: string = 'placeholder';
+  @Input() label = 'Autocomplete';
+  @Input() placeholder = 'placeholder';
   private destroy$ = new Subject<void>();
-  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
+  control = new FormControl();
+
 
   //For example,too....
   inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
@@ -40,7 +41,7 @@ export class AppAutocompleteComponent implements ControlValueAccessor {
     this.control!.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
-        this.onChange(value + '1');
+        this.onChange(value);
         console.log(`value ${value}`);
         console.log(`control`, this.control);
         console.log(`ngControl`, this.ngControl);
@@ -51,12 +52,11 @@ export class AppAutocompleteComponent implements ControlValueAccessor {
     this.control.setValue(value, { emitEvent: false });
   }
 
-  compareFun = (o1: Option | string, o2: Option): boolean => {
+  compareFn = (o1: Option | string, o2: Option): boolean => {
     if (o1) {
       return typeof o1 === 'string' ? o1 === o2.label : o1.value === o2.value;
-    } else {
-      return false;
     }
+    return false;
   };
 
   ngOnDestroy(): void {

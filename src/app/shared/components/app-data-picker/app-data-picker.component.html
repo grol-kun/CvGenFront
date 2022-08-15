@@ -1,7 +1,7 @@
 <div class="input-component">
-  <div class="input-component__label">
-    <label [textContent]="label"></label>
-    <span class="input-component__label__asterisk">*</span>
+  <div class="input-component__label-wrapper">
+    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
+    <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
   <nz-date-picker class="nz-date-picker" [formControl]="control" [nzPlaceHolder]="placeholder"></nz-date-picker>

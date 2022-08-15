@@ -5,14 +5,13 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-app-data-picker',
   templateUrl: './app-data-picker.component.html',
-  styleUrls: ['./app-data-picker.component.scss']
+  styleUrls: ['./app-data-picker.component.scss', '../../../../styles/cva/cva.scss']
 })
 export class AppDataPickerComponent {
-  date?: Date;
-  @Input() public label: string = 'Date';
-  @Input() public placeholder: string | string[] = 'placeholder';
+  @Input() label: string = 'Date';
+  @Input() placeholder: string = 'placeholder';
+  control = new FormControl();
   private destroy$ = new Subject<void>();
-  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 

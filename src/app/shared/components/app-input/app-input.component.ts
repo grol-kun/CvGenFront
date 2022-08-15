@@ -4,13 +4,13 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-input',
   templateUrl: './app-input.component.html',
-  styleUrls: ['./app-input.component.scss'],
+  styleUrls: ['./app-input.component.scss', '../../../../styles/cva/cva.scss'],
 })
 export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  @Input() public label: string = 'Input';
-  @Input() public placeholder: string = 'placeholder';
+  @Input() label: string = 'Input';
+  @Input() placeholder: string = 'placeholder';
+  control = new FormControl();
   private destroy$ = new Subject<void>();
-  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 

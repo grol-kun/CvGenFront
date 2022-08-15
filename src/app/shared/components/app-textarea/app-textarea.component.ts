@@ -1,20 +1,22 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
+import { DEFAULT_MAX_ROWS_VALUE, DEFAULT_MIN_ROWS_VALUE } from '../../models/constants';
+import { RowsSize } from '../../models/interfaces/rowsSize';
 
 @Component({
   selector: 'app-textarea',
   templateUrl: './app-textarea.component.html',
-  styleUrls: ['./app-textarea.component.scss'],
+  styleUrls: ['./app-textarea.component.scss', '../../../../styles/cva/cva.scss'],
 })
 export class AppTextareaComponent implements ControlValueAccessor, OnInit {
-  @Input() public label: string = 'Textarea';
-  @Input() public placeholder: string = 'placeholder';
-  @Input() public minRows = 3;
-  @Input() public maxRows = 6;
-  public rowsSize!: { minRows: number, maxRows: number };
+  @Input() label: string = 'Textarea';
+  @Input() placeholder: string = 'placeholder';
+  @Input() minRows = DEFAULT_MIN_ROWS_VALUE;
+  @Input() maxRows = DEFAULT_MAX_ROWS_VALUE;
+  rowsSize!: RowsSize;
+  control = new FormControl();
   private destroy$ = new Subject<void>();
-  public control = new FormControl();
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
