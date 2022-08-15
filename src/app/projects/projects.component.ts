@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ThemeToggleService } from '../shared/services/theme/theme-toggle.service';
 
 @Component({
   selector: 'app-projects',
@@ -13,10 +12,7 @@ export class ProjectsComponent implements OnInit {
   checked = true;
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private themeToggleService: ThemeToggleService,
-    private fb: FormBuilder,
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -24,17 +20,9 @@ export class ProjectsComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       anoter: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       data: [null, [Validators.required]],
-      auto: ['', [Validators.required]]
+      auto: ['', [Validators.required]],
     });
     this.logForm();
-  }
-
-  toggleTheme() {
-    this.themeToggleService.toggle();
-  }
-
-  isDark(): boolean {
-    return this.themeToggleService.isDarkThemeSelected();
   }
 
   ngOnDestroy(): void {
@@ -43,10 +31,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   logForm() {
-    this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        console.log(this.form);
-      })
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      console.log(this.form);
+    });
   }
 }

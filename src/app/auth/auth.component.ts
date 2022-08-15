@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ThemeToggleService } from '../shared/services/theme/theme-toggle.service';
 
 @Component({
   selector: 'app-auth',
@@ -13,10 +12,7 @@ export class AuthComponent implements OnInit {
   form!: FormGroup;
   currentForm?: FormGroup;
 
-  constructor(
-    private themeToggleService: ThemeToggleService,
-    private fb: FormBuilder,
-  ) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -25,14 +21,6 @@ export class AuthComponent implements OnInit {
       remember: [false]
     });
     this.justForTests();
-  }
-
-  toggleTheme() {
-    this.themeToggleService.toggle();
-  }
-
-  isDark(): boolean {
-    return this.themeToggleService.isDarkThemeSelected();
   }
 
   ngOnDestroy(): void {

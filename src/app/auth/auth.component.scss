@@ -5,9 +5,9 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  background: var(--background-auth) url(/assets/background.jpg) no-repeat center center;
+  background: var(--background-primary) url(/assets/background.jpg) no-repeat center center;
   background-size: contain;
-  background-blend-mode: darken;
+  background-blend-mode: multiply;
 }
 
 .auth {
@@ -38,4 +38,8 @@
       width: 100%;
     }
   }
+}
+
+.ant-checkbox-wrapper {
+  color: var(--text-primary);
 }

@@ -1,2 +1,48 @@
 $font-SimSong: SimSong;
 $font-size-12: 12px;
+
+$background-primary-light: #f0f2f5;
+$background-primary-dark: #2b2d30;
+
+$background-secondary-light: #cbccce;
+$background-secondary-dark: #444546;
+
+$background-tertiary-light: #f4f4f5;
+$background-tertiary-dark: #1e1e1f;
+
+$background-quaternary-light: #f5f5f8;
+$background-quaternary-dark: #121213;
+
+$text-primary-light: #2b2d30;
+$text-primary-dark: #f0f2f5;
+
+$text-secondary-light: #444546;
+$text-secondary-dark: #cbccce;
+
+$status-error-light: #ff4d4f;
+$status-error-dark: #ff4d4f;
+
+$status-success-light: #00c851;
+$status-success-dark: #00c851;
+
+@mixin light() {
+  --background-primary: #{$background-primary-light};
+  --background-secondary: #{$background-secondary-light};
+  --background-tertiary: #{$background-tertiary-light};
+  --background-quaternary: #{$background-quaternary-light};
+  --text-primary: #{$text-primary-light};
+  --text-secondary: #{$text-secondary-light};
+  --status-error: #{$status-error-light};
+  --status-success: #{$status-success-light};
+}
+
+@mixin dark() {
+  --background-primary: #{$background-primary-dark};
+  --background-secondary: #{$background-secondary-dark};
+  --background-tertiary: #{$background-tertiary-dark};
+  --background-quaternary: #{$background-quaternary-dark};
+  --text-primary: #{$text-primary-dark};
+  --text-secondary: #{$text-secondary-dark};
+  --status-error: #{$status-error-dark};
+  --status-success: #{$status-success-dark};
+}
