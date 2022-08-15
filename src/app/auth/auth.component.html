@@ -2,12 +2,12 @@
   <form [formGroup]="form" class="auth__form">
     <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
     <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
+
+    <div class="auth__form__inner-wrapper">
+      <label nz-checkbox formControlName="remember">Remember me</label>
+      <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">Forgot your password?</a>
+    </div>
+
+    <button nz-button nzType="primary" class="auth__form__button">Login</button>
   </form>
-
-  <div class="auth__checkbox">
-    <label nz-checkbox [(ngModel)]="checked">Remember me</label>
-    <a nz-button nzType="link" class="auth__link-button">Forgot your password?</a>
-  </div>
-
-  <button nz-button nzType="primary" class="auth__button">Login</button>
 </div>

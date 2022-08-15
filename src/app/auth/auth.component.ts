@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, Self } from '@angular/core';
-import { FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ThemeToggleService } from '../shared/services/theme/theme-toggle.service';
 
@@ -11,7 +11,6 @@ import { ThemeToggleService } from '../shared/services/theme/theme-toggle.servic
 export class AuthComponent implements OnInit {
   private destroy$ = new Subject<void>();
   form!: FormGroup;
-  checked = true;
   currentForm?: FormGroup;
 
   constructor(
@@ -22,9 +21,10 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]]
+      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      remember: [false]
     });
-    this.loging();
+    this.justForTests();
   }
 
   toggleTheme() {
@@ -40,7 +40,7 @@ export class AuthComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  loging() {
+  justForTests() {
     this.form.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {

@@ -4,7 +4,7 @@ import { ProjectsComponent } from './projects.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { AppTextareaModule } from '../shared/components/app-textarea/app-textarea.module';
 import { AppInputModule } from '../shared/components/app-input/app-input.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppDataPickerModule } from '../shared/components/app-data-picker/app-data-picker.module';
 import { AppAutocompleteModule } from '../shared/components/app-autocomplete/app-autocomplete.module';
 
@@ -18,7 +18,6 @@ import { AppAutocompleteModule } from '../shared/components/app-autocomplete/app
     AppTextareaModule,
     AppInputModule,
     ReactiveFormsModule,
-    FormsModule,
     AppDataPickerModule,
     AppAutocompleteModule
   ],
