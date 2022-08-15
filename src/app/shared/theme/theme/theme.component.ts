@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-theme',
   templateUrl: './theme.component.html',
   styleUrls: ['./theme.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeComponent implements OnInit {
-  constructor(private themeService: ThemeService) {}
-
-  ngOnInit(): void {}
-
-  toggle() {
-    this.themeService.toggleTheme();
+export class ThemeComponent {
+  public isDark$!: Observable<boolean>;
+  constructor(private themeService: ThemeService) {
+    this.themeService.isDarkTheme.subscribe((isDark: any) => {
+      this.isDark$ = isDark;
+    });
   }
 
-  isDark() {
-    return this.themeService.isDarkTheme;
+  public toggle() {
+    this.themeService.toggleTheme();
   }
 }
