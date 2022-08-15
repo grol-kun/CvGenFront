@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
     this.form = this.fb.group({
       user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      checked: [false]
+      remember: [false]
     });
     this.justForTests();
   }
