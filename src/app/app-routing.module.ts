@@ -22,16 +22,16 @@ const routes: Routes = [
     component: SiteLayoutComponent,
     /* canActivate: [AuthGuard], */ children: [
       {
-        path: 'projects',
-        loadChildren: () =>
-          import('./projects/projects.module').then((m) => m.ProjectsModule),
-        title: 'Projects',
-      },
-      {
         path: 'employees',
         loadChildren: () =>
           import('./employees/employees.module').then((m) => m.EmployeesModule),
         title: 'Employees',
+      },
+      {
+        path: 'projects',
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
+        title: 'Projects',
       },
       {
         path: 'cvs',

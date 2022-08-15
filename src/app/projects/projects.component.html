@@ -1,1 +1,15 @@
-<p>projects works!</p>
+<div class="auth">
+  <form [formGroup]="form" class="auth__form">
+    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
+    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
+    <app-textarea
+      formControlName="anoter"
+      label="Anoter"
+      placeholder="anoter"
+      [minRows]="3"
+      [maxRows]="6"
+    ></app-textarea>
+    <app-app-data-picker formControlName="data" label="data" placeholder="data"></app-app-data-picker>
+    <app-app-autocomplete formControlName="auto" label="auto" placeholder="auto"></app-app-autocomplete>
+  </form>
+</div>

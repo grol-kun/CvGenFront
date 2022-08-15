@@ -9,9 +9,9 @@ import { ThemeToggleService } from '../shared/services/theme/theme-toggle.servic
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
+  private destroy$ = new Subject<void>();
   form!: FormGroup;
   checked = true;
-  private destroy$ = new Subject<void>();
   currentForm?: FormGroup;
 
   constructor(

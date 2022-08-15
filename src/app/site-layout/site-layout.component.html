@@ -2,19 +2,19 @@
   <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="['/employees/']">
         <i nz-icon nzType="user"></i>
         <span>Employees</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="['/projects/']">
         <i nz-icon nzType="database"></i>
         <span>Projects</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="['/cvs/']">
         <i nz-icon nzType="folder"></i>
         <span>CVs</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="['/entities/']">
         <i nz-icon nzType="file"></i>
         <span>Entities</span>
       </li>
