@@ -17,7 +17,7 @@
 
     &__asterisk {
       margin-left: 10px;
-      color: var(--error-color);
+      color: var(--status-error);
       font-family: $font-SimSong;
       font-weight: 400;
     }
@@ -33,7 +33,7 @@
 
     &__error-message {
       top: 55px;
-      color: var(--error-color);
+      color: var(--status-error);
       line-height: 18px;
       font-size: $font-size-12;
     }
