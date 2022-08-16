@@ -1,6 +1,7 @@
 import { Component, Input, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
+import { ErrorMessages } from '../../models/interfaces/error-messages';
 
 @Component({
   selector: 'app-app-data-picker',
@@ -11,6 +12,7 @@ export class AppDataPickerComponent {
   @Input() label = 'Date';
   @Input() placeholder = 'placeholder';
   control = new FormControl();
+  customError: ErrorMessages = { required: 'It is necessary to input the date' };
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => { };
   private onTouched = () => { };

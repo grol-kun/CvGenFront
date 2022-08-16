@@ -9,10 +9,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class ProjectsComponent implements OnInit {
   form!: FormGroup;
-  checked = true;
   private destroy$ = new Subject<void>();
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -22,17 +20,10 @@ export class ProjectsComponent implements OnInit {
       data: [null, [Validators.required]],
       auto: ['', [Validators.required]],
     });
-    this.logForm();
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  logForm() {
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      console.log(this.form);
-    });
   }
 }

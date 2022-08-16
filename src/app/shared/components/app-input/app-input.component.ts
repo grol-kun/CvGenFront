@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
+
 @Component({
   selector: 'app-input',
   templateUrl: './app-input.component.html',
@@ -14,7 +15,9 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
   private onChange = (value: any) => { };
   private onTouched = () => { };
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor(
+    @Self() public ngControl: NgControl
+  ) {
     this.ngControl.valueAccessor = this;
   }
 
@@ -37,5 +40,4 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

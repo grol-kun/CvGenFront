@@ -7,18 +7,8 @@
   <input class="nz-input" nz-input [placeholder]="placeholder" [formControl]="control" />
 
   <div class="input-component__error-wrapper">
-    <span
-      class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['required'] && control.touched"
-    >
-      Please, specify the {{ label | lowercase }}
-    </span>
-
-    <span
-      class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors?.['minlength'] && control.touched"
-    >
-      The {{ label | lowercase }} can't be less than {{ngControl.control?.errors?.['minlength'].requiredLength}} symbols
+    <span class="input-component__error-wrapper__error-message" *ngIf="ngControl.control?.errors && control.touched">
+      {{ ngControl.control?.errors | errorMessage }}
     </span>
   </div>
 </div>
