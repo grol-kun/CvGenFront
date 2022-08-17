@@ -15,7 +15,7 @@ export class AuthComponent implements OnInit {
   private destroy$ = new Subject<void>();
   form!: FormGroup;
   currentForm?: FormGroup;
-  login$?: Observable<AuthorizationResponse>;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,33 +38,33 @@ export class AuthComponent implements OnInit {
   }
 
   onAuthSubmit() {
-    const { identifier, password } = this.form.getRawValue();
-
-    if (this.form.valid) {
-      const remember = this.form.get('remember')?.value;
-      this.authService
-        .login({
-          identifier,
-          password,
-        })
-        .pipe(
-          takeUntil(this.destroy$),
-          tap((data) => (this.login$ = of(data)))
-        )
-        .subscribe({
-          next: (data) => {
-            this.authService.setToken(data.jwt);
-            if (remember) {
-              this.authService.setTokenToCookies(data.jwt);
-            }
-            this.router.navigate(['/employees']);
-            this.form.reset();
-          },
-          error: (err) => {
-            console.error(err);
-            this.message.create('warning', `Authorization error! Status:${err.message}`);
-          },
-        });
+    const { identifier, password, remember } = this.form.getRawValue();
+    if (!this.form.valid) {
+      return;
     }
+    this.loading = true;
+    this.form.disable();
+    this.authService
+      .login({
+        identifier,
+        password,
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.authService.setToken(data.jwt);
+          if (remember) {
+            this.authService.setTokenToCookies(data.jwt);
+          }
+          this.router.navigate(['/employees']);
+          this.form.reset();
+        },
+        error: (err) => {
+          console.error(err);
+          this.message.create('warning', `Authorization error! Status:${err.message}`);
+          this.loading = false;
+          this.form.enable();
+        },
+      });
   }
 }
