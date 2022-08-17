@@ -20,8 +20,11 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Initializer } from './shared/services/initializer.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.Interceptor';
+import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.interceptor';
 import { CookieModule } from 'ngx-cookie';
+import { HttpLoaderFactory, TranslateControlModule } from './shared/translate/translate-control.module';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 registerLocaleData(en);
 
@@ -43,6 +46,16 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     ThemeModule,
     HttpClientModule,
     CookieModule.withOptions(),
+    TranslateControlModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      useDefaultLang: false,
+    }),
   ],
   providers: [
     ThemeService,
