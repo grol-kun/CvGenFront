@@ -1,5 +1,5 @@
 <div class="auth">
-  <form [formGroup]="form" class="auth__form">
+  <form [formGroup]="form" class="auth__form" (ngSubmit)="onAuthSubmit()">
     <app-input formControlName="identifier" label="Username" placeholder="имя пользователя"></app-input>
     <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
 
@@ -8,8 +8,8 @@
       <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">Forgot your password?</a>
     </div>
 
-    <button nz-button nzType="primary" class="auth__form__button" (click)="onAuthSubmit()">Login</button>
+    <button type="submit" nz-button nzType="primary" class="auth__form__button" [disabled]="!form.valid">Login</button>
   </form>
 </div>
-
+<app-loader class="loader" *ngIf="login$ | async"></app-loader>
 <app-theme></app-theme>

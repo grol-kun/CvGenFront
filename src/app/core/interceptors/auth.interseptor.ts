@@ -7,20 +7,10 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Injectable()
 export class AuthInterseptor implements HttpInterceptor {
-
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private message: NzMessageService
-  ) { }
+  constructor(private router: Router, private authService: AuthService, private message: NzMessageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req)
-      .pipe(
-        catchError(
-          (error: HttpErrorResponse) => this.handleAuthError(error)
-        )
-      );
+    return next.handle(req).pipe(catchError((error: HttpErrorResponse) => this.handleAuthError(error)));
   }
 
   private handleAuthError(error: HttpErrorResponse): Observable<any> {
@@ -29,6 +19,6 @@ export class AuthInterseptor implements HttpInterceptor {
       this.router.navigate(['/auth']);
       this.message.create('warning', `Authorization error!`);
     }
-    return throwError(() => new Error(error.message))
+    return throwError(() => new Error(error.message));
   }
 }

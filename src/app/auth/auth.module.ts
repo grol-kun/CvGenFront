@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ThemeModule } from '../shared/theme/theme.module';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -18,6 +19,7 @@ import { ThemeModule } from '../shared/theme/theme.module';
     NzButtonModule,
     NzCheckboxModule,
     ThemeModule,
+    LoaderModule,
   ],
 })
 export class AuthModule {}

@@ -1,6 +1,6 @@
-import { User } from "../user";
+import { User } from '../user';
 
 export interface AuthorizationResponse {
-  "jwt": string,
-  "user": User
+  jwt: string;
+  user: User;
 }

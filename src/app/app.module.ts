@@ -20,6 +20,8 @@ import { TokenInterseptor } from './core/interceptors/token.interseptor';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthInterseptor } from './core/interceptors/auth.interseptor';
 import { CookieService } from './shared/services/cookie.service';
+import { Initializer } from './shared/services/initializer.service';
+import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.interseprot';
 
 registerLocaleData(en);
 
@@ -39,7 +41,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     ReactiveFormsModule,
     SiteLayoutModule,
     ThemeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     ThemeService,
@@ -47,8 +49,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     CookieService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (themeService: ThemeService) => () => themeService.startTheme(),
-      deps: [ThemeService],
+      useFactory: (init: Initializer) => () => init.initApp(),
+      deps: [Initializer],
       multi: true,
     },
     { provide: NZ_I18N, useValue: en_US },
@@ -56,15 +58,19 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterseptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterseptor,
-      multi: true
+      useClass: TokenInterseptor,
+      multi: true,
     },
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PrefixHttpIterseptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

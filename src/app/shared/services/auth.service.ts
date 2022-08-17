@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthorizationResponse } from '../models/interfaces/authorization-response';
@@ -12,10 +13,7 @@ import { CookieService } from './cookie.service';
 export class AuthService {
   private token: string | null = null;
 
-  constructor(
-    private httpClient: HttpClient,
-    private cookieService: CookieService
-  ) { }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService, private router: Router) {}
 
   login(userData: loginInfo): Observable<AuthorizationResponse> {
     return this.httpClient.post<AuthorizationResponse>(`/api/auth/local`, userData);
@@ -34,21 +32,27 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = this.token;
-    return !!token;
+    return !!this.token;
   }
 
   setTokenToCookies(token: string): void {
-    this.cookieService.setCookie(environment.TokenName, token)
+    this.cookieService.setCookie(environment.tokenName, token);
   }
 
   getTokenFromCookies(): string {
-    return this.cookieService.getCookie(environment.TokenName);
+    return this.cookieService.getCookie(environment.tokenName);
   }
 
   logout(): void {
     this.removeToken();
-    this.cookieService.deleteCookie(environment.TokenName);
+    this.cookieService.deleteCookie(environment.tokenName);
+    this.router.navigate(['/auth']);
   }
 
+  setTokenIfAvailable() {
+    const potentialToken = this.getTokenFromCookies();
+    if (potentialToken) {
+      this.setToken(potentialToken);
+    }
+  }
 }
