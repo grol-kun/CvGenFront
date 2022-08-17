@@ -3,11 +3,7 @@ import { ErrorMessagePipe } from './error-message.pipe';
 
 @NgModule({
   imports: [],
-  declarations: [
-    ErrorMessagePipe
-  ],
-  exports: [
-    ErrorMessagePipe
-  ]
+  declarations: [ErrorMessagePipe],
+  exports: [ErrorMessagePipe],
 })
-export class ApplicationPipesModule { }
+export class ApplicationPipesModule {}

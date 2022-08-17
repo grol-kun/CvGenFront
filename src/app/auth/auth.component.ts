@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of, Subject, takeUntil, tap } from 'rxjs';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { AuthorizationResponse } from '../shared/models/interfaces/authorization-response';
 
 @Component({
   selector: 'app-auth',
@@ -49,7 +48,10 @@ export class AuthComponent implements OnInit {
         identifier,
         password,
       })
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => this.form.enable())
+      )
       .subscribe({
         next: (data) => {
           this.authService.setToken(data.jwt);
@@ -57,13 +59,11 @@ export class AuthComponent implements OnInit {
             this.authService.setTokenToCookies(data.jwt);
           }
           this.router.navigate(['/employees']);
-          this.form.reset();
         },
         error: (err) => {
           console.error(err);
           this.message.create('warning', `Authorization error! Status:${err.message}`);
           this.loading = false;
-          this.form.enable();
         },
       });
   }
