@@ -5,6 +5,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { TranslateLoader, TranslateModule, TranslateStore } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/locale/', '.json');
@@ -12,7 +13,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 
 @NgModule({
   declarations: [I18nComponent],
-  imports: [CommonModule, NzDropDownModule],
+  imports: [CommonModule, NzDropDownModule, NzIconModule],
   providers: [TranslateStore],
   exports: [I18nComponent, TranslateModule],
 })
