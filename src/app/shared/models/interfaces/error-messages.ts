@@ -1,3 +1,3 @@
 export interface ErrorMessages {
-  [errorKey: string]: string
+  [errorKey: string]: string;
 }

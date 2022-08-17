@@ -15,8 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ThemeModule } from './shared/theme/theme.module';
 import { ThemeService } from './shared/theme/theme.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Initializer } from './shared/services/initializer.service';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.interceptor';
+import { CookieModule } from 'ngx-cookie';
 import { HttpLoaderFactory, TranslateControlModule } from './shared/translate/translate-control.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 registerLocaleData(en);
@@ -37,6 +44,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     ReactiveFormsModule,
     SiteLayoutModule,
     ThemeModule,
+    HttpClientModule,
+    CookieModule.withOptions(),
     TranslateControlModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -50,14 +59,30 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
   ],
   providers: [
     ThemeService,
+    NzMessageService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (themeService: ThemeService) => () => themeService.startTheme(),
-      deps: [ThemeService],
+      useFactory: (initializer: Initializer) => () => initializer.initApp(),
+      deps: [Initializer],
       multi: true,
     },
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PrefixHttpIterseptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

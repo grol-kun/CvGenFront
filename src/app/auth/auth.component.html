@@ -1,7 +1,7 @@
 <div class="auth">
-  <form [formGroup]="form" class="auth__form">
+  <form [formGroup]="form" class="auth__form" (ngSubmit)="onAuthSubmit()">
     <app-input
-      formControlName="user"
+      formControlName="identifier"
       [label]="'auth.text.username' | translate"
       [placeholder]="'auth.text.username_placeholder' | translate"
     ></app-input>
@@ -18,9 +18,11 @@
       </a>
     </div>
 
-    <button nz-button nzType="primary" class="auth__form__button">{{ 'auth.actions.login' | translate }}</button>
+    <button type="submit" nz-button nzType="primary" class="auth__form__button" [disabled]="!form.valid">
+      {{ 'auth.actions.login' | translate }}
+    </button>
   </form>
 </div>
-
+<app-loader class="loader" *ngIf="loading"></app-loader>
 <app-theme></app-theme>
 <app-translate-control></app-translate-control>

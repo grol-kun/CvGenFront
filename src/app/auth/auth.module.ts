@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ThemeModule } from '../shared/theme/theme.module';
 import { TranslateControlModule } from '../shared/translate/translate-control.module';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -20,6 +21,7 @@ import { TranslateControlModule } from '../shared/translate/translate-control.mo
     NzCheckboxModule,
     ThemeModule,
     TranslateControlModule,
+    LoaderModule,
   ],
 })
 export class AuthModule {}

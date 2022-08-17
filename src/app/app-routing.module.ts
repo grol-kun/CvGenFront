@@ -2,35 +2,34 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './core/guards/auth.guard';
 import { SiteLayoutComponent } from './site-layout/site-layout.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
     component: AuthComponent,
     children: [
-      { path: '', redirectTo: '/auth', pathMatch: 'full' },
       {
         path: 'auth',
-        loadChildren: () =>
-          import('./auth/auth.module').then((m) => m.AuthModule),
+        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
       },
     ],
   },
   {
     path: '',
     component: SiteLayoutComponent,
-    /* canActivate: [AuthGuard], */ children: [
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: '/employees', pathMatch: 'full' },
       {
         path: 'employees',
-        loadChildren: () =>
-          import('./employees/employees.module').then((m) => m.EmployeesModule),
+        loadChildren: () => import('./employees/employees.module').then((m) => m.EmployeesModule),
         title: 'Employees',
       },
       {
         path: 'projects',
-        loadChildren: () =>
-          import('./projects/projects.module').then((m) => m.ProjectsModule),
+        loadChildren: () => import('./projects/projects.module').then((m) => m.ProjectsModule),
         title: 'Projects',
       },
       {
@@ -40,26 +39,19 @@ const routes: Routes = [
       },
       {
         path: 'entities',
-        loadChildren: () =>
-          import('./entities/entities.module').then((m) => m.EntitiesModule),
+        loadChildren: () => import('./entities/entities.module').then((m) => m.EntitiesModule),
         title: 'Entities',
+      },
+      {
+        path: '**',
+        redirectTo: '',
       },
     ],
   },
-
-  /*
-   {
-     path: '**',
-     redirectTo: '404',
-   },
-   {
-     path: '404',
-     redirectTo: ''
-   } */
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
