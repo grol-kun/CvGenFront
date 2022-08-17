@@ -13,7 +13,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
 
 @NgModule({
   declarations: [I18nComponent],
-  imports: [CommonModule, NzDropDownModule, NzIconModule],
+  imports: [CommonModule, NzDropDownModule, TranslateModule],
   providers: [TranslateStore],
   exports: [I18nComponent, TranslateModule],
 })

@@ -4,7 +4,7 @@
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu nzSelectable>
     <li nz-menu-item *ngFor="let lang of translate.getLangs()" [value]="lang" (click)="changeLang(lang)">
-      {{ lang | uppercase }}
+      {{ 'LANGUAGES.' + lang.toUpperCase() | translate }}
     </li>
   </ul>
 </nz-dropdown-menu>
