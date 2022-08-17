@@ -1,0 +1,20 @@
+{
+  "LANGUAGES": {
+    "RU": "Русский",
+    "EN": "English"
+  },
+  "AUTH": {
+    "TITLE": "Авторизация",
+    "TEXT": {
+      "USERNAME": "Имя пользователя",
+      "USERNAME_PLACEHOLDER": "Введите имя пользователя",
+      "PASSWORD": "Пароль",
+      "PASSWORD_PLACEHOLDER": "Введите пароль"
+    },
+    "ACTIONS": {
+      "LOGIN": "Войти",
+      "REMEMBER_ME": "Запомнить меня",
+      "FORGOT_PASSWORD": "Забыли пароль?"
+    }
+  }
+}

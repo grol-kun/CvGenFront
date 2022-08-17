@@ -1,0 +1,11 @@
+<a nz-dropdown [nzDropdownMenu]="menu">
+  Language
+  <i nz-icon nzType="down"></i>
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item *ngFor="let lang of translate.getLangs()" [value]="lang" (click)="changeLang(lang)">
+      {{ lang | uppercase }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

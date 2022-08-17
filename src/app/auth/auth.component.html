@@ -1,15 +1,26 @@
 <div class="auth">
   <form [formGroup]="form" class="auth__form">
-    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
-    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
+    <app-input
+      formControlName="user"
+      label="{{ 'AUTH.TEXT.USERNAME' | translate }}"
+      placeholder="{{ 'AUTH.TEXT.USERNAME_PLACEHOLDER' | translate }}"
+    ></app-input>
+    <app-input
+      formControlName="password"
+      label="{{ 'AUTH.TEXT.PASSWORD' | translate }}"
+      placeholder="{{ 'AUTH.TEXT.PASSWORD_PLACEHOLDER' | translate }}"
+    ></app-input>
 
     <div class="auth__form__inner-wrapper">
-      <label nz-checkbox formControlName="remember">Remember me</label>
-      <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">Forgot your password?</a>
+      <label nz-checkbox formControlName="remember">{{ 'AUTH.ACTIONS.REMEMBER_ME' | translate }}</label>
+      <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">
+        {{ 'AUTH.ACTIONS.FORGOT_PASSWORD' | translate }}
+      </a>
     </div>
 
-    <button nz-button nzType="primary" class="auth__form__button">Login</button>
+    <button nz-button nzType="primary" class="auth__form__button">{{ 'AUTH.ACTIONS.LOGIN' | translate }}</button>
   </form>
 </div>
 
 <app-theme></app-theme>
+<app-i18n></app-i18n>

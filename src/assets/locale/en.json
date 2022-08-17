@@ -1,0 +1,20 @@
+{
+  "LANGUAGES": {
+    "RU": "Русский",
+    "EN": "English"
+  },
+  "AUTH": {
+    "TITLE": "Auth",
+    "TEXT": {
+      "USERNAME": "Username",
+      "USERNAME_PLACEHOLDER": "Enter username",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Enter password"
+    },
+    "ACTIONS": {
+      "LOGIN": "Login",
+      "REMEMBER_ME": "Remember me",
+      "FORGOT_PASSWORD": "Forgot your password?"
+    }
+  }
+}
