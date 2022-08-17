@@ -16,12 +16,12 @@ import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ThemeModule } from './shared/theme/theme.module';
 import { ThemeService } from './shared/theme/theme.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterseptor } from './core/interceptors/token.interseptor';
+import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { AuthInterseptor } from './core/interceptors/auth.interseptor';
-import { CookieService } from './shared/services/cookie.service';
 import { Initializer } from './shared/services/initializer.service';
-import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.interseprot';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.Interceptor';
+import { CookieModule } from 'ngx-cookie';
 
 registerLocaleData(en);
 
@@ -42,14 +42,14 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     SiteLayoutModule,
     ThemeModule,
     HttpClientModule,
+    CookieModule.withOptions(),
   ],
   providers: [
     ThemeService,
     NzMessageService,
-    CookieService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (init: Initializer) => () => init.initApp(),
+      useFactory: (initializer: Initializer) => () => initializer.initApp(),
       deps: [Initializer],
       multi: true,
     },
@@ -57,12 +57,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     { provide: NZ_ICONS, useValue: icons },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterseptor,
+      useClass: AuthInterceptor,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterseptor,
+      useClass: TokenInterceptor,
       multi: true,
     },
     {

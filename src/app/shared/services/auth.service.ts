@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthorizationResponse } from '../models/interfaces/authorization-response';
 import { loginInfo } from '../models/interfaces/login-info';
-import { CookieService } from './cookie.service';
+import { CookieService } from 'ngx-cookie';
+import { ExpireDateService } from './expireDate.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,12 @@ import { CookieService } from './cookie.service';
 export class AuthService {
   private token: string | null = null;
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService,
+    private router: Router,
+    private expDate: ExpireDateService
+  ) {}
 
   login(userData: loginInfo): Observable<AuthorizationResponse> {
     return this.httpClient.post<AuthorizationResponse>(`/api/auth/local`, userData);
@@ -36,17 +42,12 @@ export class AuthService {
   }
 
   setTokenToCookies(token: string): void {
-    this.cookieService.setCookie(environment.tokenName, token);
+    this.cookieService.put(environment.tokenName, token, { secure: true, expires: this.expDate.getExpireDate() });
   }
 
-  getTokenFromCookies(): string {
-    return this.cookieService.getCookie(environment.tokenName);
-  }
-
-  logout(): void {
-    this.removeToken();
-    this.cookieService.deleteCookie(environment.tokenName);
-    this.router.navigate(['/auth']);
+  getTokenFromCookies(): string | undefined {
+    console.log('getTokenFromCookies: ', this.cookieService.get(environment.tokenName));
+    return this.cookieService.get(environment.tokenName);
   }
 
   setTokenIfAvailable() {
@@ -54,5 +55,11 @@ export class AuthService {
     if (potentialToken) {
       this.setToken(potentialToken);
     }
+  }
+
+  logout(): void {
+    this.removeToken();
+    this.cookieService.remove(environment.tokenName);
+    this.router.navigate(['/auth']);
   }
 }

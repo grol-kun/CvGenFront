@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Injectable()
-export class AuthInterseptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router, private authService: AuthService, private message: NzMessageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
