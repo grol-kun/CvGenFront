@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-i18n',
-  templateUrl: './i18n.component.html',
-  styleUrls: ['./i18n.component.scss'],
+  selector: 'app-translate-control',
+  templateUrl: './translate-control.component.html',
+  styleUrls: ['./translate-control.component.scss'],
 })
-export class I18nComponent {
+export class TranslateControlComponent {
+  langs: string[];
   constructor(public translate: TranslateService) {
     translate.addLangs(['en', 'ru']);
     if (localStorage.getItem('locale')) {
@@ -16,6 +17,7 @@ export class I18nComponent {
       localStorage.setItem('locale', 'en');
       translate.setDefaultLang('en');
     }
+    this.langs = translate.getLangs();
   }
   changeLang(language: string) {
     localStorage.setItem('locale', language);

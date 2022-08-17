@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ThemeModule } from './shared/theme/theme.module';
 import { ThemeService } from './shared/theme/theme.service';
-import { HttpLoaderFactory, I18nModule } from './shared/translate/i18n.module';
+import { HttpLoaderFactory, TranslateControlModule } from './shared/translate/translate-control.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -37,7 +37,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     ReactiveFormsModule,
     SiteLayoutModule,
     ThemeModule,
-    I18nModule,
+    TranslateControlModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

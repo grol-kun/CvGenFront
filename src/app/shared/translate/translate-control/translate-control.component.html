@@ -3,8 +3,8 @@
 </a>
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu nzSelectable>
-    <li nz-menu-item *ngFor="let lang of translate.getLangs()" [value]="lang" (click)="changeLang(lang)">
-      {{ 'LANGUAGES.' + lang.toUpperCase() | translate }}
+    <li nz-menu-item *ngFor="let lang of langs" [value]="lang" (click)="changeLang(lang)">
+      {{ 'languages.' + lang | translate }}
     </li>
   </ul>
 </nz-dropdown-menu>

@@ -3,13 +3,7 @@
   width: 32px;
   height: 32px;
   user-select: none;
-}
-
-.language-select {
-  display: block;
-  width: 32px;
-  height: 32px;
-  &__img {
+  .language-select__img {
     width: 90%;
     height: 90%;
   }
