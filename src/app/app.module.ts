@@ -15,6 +15,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ThemeModule } from './shared/theme/theme.module';
 import { ThemeService } from './shared/theme/theme.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterseptor } from './core/interceptors/token.interseptor';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthInterseptor } from './core/interceptors/auth.interseptor';
+import { CookieService } from './shared/services/cookie.service';
 
 registerLocaleData(en);
 
@@ -34,9 +39,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     ReactiveFormsModule,
     SiteLayoutModule,
     ThemeModule,
+    HttpClientModule
   ],
   providers: [
     ThemeService,
+    NzMessageService,
+    CookieService,
     {
       provide: APP_INITIALIZER,
       useFactory: (themeService: ThemeService) => () => themeService.startTheme(),
@@ -45,7 +53,18 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     },
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterseptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterseptor,
+      multi: true
+    },
+
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

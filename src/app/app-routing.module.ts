@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './core/guards/auth.guard';
 import { SiteLayoutComponent } from './site-layout/site-layout.component';
 
 const routes: Routes = [
@@ -14,13 +15,14 @@ const routes: Routes = [
         path: 'auth',
         loadChildren: () =>
           import('./auth/auth.module').then((m) => m.AuthModule),
-      },
+      }
     ],
   },
   {
     path: '',
     component: SiteLayoutComponent,
-    /* canActivate: [AuthGuard], */ children: [
+    canActivate: [AuthGuard],
+    children: [
       {
         path: 'employees',
         loadChildren: () =>
@@ -44,18 +46,12 @@ const routes: Routes = [
           import('./entities/entities.module').then((m) => m.EntitiesModule),
         title: 'Entities',
       },
+      {
+        path: '**',
+        redirectTo: 'employees'
+      }
     ],
   },
-
-  /*
-   {
-     path: '**',
-     redirectTo: '404',
-   },
-   {
-     path: '404',
-     redirectTo: ''
-   } */
 ];
 
 @NgModule({

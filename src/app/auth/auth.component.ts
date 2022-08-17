@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-auth',
@@ -12,15 +15,19 @@ export class AuthComponent implements OnInit {
   form!: FormGroup;
   currentForm?: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private message: NzMessageService
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      user: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      identifier: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       remember: [false]
     });
-    this.justForTests();
   }
 
   ngOnDestroy(): void {
@@ -28,11 +35,32 @@ export class AuthComponent implements OnInit {
     this.destroy$.complete();
   }
 
-  justForTests() {
-    this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        console.log(this.form);
+  onAuthSubmit() {
+    this.form.markAllAsTouched();
+    const { identifier, password } = this.form.getRawValue();
+
+    if (this.form.valid) {
+      const remember = this.form.get('remember')?.value;
+      this.authService.login({
+        identifier,
+        password,
       })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (data) => {
+            console.log(data);
+            this.authService.setToken(data.jwt);
+            if (remember) {
+              this.authService.setTokenToCookies(data.jwt);
+            }
+            this.router.navigate(['/employees']);
+          },
+          error: (err) => {
+            console.error(err);
+            this.message.create('warning', `Authorization error! Status:${err.message}`);
+          }
+        })
+      this.form.reset();
+    }
   }
 }

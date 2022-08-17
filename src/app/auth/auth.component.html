@@ -1,6 +1,6 @@
 <div class="auth">
   <form [formGroup]="form" class="auth__form">
-    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
+    <app-input formControlName="identifier" label="Username" placeholder="имя пользователя"></app-input>
     <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
 
     <div class="auth__form__inner-wrapper">
@@ -8,7 +8,7 @@
       <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">Forgot your password?</a>
     </div>
 
-    <button nz-button nzType="primary" class="auth__form__button">Login</button>
+    <button nz-button nzType="primary" class="auth__form__button" (click)="onAuthSubmit()">Login</button>
   </form>
 </div>
 
