@@ -1,0 +1,10 @@
+<a class="language-select" nz-dropdown [nzDropdownMenu]="menu">
+  <img class="language-select__img" src="/assets/svgs/language.svg" alt="Language" />
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item *ngFor="let lang of langs" [value]="lang" (click)="changeLang(lang)">
+      {{ 'languages.' + lang | translate }}
+    </li>
+  </ul>
+</nz-dropdown-menu>
