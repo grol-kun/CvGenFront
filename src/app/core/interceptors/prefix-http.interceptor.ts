@@ -8,7 +8,9 @@ export class PrefixHttpIterseptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({ url: `${environment.baseUrl}${req.url}` });
+    if (!req.url.startsWith('./assets/')) {
+      req = req.clone({ url: `${environment.baseUrl}${req.url}` });
+    }
     return next.handle(req);
   }
 }
