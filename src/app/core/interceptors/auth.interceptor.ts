@@ -1,4 +1,10 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -7,10 +13,21 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private authService: AuthService, private message: NzMessageService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private message: NzMessageService
+  ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).pipe(catchError((error: HttpErrorResponse) => this.handleAuthError(error)));
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    return next
+      .handle(req)
+      .pipe(
+        catchError((error: HttpErrorResponse) => this.handleAuthError(error))
+      );
   }
 
   private handleAuthError(error: HttpErrorResponse): Observable<any> {

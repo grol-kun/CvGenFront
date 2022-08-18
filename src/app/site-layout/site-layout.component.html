@@ -28,6 +28,9 @@
         <nz-breadcrumb-item>1</nz-breadcrumb-item>
       </nz-breadcrumb>
       <div class="inner-content">
+        <div class="inner-content__loader_wrapper" *ngIf="loader$ | async">
+          <app-loader></app-loader>
+        </div>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
