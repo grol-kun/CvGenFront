@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-site-layout',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./site-layout.component.scss'],
 })
 export class SiteLayoutComponent implements OnInit {
-  constructor() {}
+  loaderObserver$?: BehaviorSubject<boolean>;
 
-  ngOnInit(): void {}
+  constructor(public loaderService: LoaderService) {}
+
+  ngOnInit(): void {
+    this.loaderObserver$ = this.loaderService.loaderStatus;
+  }
 }

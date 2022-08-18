@@ -25,12 +25,24 @@ nz-breadcrumb {
   margin: 16px 0;
 }
 
+nz-footer {
+  text-align: center;
+}
+
 .inner-content {
   padding: 24px;
   background: #fff;
   min-height: 360px;
-}
+  position: relative;
 
-nz-footer {
-  text-align: center;
+  &__loader_wrapper {
+    margin: -24px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(85, 85, 86, 0.1);
+  }
 }
