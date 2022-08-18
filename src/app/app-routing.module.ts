@@ -12,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+        loadChildren: () =>
+          import('./auth/auth.module').then((m) => m.AuthModule),
       },
     ],
   },
@@ -24,12 +25,22 @@ const routes: Routes = [
       { path: '', redirectTo: '/employees', pathMatch: 'full' },
       {
         path: 'employees',
-        loadChildren: () => import('./employees/employees.module').then((m) => m.EmployeesModule),
+        loadChildren: () =>
+          import('./employees/employees.module').then((m) => m.EmployeesModule),
         title: 'Employees',
       },
       {
+        path: 'employees/:id',
+        loadChildren: () =>
+          import('./employees/employee/employee.module').then(
+            (m) => m.EmployeeModule
+          ),
+        title: 'Employee',
+      },
+      {
         path: 'projects',
-        loadChildren: () => import('./projects/projects.module').then((m) => m.ProjectsModule),
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
         title: 'Projects',
       },
       {
@@ -39,13 +50,14 @@ const routes: Routes = [
       },
       {
         path: 'entities',
-        loadChildren: () => import('./entities/entities.module').then((m) => m.EntitiesModule),
+        loadChildren: () =>
+          import('./entities/entities.module').then((m) => m.EntitiesModule),
         title: 'Entities',
       },
-      {
+      /*       {
         path: '**',
         redirectTo: '',
-      },
+      }, */
     ],
   },
 ];

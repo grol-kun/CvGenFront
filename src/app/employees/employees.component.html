@@ -1,4 +1,9 @@
-<nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="usersList$ | async as userList; else loader">
+<nz-table
+  #filterTable
+  [nzData]="userList"
+  nzTableLayout="fixed"
+  *ngIf="usersList$ | async as userList; else loader"
+>
   <thead>
     <tr>
       <th
@@ -12,7 +17,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of filterTable.data">
+    <tr
+      *ngFor="let data of filterTable.data"
+      [routerLink]="['/employees/' + data.id]"
+    >
       <td>{{ data.firstName }}</td>
       <td>{{ data.lastName }}</td>
       <td>{{ data.email }}</td>
