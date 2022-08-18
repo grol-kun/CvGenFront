@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
@@ -8,11 +8,11 @@ import { LoaderService } from '../shared/services/loader.service';
   styleUrls: ['./site-layout.component.scss'],
 })
 export class SiteLayoutComponent implements OnInit {
-  loaderObserver$?: Observable<boolean>;
+  loader$?: Observable<boolean>;
 
   constructor(private loaderService: LoaderService) {}
 
   ngOnInit(): void {
-    this.loaderObserver$ = this.loaderService.loaderStatus;
+    this.loader$ = this.loaderService.loaderStatus$;
   }
 }

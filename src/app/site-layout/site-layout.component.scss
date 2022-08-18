@@ -3,7 +3,7 @@
 .logo {
   height: 32px;
   margin: 16px;
-  background-color: $background-primary-light;
+  background-color: $simple-white;
   svg {
     height: 100%;
     width: 100%;
@@ -11,7 +11,7 @@
 }
 
 nz-header {
-  background: $background-primary-light;
+  background: $simple-white;
   padding: 0;
 }
 
@@ -33,7 +33,7 @@ nz-footer {
 
 .inner-content {
   padding: 24px;
-  background: $background-primary-light;
+  background: $simple-white;
   min-height: 360px;
   position: relative;
 
