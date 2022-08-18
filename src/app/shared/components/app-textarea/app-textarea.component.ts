@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { DEFAULT_MAX_ROWS_VALUE, DEFAULT_MIN_ROWS_VALUE } from '../../models/constants/constants';
+import {
+  DEFAULT_MAX_ROWS_VALUE,
+  DEFAULT_MIN_ROWS_VALUE,
+} from '../../models/constants/constants';
 import { RowsSize } from '../../models/interfaces/rows-size';
 
 @Component({
@@ -26,9 +29,11 @@ export class AppTextareaComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit(): void {
     this.rowsSize = { minRows: this.minRows, maxRows: this.maxRows };
-    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.onChange(value);
-    });
+    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(
+      (value) => {
+        this.onChange(value);
+      }
+    );
   }
 
   registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);

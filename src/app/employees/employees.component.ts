@@ -1,16 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { UserInfo } from '../shared/models/interfaces/user-info';
 import { UserService } from '../shared/services/user.service';
-
-interface ColumnItem {
-  name: string;
-  sortOrder: NzTableSortOrder | null;
-  sortFn: NzTableSortFn<UserInfo> | null;
-  sortDirections: NzTableSortOrder[];
-}
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -19,7 +11,7 @@ interface ColumnItem {
 export class EmployeesComponent implements OnInit {
   usersList$!: Observable<UserInfo[]>;
 
-  constructor(private userService: UserService, private message: NzMessageService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.usersList$ = this.userService.getUsers();
@@ -30,13 +22,15 @@ export class EmployeesComponent implements OnInit {
       name: 'First Name',
       sortOrder: null,
       sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) => a.firstName.localeCompare(b.firstName),
+      sortFn: (a: UserInfo, b: UserInfo) =>
+        a.firstName.localeCompare(b.firstName),
     },
     {
       name: 'Last Name',
       sortOrder: 'descend',
       sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) => a.lastName.localeCompare(b.lastName),
+      sortFn: (a: UserInfo, b: UserInfo) =>
+        a.lastName.localeCompare(b.lastName),
     },
     {
       name: 'Email',
