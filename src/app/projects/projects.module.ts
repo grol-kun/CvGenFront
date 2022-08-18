@@ -7,6 +7,7 @@ import { AppInputModule } from '../shared/components/app-input/app-input.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppDataPickerModule } from '../shared/components/app-data-picker/app-data-picker.module';
 import { AppAutocompleteModule } from '../shared/components/app-autocomplete/app-autocomplete.module';
+import { TranslateControlModule } from '../shared/translate/translate-control.module';
 
 @NgModule({
   declarations: [
