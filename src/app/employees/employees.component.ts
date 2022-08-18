@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { UserInfo } from '../shared/models/interfaces/user-info';
 import { UserService } from '../shared/services/user.service';
+
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
