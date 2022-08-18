@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 export class Initializer {
   constructor(public themeService: ThemeService, public authService: AuthService) {}
 
-  public initApp() {
+  initApp() {
     this.themeService.startTheme();
     this.authService.setTokenIfAvailable();
   }
