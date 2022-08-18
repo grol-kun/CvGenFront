@@ -1,4 +1,9 @@
-<nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="usersList$ | async as userList; else loader">
+<nz-table
+  #filterTable
+  [nzData]="userList"
+  nzTableLayout="fixed"
+  *ngIf="usersList$ | async as userList"
+>
   <thead>
     <tr>
       <th
@@ -19,7 +24,3 @@
     </tr>
   </tbody>
 </nz-table>
-
-<ng-template #loader>
-  <app-loader></app-loader>
-</ng-template>

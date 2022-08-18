@@ -8,6 +8,7 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { RouterModule } from '@angular/router';
+import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({
   imports: [
@@ -18,9 +19,10 @@ import { RouterModule } from '@angular/router';
     NzListModule,
     NzMenuModule,
     NzPageHeaderModule,
-    RouterModule
+    RouterModule,
+    LoaderModule,
   ],
   declarations: [SiteLayoutComponent],
-  exports: [SiteLayoutComponent]
+  exports: [SiteLayoutComponent],
 })
-export class SiteLayoutModule { }
+export class SiteLayoutModule {}
