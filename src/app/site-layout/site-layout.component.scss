@@ -1,7 +1,9 @@
+@import "../../styles.scss";
+
 .logo {
   height: 32px;
   margin: 16px;
-  background-color: #fff;
+  background-color: $background-primary-light;
   svg {
     height: 100%;
     width: 100%;
@@ -9,7 +11,7 @@
 }
 
 nz-header {
-  background: #fff;
+  background: $background-primary-light;
   padding: 0;
 }
 
@@ -31,7 +33,7 @@ nz-footer {
 
 .inner-content {
   padding: 24px;
-  background: #fff;
+  background: $background-primary-light;
   min-height: 360px;
   position: relative;
 
@@ -43,6 +45,6 @@ nz-footer {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(85, 85, 86, 0.1);
+    background-color: $overlay-bg-color;
   }
 }

@@ -20,7 +20,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Initializer } from './shared/services/initializer.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { PrefixHttpIterseptor as PrefixHttpIterceptor } from './core/interceptors/prefix-http.interceptor';
+import { PrefixHttpInterceptor } from './core/interceptors/prefix-http.interceptor';
 import { CookieModule } from 'ngx-cookie';
 import {
   HttpLoaderFactory,
@@ -29,7 +29,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LoaderService } from './shared/services/loader.service';
-import { LoaderIterceptor } from './core/interceptors/loader.interceptor';
+import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
 registerLocaleData(en);
 
@@ -83,7 +83,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: LoaderIterceptor,
+      useClass: LoaderInterceptor,
       multi: true,
     },
     {
@@ -93,7 +93,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: PrefixHttpIterceptor,
+      useClass: PrefixHttpInterceptor,
       multi: true,
     },
   ],

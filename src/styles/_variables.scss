@@ -25,6 +25,8 @@ $status-error-dark: #ff4d4f;
 $status-success-light: #00c851;
 $status-success-dark: #00c851;
 
+$overlay-bg-color: rgba(85, 85, 86, 0.1);
+
 @mixin light() {
   --background-primary: #{$background-primary-light};
   --background-secondary: #{$background-secondary-light};
