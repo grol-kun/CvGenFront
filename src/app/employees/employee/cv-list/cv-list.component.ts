@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 
 @Component({
   selector: 'app-cv-list',
   templateUrl: './cv-list.component.html',
-  styleUrls: ['./cv-list.component.scss']
+  styleUrls: ['./cv-list.component.scss'],
 })
 export class CvListComponent implements OnInit {
+  @Input() user$?: Observable<UserInfo>;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

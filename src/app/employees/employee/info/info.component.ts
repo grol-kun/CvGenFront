@@ -13,19 +13,4 @@ export class InfoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  panels = [
-    {
-      active: true,
-      name: 'Info',
-    },
-    {
-      active: false,
-      name: 'Skills',
-    },
-    {
-      active: false,
-      name: 'Languages',
-    },
-  ];
 }
