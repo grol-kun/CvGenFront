@@ -16,6 +16,7 @@ export class TranslateControlComponent {
     } else {
       localStorage.setItem('locale', 'en');
       translate.setDefaultLang('en');
+      translate.use('en');
     }
     this.langs = translate.getLangs();
   }

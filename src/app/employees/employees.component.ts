@@ -11,6 +11,7 @@ import { UserService } from '../shared/services/user.service';
 })
 export class EmployeesComponent implements OnInit {
   usersList$!: Observable<UserInfo[]>;
+  localePath = 'employees.actions.';
 
   constructor(private userService: UserService) {}
 
@@ -20,21 +21,21 @@ export class EmployeesComponent implements OnInit {
 
   listOfColumns: ColumnItem[] = [
     {
-      name: 'First Name',
+      name: this.localePath + 'first_name',
       sortOrder: null,
       sortDirections: ['ascend', 'descend', null],
       sortFn: (a: UserInfo, b: UserInfo) =>
         a.firstName.localeCompare(b.firstName),
     },
     {
-      name: 'Last Name',
+      name: this.localePath + 'last_name',
       sortOrder: 'descend',
       sortDirections: ['ascend', 'descend', null],
       sortFn: (a: UserInfo, b: UserInfo) =>
         a.lastName.localeCompare(b.lastName),
     },
     {
-      name: 'Email',
+      name: this.localePath + 'email',
       sortOrder: null,
       sortDirections: ['ascend', 'descend', null],
       sortFn: (a: UserInfo, b: UserInfo) => a.email.localeCompare(b.email),

@@ -3,6 +3,12 @@
     "ru": "Русский",
     "en": "English"
   },
+  "layout":{
+    "employees": "Сотрудники",
+    "projects": "Проекты",
+    "cvs": "Резюме",
+    "entities": "Сущности" 
+  },
   "auth": {
     "title": "Авторизация",
     "text": {
@@ -16,5 +22,18 @@
       "remember_me": "Запомнить меня",
       "forgot_password": "Забыли пароль?"
     }
+  },
+  "employees":{
+    "title": "Сотрудники",
+    "actions": {
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "email": "Электронная почта"
+    }
+  },
+  "errors": {
+    "required": "Это обязательное поле",
+    "minLength": "Слишком мало символов",
+    "maxLength": "Слишком много символов"
   }
 }

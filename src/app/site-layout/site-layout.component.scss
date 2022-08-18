@@ -13,6 +13,19 @@ nz-header {
   padding: 0;
 }
 
+.header-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.ui-controls{
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+}
+
 nz-sider {
   min-height: 100vh;
 }

@@ -3,6 +3,12 @@
     "ru": "Русский",
     "en": "English"
   },
+  "layout":{
+    "employees": "Employees",
+    "projects": "Projects",
+    "cvs": "CVs",
+    "entities": "Entities" 
+  },
   "auth": {
     "title": "Auth",
     "text": {
@@ -16,5 +22,18 @@
       "remember_me": "Remember me",
       "forgot_password": "Forgot your password?"
     }
+  },
+  "employees":{
+    "title": "Employees",
+    "actions": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email"
+    }
+  },
+  "errors": {
+    "required": "The field is required",
+    "minLength": "It is too short",
+    "maxLength": "It is too long"
   }
 }

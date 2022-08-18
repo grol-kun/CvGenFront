@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppInputComponent } from './app-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { TranslateControlModule } from '../../translate/translate-control.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    TranslateControlModule
   ],
   exports: [
     AppInputComponent
