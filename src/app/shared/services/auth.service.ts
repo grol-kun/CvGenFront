@@ -46,7 +46,6 @@ export class AuthService {
   }
 
   getTokenFromCookies(): string | undefined {
-    console.log('getTokenFromCookies: ', this.cookieService.get(environment.tokenName));
     return this.cookieService.get(environment.tokenName);
   }
 
