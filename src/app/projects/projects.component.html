@@ -1,15 +1,26 @@
-<div class="auth">
-  <form [formGroup]="form" class="auth__form">
-    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
-    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
-    <app-textarea
-      formControlName="anoter"
-      label="Anoter"
-      placeholder="anoter"
-      [minRows]="3"
-      [maxRows]="6"
-    ></app-textarea>
-    <app-app-data-picker formControlName="data" label="data" placeholder="data"></app-app-data-picker>
-    <app-app-autocomplete formControlName="auto" label="auto" placeholder="auto"></app-app-autocomplete>
-  </form>
-</div>
+<nz-table
+  #filterTable
+  [nzData]="projectsList"
+  nzTableLayout="fixed"
+  *ngIf="projectsList$ | async as projectsList"
+>
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+      >
+        {{ column.name | translate }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data">
+      <td>{{ data.attributes.name }}</td>
+      <td>{{ data.attributes.from | date: 'mediumDate' }}</td>
+      <td>{{ data.attributes.to | date: 'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</nz-table>

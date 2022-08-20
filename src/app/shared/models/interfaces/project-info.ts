@@ -1,4 +1,4 @@
-export interface Project {
+export interface ProjectInfo {
   id: number;
   attributes: {
     name: string;
@@ -8,4 +8,8 @@ export interface Project {
     to: string;
     internalName: string;
   };
+}
+
+export interface ProjectInfoResponse {
+  data: ProjectInfo[];
 }
