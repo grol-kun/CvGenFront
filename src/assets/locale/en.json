@@ -31,6 +31,15 @@
       "email": "Email"
     }
   },
+  "projects":{
+    "title": "Projects",
+    "actions": {
+      "name": "Name",
+      "description": "Description",
+      "start_date": "Start Date",
+      "end_date": "End Date"
+    }
+  },
   "errors": {
     "required": "The field is required",
     "minLength": "It is too short",
