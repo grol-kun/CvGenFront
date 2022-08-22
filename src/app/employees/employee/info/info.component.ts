@@ -55,9 +55,9 @@ export class InfoComponent implements OnInit, OnChanges {
   }
 
   onAuthSubmit() {
-    const { firstName, lastName, education, email, skills, languages } = this.form.getRawValue();
-    if (!this.user) return;
-    const user: UserInfo = { ...this.user, firstName, lastName, education, email, skills, languages };
+    this.form.markAllAsTouched();
+    if (!this.form.valid || !this.user) return;
+    const user: UserInfo = { ...this.user, ...this.form.getRawValue() };
 
     if (user.id) {
       this.form.disable();

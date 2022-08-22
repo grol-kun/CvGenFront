@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnInit, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -6,7 +6,6 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NgControl,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -65,8 +64,6 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
       items: this.fb.array([]),
     });
 
-    this.items.controls.forEach((c) => c.valueChanges.subscribe((_) => console.log('test')));
-
     this.currentService.getFullList().subscribe((data) => (this.fullListResponse = data));
   }
 
@@ -83,7 +80,6 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
   }
 
   public writeValue(value: any[]): void {
-    console.log('FormArrayComponent | writeValue');
     this.items.reset();
     if (value) {
       value.forEach((item) => this.items.push(new FormControl(item, [Validators.required])));
@@ -94,7 +90,6 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
   public onTouched: () => void = () => {};
 
   public registerOnChange(fn: any): void {
-    console.log('FormArrayComponent | registerOnChange');
     this.form.valueChanges.pipe(map((value) => value.items)).subscribe(fn);
   }
 
@@ -103,7 +98,6 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
   }
 
   public validate(control: AbstractControl): ValidationErrors | null {
-    console.log('FormArrayComponent | validate | ' + this.form.valid);
     return this.form.valid ? null : { invalidForm: { valid: false, message: 'FormArrayComponent invalid' } };
   }
 }

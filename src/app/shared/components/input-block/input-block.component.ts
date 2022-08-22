@@ -36,45 +36,37 @@ import { SkillResponse } from '../../models/interfaces/skill-response';
   ],
 })
 export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() index?: number;
   @Input() fullListResponse!: SkillResponse | LanguageResponse | null;
 
   options!: NzCascaderOption[];
   optionsLevel = gradation;
   public form!: FormGroup;
-  currentValue: any;
   private destroy$ = new Subject<void>();
   fullList!: Skill[] | Language[];
 
-  constructor(public builder: FormBuilder) {
-    console.log('SubFormComponent | constructor');
-  }
+  constructor(public builder: FormBuilder) {}
+
   ngOnInit(): void {
     this.form = this.builder.group({
       name: new FormControl(null, Validators.required),
       level: new FormControl(null, Validators.required),
     });
-    this.form.markAllAsTouched();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('SubFormComponent | ngOnChanges');
-
-    if (this.fullListResponse) {
-      this.fullList = this.fullListResponse.data;
-      this.options = this.fullListResponse.data.map((item) => {
+    const fullListResponse = changes?.['fullListResponse']?.currentValue;
+    if (fullListResponse) {
+      this.fullList = fullListResponse.data;
+      this.options = fullListResponse.data.map((item: Language | Skill) => {
         return { value: item.id, label: item.attributes.name, isLeaf: true };
       });
     }
   }
 
   public writeValue(val: any): void {
-    console.log('SubFormComponent | writeValue');
     if (val) {
       this.form.controls['name'].setValue(val.attributes.name, { emitEvent: false });
       this.form.controls['level'].setValue(val.attributes.level, { emitEvent: false });
-      this.form.markAllAsTouched();
-      console.log(this.form);
     }
   }
 
@@ -106,9 +98,6 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public validate(control: AbstractControl): ValidationErrors | null {
-    console.log('SubFormComponent | validate | ' + this.form.valid);
-    console.log(this.form);
-
     return this.form.valid ? null : { invalidForm: { valid: false, message: 'SubFormComponent invalid' } };
   }
 
