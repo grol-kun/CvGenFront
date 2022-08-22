@@ -1,15 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  finalize,
-  mergeMap,
-  Observable,
-  of,
-  Subject,
-  switchMap,
-  takeUntil,
-  tap,
-} from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -22,10 +13,7 @@ export class EmployeeComponent implements OnInit {
   userId?: string;
   user$?: Observable<UserInfo>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService
-  ) {}
+  constructor(private route: ActivatedRoute, private userService: UserService) {}
 
   ngOnInit() {
     this.user$ = this.route.params.pipe(

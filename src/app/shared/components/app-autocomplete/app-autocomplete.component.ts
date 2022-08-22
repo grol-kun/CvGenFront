@@ -1,13 +1,6 @@
-import { AfterViewInit, Component, Input, OnChanges, Self, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, Self, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-
-interface Option {
-  label: string;
-  value: string;
-  age: number;
-}
-//For example....
 
 @Component({
   selector: 'app-app-autocomplete',
@@ -25,14 +18,6 @@ export class AppAutocompleteComponent implements ControlValueAccessor, OnChanges
   private onChange = (value: any) => {};
   private onTouched = () => {};
   control = new FormControl();
-  //options: any;
-
-  //For example,too....
-  //inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
-  /* options: Option[] = [
-    { label: 'Lucy', value: 'lucy', age: 20 },
-    { label: 'Jack', value: 'jack', age: 22 },
-  ]; */
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;

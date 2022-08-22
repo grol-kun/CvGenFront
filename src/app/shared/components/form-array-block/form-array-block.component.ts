@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -12,7 +20,7 @@ import {
   Validator,
   Validators,
 } from '@angular/forms';
-import { map } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { LanguageResponse } from '../../models/interfaces/language-response';
 import { SkillResponse } from '../../models/interfaces/skill-response';
 import { LanguageService } from '../../services/language.service';
@@ -36,12 +44,13 @@ import { SkillService } from '../../services/skill.service';
     },
   ],
 })
-export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Validator {
+export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
   @Input() datatype?: string;
 
   public form!: FormGroup;
   private currentService!: SkillService | LanguageService;
   public fullListResponse!: SkillResponse | LanguageResponse;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -64,7 +73,10 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
       items: this.fb.array([]),
     });
 
-    this.currentService.getFullList().subscribe((data) => (this.fullListResponse = data));
+    this.currentService
+      .getFullList()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => (this.fullListResponse = data));
   }
 
   public get items(): FormArray {
@@ -99,5 +111,10 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
 
   public validate(control: AbstractControl): ValidationErrors | null {
     return this.form.valid ? null : { invalidForm: { valid: false, message: 'FormArrayComponent invalid' } };
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

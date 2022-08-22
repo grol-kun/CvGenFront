@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, NgControl } from '@angular/forms';
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-select',
@@ -11,8 +11,6 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 export class AppSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
   @Input('options') nzOptions!: NzCascaderOption[];
-
-  //nzOptions: NzCascaderOption[] = options;
 
   control = new FormControl();
   private destroy$ = new Subject<void>();
