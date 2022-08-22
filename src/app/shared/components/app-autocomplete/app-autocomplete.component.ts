@@ -25,7 +25,6 @@ export class AppAutocompleteComponent implements ControlValueAccessor, OnChanges
 
   ngOnChanges(changes: SimpleChanges): void {
     this.options = changes?.['InputOptions']?.currentValue;
-    console.log('this.options : ', this.options);
   }
 
   registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);
