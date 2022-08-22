@@ -36,8 +36,8 @@
     "actions": {
       "name": "Name",
       "description": "Description",
-      "start_date": "Start Date",
-      "end_date": "End Date"
+      "from": "Start Date",
+      "to": "End Date"
     }
   },
   "errors": {
