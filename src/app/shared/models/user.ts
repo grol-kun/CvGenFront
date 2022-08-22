@@ -7,7 +7,7 @@ export interface User {
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
-  skills: string | null;
+  skills: any;
   languages: string | null;
   education: string | null;
   description: string | null;

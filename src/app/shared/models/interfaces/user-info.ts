@@ -15,3 +15,21 @@ export interface UserInfo {
   lastName: string;
   cvs: string[];
 }
+
+/* export interface UserInfo {
+  id?: number | undefined;
+  username?: string | undefined;
+  email?: string | undefined;
+  provider?: string | undefined;
+  confirmed?: boolean | undefined;
+  blocked?: boolean | undefined;
+  createdAt?: string | undefined;
+  updatedAt?: string | undefined;
+  skills?: string[] | undefined;
+  languages?: string[] | undefined;
+  education?: string | undefined;
+  description?: string | undefined;
+  firstName?: string | undefined;
+  lastName?: string | undefined;
+  cvs?: string[] | undefined;
+} */

@@ -1,23 +1,40 @@
-<nz-collapse>
-  <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="collapse-panel">
-    <div class="collapse-panel__inner">
-      <p>{{ (user$ | async)?.id }}</p>
-    </div>
-  </nz-collapse-panel>
+<form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
+  <nz-collapse>
+    <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <div class="form__collapse-panel__inner__block">
+          <app-input formControlName="firstName" [label]="'First Name'" [placeholder]="'First Name'"></app-input>
+          <app-input formControlName="lastName" [label]="'Last Name'" [placeholder]="'Last Name'"></app-input>
+          <app-input formControlName="education" [label]="'Education'" [placeholder]="'Education'"></app-input>
+          <app-input formControlName="email" [label]="'Email'" [placeholder]="'Email'"></app-input>
+        </div>
+      </div>
+    </nz-collapse-panel>
 
-  <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="collapse-panel">
-    <div class="collapse-panel__inner">
-      <p>{{ (user$ | async)?.id }}</p>
-    </div>
-  </nz-collapse-panel>
+    <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
+      </div>
+    </nz-collapse-panel>
 
-  <nz-collapse-panel
-    nzHeader="Languages"
-    [nzActive]="true"
-    class="collapse-panel"
-  >
-    <div class="collapse-panel__inner">
-      <p>{{ (user$ | async)?.id }}</p>
+    <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+
+  <div class="form__buttons-block">
+    <div>
+      <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
+        Save
+      </button>
+      <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
+        Сancel
+      </button>
     </div>
-  </nz-collapse-panel>
-</nz-collapse>
+  </div>
+
+  <pre>Form valid = {{ form.status | json }}</pre>
+  <pre>{{ form.value | json }}</pre>
+</form>

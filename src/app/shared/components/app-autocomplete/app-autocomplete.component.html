@@ -6,8 +6,8 @@
 
   <input class="nz-autocomplete" [placeholder]="placeholder" nz-input [formControl]="control" [nzAutocomplete]="auto" />
   <nz-autocomplete #auto [compareWith]="compareFn">
-    <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option.label">
-      {{ option.label }}
+    <nz-auto-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option">
+      {{ option }}
     </nz-auto-option>
   </nz-autocomplete>
 

@@ -1,12 +1,13 @@
 <nz-tabset>
   <nz-tab nzTitle="Info">
     <ng-template nz-tab>
-      <app-info [user$]="user$"></app-info>
+      <app-info [user]="user$ | async"></app-info>
     </ng-template>
   </nz-tab>
+
   <nz-tab nzTitle="CV">
     <ng-template nz-tab>
-      <app-cv-list [user$]="user$"></app-cv-list>
+      <app-cv-list [user]="user$ | async"></app-cv-list>
     </ng-template>
   </nz-tab>
 </nz-tabset>

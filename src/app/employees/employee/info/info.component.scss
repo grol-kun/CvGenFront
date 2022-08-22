@@ -1,7 +1,30 @@
-.collapse-panel {
-  font-weight: 800;
+.form {
+  &__collapse-panel {
+    font-weight: 800;
 
-  &__inner {
-    font-weight: 400;
+    &__inner {
+      font-weight: 400;
+
+      &__block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        app-input {
+          flex: 1 1 40%;
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+
+  &__buttons-block {
+    display: flex;
+    justify-content: flex-end;
+
+    &__button {
+      margin: 10px 5px;
+    }
   }
 }

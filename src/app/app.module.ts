@@ -22,27 +22,27 @@ import { Initializer } from './shared/services/initializer.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { PrefixHttpInterceptor } from './core/interceptors/prefix-http.interceptor';
 import { CookieModule } from 'ngx-cookie';
-import {
-  HttpLoaderFactory,
-  TranslateControlModule,
-} from './shared/translate/translate-control.module';
+import { HttpLoaderFactory, TranslateControlModule } from './shared/translate/translate-control.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
-  (key) => antDesignIcons[key]
-);
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesignIcons[key]);
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    DragDropModule,
+    ScrollingModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

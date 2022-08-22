@@ -1,4 +1,4 @@
-import { Component, Input, Self } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, Self, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -12,45 +12,53 @@ interface Option {
 @Component({
   selector: 'app-app-autocomplete',
   templateUrl: './app-autocomplete.component.html',
-  styleUrls: ['./app-autocomplete.component.scss']
+  styleUrls: ['./app-autocomplete.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class AppAutocompleteComponent implements ControlValueAccessor {
+export class AppAutocompleteComponent implements ControlValueAccessor, OnChanges {
   @Input() label = 'Autocomplete';
   @Input() placeholder = 'placeholder';
+  @Input('options') InputOptions?: any[];
+  options!: string[];
+
   private destroy$ = new Subject<void>();
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
   control = new FormControl();
+  //options: any;
 
   //For example,too....
-  inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
-  options: Option[] = [
+  //inputValue: Option = { label: 'Lucy', value: 'lucy', age: 20 };
+  /* options: Option[] = [
     { label: 'Lucy', value: 'lucy', age: 20 },
-    { label: 'Jack', value: 'jack', age: 22 }
-  ];
+    { label: 'Jack', value: 'jack', age: 22 },
+  ]; */
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 
-  registerOnChange = (fn: (value: any) => {}) => this.onChange = fn;
-  registerOnTouched = (fn: () => {}) => this.onTouched = fn;
+  ngOnChanges(changes: SimpleChanges): void {
+    this.options = changes?.['InputOptions']?.currentValue;
+    console.log('this.options : ', this.options);
+  }
+
+  registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);
+  registerOnTouched = (fn: () => {}) => (this.onTouched = fn);
 
   ngOnInit(): void {
-    this.control!.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.onChange(value);
-      });
+    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      this.onChange(value);
+    });
   }
 
   writeValue(value: any): void {
     this.control.setValue(value, { emitEvent: false });
   }
 
-  compareFn = (o1: Option | string, o2: Option): boolean => {
+  compareFn = (o1: string, o2: string): boolean => {
     if (o1) {
-      return typeof o1 === 'string' ? o1 === o2.label : o1.value === o2.value;
+      return o2.toLowerCase().includes(o1.toLowerCase());
     }
     return false;
   };
