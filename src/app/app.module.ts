@@ -28,9 +28,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -41,8 +38,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    DragDropModule,
-    ScrollingModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
