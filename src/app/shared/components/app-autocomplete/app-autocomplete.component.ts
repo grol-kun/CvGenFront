@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Self, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -6,12 +6,11 @@ import { Subject, takeUntil } from 'rxjs';
   selector: 'app-app-autocomplete',
   templateUrl: './app-autocomplete.component.html',
   styleUrls: ['./app-autocomplete.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class AppAutocompleteComponent implements ControlValueAccessor, OnChanges {
   @Input() label = 'Autocomplete';
   @Input() placeholder = 'placeholder';
-  @Input('options') InputOptions?: any[];
+  @Input('options') inputOptions: string[] = [];
   options!: string[];
 
   private destroy$ = new Subject<void>();
@@ -24,7 +23,7 @@ export class AppAutocompleteComponent implements ControlValueAccessor, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.options = changes?.['InputOptions']?.currentValue;
+    this.options = changes?.['inputOptions']?.currentValue;
   }
 
   registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);

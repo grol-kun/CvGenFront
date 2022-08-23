@@ -25,13 +25,11 @@
   </nz-collapse>
 
   <div class="form__buttons-block">
-    <div>
-      <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
-        Save
-      </button>
-      <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
-        Сancel
-      </button>
-    </div>
+    <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
+      Save
+    </button>
+    <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
+      Сancel
+    </button>
   </div>
 </form>

@@ -1,6 +1,6 @@
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 
-export const gradation: NzCascaderOption[] = [
+export const GRADATION: NzCascaderOption[] = [
   { value: 1, label: '1', isLeaf: true },
   { value: 2, label: '2', isLeaf: true },
   { value: 3, label: '3', isLeaf: true },

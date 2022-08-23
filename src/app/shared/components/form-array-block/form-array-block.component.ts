@@ -21,10 +21,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { map, Subject, takeUntil } from 'rxjs';
-import { LanguageResponse } from '../../models/interfaces/language-response';
-import { SkillResponse } from '../../models/interfaces/skill-response';
-import { LanguageService } from '../../services/language.service';
-import { SkillService } from '../../services/skill.service';
+import { Response } from '../../models/interfaces/response';
+import { Language } from '../../models/interfaces/language';
+import { Skill } from '../../models/interfaces/skill';
+import { Ability } from '../../models/types/ability';
+import { AbilityService } from '../../services/ability.service';
 
 @Component({
   selector: 'app-form-array-block',
@@ -45,36 +46,21 @@ import { SkillService } from '../../services/skill.service';
   ],
 })
 export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Validator, OnDestroy {
-  @Input() datatype?: string;
+  @Input() datatype!: Ability;
 
-  public form!: FormGroup;
-  private currentService!: SkillService | LanguageService;
-  public fullListResponse!: SkillResponse | LanguageResponse;
+  form!: FormGroup;
+  fullListResponse!: Response<Language | Skill>;
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private fb: FormBuilder,
-    private readonly cdr: ChangeDetectorRef,
-    private skillService: SkillService,
-    private languageService: LanguageService
-  ) {}
+  constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private abilityService: AbilityService) {}
 
   ngOnInit(): void {
-    switch (this.datatype) {
-      case 'skills':
-        this.currentService = this.skillService;
-        break;
-      case 'languages':
-        this.currentService = this.languageService;
-        break;
-    }
-
     this.form = this.fb.group({
       items: this.fb.array([]),
     });
 
-    this.currentService
-      .getFullList()
+    this.abilityService
+      .getFullList<Response<Language | Skill>>(this.datatype)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => (this.fullListResponse = data));
   }
@@ -102,7 +88,12 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
   public onTouched: () => void = () => {};
 
   public registerOnChange(fn: any): void {
-    this.form.valueChanges.pipe(map((value) => value.items)).subscribe(fn);
+    this.form.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        map((value) => value.items)
+      )
+      .subscribe(fn);
   }
 
   public registerOnTouched(fn: any): void {

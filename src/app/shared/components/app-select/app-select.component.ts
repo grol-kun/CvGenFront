@@ -10,7 +10,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AppSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
-  @Input('options') nzOptions!: NzCascaderOption[];
+  @Input('options') nzOptions: NzCascaderOption[] = [];
 
   control = new FormControl();
   private destroy$ = new Subject<void>();

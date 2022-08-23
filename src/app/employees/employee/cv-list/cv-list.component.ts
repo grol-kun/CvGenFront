@@ -8,7 +8,7 @@ import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
   styleUrls: ['./cv-list.component.scss'],
 })
 export class CvListComponent implements OnInit {
-  @Input() user?: UserInfo | null;
+  @Input() user!: UserInfo | null;
 
   constructor() {}
 

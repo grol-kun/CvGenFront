@@ -2,7 +2,6 @@ import { Component, forwardRef, Input, OnDestroy, OnChanges, SimpleChanges, OnIn
 import {
   FormBuilder,
   FormGroup,
-  FormControl,
   Validators,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
@@ -12,11 +11,12 @@ import {
 import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { gradation } from '../../models/constants/gradation';
+import { GRADATION } from '../../models/constants/gradation';
+import { Ability } from '../../models/interfaces/ability';
+import { Response } from '../../models/interfaces/response';
 import { Language } from '../../models/interfaces/language';
-import { LanguageResponse } from '../../models/interfaces/language-response';
 import { Skill } from '../../models/interfaces/skill';
-import { SkillResponse } from '../../models/interfaces/skill-response';
+import { DropdownResultOptions } from '../../models/interfaces/name-level-dropdown-resp';
 
 @Component({
   selector: 'app-input-block',
@@ -36,20 +36,20 @@ import { SkillResponse } from '../../models/interfaces/skill-response';
   ],
 })
 export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() fullListResponse!: SkillResponse | LanguageResponse | null;
+  @Input() fullListResponse!: Response<Language | Skill> | null;
 
   options!: NzCascaderOption[];
-  optionsLevel = gradation;
-  public form!: FormGroup;
+  optionsLevel = GRADATION;
+  form!: FormGroup;
+  fullList!: Ability[];
   private destroy$ = new Subject<void>();
-  fullList!: Skill[] | Language[];
 
-  constructor(public builder: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.form = this.builder.group({
-      name: new FormControl(null, Validators.required),
-      level: new FormControl(null, Validators.required),
+    this.form = this.fb.group({
+      name: ['', [Validators.required]],
+      level: ['', [Validators.required]],
     });
   }
 
@@ -57,7 +57,7 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
     const fullListResponse = changes?.['fullListResponse']?.currentValue;
     if (fullListResponse) {
       this.fullList = fullListResponse.data;
-      this.options = fullListResponse.data.map((item: Language | Skill) => {
+      this.options = fullListResponse.data.map((item: Ability) => {
         return { value: item.id, label: item.attributes.name, isLeaf: true };
       });
     }
@@ -65,8 +65,8 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
 
   public writeValue(val: any): void {
     if (val) {
-      this.form.controls['name'].setValue(val.attributes.name, { emitEvent: false });
-      this.form.controls['level'].setValue(val.attributes.level, { emitEvent: false });
+      const { name, level } = val.attributes;
+      this.form.setValue({ name, level }, { emitEvent: false });
     }
   }
 
@@ -76,7 +76,7 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
     this.form.valueChanges
       .pipe(
         takeUntil(this.destroy$),
-        map((value: { name: string | number[]; level: string | number[] }) => {
+        map((value: DropdownResultOptions) => {
           if (value.name) {
             const currentObj =
               typeof value.name === 'string'
@@ -87,7 +87,7 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
             }
             return currentObj;
           }
-          return;
+          return null;
         })
       )
       .subscribe(fn);

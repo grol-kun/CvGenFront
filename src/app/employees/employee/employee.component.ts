@@ -10,8 +10,8 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
-  userId?: string;
-  user$?: Observable<UserInfo>;
+  userId!: string;
+  user$!: Observable<UserInfo>;
 
   constructor(private route: ActivatedRoute, private userService: UserService) {}
 

@@ -34,12 +34,8 @@ export class InfoComponent implements OnInit, OnChanges {
     const user = changes?.['user']?.currentValue;
 
     if (user) {
-      this.form.controls['firstName'].setValue(user.firstName);
-      this.form.controls['lastName'].setValue(user.lastName);
-      this.form.controls['education'].setValue(user.education);
-      this.form.controls['email'].setValue(user.email);
-      this.form.controls['skills'].setValue(user.skills);
-      this.form.controls['languages'].setValue(user.languages);
+      const { firstName, lastName, education, email, skills, languages } = user;
+      this.form.patchValue({ firstName, lastName, education, email, skills, languages }, { emitEvent: false });
     }
   }
 
@@ -56,7 +52,9 @@ export class InfoComponent implements OnInit, OnChanges {
 
   onAuthSubmit() {
     this.form.markAllAsTouched();
-    if (!this.form.valid || !this.user) return;
+    if (!this.form.valid || !this.user) {
+      return;
+    }
     const user: UserInfo = { ...this.user, ...this.form.getRawValue() };
 
     if (user.id) {
@@ -67,15 +65,7 @@ export class InfoComponent implements OnInit, OnChanges {
           takeUntil(this.destroy$),
           finalize(() => this.form.enable())
         )
-        .subscribe({
-          next: () => {
-            this.message.create('success', `User ${user.firstName} was updated successfully!`);
-          },
-          error: (err) => {
-            console.error(err);
-            this.message.create('error', `Authorization error! Status:${err.message}`);
-          },
-        });
+        .subscribe(() => this.message.create('success', `User ${user.firstName} was updated successfully!`));
     }
   }
 

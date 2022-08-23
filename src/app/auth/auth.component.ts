@@ -62,7 +62,6 @@ export class AuthComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          this.message.create('warning', `Authorization error! Status:${err.message}`);
           this.loading = false;
         },
       });
