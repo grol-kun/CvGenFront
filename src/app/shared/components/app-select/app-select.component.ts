@@ -1,6 +1,5 @@
-import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, NgControl } from '@angular/forms';
-import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -10,7 +9,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AppSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
-  @Input('options') nzOptions: NzCascaderOption[] = [];
+  @Input() options: string[] = [];
+  @Input() placeholder: string = 'Please select...';
 
   control = new FormControl();
   private destroy$ = new Subject<void>();
@@ -25,9 +25,7 @@ export class AppSelectComponent implements ControlValueAccessor, OnInit, OnDestr
   registerOnTouched = (fn: () => {}) => (this.onTouched = fn);
 
   ngOnInit(): void {
-    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.onChange(value);
-    });
+    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onChange(value));
   }
 
   writeValue(value: any): void {

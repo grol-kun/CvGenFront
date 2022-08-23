@@ -62,7 +62,10 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
     this.abilityService
       .getFullList<Response<Language | Skill>>(this.datatype)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => (this.fullListResponse = data));
+      .subscribe((data) => {
+        this.fullListResponse = data;
+        this.cdr.detectChanges();
+      });
   }
 
   public get items(): FormArray {

@@ -8,7 +8,6 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GRADATION } from '../../models/constants/gradation';
@@ -16,7 +15,7 @@ import { Ability } from '../../models/interfaces/ability';
 import { Response } from '../../models/interfaces/response';
 import { Language } from '../../models/interfaces/language';
 import { Skill } from '../../models/interfaces/skill';
-import { DropdownResultOptions } from '../../models/interfaces/name-level-dropdown-resp';
+import { SelectResult } from '../../models/interfaces/selectResult';
 
 @Component({
   selector: 'app-input-block',
@@ -38,7 +37,7 @@ import { DropdownResultOptions } from '../../models/interfaces/name-level-dropdo
 export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
   @Input() fullListResponse!: Response<Language | Skill> | null;
 
-  options!: NzCascaderOption[];
+  options!: string[];
   optionsLevel = GRADATION;
   form!: FormGroup;
   fullList!: Ability[];
@@ -57,9 +56,7 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
     const fullListResponse = changes?.['fullListResponse']?.currentValue;
     if (fullListResponse) {
       this.fullList = fullListResponse.data;
-      this.options = fullListResponse.data.map((item: Ability) => {
-        return { value: item.id, label: item.attributes.name, isLeaf: true };
-      });
+      this.options = fullListResponse.data.map((item: Ability) => item.attributes.name);
     }
   }
 
@@ -76,14 +73,11 @@ export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
     this.form.valueChanges
       .pipe(
         takeUntil(this.destroy$),
-        map((value: DropdownResultOptions) => {
+        map((value: SelectResult) => {
           if (value.name) {
-            const currentObj =
-              typeof value.name === 'string'
-                ? this.fullList.find((skill) => skill.attributes.name === value.name)
-                : this.fullList.find((skill) => skill.id === value.name[0]);
+            const currentObj = this.fullList.find((skill) => skill.attributes.name === value.name);
             if (currentObj && value.level && value.name) {
-              currentObj.attributes.level = typeof value.level === 'string' ? value.level : String(value.level[0]);
+              currentObj.attributes.level = value.level;
             }
             return currentObj;
           }
