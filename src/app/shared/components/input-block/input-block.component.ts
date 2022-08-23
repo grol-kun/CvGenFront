@@ -15,7 +15,7 @@ import { Ability } from '../../models/interfaces/ability';
 import { Response } from '../../models/interfaces/response';
 import { Language } from '../../models/interfaces/language';
 import { Skill } from '../../models/interfaces/skill';
-import { SelectResult } from '../../models/interfaces/selectResult';
+import { SelectResult } from '../../models/interfaces/select-result';
 
 @Component({
   selector: 'app-input-block',
@@ -35,12 +35,12 @@ import { SelectResult } from '../../models/interfaces/selectResult';
   ],
 })
 export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() fullListResponse!: Response<Language | Skill> | null;
+  @Input() fullListResponse: Response<Language | Skill> | null = null;
 
-  options!: string[];
+  options: string[] = [];
   optionsLevel = GRADATION;
   form!: FormGroup;
-  fullList!: Ability[];
+  fullList: Ability[] = [];
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {}
