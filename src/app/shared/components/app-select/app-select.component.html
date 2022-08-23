@@ -1,0 +1,17 @@
+<div class="input-component">
+  <div class="input-component__label-wrapper">
+    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
+    <span class="input-component__label-wrapper__asterisk">*</span>
+  </div>
+
+  <nz-cascader [nzOptions]="nzOptions" [formControl]="control" class="nz-cascader"></nz-cascader>
+
+  <div class="input-component__error-wrapper">
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="(ngControl.control?.errors && control.touched) || ngControl.control?.touched"
+    >
+      {{ ngControl.control?.errors | errorMessage }}
+    </span>
+  </div>
+</div>
