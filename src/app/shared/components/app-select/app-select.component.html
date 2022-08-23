@@ -4,7 +4,9 @@
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <nz-cascader [nzOptions]="nzOptions" [formControl]="control" class="nz-cascader"></nz-cascader>
+  <nz-select nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [formControl]="control" class="nz-select">
+    <nz-option *ngFor="let p of options" [nzValue]="p" [nzLabel]="p"></nz-option>
+  </nz-select>
 
   <div class="input-component__error-wrapper">
     <span
