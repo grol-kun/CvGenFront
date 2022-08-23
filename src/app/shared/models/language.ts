@@ -1,4 +1,4 @@
-export interface Skill {
+export interface Language {
   id: number;
   attributes: {
     name: string;
