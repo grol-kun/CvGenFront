@@ -1,4 +1,10 @@
-import { Language } from './language';
-import { Skill } from './skill';
-
-export interface Ability extends Language, Skill {}
+export interface Ability {
+  id: number;
+  attributes: {
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    level: string | null;
+  };
+}

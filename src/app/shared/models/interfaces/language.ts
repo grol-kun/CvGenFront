@@ -1,3 +1,3 @@
-import { Ancestor } from './ancestor';
+import { Ability } from './ability';
 
-export interface Language extends Ancestor {}
+export interface Language extends Ability {}

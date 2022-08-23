@@ -1,3 +1,3 @@
-import { Ancestor } from './ancestor';
+import { Ability } from './ability';
 
-export interface Skill extends Ancestor {}
+export interface Skill extends Ability {}
