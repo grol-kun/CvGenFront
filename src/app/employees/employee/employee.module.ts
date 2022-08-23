@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 import { AppAutocompleteModule } from 'src/app/shared/components/app-autocomplete/app-autocomplete.module';
 import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block/form-array-block.module';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -26,6 +27,7 @@ import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block
     ApplicationPipesModule,
     AppAutocompleteModule,
     FormArrayBlockModule,
+    NzMenuModule,
   ],
 })
 export class EmployeeModule {}

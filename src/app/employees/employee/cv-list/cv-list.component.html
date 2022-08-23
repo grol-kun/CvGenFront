@@ -1,1 +1,51 @@
-<p>cv-list works!</p>
+<div class="page">
+  <div class="page__menu">
+    <ul nz-menu nzMode="inline" class="page__menu__nz-menu">
+      <li nz-menu-item nzSelected>Option 1</li>
+      <li nz-menu-item>Option 2</li>
+    </ul>
+  </div>
+
+  <div class="page__wrapper">
+    <div class="page__wrapper__button-block">
+      <button nz-button nzType="default">Preview</button>
+    </div>
+    <div class="page__wrapper__form">
+      <form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
+        <nz-collapse>
+          <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="form__collapse-panel">
+            <div class="form__collapse-panel__inner">
+              <div class="form__collapse-panel__inner__block">
+                <app-input formControlName="firstName" [label]="'First Name'" [placeholder]="'First Name'"></app-input>
+                <app-input formControlName="lastName" [label]="'Last Name'" [placeholder]="'Last Name'"></app-input>
+                <app-input formControlName="education" [label]="'Education'" [placeholder]="'Education'"></app-input>
+                <app-input formControlName="email" [label]="'Email'" [placeholder]="'Email'"></app-input>
+              </div>
+            </div>
+          </nz-collapse-panel>
+
+          <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="form__collapse-panel">
+            <div class="form__collapse-panel__inner">
+              <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
+            </div>
+          </nz-collapse-panel>
+
+          <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="form__collapse-panel">
+            <div class="form__collapse-panel__inner">
+              <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+
+        <div class="form__buttons-block">
+          <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
+            Save
+          </button>
+          <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
+            Сancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
