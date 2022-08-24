@@ -23,15 +23,13 @@ export class EmployeesComponent implements OnInit {
       name: 'First Name',
       sortOrder: null,
       sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) =>
-        a.firstName.localeCompare(b.firstName),
+      sortFn: (a: UserInfo, b: UserInfo) => a.firstName.localeCompare(b.firstName),
     },
     {
       name: 'Last Name',
       sortOrder: 'descend',
       sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) =>
-        a.lastName.localeCompare(b.lastName),
+      sortFn: (a: UserInfo, b: UserInfo) => a.lastName.localeCompare(b.lastName),
     },
     {
       name: 'Email',

@@ -1,22 +1,23 @@
 import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './app-input.component.html',
-  styleUrls: ['./app-input.component.scss'],
+  selector: 'app-select',
+  templateUrl: './app-select.component.html',
+  styleUrls: ['./app-select.component.scss'],
 })
-export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class AppSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
-  @Input() placeholder = 'placeholder';
+  @Input() options: string[] = [];
+  @Input() placeholder: string = 'Please select...';
 
   control = new FormControl();
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => {};
   private onTouched = () => {};
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor(@Self() public ngControl: NgControl, private fb: FormBuilder) {
     this.ngControl.valueAccessor = this;
   }
 
@@ -24,9 +25,7 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
   registerOnTouched = (fn: () => {}) => (this.onTouched = fn);
 
   ngOnInit(): void {
-    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.onChange(value);
-    });
+    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => this.onChange(value));
   }
 
   writeValue(value: any): void {
