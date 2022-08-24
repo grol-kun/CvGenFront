@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CV } from '../models/cv';
-import { User } from '../models/user';
+import { CV } from '../models/interfaces/cv';
+import { UserInfo } from '../models/interfaces/user-info'; 
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class PdfObjectBuilderService {
     }, []);
   }
 
-  private BuildEducationList(userObj: User) {
+  private BuildEducationList(userObj: UserInfo) {
     return [
       {
         stack: [
@@ -77,7 +77,7 @@ export class PdfObjectBuilderService {
       : [];
   }
 
-  private BuildHeader(userObj: User) {
+  private BuildHeader(userObj: UserInfo) {
     return [
       {
         width: '*',
@@ -110,7 +110,7 @@ export class PdfObjectBuilderService {
       { stack: this.BuildLanguagesList(cvObj), style: 'list' },
     ];
   }
-  private BuildEducationSection(userObj: User) {
+  private BuildEducationSection(userObj: UserInfo) {
     return [
       { text: 'Education', style: 'sectionTitle' },
       { stack: this.BuildEducationList(userObj), style: 'list' },
@@ -127,7 +127,7 @@ export class PdfObjectBuilderService {
     return [this.BuildLogoSection()];
   }
 
-  private BuildMain(userObj: User, cvObj: CV) {
+  private BuildMain(userObj: UserInfo, cvObj: CV) {
     return [this.BuildEducationSection(userObj), this.BuildProjectsSection(cvObj)];
   }
 
@@ -135,7 +135,7 @@ export class PdfObjectBuilderService {
     return [this.BuildSkillsSection(cvObj), this.BuildLanguagesSection(cvObj)];
   }
 
-  public BuildDocDefinition(cvObj: CV, userObj: User) {
+  public BuildDocDefinition(cvObj: CV, userObj: UserInfo) {
     return {
       pageSize: 'A4',
       background: function () {
