@@ -18,23 +18,23 @@ export class PdfObjectBuilderService {
   }
 
   private BuildProjectsList(cvObj: CV) {
-    return cvObj.attributes.projects.reduce((r: {}[], i) => {
-      r = [
-        ...r,
+    return cvObj.attributes.projects.reduce(
+      (a: object[], c) => [
+        ...a,
         {
           stack: [
-            { text: i.attributes.name, style: 'listItemHeader' },
+            { text: c.attributes.name, style: 'listItemHeader' },
             {
-              text: `${i.attributes.from} ${i.attributes.to && `- ${i.attributes.to}`}`,
+              text: `${c.attributes.from} ${c.attributes.to && `- ${c.attributes.to}`}`,
               style: 'listItemSubHeader',
             },
-            { text: i.attributes.description, style: 'listItemDesc' },
+            { text: c.attributes.description, style: 'listItemDesc' },
           ],
           style: 'listItem',
         },
-      ];
-      return r;
-    }, []);
+      ],
+      []
+    );
   }
 
   private BuildEducationList(userObj: UserInfo) {
@@ -53,29 +53,29 @@ export class PdfObjectBuilderService {
   }
 
   private BuildSkillList(cvObj: CV) {
-    return cvObj.attributes.skills.reduce((r: {}[], i) => {
-      r = [
-        ...r,
+    return cvObj.attributes.skills.reduce(
+      (a: object[], c) => [
+        ...a,
         {
-          stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
+          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
           style: 'listItem',
         },
-      ];
-      return r;
-    }, []);
+      ],
+      []
+    );
   }
 
   private BuildLanguagesList(cvObj: CV) {
-    return cvObj.attributes.languages.reduce((r: {}[], i) => {
-      r = [
-        ...r,
+    return cvObj.attributes.languages.reduce(
+      (a: object[], c) => [
+        ...a,
         {
-          stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
+          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
           style: 'listItem',
         },
-      ];
-      return r;
-    }, []);
+      ],
+      []
+    );
   }
 
   private BuildLogo() {
