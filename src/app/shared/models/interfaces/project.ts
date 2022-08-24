@@ -1,5 +1,6 @@
-export interface Project {
-  id: number;
+import { ResponseObjectStructure } from './response-object-structure';
+
+export interface Project extends ResponseObjectStructure {
   attributes: {
     name: string;
     description: string;

@@ -9,7 +9,7 @@ import { UserInfo } from '../models/interfaces/user-info';
   providedIn: 'root',
 })
 export class PdfObjectBuilderService {
-  logoSvg?: any;
+  logoSvg?: string;
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get(`./assets/svgs/logo.svg`, { responseType: 'text' }).subscribe((value) => {
