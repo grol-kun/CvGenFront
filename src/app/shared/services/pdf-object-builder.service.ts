@@ -15,17 +15,20 @@ export class PdfObjectBuilderService {
 
   private BuildProjectsList(cvObj: CV) {
     return cvObj.attributes.projects.reduce((r: {}[], i) => {
-      r.push({
-        stack: [
-          { text: i.attributes.name, style: 'listItemHeader' },
-          {
-            text: `${i.attributes.from} ${i.attributes.to && `- ${i.attributes.to}`}`,
-            style: 'listItemSubHeader',
-          },
-          { text: i.attributes.description, style: 'listItemDesc' },
-        ],
-        style: 'listItem',
-      });
+      r = [
+        ...r,
+        {
+          stack: [
+            { text: i.attributes.name, style: 'listItemHeader' },
+            {
+              text: `${i.attributes.from} ${i.attributes.to && `- ${i.attributes.to}`}`,
+              style: 'listItemSubHeader',
+            },
+            { text: i.attributes.description, style: 'listItemDesc' },
+          ],
+          style: 'listItem',
+        },
+      ];
       return r;
     }, []);
   }
@@ -47,20 +50,26 @@ export class PdfObjectBuilderService {
 
   private BuildSkillList(cvObj: CV) {
     return cvObj.attributes.skills.reduce((r: {}[], i) => {
-      r.push({
-        stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
-        style: 'listItem',
-      });
+      r = [
+        ...r,
+        {
+          stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
+          style: 'listItem',
+        },
+      ];
       return r;
     }, []);
   }
 
   private BuildLanguagesList(cvObj: CV) {
     return cvObj.attributes.languages.reduce((r: {}[], i) => {
-      r.push({
-        stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
-        style: 'listItem',
-      });
+      r = [
+        ...r,
+        {
+          stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
+          style: 'listItem',
+        },
+      ];
       return r;
     }, []);
   }
