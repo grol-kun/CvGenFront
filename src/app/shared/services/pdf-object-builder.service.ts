@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CV } from '../models/interfaces/cv';
-import { UserInfo } from '../models/interfaces/user-info'; 
+import { UserInfo } from '../models/interfaces/user-info';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class PdfObjectBuilderService {
   }
 
   private BuildProjectsList(cvObj: CV) {
-    return [...cvObj.attributes.projects].reduce((r: {}[], i) => {
+    return cvObj.attributes.projects.reduce((r: {}[], i) => {
       r.push({
         stack: [
           { text: i.attributes.name, style: 'listItemHeader' },
@@ -46,7 +46,7 @@ export class PdfObjectBuilderService {
   }
 
   private BuildSkillList(cvObj: CV) {
-    return [...cvObj.attributes.skills].reduce((r: {}[], i) => {
+    return cvObj.attributes.skills.reduce((r: {}[], i) => {
       r.push({
         stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
         style: 'listItem',
@@ -56,7 +56,7 @@ export class PdfObjectBuilderService {
   }
 
   private BuildLanguagesList(cvObj: CV) {
-    return [...cvObj.attributes.languages].reduce((r: {}[], i) => {
+    return cvObj.attributes.languages.reduce((r: {}[], i) => {
       r.push({
         stack: [{ text: i.attributes.name }, { text: i.attributes.level, fontSize: 7 }],
         style: 'listItem',
@@ -138,7 +138,7 @@ export class PdfObjectBuilderService {
   public BuildDocDefinition(cvObj: CV, userObj: UserInfo) {
     return {
       pageSize: 'A4',
-      background: function () {
+      background: () => {
         return {
           canvas: [
             {
