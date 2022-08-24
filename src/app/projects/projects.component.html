@@ -1,15 +1,35 @@
-<div class="auth">
-  <form [formGroup]="form" class="auth__form">
-    <app-input formControlName="user" label="Username" placeholder="имя пользователя"></app-input>
-    <app-input formControlName="password" label="Password" placeholder="пароль"></app-input>
-    <app-textarea
-      formControlName="anoter"
-      label="Anoter"
-      placeholder="anoter"
-      [minRows]="3"
-      [maxRows]="6"
-    ></app-textarea>
-    <app-app-data-picker formControlName="data" label="data" placeholder="data"></app-app-data-picker>
-    <app-app-autocomplete formControlName="auto" label="auto" placeholder="auto"></app-app-autocomplete>
-  </form>
+<div class="button-block">
+  <button nz-button nzType="primary" [routerLink]="['/projects/new']">New Project</button>
 </div>
+<nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="projectList$ | async as userList">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data" [routerLink]="['/projects/', data.id]">
+      <td>{{ data.attributes.name }}</td>
+      <td>{{ data.attributes.from }}</td>
+      <td>
+        <div class="td-wrapper">
+          {{ data.attributes.to }}
+          <i
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            class="td-wrapper__nz-icon"
+            (click)="deleteItem($event, data.id)"
+          ></i>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
