@@ -16,6 +16,6 @@ export class PdfService {
   }
 
   generatePdf(cvObj: CV, userObj: UserInfo) {
-    this.pdfMake.createPdf(this.pob.BuildDocDefinition(cvObj, userObj)).open();
+    this.pdfMake.createPdf(this.pob.buildDocDefinition(cvObj, userObj)).open();
   }
 }
