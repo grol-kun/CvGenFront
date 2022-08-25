@@ -4,8 +4,16 @@
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <nz-select nzShowSearch nzAllowClear [nzPlaceHolder]="placeholder" [formControl]="control" class="nz-select">
-    <nz-option *ngFor="let p of options" [nzValue]="p" [nzLabel]="p"></nz-option>
+  <nz-select
+    nzShowSearch
+    nzAllowClear
+    [nzPlaceHolder]="placeholder"
+    [formControl]="control"
+    [nzMode]="nzMode"
+    class="nz-select"
+    [nzOptionOverflowSize]="8"
+  >
+    <nz-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option"></nz-option>
   </nz-select>
 
   <div class="input-component__error-wrapper">
