@@ -26,7 +26,11 @@
             nzType="delete"
             nzTheme="outline"
             class="td-wrapper__nz-icon"
-            (click)="deleteItem($event, data.id)"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this item?"
+            nzPopconfirmPlacement="left"
+            (nzOnConfirm)="deleteItem(data.id)"
+            (click)="onClick($event)"
           ></i>
         </div>
       </td>

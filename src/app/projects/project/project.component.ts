@@ -8,7 +8,6 @@ import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { ProjectPutRequestBody } from 'src/app/shared/models/interfaces/project-put-request-body';
 
 @Component({
   selector: 'app-project',
@@ -44,19 +43,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
         switchMap(({ id }) => {
           if (id !== 'new') {
             return this.projectService.getProjectById(id);
-          } else {
-            this.isNew = true;
-            return of(null);
           }
+          this.isNew = true;
+          return of(null);
         })
       ),
       this.abilityService.getFullList<Response<Skill>>('skills'),
-    ]).subscribe((data) => {
-      if (data[0]) {
-        this.project = data[0].data;
-        const { internalName, name, from, to, domain, description, skills } = data[0].data.attributes;
+    ]).subscribe(([projectsResponse, skillsResponse]) => {
+      if (projectsResponse) {
+        this.project = projectsResponse.data;
+        const { internalName, name, from, to, domain, description, skills } = projectsResponse.data.attributes;
 
-        this.skills = data[1].data;
+        this.skills = skillsResponse.data;
         const skillsNames = skills.map((skill) => skill.attributes.name);
 
         this.form.patchValue(
@@ -66,7 +64,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       }
 
       if (this.skills.length === 0) {
-        this.skills = data[1].data;
+        this.skills = skillsResponse.data;
       }
 
       this.options = this.skills.map((item: Skill) => item.attributes.name);
@@ -90,15 +88,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
     if (!this.form.valid) {
       return;
     }
-    const requestBody = this.makeRequestBody();
+    const requestBody = this.projectService.makeRequestBody(this.form, this.skills);
     this.form.disable();
-    let request$;
 
-    if (this.isNew) {
-      request$ = this.projectService.addNewProject(requestBody);
-    } else {
-      request$ = this.projectService.updateProject(this.project.id, requestBody);
-    }
+    const request$ = this.isNew
+      ? this.projectService.addNewProject(requestBody)
+      : this.projectService.updateProject(this.project.id, requestBody);
 
     if (request$) {
       request$
@@ -107,22 +102,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
           finalize(() => this.form.enable())
         )
         .subscribe(() => {
-          if (this.isNew) {
-            this.message.create('success', `New project was created successfully!`);
-          } else {
-            this.message.create('success', `Project "${this.project.attributes.name}" was updated successfully!`);
-          }
+          const text = this.isNew
+            ? `New project was created successfully!`
+            : `Project "${this.project.attributes.name}" was updated successfully!`;
+
+          this.message.create('success', text);
         });
     }
-  }
-
-  makeRequestBody(): ProjectPutRequestBody {
-    const skills = this.form
-      .getRawValue()
-      .skills.map((skillName: string) => this.skills.find((elem) => elem.attributes.name === skillName));
-
-    const project: ProjectPutRequestBody = { data: { ...this.form.getRawValue(), skills } };
-    return project;
   }
 
   onCancel() {

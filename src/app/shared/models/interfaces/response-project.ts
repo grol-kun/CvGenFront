@@ -1,6 +1,6 @@
 import { Skill } from './skill';
 
-export interface ResponseProjectById {
+export interface ResponseProject {
   data: {
     id: number;
     attributes: {

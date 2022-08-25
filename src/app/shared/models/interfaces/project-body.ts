@@ -1,6 +1,6 @@
 import { Skill } from './skill';
 
-export interface ProjectPutRequestBody {
+export interface ProjectBody {
   data: {
     name: string;
     description: string;
