@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { commonErrors } from '../models/constants/error.constant';
+import { COMMON_ERRORS } from '../models/constants/error.constant';
 import { ErrorMessages } from '../models/interfaces/error-messages';
 
 @Pipe({
@@ -13,7 +13,7 @@ export class ErrorMessagePipe implements PipeTransform {
     }
 
     const controlErrors = {
-      ...commonErrors,
+      ...COMMON_ERRORS,
       ...addintional,
     };
 

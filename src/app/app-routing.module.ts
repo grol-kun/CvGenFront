@@ -1,20 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { SiteLayoutComponent } from './site-layout/site-layout.component';
 
 const routes: Routes = [
   {
     path: 'auth',
-    component: AuthComponent,
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-      },
-    ],
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '',
@@ -26,11 +18,6 @@ const routes: Routes = [
         path: 'employees',
         loadChildren: () => import('./employees/employees.module').then((m) => m.EmployeesModule),
         title: 'Employees',
-      },
-      {
-        path: 'employees/:id',
-        loadChildren: () => import('./employees/employee/employee.module').then((m) => m.EmployeeModule),
-        title: 'Employee',
       },
       {
         path: 'projects',

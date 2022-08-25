@@ -7,7 +7,6 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { CoreModule } from './core/core.module';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -41,7 +40,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     SiteLayoutModule,

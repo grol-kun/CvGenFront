@@ -8,5 +8,8 @@ export interface Project extends ResponseObjectStructure {
     from: string;
     to: string;
     internalName: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
   };
 }
