@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoaderService } from '../shared/services/loader.service';
 
@@ -16,10 +11,7 @@ import { LoaderService } from '../shared/services/loader.service';
 export class SiteLayoutComponent implements OnInit {
   loader$?: Observable<boolean>;
 
-  constructor(
-    private loaderService: LoaderService,
-    private cd: ChangeDetectorRef
-  ) {}
+  constructor(private loaderService: LoaderService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loader$ = this.loaderService.loaderStatus$;
