@@ -11,7 +11,7 @@ import { PdfObjectBuilderService } from './pdf-object-builder.service';
 export class PdfService {
   pdfMake: any;
   constructor(private pob: PdfObjectBuilderService) {
-    (PdfMake.vfs as any) = PdfFonts.pdfMake.vfs;
+    (PdfMake.vfs as { [file: string]: string }) = PdfFonts.pdfMake.vfs;
     this.pdfMake = PdfMake;
   }
 
