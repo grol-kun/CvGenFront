@@ -2,19 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectsComponent } from './projects.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { TranslateControlModule } from '../shared/translate/translate-control.module';
-import { ProjectInfoComponent } from './project-info/project-info.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { LoaderModule } from '../shared/components/loader/loader.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @NgModule({
-  declarations: [ProjectsComponent, ProjectInfoComponent],
+  declarations: [ProjectsComponent],
   imports: [
     CommonModule,
     ProjectsRoutingModule,
+    ReactiveFormsModule,
     NzTableModule,
-    LoaderModule,
-    TranslateControlModule,
+    NzIconModule,
+    NzButtonModule,
+    NzPopconfirmModule,
   ],
 })
 export class ProjectsModule {}

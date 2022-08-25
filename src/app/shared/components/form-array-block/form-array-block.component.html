@@ -1,0 +1,16 @@
+<ng-container [formGroup]="form" class="form">
+  <div formArrayName="items">
+    <div *ngFor="let item of items.controls; let i = index" class="form__wrapper">
+      <app-input-block
+        [formControlName]="i"
+        class="form__wrapper__app-input-block"
+        [fullListResponse]="fullListResponse"
+      >
+      </app-input-block>
+      <i nz-icon nzType="close" nzTheme="outline" (click)="deleteItem(i)" class="form__wrapper__cross"></i>
+    </div>
+    <div class="form__button_wrapper">
+      <button nz-button nzType="text" type="button" (click)="addItem()">+Add {{ datatype }}</button>
+    </div>
+  </div>
+</ng-container>

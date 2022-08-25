@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  &__app-select {
+    flex: 1 1 40%;
+    margin: 0 10px;
+  }
+}

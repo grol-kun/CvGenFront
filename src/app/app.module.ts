@@ -7,7 +7,6 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { CoreModule } from './core/core.module';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -20,7 +19,7 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Initializer } from './shared/services/initializer.service';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { PrefixHttpIterseptor } from './core/interceptors/prefix-http.interceptor';
+import { PrefixHttpInterceptor } from './core/interceptors/prefix-http.interceptor';
 import { CookieModule } from 'ngx-cookie';
 import {
   HttpLoaderFactory,
@@ -28,6 +27,8 @@ import {
 } from './shared/translate/translate-control.module';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { LoaderService } from './shared/services/loader.service';
+import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 
 registerLocaleData(en);
 
@@ -44,7 +45,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     SiteLayoutModule,
@@ -65,6 +65,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
   providers: [
     ThemeService,
     NzMessageService,
+    LoaderService,
     {
       provide: APP_INITIALIZER,
       useFactory: (initializer: Initializer) => () => initializer.initApp(),
@@ -80,12 +81,17 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     },
     {
       provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: PrefixHttpIterseptor,
+      useClass: PrefixHttpInterceptor,
       multi: true,
     },
   ],

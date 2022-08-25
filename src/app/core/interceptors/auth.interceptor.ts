@@ -17,7 +17,9 @@ export class AuthInterceptor implements HttpInterceptor {
     if (error.status === 401) {
       this.authService.removeToken();
       this.router.navigate(['/auth']);
-      this.message.create('warning', `Authorization error!`);
+      this.message.create('error', `Authorization error!`);
+    } else {
+      this.message.create('error', `Something went wrong!`);
     }
     return throwError(() => new Error(error.message));
   }

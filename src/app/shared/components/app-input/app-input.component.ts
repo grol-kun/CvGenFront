@@ -10,26 +10,23 @@ import { Subject, takeUntil } from 'rxjs';
 export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
   @Input() placeholder = 'placeholder';
+
   control = new FormControl();
   private destroy$ = new Subject<void>();
-  private onChange = (value: any) => { };
-  private onTouched = () => { };
+  private onChange = (value: any) => {};
+  private onTouched = () => {};
 
-  constructor(
-    @Self() public ngControl: NgControl
-  ) {
+  constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 
-  registerOnChange = (fn: (value: any) => {}) => this.onChange = fn;
-  registerOnTouched = (fn: () => {}) => this.onTouched = fn;
+  registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);
+  registerOnTouched = (fn: () => {}) => (this.onTouched = fn);
 
   ngOnInit(): void {
-    this.control!.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.onChange(value);
-      });
+    this.control!.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      this.onChange(value);
+    });
   }
 
   writeValue(value: any): void {

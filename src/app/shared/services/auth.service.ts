@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthorizationResponse } from '../models/interfaces/authorization-response';
 import { loginInfo } from '../models/interfaces/login-info';
 import { CookieService } from 'ngx-cookie';
-import { ExpireDateService } from './expireDate.service';
+import { ExpireDateService } from './expire-date.service';
 
 @Injectable({
   providedIn: 'root',

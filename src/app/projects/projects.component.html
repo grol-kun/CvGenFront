@@ -1,9 +1,7 @@
-<nz-table
-  #filterTable
-  [nzData]="projectsList"
-  nzTableLayout="fixed"
-  *ngIf="projectsList$ | async as projectsList"
->
+<div class="button-block">
+  <button nz-button nzType="primary" [routerLink]="['/projects/new']">New Project</button>
+</div>
+<nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="projectList$ | async as userList">
   <thead>
     <tr>
       <th
@@ -12,15 +10,30 @@
         [nzSortFn]="column.sortFn"
         [nzSortDirections]="column.sortDirections"
       >
-        {{ column.name | translate }}
+        {{ column.name }}
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of filterTable.data">
+    <tr *ngFor="let data of filterTable.data" [routerLink]="['/projects/', data.id]">
       <td>{{ data.attributes.name }}</td>
-      <td>{{ data.attributes.from | date: 'mediumDate' }}</td>
-      <td>{{ data.attributes.to | date: 'mediumDate' }}</td>
+      <td>{{ data.attributes.from }}</td>
+      <td>
+        <div class="td-wrapper">
+          {{ data.attributes.to }}
+          <i
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            class="td-wrapper__nz-icon"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this item?"
+            nzPopconfirmPlacement="left"
+            (nzOnConfirm)="deleteItem(data.id)"
+            (click)="onClick($event)"
+          ></i>
+        </div>
+      </td>
     </tr>
   </tbody>
 </nz-table>

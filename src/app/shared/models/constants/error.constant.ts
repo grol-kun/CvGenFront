@@ -1,7 +1,7 @@
 import { ErrorMessages } from '../interfaces/error-messages';
 
-export const commonErrors: ErrorMessages = {
-  required: 'errors.required',
-  minlength: 'errors.minLength',
-  maxlength: 'errors.maxLength'
+export const COMMON_ERRORS: ErrorMessages = {
+  required: 'The field is required',
+  minlength: 'It is too short',
+  maxlength: 'It is too long',
 };
