@@ -10,8 +10,11 @@ import { Subject, takeUntil } from 'rxjs';
 export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label = 'Input';
   @Input() placeholder = 'placeholder';
+  @Input() passwordVisible = true;
+  @Input() isPassword = false;
 
   control = new FormControl();
+
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => {};
   private onTouched = () => {};

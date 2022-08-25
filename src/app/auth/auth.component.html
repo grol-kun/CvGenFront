@@ -5,8 +5,11 @@
       [label]="'auth.text.username' | translate"
       [placeholder]="'auth.text.username_placeholder' | translate"
     ></app-input>
+
     <app-input
       formControlName="password"
+      [isPassword]="true"
+      [passwordVisible]="false"
       [label]="'auth.text.password' | translate"
       [placeholder]="'auth.text.password_placeholder' | translate"
     ></app-input>
