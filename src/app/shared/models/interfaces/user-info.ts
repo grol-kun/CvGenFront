@@ -1,4 +1,4 @@
-import { CV } from './cv';
+import { Cv } from './cv';
 import { Language } from './language';
 import { Skill } from './skill';
 
@@ -17,5 +17,5 @@ export interface UserInfo {
   description: string;
   firstName: string;
   lastName: string;
-  cvs: CV[];
+  cvs: Cv[];
 }
