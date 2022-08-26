@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, map, takeUntil, Subject } from 'rxjs';
+import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
 import { CV_COLUMNS } from '../shared/models/constants/cv-columns';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { Cv } from '../shared/models/interfaces/cv';
@@ -13,17 +13,20 @@ import { CvService } from '../shared/services/cv.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvsComponent implements OnInit, OnDestroy {
-  cvList$!: Observable<Cv[]>;
+  cvList$ = new BehaviorSubject<Cv[]>([]);
+
   private destroy$ = new Subject<void>();
 
   constructor(private messageService: NzMessageService, private cdr: ChangeDetectorRef, private cvService: CvService) {}
 
   ngOnInit() {
-    this.getCvList();
+    this.getCvList()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => this.cvList$.next(data));
   }
 
   getCvList() {
-    this.cvList$ = this.cvService.getCvs().pipe(map((data) => data.data));
+    return this.cvService.getCvs();
   }
 
   listOfColumns: ColumnItem[] = CV_COLUMNS;
@@ -31,11 +34,13 @@ export class CvsComponent implements OnInit, OnDestroy {
   deleteItem(id: number) {
     this.cvService
       .deleteCvById(id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap(() => this.getCvList())
+      )
+      .subscribe((data) => {
+        this.cvList$.next(data);
         this.messageService.create('success', `CV has just been deleted!`);
-        this.getCvList();
-        this.cdr.detectChanges();
       });
   }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Project } from '../models/interfaces/project';
 import { Response } from '../models/interfaces/response';
 import { ProjectBody } from '../models/interfaces/project-body';
@@ -13,8 +13,8 @@ import { ResponseOneEntity } from '../models/interfaces/response-one-entity';
 export class CvService {
   constructor(private httpClient: HttpClient) {}
 
-  getCvs(): Observable<Response<Cv>> {
-    return this.httpClient.get<Response<Cv>>(`/api/cvs`);
+  getCvs(): Observable<Cv[]> {
+    return this.httpClient.get<Response<Cv>>(`/api/cvs`).pipe(map((data) => data.data));
   }
 
   getCvById(id: string | number): Observable<ResponseOneEntity<Cv>> {
