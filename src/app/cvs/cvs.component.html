@@ -1,1 +1,38 @@
-<p>cvs works!</p>
+<div class="button-block">
+  <button nz-button nzType="primary" [routerLink]="['/cvs/new']">New CV</button>
+</div>
+<nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data" [routerLink]="['/cvs/', data.id]">
+      <td>{{ data.attributes.name }}</td>
+      <td>
+        <div class="td-wrapper">
+          {{ data.attributes.description }}
+          <i
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            class="td-wrapper__nz-icon"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this item?"
+            nzPopconfirmPlacement="left"
+            (nzOnConfirm)="deleteItem(data.id)"
+            (click)="onClick($event)"
+          ></i>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

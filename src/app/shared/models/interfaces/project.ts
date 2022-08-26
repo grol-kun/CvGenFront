@@ -1,6 +1,17 @@
-import { ProjectAttributes } from './project-attributes';
-import { ResponseObjectStructure } from './response-object-structure';
+import { Skill } from './skill';
 
-export interface Project extends ResponseObjectStructure {
-  attributes: ProjectAttributes;
+export interface Project {
+  id: number;
+  attributes: {
+    name: string;
+    description: string;
+    domain: string;
+    from: string;
+    to: string;
+    internalName: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    skills: Skill[];
+  };
 }

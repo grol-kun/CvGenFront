@@ -1,0 +1,16 @@
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 20px;
+}
+.td-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__nz-icon {
+    margin-left: 10px;
+    z-index: 5;
+    cursor: pointer;
+  }
+}
