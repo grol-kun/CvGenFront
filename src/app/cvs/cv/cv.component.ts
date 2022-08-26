@@ -49,8 +49,7 @@ export class CvComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         if (data) {
           this.cv = data.data;
-          const { name, description, skills, languages } = this.cv.attributes;
-          this.form.patchValue({ name, description, skills, languages }, { emitEvent: false });
+          this.form.patchValue({ ...this.cv.attributes }, { emitEvent: false });
         }
       });
   }
@@ -65,11 +64,6 @@ export class CvComponent implements OnInit, OnDestroy {
   }
 
   onAuthSubmit() {
-    this.form.markAllAsTouched();
-    if (!this.form.valid) {
-      return;
-    }
-
     const requestBody = this.isNew
       ? { data: { ...this.form.getRawValue() } }
       : { data: { ...this.cv.attributes, ...this.form.getRawValue() } };
