@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../models/interfaces/project';
 import { Response } from '../models/interfaces/response';
-import { ResponseProject } from '../models/interfaces/response-project';
 import { ProjectBody } from '../models/interfaces/project-body';
 import { Skill } from '../models/interfaces/skill';
 import { FormGroup } from '@angular/forms';
+import { ResponseOneEntity } from '../models/interfaces/response-one-entity';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +15,11 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) {}
 
   getProjects(): Observable<Response<Project>> {
-    return this.httpClient.get<Response<Project>>(`/api/projects`);
+    return this.httpClient.get<Response<Project>>(`/api/projects?populate=%2A`);
   }
 
-  getProjectById(id: string | number): Observable<ResponseProject> {
-    return this.httpClient.get<ResponseProject>(`/api/projects/${id}`);
+  getProjectById(id: string | number): Observable<ResponseOneEntity<Project>> {
+    return this.httpClient.get<ResponseOneEntity<Project>>(`/api/projects/${id}?populate=%2A`);
   }
 
   updateProject(id: string | number, body: ProjectBody) {

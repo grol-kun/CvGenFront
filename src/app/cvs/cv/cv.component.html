@@ -1,0 +1,39 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
+  <nz-collapse>
+    <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <div class="form__collapse-panel__inner__block">
+          <app-input formControlName="name" [label]="'Name'" [placeholder]="'Name'"></app-input>
+          <app-textarea
+            formControlName="description"
+            [label]="'Description'"
+            [placeholder]="'Description'"
+            [minRows]="5"
+          >
+          </app-textarea>
+        </div>
+      </div>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
+      </div>
+    </nz-collapse-panel>
+
+    <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="form__collapse-panel">
+      <div class="form__collapse-panel__inner">
+        <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+
+  <div class="form__buttons-block">
+    <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
+      Save
+    </button>
+    <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
+      Сancel
+    </button>
+  </div>
+</form>
