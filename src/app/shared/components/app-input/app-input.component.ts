@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Self } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -7,13 +7,13 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './app-input.component.html',
   styleUrls: ['./app-input.component.scss'],
 })
-export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   @Input() label = 'Input';
   @Input() placeholder = 'placeholder';
-  @Input() passwordVisible = true;
   @Input() isPassword = false;
 
   control = new FormControl();
+  textVisible = true;
 
   private destroy$ = new Subject<void>();
   private onChange = (value: any) => {};
@@ -21,6 +21,14 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const isPassword = changes?.['isPassword']?.currentValue;
+
+    if (isPassword) {
+      this.textVisible = false;
+    }
   }
 
   registerOnChange = (fn: (value: any) => {}) => (this.onChange = fn);

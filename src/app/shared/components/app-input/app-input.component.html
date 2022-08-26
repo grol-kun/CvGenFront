@@ -10,12 +10,12 @@
       nz-input
       [placeholder]="placeholder"
       [formControl]="control"
-      [type]="passwordVisible ? 'text' : 'password'"
+      [type]="textVisible ? 'text' : 'password'"
     />
   </nz-input-group>
 
   <ng-template #passwordSuffix>
-    <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+    <i nz-icon [nzType]="textVisible ? 'eye-invisible' : 'eye'" (click)="textVisible = !textVisible"></i>
   </ng-template>
 
   <div class="input-component__error-wrapper">
