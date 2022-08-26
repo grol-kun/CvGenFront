@@ -7,6 +7,8 @@ import { AuthorizationResponse } from '../models/interfaces/authorization-respon
 import { loginInfo } from '../models/interfaces/login-info';
 import { CookieService } from 'ngx-cookie';
 import { ExpireDateService } from './expire-date.service';
+import { Store } from '@ngrx/store';
+import { getToken, removeToken, setToken } from 'src/app/ngRx/actions/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,8 @@ export class AuthService {
     private httpClient: HttpClient,
     private cookieService: CookieService,
     private router: Router,
-    private expDate: ExpireDateService
+    private expDate: ExpireDateService,
+    private store: Store //private store: Store<{ auth: string }>
   ) {}
 
   login(userData: loginInfo): Observable<AuthorizationResponse> {
@@ -27,14 +30,20 @@ export class AuthService {
 
   setToken(token: string): void {
     this.token = token;
+    this.store.dispatch(setToken());
+    console.log('setToken');
   }
 
   removeToken(): void {
     this.token = null;
+    this.store.dispatch(removeToken());
   }
 
   getToken(): string | null {
+    console.log('getToken');
+    this.store.dispatch(getToken());
     return this.token;
+    //return this.store.dispatch(getToken())
   }
 
   isAuthenticated(): boolean {
