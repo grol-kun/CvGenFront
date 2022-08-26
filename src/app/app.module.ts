@@ -32,7 +32,6 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './ngRx/reducers';
 import { AppEffects } from './ngRx/effects/app.effects';
-import { tokenReducer } from './ngRx/reducers/auth.reducer';
 
 registerLocaleData(en);
 
@@ -64,12 +63,10 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
       useDefaultLang: false,
     }),
     EffectsModule.forRoot([AppEffects]),
-    /*     StoreModule.forRoot(reducers, {
+    StoreModule.forRoot(reducers, {
       metaReducers,
-    }), */
-    StoreModule.forRoot({}, {}),
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    //StoreModule.forRoot({ authReducer }),
   ],
   providers: [
     ThemeService,

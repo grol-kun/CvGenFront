@@ -1,5 +1,4 @@
-import { Token } from '@angular/compiler';
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { setToken, removeToken } from '../actions/auth.actions';
 
 export interface TokenState {
@@ -11,7 +10,16 @@ export const initialState: TokenState = {
 };
 
 export const tokenReducer = createReducer(
-  initialState
-  /*   on(setToken, (data) => data),
-  on(removeToken, () => initialState) */
+  initialState,
+  on(setToken, (state, { token }) => ({
+    ...state,
+    token,
+  })),
+  on(removeToken, (state) => ({
+    ...state,
+    token: initialState.token,
+  }))
 );
+
+export const featureSelector = createFeatureSelector<TokenState>('authData');
+export const tokenSelector = createSelector(featureSelector, (state) => state.token);
