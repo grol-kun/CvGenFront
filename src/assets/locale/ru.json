@@ -3,11 +3,11 @@
     "ru": "Русский",
     "en": "English"
   },
-  "layout":{
+  "layout": {
     "employees": "Сотрудники",
     "projects": "Проекты",
     "cvs": "Резюме",
-    "entities": "Сущности" 
+    "entities": "Сущности"
   },
   "auth": {
     "title": "Авторизация",
@@ -23,23 +23,41 @@
       "forgot_password": "Забыли пароль?"
     }
   },
-  "employees":{
+  "employees": {
     "title": "Сотрудники",
     "actions": {
       "first_name": "Имя",
       "last_name": "Фамилия",
+      "email": "Электронная почта",
+      "info_tab": "Информация",
+      "cv_tab": "Резюме",
+      "info_collapse": "Информация",
+      "skills_collapse": "Навыки",
+      "languages_collapse": "Языки"
+    },
+    "labels": {
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "education": "Образование",
       "email": "Электронная почта"
+    },
+    "placeholders": {
+      "first_name": "Введите имя",
+      "last_name": "Введите фамилию",
+      "education": "Укажите информацию о образовании",
+      "email": "Укажите электронную почту"
     }
   },
-  "projects":{
+  "projects": {
     "title": "Проекты",
     "actions": {
       "name": "Название",
       "from": "Дата начала",
-      "to": "Дата окончания"
+      "to": "Дата окончания",
+      "new_project": "Новый проект"
     },
-    "forms":{
-      "labels":{
+    "forms": {
+      "labels": {
         "internalName": "Внутреннее название",
         "name": "Название",
         "from": "Дата начала",
@@ -48,7 +66,7 @@
         "stack": "Технический стек",
         "description": "Описание"
       },
-      "placeholders":{
+      "placeholders": {
         "internalName": "Введите внутреннее название",
         "name": "Введите название",
         "from": "Укажите дату начала",
@@ -64,7 +82,23 @@
     "minLength": "Слишком мало символов",
     "maxLength": "Слишком много символов"
   },
-  "buttons":{
+  "form_array_block": {
+    "actions": {
+      "add_skills": "+ Добавить навык",
+      "add_languages": "+ Добавить язык"
+    }
+  },
+  "input_block": {
+    "labels": {
+      "name": "Название",
+      "level": "Уровень"
+    },
+    "placeholders": {
+      "name": "Выберите один вариант",
+      "level": "Укажите уровень"
+    }
+  },
+  "buttons": {
     "save": "Сохранить",
     "cancel": "Отмена"
   }

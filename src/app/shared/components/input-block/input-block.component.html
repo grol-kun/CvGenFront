@@ -1,7 +1,11 @@
 <ng-container [formGroup]="form" class="wrapper">
   <div class="wrapper">
-    <app-select formControlName="name" label="Name" [options]="options" class="wrapper__app-select"> </app-select>
-    <app-select formControlName="level" label="Level" [options]="optionsLevel" class="wrapper__app-select">
+    <app-select formControlName="name" [label]="'input_block.labels.name' | translate"
+      [placeholder]="'input_block.placeholders.name' | translate" [options]="options" class="wrapper__app-select">
+    </app-select>
+    <app-select formControlName="level" [label]="'input_block.labels.level'| translate"
+      [placeholder]="'input_block.placeholders.level' | translate" [options]=" optionsLevel"
+      class="wrapper__app-select">
     </app-select>
   </div>
 </ng-container>

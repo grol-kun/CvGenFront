@@ -3,11 +3,11 @@
     "ru": "Русский",
     "en": "English"
   },
-  "layout":{
+  "layout": {
     "employees": "Employees",
     "projects": "Projects",
     "cvs": "CVs",
-    "entities": "Entities" 
+    "entities": "Entities"
   },
   "auth": {
     "title": "Auth",
@@ -23,23 +23,41 @@
       "forgot_password": "Forgot your password?"
     }
   },
-  "employees":{
+  "employees": {
     "title": "Employees",
     "actions": {
       "first_name": "First Name",
       "last_name": "Last Name",
+      "email": "Email",
+      "info_tab": "Info",
+      "cv_tab": "CV",
+      "info_collapse": "Info",
+      "skills_collapse": "Skills",
+      "languages_collapse": "Languages"
+    },
+    "labels": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "education": "Education",
       "email": "Email"
+    },
+    "placeholders": {
+      "first_name": "Enter first name",
+      "last_name": "Enter last name",
+      "education": "Enter education info",
+      "email": "Enter email"
     }
   },
-  "projects":{
+  "projects": {
     "title": "Projects",
     "actions": {
       "name": "Name",
       "from": "Start Date",
-      "to": "End Date"
+      "to": "End Date",
+      "new_project": "New Project"
     },
-    "forms":{
-      "labels":{
+    "forms": {
+      "labels": {
         "internalName": "Internal name",
         "name": "Name",
         "from": "Start Date",
@@ -48,7 +66,7 @@
         "stack": "Tech stack",
         "description": "Description"
       },
-      "placeholders":{
+      "placeholders": {
         "internalName": "Specify internal name",
         "name": "Enter name",
         "from": "Select start Date",
@@ -64,7 +82,23 @@
     "minLength": "It is too short",
     "maxLength": "It is too long"
   },
-  "buttons":{
+  "form_array_block": {
+    "actions": {
+      "add_skills": "+ Add skill",
+      "add_languages": "+ Add language"
+    }
+  },
+  "input_block": {
+    "labels": {
+      "name": "Name",
+      "level": "Level"
+    },
+    "placeholders": {
+      "name": "Select one",
+      "level": "Select a level"
+    }
+  },
+  "buttons": {
     "save": "Save",
     "cancel": "Cancel"
   }
