@@ -12,7 +12,6 @@ import { UserService } from '../shared/services/user.service';
 })
 export class EmployeesComponent implements OnInit {
   usersList$!: Observable<UserInfo[]>;
-  localePath = 'employees.actions.';
 
   constructor(private userService: UserService) {}
 

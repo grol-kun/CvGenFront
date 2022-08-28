@@ -35,14 +35,37 @@
     "title": "Projects",
     "actions": {
       "name": "Name",
-      "description": "Description",
       "from": "Start Date",
       "to": "End Date"
+    },
+    "forms":{
+      "labels":{
+        "internalName": "Internal name",
+        "name": "Name",
+        "from": "Start Date",
+        "to": "End Date",
+        "domain": "Domain",
+        "stack": "Tech stack",
+        "description": "Description"
+      },
+      "placeholders":{
+        "internalName": "Specify internal name",
+        "name": "Enter name",
+        "from": "Select start Date",
+        "to": "Select end Date",
+        "domain": "Specify domain",
+        "stack": "Select tech stack",
+        "description": "Enter description"
+      }
     }
   },
   "errors": {
     "required": "The field is required",
     "minLength": "It is too short",
     "maxLength": "It is too long"
+  },
+  "buttons":{
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
