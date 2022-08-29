@@ -30,8 +30,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, metaReducers } from './ngRx/reducers';
-import { AppEffects } from './ngRx/effects/app.effects';
+import { reducers, metaReducers } from './core/store/reducers';
+import { AuthEffects } from './core/store/effects/auth.effects';
 
 registerLocaleData(en);
 
@@ -62,7 +62,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
       },
       useDefaultLang: false,
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(reducers, {
       metaReducers,
     }),

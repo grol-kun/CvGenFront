@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { updateMyInfo } from 'src/app/ngRx/actions/auth.actions';
+import { updateMyInfo } from '../../../core/store/actions/auth.actions';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 

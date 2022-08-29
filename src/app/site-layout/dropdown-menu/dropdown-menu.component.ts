@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { infoSelector } from 'src/app/ngRx/reducers/auth.reducer';
+import { infoSelector } from '../../core/store/selectors/auth.selector';
 import { MyInfo } from 'src/app/shared/models/interfaces/my-info';
 import { AuthService } from '../../shared/services/auth.service';
 

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { finalize, Subject, takeUntil } from 'rxjs';
-import { updateMyInfo } from '../ngRx/actions/auth.actions';
+import { updateMyInfo } from '../core/store/actions/auth.actions';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({

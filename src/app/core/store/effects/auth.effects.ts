@@ -6,7 +6,9 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 import { setMyInfo, updateMyInfo } from '../actions/auth.actions';
 
 @Injectable()
-export class AppEffects {
+export class AuthEffects {
+  constructor(private actions$: Actions, private authService: AuthService) {}
+
   loadMyInfo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateMyInfo),
@@ -18,6 +20,4 @@ export class AppEffects {
       )
     )
   );
-
-  constructor(private actions$: Actions, private authService: AuthService) {}
 }

@@ -1,4 +1,4 @@
-import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { MyInfo } from 'src/app/shared/models/interfaces/my-info';
 import { setToken, removeToken, setMyInfo } from '../actions/auth.actions';
 
@@ -27,7 +27,3 @@ export const tokenReducer = createReducer(
     info: { ...info },
   }))
 );
-
-export const featureSelector = createFeatureSelector<AuthState>('authData');
-export const tokenSelector = createSelector(featureSelector, (state) => state.token);
-export const infoSelector = createSelector(featureSelector, (state) => state.info);

@@ -8,8 +8,8 @@ import { loginInfo } from '../models/interfaces/login-info';
 import { CookieService } from 'ngx-cookie';
 import { ExpireDateService } from './expire-date.service';
 import { Store } from '@ngrx/store';
-import { removeToken, setToken, getToken } from 'src/app/ngRx/actions/auth.actions';
-import { tokenSelector } from 'src/app/ngRx/reducers/auth.reducer';
+import { removeToken, setToken } from 'src/app/core/store/actions/auth.actions';
+import { tokenSelector } from 'src/app/core/store/selectors/auth.selector';
 import { MyInfo } from '../models/interfaces/my-info';
 
 @Injectable({
@@ -37,7 +37,6 @@ export class AuthService {
   }
 
   getToken(): Observable<string | null> {
-    this.store.dispatch(getToken());
     return this.store.select(tokenSelector);
   }
 

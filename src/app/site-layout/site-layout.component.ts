@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { infoSelector } from '../ngRx/reducers/auth.reducer';
+import { infoSelector } from '../core/store/selectors/auth.selector';
 import { MyInfo } from '../shared/models/interfaces/my-info';
 import { LoaderService } from '../shared/services/loader.service';
 
