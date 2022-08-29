@@ -10,6 +10,7 @@ import { ExpireDateService } from './expire-date.service';
 import { Store } from '@ngrx/store';
 import { removeToken, setToken, getToken } from 'src/app/ngRx/actions/auth.actions';
 import { tokenSelector } from 'src/app/ngRx/reducers/auth.reducer';
+import { MyInfo } from '../models/interfaces/my-info';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +60,9 @@ export class AuthService {
     this.removeToken();
     this.cookieService.remove(environment.tokenName);
     this.router.navigate(['/auth']);
+  }
+
+  getMyInfo(): Observable<MyInfo> {
+    return this.httpClient.get<MyInfo>(`/api/users/me`);
   }
 }

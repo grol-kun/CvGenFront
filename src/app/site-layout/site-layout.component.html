@@ -1,6 +1,6 @@
-<nz-layout>
-  <nz-sider nzCollapsible nzWidth="200px">
-    <div class="logo"></div>
+<nz-layout class="nz-layout">
+  <nz-sider nzCollapsible nzWidth="200px" class="nz-layout__nz-sider">
+    <div class="nz-layout__nz-sider__logo" [routerLink]="['']"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item [routerLink]="['/employees/']">
         <i nz-icon nzType="user"></i>
@@ -20,15 +20,23 @@
       </li>
     </ul>
   </nz-sider>
-  <nz-layout>
-    <nz-header></nz-header>
-    <nz-content>
-      <nz-breadcrumb>
+
+  <nz-layout class="nz-layout__nz-layout">
+    <nz-header class="nz-layout__nz-layout__nz-header">
+      <div class="nz-layout__nz-layout__nz-header__menu-wrapper">
+        <p>Hello, {{ (info$ | async)?.firstName }}</p>
+        <app-dropdown-menu> </app-dropdown-menu>
+      </div>
+    </nz-header>
+
+    <nz-content class="nz-layout__nz-layout__nz-content">
+      <nz-breadcrumb class="nz-layout__nz-layout__nz-content__nz-breadcrumb">
         <nz-breadcrumb-item>User</nz-breadcrumb-item>
         <nz-breadcrumb-item>1</nz-breadcrumb-item>
       </nz-breadcrumb>
-      <div class="inner-content">
-        <div class="inner-content__loader_wrapper" *ngIf="loader$ | async">
+
+      <div class="nz-layout__nz-layout__nz-content__inner-content">
+        <div class="nz-layout__nz-layout__nz-content__inner-content__loader_wrapper" *ngIf="loader$ | async">
           <app-loader></app-loader>
         </div>
         <router-outlet></router-outlet>

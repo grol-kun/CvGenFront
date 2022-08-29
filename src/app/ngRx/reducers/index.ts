@@ -1,9 +1,9 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import { tokenReducer, TokenState } from './auth.reducer';
+import { tokenReducer, AuthState } from './auth.reducer';
 
 export interface State {
-  authData: TokenState;
+  authData: AuthState;
 }
 
 export const reducers: ActionReducerMap<State> = {

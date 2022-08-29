@@ -1,8 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { finalize, Subject, takeUntil } from 'rxjs';
+import { updateMyInfo } from 'src/app/ngRx/actions/auth.actions';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -21,7 +23,8 @@ export class InfoComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private router: Router,
     private message: NzMessageService,
-    private userService: UserService
+    private userService: UserService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +68,10 @@ export class InfoComponent implements OnInit, OnChanges {
           takeUntil(this.destroy$),
           finalize(() => this.form.enable())
         )
-        .subscribe(() => this.message.create('success', `User ${user.firstName} was updated successfully!`));
+        .subscribe(() => {
+          this.message.create('success', `User ${user.firstName} was updated successfully!`);
+          this.store.dispatch(updateMyInfo());
+        });
     }
   }
 
