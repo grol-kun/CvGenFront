@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { finalize, Subject, takeUntil } from 'rxjs';
+import { updateMyInfo } from '../core/store/actions/auth.actions';
 import { AuthService } from '../shared/services/auth.service';
-import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +21,7 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private message: NzMessageService
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ export class AuthComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.authService.setToken(data.jwt);
+          this.store.dispatch(updateMyInfo());
           if (remember) {
             this.authService.setTokenToCookies(data.jwt);
           }

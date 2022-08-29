@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
 import { ThemeService } from '../theme/theme.service';
 import { AuthService } from './auth.service';
 
@@ -6,10 +8,11 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class Initializer {
-  constructor(public themeService: ThemeService, public authService: AuthService) {}
+  constructor(private themeService: ThemeService, private authService: AuthService, private store: Store) {}
 
   initApp() {
     this.themeService.startTheme();
     this.authService.setTokenIfAvailable();
+    this.store.dispatch(updateMyInfo());
   }
 }

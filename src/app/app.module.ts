@@ -7,7 +7,6 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { CoreModule } from './core/core.module';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -27,6 +26,12 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers, metaReducers } from './core/store/reducers';
+import { AuthEffects } from './core/store/effects/auth.effects';
 
 registerLocaleData(en);
 
@@ -41,7 +46,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     SiteLayoutModule,
@@ -58,6 +62,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
       },
       useDefaultLang: false,
     }),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     ThemeService,

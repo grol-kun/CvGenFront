@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EMPLOYEE_COLUMNS } from '../shared/models/constants/employee-columns';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { UserInfo } from '../shared/models/interfaces/user-info';
 import { UserService } from '../shared/services/user.service';
@@ -18,24 +19,5 @@ export class EmployeesComponent implements OnInit {
     this.usersList$ = this.userService.getUsers();
   }
 
-  listOfColumns: ColumnItem[] = [
-    {
-      name: 'First Name',
-      sortOrder: null,
-      sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) => a.firstName.localeCompare(b.firstName),
-    },
-    {
-      name: 'Last Name',
-      sortOrder: 'descend',
-      sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) => a.lastName.localeCompare(b.lastName),
-    },
-    {
-      name: 'Email',
-      sortOrder: null,
-      sortDirections: ['ascend', 'descend', null],
-      sortFn: (a: UserInfo, b: UserInfo) => a.email.localeCompare(b.email),
-    },
-  ];
+  listOfColumns: ColumnItem[] = EMPLOYEE_COLUMNS;
 }

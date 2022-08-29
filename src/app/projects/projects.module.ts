@@ -2,24 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectsComponent } from './projects.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { AppTextareaModule } from '../shared/components/app-textarea/app-textarea.module';
-import { AppInputModule } from '../shared/components/app-input/app-input.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AppDataPickerModule } from '../shared/components/app-data-picker/app-data-picker.module';
-import { AppAutocompleteModule } from '../shared/components/app-autocomplete/app-autocomplete.module';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @NgModule({
-  declarations: [
-    ProjectsComponent
-  ],
+  declarations: [ProjectsComponent],
   imports: [
     CommonModule,
     ProjectsRoutingModule,
-    AppTextareaModule,
-    AppInputModule,
     ReactiveFormsModule,
-    AppDataPickerModule,
-    AppAutocompleteModule
+    NzTableModule,
+    NzIconModule,
+    NzButtonModule,
+    NzPopconfirmModule,
   ],
 })
-export class ProjectsModule { }
+export class ProjectsModule {}

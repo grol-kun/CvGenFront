@@ -1,0 +1,23 @@
+.form {
+  &__collapse-panel {
+    font-weight: 800;
+
+    &__inner {
+      font-weight: 400;
+
+      &__block {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__buttons-block {
+    display: flex;
+    justify-content: flex-end;
+
+    &__button {
+      margin: 10px 5px;
+    }
+  }
+}

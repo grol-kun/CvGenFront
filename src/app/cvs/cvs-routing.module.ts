@@ -7,6 +7,16 @@ const routes: Routes = [
     path: '',
     component: CvsComponent,
   },
+  {
+    path: ':id',
+    loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
+    title: 'Project',
+  },
+  {
+    path: 'new',
+    loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
+    title: 'Project',
+  },
 ];
 
 @NgModule({
