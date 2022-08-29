@@ -7,18 +7,21 @@ import { AuthorizationResponse } from '../models/interfaces/authorization-respon
 import { loginInfo } from '../models/interfaces/login-info';
 import { CookieService } from 'ngx-cookie';
 import { ExpireDateService } from './expire-date.service';
+import { Store } from '@ngrx/store';
+import { removeToken, setToken } from 'src/app/core/store/actions/auth.actions';
+import { tokenSelector } from 'src/app/core/store/selectors/auth.selector';
+import { MyInfo } from '../models/interfaces/my-info';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private token: string | null = null;
-
   constructor(
     private httpClient: HttpClient,
     private cookieService: CookieService,
     private router: Router,
-    private expDate: ExpireDateService
+    private expDate: ExpireDateService,
+    private store: Store
   ) {}
 
   login(userData: loginInfo): Observable<AuthorizationResponse> {
@@ -26,19 +29,15 @@ export class AuthService {
   }
 
   setToken(token: string): void {
-    this.token = token;
+    this.store.dispatch(setToken({ token }));
   }
 
   removeToken(): void {
-    this.token = null;
+    this.store.dispatch(removeToken());
   }
 
-  getToken(): string | null {
-    return this.token;
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.token;
+  getToken(): Observable<string | null> {
+    return this.store.select(tokenSelector);
   }
 
   setTokenToCookies(token: string): void {
@@ -60,5 +59,9 @@ export class AuthService {
     this.removeToken();
     this.cookieService.remove(environment.tokenName);
     this.router.navigate(['/auth']);
+  }
+
+  getMyInfo(): Observable<MyInfo> {
+    return this.httpClient.get<MyInfo>(`/api/users/me`);
   }
 }

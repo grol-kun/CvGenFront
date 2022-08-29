@@ -26,6 +26,12 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LoaderService } from './shared/services/loader.service';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers, metaReducers } from './core/store/reducers';
+import { AuthEffects } from './core/store/effects/auth.effects';
 
 registerLocaleData(en);
 
@@ -56,6 +62,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
       },
       useDefaultLang: false,
     }),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     ThemeService,
