@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, finalize, takeUntil } from 'rxjs';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
+import { Project } from 'src/app/shared/models/interfaces/project';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -13,12 +14,14 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./cv-list.component.scss'],
 })
 export class CvListComponent implements OnInit {
-  @Input() user!: UserInfo | null;
+  @Input() user: UserInfo | null = null;
 
   form!: FormGroup;
   cvs: Cv[] = [];
   searchCv = '';
-  isModalVisible = false;
+  isCvModalVisible = false;
+  isProjectModalVisible = false;
+  isFormActive = false;
 
   private destroy$ = new Subject<void>();
 
@@ -26,7 +29,8 @@ export class CvListComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private message: NzMessageService,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: NzMessageService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +59,7 @@ export class CvListComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(3)]],
       skills: [],
       languages: [],
-      //projects: [],
+      projects: [],
     });
   }
 
@@ -87,7 +91,6 @@ export class CvListComponent implements OnInit {
   }
 
   trackByFn(index: number, cv: Cv) {
-    console.log(index);
     return cv.id;
   }
 
@@ -96,15 +99,38 @@ export class CvListComponent implements OnInit {
     if (!existIds.includes(cv.id)) {
       this.cvs.push(cv);
     }
-    this.isModalVisible = false;
+    this.isCvModalVisible = false;
   }
 
   showModal() {
-    this.isModalVisible = true;
+    this.isCvModalVisible = true;
   }
 
   onVisibleStatusChange(newStatus: boolean) {
-    this.isModalVisible = newStatus;
+    this.isCvModalVisible = this.isProjectModalVisible = newStatus;
+  }
+
+  deleteItem(idx: number) {
+    this.cvs.splice(idx, 1);
+  }
+
+  catchClick(event: Event) {
+    event.stopPropagation();
+  }
+
+  activateForm(cv: Cv) {
+    console.log('cv:', cv);
+
+    this.isFormActive = true;
+  }
+
+  addProject() {
+    this.isProjectModalVisible = true;
+  }
+
+  onProjectSelected(project: Project) {
+    console.log('onProjectSelected', project);
+    this.isProjectModalVisible = false;
   }
 
   ngOnDestroy(): void {

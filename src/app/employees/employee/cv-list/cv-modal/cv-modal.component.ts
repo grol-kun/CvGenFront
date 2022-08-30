@@ -6,11 +6,11 @@ import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { CvService } from 'src/app/shared/services/cv.service';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  selector: 'app-cv-modal',
+  templateUrl: './cv-modal.component.html',
+  styleUrls: ['./cv-modal.component.scss'],
 })
-export class ModalComponent implements OnInit, OnChanges {
+export class CvModalComponent implements OnInit, OnChanges {
   @Output()
   cvSelected = new EventEmitter<Cv>();
   @Output()
@@ -26,7 +26,6 @@ export class ModalComponent implements OnInit, OnChanges {
     const isVisible: boolean = changes?.['isVisible']?.currentValue;
 
     if (isVisible) {
-      console.log('isVisible: ', isVisible);
       this.isVisible = isVisible;
     }
   }

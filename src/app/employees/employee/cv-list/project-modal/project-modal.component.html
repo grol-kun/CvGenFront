@@ -1,6 +1,6 @@
 <nz-modal [nzVisible]="isVisible" nzTitle="User information" (nzOnCancel)="handleCancel()">
   <ng-container *nzModalContent>
-    <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
+    <nz-table #filterTable [nzData]="projectList" nzTableLayout="fixed" *ngIf="projectList$ | async as projectList">
       <thead>
         <tr>
           <th
@@ -14,13 +14,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of filterTable.data" (click)="selectCv(data)">
+        <tr *ngFor="let data of filterTable.data" (click)="selectProject(data)">
           <td>{{ data.attributes.name }}</td>
-          <td>
-            <div class="td-wrapper">
-              {{ data.attributes.description }}
-            </div>
-          </td>
+          <td>{{ data.attributes.from }}</td>
+          <td>{{ data.attributes.to }}</td>
         </tr>
       </tbody>
     </nz-table>

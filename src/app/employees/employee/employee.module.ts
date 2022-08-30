@@ -16,7 +16,9 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { AppTextareaModule } from 'src/app/shared/components/app-textarea/app-textarea.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ModalModule } from './cv-list/modal/modal.module';
+import { CvModalModule } from './cv-list/cv-modal/cv-modal.module';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { ProjectModalModule } from './cv-list/project-modal/project-modal.module';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -35,7 +37,9 @@ import { ModalModule } from './cv-list/modal/modal.module';
     AppTextareaModule,
     NzInputModule,
     NzIconModule,
-    ModalModule,
+    CvModalModule,
+    NzPopconfirmModule,
+    ProjectModalModule,
   ],
 })
 export class EmployeeModule {}
