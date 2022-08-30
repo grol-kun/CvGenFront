@@ -1,0 +1,32 @@
+<nz-modal [nzVisible]="isVisible" nzTitle="User information" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
+      <thead>
+        <tr>
+          <th
+            *ngFor="let column of listOfColumns"
+            [nzSortOrder]="column.sortOrder"
+            [nzSortFn]="column.sortFn"
+            [nzSortDirections]="column.sortDirections"
+          >
+            {{ column.name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of filterTable.data" (click)="selectCv(data)">
+          <td>{{ data.attributes.name }}</td>
+          <td>
+            <div class="td-wrapper">
+              {{ data.attributes.description }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+  </div>
+</nz-modal>

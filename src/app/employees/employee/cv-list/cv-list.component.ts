@@ -2,7 +2,8 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, Subject, finalize, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil } from 'rxjs';
+import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -15,6 +16,10 @@ export class CvListComponent implements OnInit {
   @Input() user!: UserInfo | null;
 
   form!: FormGroup;
+  cvs: Cv[] = [];
+  searchCv = '';
+  isModalVisible = false;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -31,11 +36,14 @@ export class CvListComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const user = changes?.['user']?.currentValue;
+    const user: UserInfo = changes?.['user']?.currentValue;
 
     if (user) {
-      const { firstName, lastName, education, email, skills, languages } = user;
-      this.form.patchValue({ firstName, lastName, education, email, skills, languages }, { emitEvent: false });
+      console.log('user: ', user);
+
+      const { firstName, lastName, education, skills, languages, description } = user;
+      this.cvs = user.cvs;
+      this.form.patchValue({ firstName, lastName, education, description, skills, languages }, { emitEvent: false });
     }
   }
 
@@ -44,9 +52,10 @@ export class CvListComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       education: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      description: ['', [Validators.required, Validators.minLength(3)]],
       skills: [],
       languages: [],
+      //projects: [],
     });
   }
 
@@ -71,6 +80,31 @@ export class CvListComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['/employees']);
+  }
+
+  searchChange(value: string) {
+    this.searchCv = value;
+  }
+
+  trackByFn(index: number, cv: Cv) {
+    console.log(index);
+    return cv.id;
+  }
+
+  onCvSelected(cv: Cv) {
+    const existIds = this.cvs.map((cv) => cv.id);
+    if (!existIds.includes(cv.id)) {
+      this.cvs.push(cv);
+    }
+    this.isModalVisible = false;
+  }
+
+  showModal() {
+    this.isModalVisible = true;
+  }
+
+  onVisibleStatusChange(newStatus: boolean) {
+    this.isModalVisible = newStatus;
   }
 
   ngOnDestroy(): void {

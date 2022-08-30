@@ -1,25 +1,72 @@
 <div class="page">
   <div class="page__menu">
-    <ul nz-menu nzMode="inline" class="page__menu__nz-menu">
-      <li nz-menu-item nzSelected>Option 1</li>
-      <li nz-menu-item>Option 2</li>
-    </ul>
+    <div class="page__menu__first-block">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="input search text" #search (input)="searchChange(search.value)" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+
+      <ul nz-menu nzMode="inline" class="page__menu__first-block__nz-menu">
+        <li
+          nz-menu-item
+          class="page__menu__first-block__nz-menu__nz-menu-item"
+          *ngFor="let cv of cvs | filter: searchCv; trackBy: trackByFn"
+        >
+          {{ cv.attributes.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="page__menu__second-block">
+      <button class="page__menu__second-block__nz-button" nz-button nzType="primary" (click)="showModal()">
+        Add CV
+      </button>
+    </div>
   </div>
+
+  <app-modal
+    [isVisible]="isModalVisible"
+    (cvSelected)="onCvSelected($event)"
+    (visibleStatusChange)="onVisibleStatusChange($event)"
+  ></app-modal>
 
   <div class="page__wrapper">
     <div class="page__wrapper__button-block">
       <button nz-button nzType="default">Preview</button>
     </div>
+
     <div class="page__wrapper__form">
       <form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
         <nz-collapse>
           <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="form__collapse-panel">
             <div class="form__collapse-panel__inner">
               <div class="form__collapse-panel__inner__block">
-                <app-input formControlName="firstName" [label]="'First Name'" [placeholder]="'First Name'"></app-input>
-                <app-input formControlName="lastName" [label]="'Last Name'" [placeholder]="'Last Name'"></app-input>
-                <app-input formControlName="education" [label]="'Education'" [placeholder]="'Education'"></app-input>
-                <app-input formControlName="email" [label]="'Email'" [placeholder]="'Email'"></app-input>
+                <app-input
+                  formControlName="firstName"
+                  [label]="'First Name'"
+                  [placeholder]="'First Name'"
+                  class="form__collapse-panel__inner__block__app-input"
+                ></app-input>
+                <app-input
+                  formControlName="lastName"
+                  [label]="'Last Name'"
+                  [placeholder]="'Last Name'"
+                  class="form__collapse-panel__inner__block__app-input"
+                ></app-input>
+                <app-input
+                  formControlName="education"
+                  [label]="'Education'"
+                  [placeholder]="'Education'"
+                  class="form__collapse-panel__inner__block__app-input"
+                ></app-input>
+                <app-textarea
+                  formControlName="description"
+                  [label]="'Description'"
+                  [placeholder]="'Description'"
+                  class="form__collapse-panel__inner__block__app-textarea"
+                ></app-textarea>
               </div>
             </div>
           </nz-collapse-panel>
@@ -36,6 +83,8 @@
             </div>
           </nz-collapse-panel>
         </nz-collapse>
+
+        <!--  <app-projects-array formControlName="projects"></app-projects-array> -->
 
         <div class="form__buttons-block">
           <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">

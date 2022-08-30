@@ -13,6 +13,10 @@ import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.m
 import { AppAutocompleteModule } from 'src/app/shared/components/app-autocomplete/app-autocomplete.module';
 import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block/form-array-block.module';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { AppTextareaModule } from 'src/app/shared/components/app-textarea/app-textarea.module';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ModalModule } from './cv-list/modal/modal.module';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -28,6 +32,10 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     AppAutocompleteModule,
     FormArrayBlockModule,
     NzMenuModule,
+    AppTextareaModule,
+    NzInputModule,
+    NzIconModule,
+    ModalModule,
   ],
 })
 export class EmployeeModule {}
