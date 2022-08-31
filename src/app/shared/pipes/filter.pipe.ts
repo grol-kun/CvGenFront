@@ -13,8 +13,6 @@ export class FilterPipe implements PipeTransform {
       return data.filter((item) => item[params as string].toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
     }
 
-    for (let i = 0; i < params.length; i++) {}
-
     return data.filter((item) => {
       for (let i = 0; i < params.length; i++) {
         item = item[params[i]];
