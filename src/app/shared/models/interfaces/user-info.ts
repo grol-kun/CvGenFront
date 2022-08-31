@@ -1,3 +1,7 @@
+import { Cv } from './cv';
+import { Language } from './language';
+import { Skill } from './skill';
+
 export interface UserInfo {
   id: number;
   username: string;
@@ -7,11 +11,11 @@ export interface UserInfo {
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
-  skills: string[];
-  languages: string[];
+  skills: Skill[];
+  languages: Language[];
   education: string;
   description: string;
   firstName: string;
   lastName: string;
-  cvs: string[];
+  cvs: Cv[];
 }

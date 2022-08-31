@@ -1,0 +1,24 @@
+<button nz-button nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+  <span nz-icon nzType="user"></span>
+</button>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="showModal()">User</li>
+    <li nz-menu-item (click)="logout()">Logout</li>
+  </ul>
+</nz-dropdown-menu>
+
+<nz-modal [nzVisible]="isVisible" nzTitle="User information" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <p>id: {{ (info$ | async)?.id }}</p>
+    <p>username: {{ (info$ | async)?.username }}</p>
+    <p>email: {{ (info$ | async)?.email }}</p>
+    <p>firstName: {{ (info$ | async)?.firstName }}</p>
+    <p>lastName: {{ (info$ | async)?.lastName }}</p>
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+  </div>
+</nz-modal>

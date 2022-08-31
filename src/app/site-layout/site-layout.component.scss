@@ -1,63 +1,59 @@
 @import "../../styles.scss";
 
-.logo {
-  height: 32px;
-  margin: 16px;
-  background-color: $simple-white;
-  svg {
-    height: 100%;
-    width: 100%;
+.nz-layout {
+  &__nz-sider {
+    min-height: 100vh;
+    &__logo {
+      cursor: pointer;
+      height: $header-logo-size-64;
+      margin: 0;
+      padding: 0 0 0 10px;
+
+      background: url("../../assets/svgs/Frame.svg") 10px 50% no-repeat;
+      background-size: 90% auto;
+      background-color: $simple-white;
+    }
   }
-}
 
-nz-header {
-  background: $simple-white;
-  padding: 0;
-}
+  &__nz-layout {
+    &__nz-header {
+      background: $simple-white;
+      padding: 0 20px;
+      display: flex;
+      justify-content: flex-end;
 
-.header-inner{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-}
+      &__menu-wrapper {
+        display: flex;
+        p {
+          padding: 0 10px 0 0;
+        }
+      }
+    }
 
-.ui-controls{
-  display: flex;
-  justify-content: space-between;
-  width: 100px;
-}
+    &__nz-content {
+      margin: 0 16px;
 
-nz-sider {
-  min-height: 100vh;
-}
+      &__nz-breadcrumb {
+        margin: 16px 0;
+      }
 
-nz-content {
-  margin: 0 16px;
-}
+      &__inner-content {
+        padding: 24px;
+        background: $simple-white;
+        min-height: 360px;
+        position: relative;
 
-nz-breadcrumb {
-  margin: 16px 0;
-}
-
-nz-footer {
-  text-align: center;
-}
-
-.inner-content {
-  padding: 24px;
-  background: $simple-white;
-  min-height: 360px;
-  position: relative;
-
-  &__loader_wrapper {
-    margin: -24px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: $overlay-bg-color;
+        &__loader_wrapper {
+          margin: -24px;
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          background-color: $overlay-bg-color;
+        }
+      }
+    }
   }
 }

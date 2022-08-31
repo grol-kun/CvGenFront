@@ -1,3 +1,5 @@
+import { Skill } from './skill';
+
 export interface Project {
   id: number;
   attributes: {
@@ -10,5 +12,6 @@ export interface Project {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    skills: Skill[];
   };
 }

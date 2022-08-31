@@ -9,6 +9,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from '../shared/components/loader/loader.module';
+import { DropdownMenuModule } from './dropdown-menu/dropdown-menu.module';
 import { TranslateControlModule } from '../shared/translate/translate-control.module';
 import { ThemeModule } from '../shared/theme/theme.module';
 
@@ -23,6 +24,7 @@ import { ThemeModule } from '../shared/theme/theme.module';
     NzPageHeaderModule,
     RouterModule,
     LoaderModule,
+    DropdownMenuModule,
     TranslateControlModule,
     ThemeModule
   ],
