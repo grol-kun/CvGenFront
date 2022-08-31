@@ -31,11 +31,12 @@ export class ThemeService {
     if (!initTheme) {
       initTheme = deviceMode.matches ? ThemeMode.DARK : ThemeMode.LIGHT;
     }
-    this.document.body.setAttribute('data-theme', this.currentTheme);
+    this.document.body.setAttribute('data-theme', initTheme);
     this.updateCurrentTheme(initTheme);
   }
 
   public startTheme() {
+    this.currentTheme = this.themeStorage.get() ? this.themeStorage.get() : ThemeMode.LIGHT;
     this.document.body.setAttribute('data-theme', this.currentTheme);
     this.updateCurrentTheme(this.currentTheme);
   }

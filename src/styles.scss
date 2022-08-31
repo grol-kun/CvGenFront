@@ -10,9 +10,11 @@ body {
 }
 
 [data-theme='dark'] {
+  @import 'styles/themes/dark';
   @include dark();
 }
 
 [data-theme='light'] {
+  @import 'styles/themes/light';
   @include light();
 }

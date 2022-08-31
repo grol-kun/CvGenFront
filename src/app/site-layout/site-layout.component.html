@@ -1,6 +1,8 @@
 <nz-layout class="nz-layout">
   <nz-sider nzCollapsible nzWidth="200px" class="nz-layout__nz-sider">
-    <div class="nz-layout__nz-sider__logo" [routerLink]="['']"></div>
+    <div class="nz-layout__nz-sider__logo" [routerLink]="['']">
+      <img class="nz-layout__nz-sider__logo__inner" src="../../assets/svgs/Frame.svg" alt="Innowise">
+    </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item [routerLink]="['/employees/']">
         <i nz-icon nzType="user"></i>
@@ -24,6 +26,10 @@
   <nz-layout class="nz-layout__nz-layout">
     <nz-header class="nz-layout__nz-layout__nz-header">
       <div class="nz-layout__nz-layout__nz-header__menu-wrapper">
+        <div class="nz-layout__nz-layout__nz-header__menu-wrapper__controls">
+          <app-theme></app-theme>
+          <app-translate-control></app-translate-control>
+        </div>
         <p>Hello, {{ (info$ | async)?.firstName }}</p>
         <app-dropdown-menu> </app-dropdown-menu>
       </div>
