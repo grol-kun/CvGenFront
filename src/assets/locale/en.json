@@ -77,6 +77,25 @@
       }
     }
   },
+  "cvs":{
+    "title": "CVs",
+    "actions":{
+      "new_cv": "New CV",
+      "name": "Name",
+      "description": "Description",
+      "info_collapse": "Info",
+      "skills_collapse": "Skills",
+      "languages_collapse": "Languages"
+    },
+    "labels":{
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholders":{
+      "name": "Enter name",
+      "description": "Enter description"
+    }
+  },
   "errors": {
     "required": "The field is required",
     "minLength": "It is too short",
@@ -100,6 +119,11 @@
   },
   "buttons": {
     "save": "Save",
+    "cancel": "Cancel"
+  },
+  "popconfirm":{
+    "title": "Are you sure delete this item?",
+    "ok": "Yes, delete",
     "cancel": "Cancel"
   }
 }

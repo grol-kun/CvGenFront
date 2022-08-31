@@ -77,6 +77,25 @@
       }
     }
   },
+  "cvs":{
+    "title": "Резюме",
+    "actions":{
+      "new_cv": "Новое резюме",
+      "name": "Название",
+      "description": "Описание",
+      "info_collapse": "Информация",
+      "skills_collapse": "Навыки",
+      "languages_collapse": "Языки"
+    },
+    "labels":{
+      "name": "Название",
+      "description": "Описание"
+    },
+    "placeholders":{
+      "name": "Введите название",
+      "description": "Введите описание"
+    }
+  },
   "errors": {
     "required": "Это обязательное поле",
     "minLength": "Слишком мало символов",
@@ -100,6 +119,11 @@
   },
   "buttons": {
     "save": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "popconfirm":{
+    "title": "Вы действительно хотите удалить этот элемент?",
+    "ok": "Удалить",
     "cancel": "Отмена"
   }
 }
