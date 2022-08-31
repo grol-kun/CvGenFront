@@ -13,7 +13,7 @@
         <li
           nz-menu-item
           class="page__menu__first-block__nz-menu__nz-menu-item"
-          *ngFor="let cv of cvs | attributesNameFilter: searchCv; let idx = index; trackBy: trackByFn"
+          *ngFor="let cv of cvs | filter: searchCv:['attributes', 'name']; let idx = index; trackBy: trackByFn"
           (click)="activateForm(cv)"
         >
           <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
