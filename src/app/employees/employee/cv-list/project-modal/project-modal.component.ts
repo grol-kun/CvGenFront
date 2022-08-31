@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { CV_COLUMNS } from 'src/app/shared/models/constants/cv-columns';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { PROJECT_COLUMNS } from 'src/app/shared/models/constants/project-columns';
 import { ColumnItem } from 'src/app/shared/models/interfaces/column-item';
 import { Project } from 'src/app/shared/models/interfaces/project';
@@ -11,7 +10,7 @@ import { ProjectService } from 'src/app/shared/services/project.service';
   templateUrl: './project-modal.component.html',
   styleUrls: ['./project-modal.component.scss'],
 })
-export class ProjectModalComponent implements OnInit {
+export class ProjectModalComponent implements OnInit, OnChanges, OnDestroy {
   @Output()
   projectSelected = new EventEmitter<Project>();
   @Output()
@@ -20,6 +19,8 @@ export class ProjectModalComponent implements OnInit {
 
   projectList$!: Observable<Project[]>;
   listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
+
+  private destroy$ = new Subject<void>();
 
   constructor(private projectService: ProjectService) {}
 
@@ -32,7 +33,10 @@ export class ProjectModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectList$ = this.projectService.getProjects().pipe(map((data) => data.data));
+    this.projectList$ = this.projectService.getProjects().pipe(
+      takeUntil(this.destroy$),
+      map((data) => data.data)
+    );
   }
 
   handleCancel(): void {
@@ -42,5 +46,10 @@ export class ProjectModalComponent implements OnInit {
 
   selectProject(project: Project) {
     this.projectSelected.emit(project);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

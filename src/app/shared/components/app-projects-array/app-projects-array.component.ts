@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  forwardRef,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -17,12 +9,10 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator,
   Validators,
 } from '@angular/forms';
-import { map, Subject, takeUntil, tap } from 'rxjs';
+import { map, Subject, takeUntil } from 'rxjs';
 import { Response } from '../../models/interfaces/response';
-import { ProjectService } from '../../services/project.service';
 import { Project } from '../../models/interfaces/project';
 import { Skill } from '../../models/interfaces/skill';
 import { AbilityService } from '../../services/ability.service';
@@ -31,7 +21,6 @@ import { AbilityService } from '../../services/ability.service';
   selector: 'app-projects-array',
   templateUrl: './app-projects-array.component.html',
   styleUrls: ['./app-projects-array.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -47,16 +36,11 @@ import { AbilityService } from '../../services/ability.service';
 })
 export class AppProjectsArrayComponent implements ControlValueAccessor, OnInit, OnDestroy {
   form!: FormGroup;
-  fullListResponse!: Response<Skill>;
+  fullListResponse: Response<Skill> | null = null;
   private destroy$ = new Subject<void>();
   projects: Project[] = [];
 
-  constructor(
-    private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
-    private projectService: ProjectService,
-    private abilityService: AbilityService
-  ) {}
+  constructor(private fb: FormBuilder, private abilityService: AbilityService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -68,7 +52,6 @@ export class AppProjectsArrayComponent implements ControlValueAccessor, OnInit, 
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.fullListResponse = data;
-        //this.cdr.detectChanges();
       });
   }
 
@@ -90,15 +73,11 @@ export class AppProjectsArrayComponent implements ControlValueAccessor, OnInit, 
   }
 
   public writeValue(value: any[]): void {
-    //this.items.reset();
     this.items.clear();
     if (value) {
-      console.log('writeValue. value :', value);
       this.projects = value;
-
       value.forEach((item) => this.items.push(new FormControl(item, [Validators.required])));
     }
-    //this.cdr.detectChanges();
   }
 
   public onTouched: () => void = () => {};

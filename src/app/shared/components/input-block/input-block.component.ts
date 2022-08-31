@@ -7,6 +7,7 @@ import {
   NG_VALIDATORS,
   AbstractControl,
   ValidationErrors,
+  ControlValueAccessor,
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -34,7 +35,7 @@ import { SelectResult } from '../../models/interfaces/select-result';
     },
   ],
 })
-export class InputBlockComponent implements OnInit, OnDestroy, OnChanges {
+export class InputBlockComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   @Input() fullListResponse: Response<Language | Skill> | null = null;
 
   options: string[] = [];

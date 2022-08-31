@@ -7,13 +7,12 @@ import {
   NG_VALIDATORS,
   AbstractControl,
   ValidationErrors,
+  ControlValueAccessor,
 } from '@angular/forms';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Response } from '../../models/interfaces/response';
 import { Skill } from '../../models/interfaces/skill';
-import { SelectResult } from '../../models/interfaces/select-result';
-import { ProjectAttributes } from '../../models/interfaces/project-attributes';
 
 @Component({
   selector: 'app-project-card',
@@ -32,12 +31,13 @@ import { ProjectAttributes } from '../../models/interfaces/project-attributes';
     },
   ],
 })
-export class ProjectCardComponent implements OnInit, OnDestroy, OnChanges {
+export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   @Input() fullListResponse: Response<Skill> | null = null;
 
   options: string[] = [];
   form!: FormGroup;
   fullList: Skill[] = [];
+
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {}
@@ -65,7 +65,6 @@ export class ProjectCardComponent implements OnInit, OnDestroy, OnChanges {
   public writeValue(val: any): void {
     if (val) {
       const { internalName, name, from, to, domain, skills, description } = val.attributes;
-
       const skillsNames = skills.map((skill: Skill) => skill.attributes.name);
       this.form.setValue(
         { internalName, name, from, to, domain, skills: skillsNames, description },

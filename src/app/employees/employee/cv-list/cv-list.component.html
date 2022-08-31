@@ -4,6 +4,7 @@
       <nz-input-group [nzSuffix]="suffixIconSearch">
         <input type="text" nz-input placeholder="input search text" #search (input)="searchChange(search.value)" />
       </nz-input-group>
+
       <ng-template #suffixIconSearch>
         <span nz-icon nzType="search"></span>
       </ng-template>
@@ -12,7 +13,7 @@
         <li
           nz-menu-item
           class="page__menu__first-block__nz-menu__nz-menu-item"
-          *ngFor="let cv of cvs | filter: searchCv; let idx = index; trackBy: trackByFn"
+          *ngFor="let cv of cvs | attributesNameFilter: searchCv; let idx = index; trackBy: trackByFn"
           (click)="activateForm(cv)"
         >
           <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
@@ -39,7 +40,7 @@
         type="button"
         nz-button
         nzType="primary"
-        (click)="showModal()"
+        (click)="showCvModal()"
       >
         Add CV
       </button>
@@ -76,18 +77,21 @@
                   [placeholder]="'First Name'"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
+
                 <app-input
                   formControlName="lastName"
                   [label]="'Last Name'"
                   [placeholder]="'Last Name'"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
+
                 <app-input
                   formControlName="education"
                   [label]="'Education'"
                   [placeholder]="'Education'"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
+
                 <app-textarea
                   formControlName="description"
                   [label]="'Description'"
@@ -112,7 +116,9 @@
         </nz-collapse>
 
         <div class="page__wrapper__form__button_wrapper">
-          <button type="button" nz-button nzType="text" type="button" (click)="addProject()">+Add projects</button>
+          <button type="button" nz-button nzType="text" type="button" (click)="showProjectModal()">
+            +Add projects
+          </button>
         </div>
 
         <app-projects-array formControlName="projects"></app-projects-array>
@@ -138,8 +144,6 @@
           </button>
         </div>
       </form>
-      <pre>{{ form.status }}</pre>
-      <pre>{{ form.value | json }}</pre>
     </div>
   </div>
 </div>

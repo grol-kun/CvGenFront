@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './cv-list.component.html',
   styleUrls: ['./cv-list.component.scss'],
 })
-export class CvListComponent implements OnInit {
+export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   @Input() user: UserInfo | null = null;
 
   form!: FormGroup;
@@ -29,9 +29,8 @@ export class CvListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private message: NzMessageService,
-    private userService: UserService,
-    private messageService: NzMessageService
+    private messageService: NzMessageService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -44,11 +43,9 @@ export class CvListComponent implements OnInit {
     const user: UserInfo = changes?.['user']?.currentValue;
 
     if (user) {
-      console.log('user: ', user);
-
       const { firstName, lastName, education, skills, languages, description } = user;
       this.cvs = user.cvs;
-      this.form.patchValue({ firstName, lastName, education, description, skills, languages }, { emitEvent: false });
+      this.form.patchValue({ firstName, lastName, education, skills, languages, description }, { emitEvent: false });
     }
   }
 
@@ -65,11 +62,27 @@ export class CvListComponent implements OnInit {
   }
 
   onAuthSubmit() {
-    this.form.markAllAsTouched();
-    if (!this.form.valid || !this.user) {
+    const { firstName, lastName, education, skills, languages, description, projects } = this.form.getRawValue();
+    const cvs = [...this.cvs];
+    const currentCv = { ...this.currentCv };
+
+    if (currentCv && currentCv.attributes && currentCv.attributes.projects) {
+      if (projects.length > 0) {
+        currentCv.attributes.projects.data = [...projects];
+      } else {
+        currentCv.attributes.projects = null;
+      }
+    }
+
+    if (this.currentCv && this.currentCv.id) {
+      cvs.map((cv) => (cv.id === this.currentCv!.id ? currentCv : cv));
+    }
+
+    if (!this.user) {
       return;
     }
-    const user: UserInfo = { ...this.user, ...this.form.getRawValue() };
+
+    const user: UserInfo = { ...this.user, firstName, lastName, education, skills, languages, description, cvs };
 
     if (user.id) {
       this.form.disable();
@@ -79,8 +92,68 @@ export class CvListComponent implements OnInit {
           takeUntil(this.destroy$),
           finalize(() => this.form.enable())
         )
-        .subscribe(() => this.message.create('success', `User ${user.firstName} was updated successfully!`));
+        .subscribe(() => this.messageService.create('success', `User ${user.firstName} was updated successfully!`));
     }
+  }
+
+  activateForm(cv: Cv) {
+    if (!cv.attributes.projects) {
+      cv.attributes.projects = { data: [] };
+    }
+    this.currentCv = cv;
+    this.patchProjects();
+    this.isFormVisible = true;
+  }
+
+  patchProjects() {
+    if (this.currentCv && this.currentCv.attributes.projects) {
+      const { data: projects } = this.currentCv.attributes.projects;
+      this.form.patchValue({ projects }, { emitEvent: false });
+    }
+  }
+
+  showCvModal() {
+    this.isCvModalVisible = true;
+  }
+
+  onCvSelected(cv: Cv) {
+    const existIds = this.cvs.map((cv) => cv.id);
+    if (!existIds.includes(cv.id)) {
+      this.cvs.push(cv);
+    }
+    this.isCvModalVisible = false;
+  }
+
+  showProjectModal() {
+    this.isProjectModalVisible = true;
+  }
+
+  onProjectSelected(project: Project) {
+    this.isProjectModalVisible = false;
+
+    if (this.currentCv && this.currentCv.attributes.projects) {
+      this.currentCv.attributes.projects.data.push(project);
+    } else if (this.currentCv) {
+      this.currentCv.attributes.projects = { data: [project] };
+    }
+
+    this.patchProjects();
+  }
+
+  onHideModals() {
+    this.isCvModalVisible = this.isProjectModalVisible = false;
+  }
+
+  deleteCv(idx: number) {
+    if (this.cvs[idx] !== this.currentCv) {
+      this.cvs.splice(idx, 1);
+    } else {
+      this.messageService.create('error', `You can't delete current CV!`);
+    }
+  }
+
+  catchClick(event: Event) {
+    event.stopPropagation();
   }
 
   onCancel() {
@@ -93,67 +166,6 @@ export class CvListComponent implements OnInit {
 
   trackByFn(index: number, cv: Cv) {
     return cv.id;
-  }
-
-  activateForm(cv: Cv) {
-    console.log('cv:', cv);
-    if (!cv.attributes.projects) {
-      cv.attributes.projects = { data: [] };
-    }
-    this.currentCv = cv;
-    this.patchProjects();
-    this.isFormVisible = true;
-  }
-
-  patchProjects() {
-    if (this.currentCv && this.currentCv.attributes.projects) {
-      const { data: projects } = this.currentCv.attributes.projects;
-      console.log('projects: ', projects);
-
-      this.form.patchValue({ projects }, { emitEvent: false });
-    }
-  }
-
-  onCvSelected(cv: Cv) {
-    const existIds = this.cvs.map((cv) => cv.id);
-    if (!existIds.includes(cv.id)) {
-      this.cvs.push(cv);
-    }
-    console.log('cvs : ', this.cvs);
-
-    this.isCvModalVisible = false;
-  }
-
-  addProject() {
-    this.isProjectModalVisible = true;
-  }
-
-  onProjectSelected(project: Project) {
-    console.log('onProjectSelected', project);
-    this.isProjectModalVisible = false;
-
-    this.currentCv?.attributes.projects?.data.push(project);
-    this.patchProjects();
-  }
-
-  showModal() {
-    this.isCvModalVisible = true;
-  }
-
-  onHideModals() {
-    this.isCvModalVisible = this.isProjectModalVisible = false;
-  }
-
-  deleteCv(idx: number) {
-    if (this.cvs[idx] !== this.currentCv) {
-      this.cvs.splice(idx, 1);
-    } else {
-      this.message.create('error', `You can't delete current CV!`);
-    }
-  }
-
-  catchClick(event: Event) {
-    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

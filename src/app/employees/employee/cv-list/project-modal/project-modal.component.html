@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="isVisible" nzTitle="User information" (nzOnCancel)="handleCancel()">
+<nz-modal [nzVisible]="isVisible" nzTitle="List of Projects" (nzOnCancel)="handleCancel()">
   <ng-container *nzModalContent>
     <nz-table #filterTable [nzData]="projectList" nzTableLayout="fixed" *ngIf="projectList$ | async as projectList">
       <thead>
