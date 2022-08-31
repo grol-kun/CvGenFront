@@ -14,7 +14,7 @@ export class CvModalComponent implements OnInit, OnChanges {
   @Output()
   cvSelected = new EventEmitter<Cv>();
   @Output()
-  visibleStatusChange = new EventEmitter<boolean>();
+  hideModals = new EventEmitter<boolean>();
   @Input() isVisible = false;
 
   cvList$!: Observable<Cv[]>;
@@ -36,7 +36,7 @@ export class CvModalComponent implements OnInit, OnChanges {
 
   handleCancel(): void {
     this.isVisible = false;
-    this.visibleStatusChange.emit(false);
+    this.hideModals.emit();
   }
 
   selectCv(cv: Cv) {

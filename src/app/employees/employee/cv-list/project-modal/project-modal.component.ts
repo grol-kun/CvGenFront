@@ -15,7 +15,7 @@ export class ProjectModalComponent implements OnInit {
   @Output()
   projectSelected = new EventEmitter<Project>();
   @Output()
-  visibleStatusChange = new EventEmitter<boolean>();
+  hideModals = new EventEmitter<boolean>();
   @Input() isVisible = false;
 
   projectList$!: Observable<Project[]>;
@@ -37,7 +37,7 @@ export class ProjectModalComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
-    this.visibleStatusChange.emit(false);
+    this.hideModals.emit();
   }
 
   selectProject(project: Project) {

@@ -21,8 +21,9 @@ export class CvListComponent implements OnInit {
   searchCv = '';
   isCvModalVisible = false;
   isProjectModalVisible = false;
-  isFormActive = false;
+  isFormVisible = false;
 
+  private currentCv: Cv | null = null;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -94,34 +95,33 @@ export class CvListComponent implements OnInit {
     return cv.id;
   }
 
+  activateForm(cv: Cv) {
+    console.log('cv:', cv);
+    if (!cv.attributes.projects) {
+      cv.attributes.projects = { data: [] };
+    }
+    this.currentCv = cv;
+    this.patchProjects();
+    this.isFormVisible = true;
+  }
+
+  patchProjects() {
+    if (this.currentCv && this.currentCv.attributes.projects) {
+      const { data: projects } = this.currentCv.attributes.projects;
+      console.log('projects: ', projects);
+
+      this.form.patchValue({ projects }, { emitEvent: false });
+    }
+  }
+
   onCvSelected(cv: Cv) {
     const existIds = this.cvs.map((cv) => cv.id);
     if (!existIds.includes(cv.id)) {
       this.cvs.push(cv);
     }
+    console.log('cvs : ', this.cvs);
+
     this.isCvModalVisible = false;
-  }
-
-  showModal() {
-    this.isCvModalVisible = true;
-  }
-
-  onVisibleStatusChange(newStatus: boolean) {
-    this.isCvModalVisible = this.isProjectModalVisible = newStatus;
-  }
-
-  deleteItem(idx: number) {
-    this.cvs.splice(idx, 1);
-  }
-
-  catchClick(event: Event) {
-    event.stopPropagation();
-  }
-
-  activateForm(cv: Cv) {
-    console.log('cv:', cv);
-
-    this.isFormActive = true;
   }
 
   addProject() {
@@ -131,6 +131,29 @@ export class CvListComponent implements OnInit {
   onProjectSelected(project: Project) {
     console.log('onProjectSelected', project);
     this.isProjectModalVisible = false;
+
+    this.currentCv?.attributes.projects?.data.push(project);
+    this.patchProjects();
+  }
+
+  showModal() {
+    this.isCvModalVisible = true;
+  }
+
+  onHideModals() {
+    this.isCvModalVisible = this.isProjectModalVisible = false;
+  }
+
+  deleteCv(idx: number) {
+    if (this.cvs[idx] !== this.currentCv) {
+      this.cvs.splice(idx, 1);
+    } else {
+      this.message.create('error', `You can't delete current CV!`);
+    }
+  }
+
+  catchClick(event: Event) {
+    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

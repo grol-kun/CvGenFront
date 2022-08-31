@@ -7,7 +7,9 @@ export interface Cv {
   attributes: {
     name: string;
     description: string;
-    projects: Project[];
+    projects: {
+      data: Project[];
+    } | null;
     languages: Language[];
     skills: Skill[];
     createdAt: string;

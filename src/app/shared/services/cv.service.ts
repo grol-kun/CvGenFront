@@ -14,7 +14,7 @@ export class CvService {
   constructor(private httpClient: HttpClient) {}
 
   getCvs(): Observable<Cv[]> {
-    return this.httpClient.get<Response<Cv>>(`/api/cvs`).pipe(map((data) => data.data));
+    return this.httpClient.get<Response<Cv>>(`/api/cvs?populate=%2A`).pipe(map((data) => data.data));
   }
 
   getCvById(id: string | number): Observable<ResponseOneEntity<Cv>> {
