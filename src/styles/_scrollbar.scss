@@ -1,13 +1,12 @@
-// ::-webkit-scrollbar {
-//   width: 10px;
-//   height: 10px;
-// }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
-// ::-webkit-scrollbar-track {
-//   background: var(--background-primary);
-// }
+::-webkit-scrollbar-track {
+  background: var(--background-primary);
+}
 
-// ::-webkit-scrollbar-thumb {
-//   background: var(--background-secondary);
-//   border-radius: 7px;
-// }
+::-webkit-scrollbar-thumb {
+  background: var(--background-secondary);
+}

@@ -1,6 +1,11 @@
 @import '../../styles.scss';
 
+:host {
+  height: 100%;
+}
+
 .nz-layout {
+  height: -webkit-fill-available;
   &__nz-sider {
     min-height: 100vh;
     &__logo {
@@ -21,6 +26,9 @@
       padding: 0 20px;
       display: flex;
       justify-content: flex-end;
+      &__adaptive {
+        display: none;
+      }
       &__menu-wrapper {
         display: flex;
         p {
@@ -31,7 +39,7 @@
           display: flex;
           align-items: center;
           margin: 0 10px 0 0;
-          :first-child{
+          :first-child {
             margin: inherit;
           }
         }
@@ -47,10 +55,11 @@
 
       &__inner-content {
         padding: 24px;
-        background: var(--background-tertiary);
-        min-height: 360px;
+        background: var(--background-quaternary);
         position: relative;
-
+        height: 92%;
+        overflow-y: auto;
+        overflow-x: hidden;
         &__loader_wrapper {
           margin: -24px;
           position: absolute;
@@ -64,4 +73,60 @@
       }
     }
   }
+}
+
+@media screen and (min-width: 320px) and (max-width: 568px) {
+  .nz-layout__nz-sider {
+    display: none;
+  }
+
+  .nz-layout__nz-layout__nz-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__menu-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      &__controls {
+        width: 30%;
+      }
+      &__user-hi {
+        display: none;
+      }
+    }
+
+    &__adaptive {
+      display: flex;
+      flex-direction: row;
+      gap: 1%;
+      &__logo {
+        width: 20%;
+        &__inner {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
+  .ant-menu-dark .ant-menu-item {
+    padding: 0 5% 0 5%;
+    width: max-content;
+  }
+
+  ::ng-deep .ant-menu.ant-menu-dark {
+    width: 100%;
+  }
+}
+
+::ng-deep table {
+  position: relative;
+}
+
+::ng-deep thead {
+  position: sticky;
+  top: 0;
+  backdrop-filter: brightness(0);
+  z-index: 10;
+  box-shadow: 0px -70px 0px 0px var(--background-quaternary);
 }

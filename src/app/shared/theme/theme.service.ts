@@ -36,7 +36,7 @@ export class ThemeService {
   }
 
   public startTheme() {
-    this.currentTheme = this.themeStorage.get() ? this.themeStorage.get() : ThemeMode.LIGHT;
+    this.currentTheme = this.themeStorage.get() || ThemeMode.LIGHT;
     this.document.body.setAttribute('data-theme', this.currentTheme);
     this.updateCurrentTheme(this.currentTheme);
   }
