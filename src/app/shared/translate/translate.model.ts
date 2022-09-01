@@ -1,4 +1,4 @@
 export enum TranslateMode {
-    EN = 'en',
-    RU = 'ru',
-  }
+  EN = 'en',
+  RU = 'ru'
+}

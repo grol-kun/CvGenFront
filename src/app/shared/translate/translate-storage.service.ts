@@ -12,7 +12,7 @@ export class TranslateStorageService implements TranslateStorage {
   public set(translateMode: TranslateMode): void {
     localStorage.setItem(this.storageKey, translateMode.toString());
   }
-  public get(): TranslateMode {
+  public get() {
     return <TranslateMode>localStorage.getItem(this.storageKey) || undefined;
   }
 }
