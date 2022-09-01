@@ -7,6 +7,7 @@ import { finalize, Subject, takeUntil } from 'rxjs';
 import { updateMyInfo } from '../../../core/store/actions/auth.actions';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
+import { MailValidatorService } from 'src/app/shared/validators/mail.validator';
 
 @Component({
   selector: 'app-info',
@@ -24,7 +25,8 @@ export class InfoComponent implements OnInit, OnChanges {
     private router: Router,
     private message: NzMessageService,
     private userService: UserService,
-    private store: Store
+    private store: Store,
+    private mailValidatorService: MailValidatorService
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,7 @@ export class InfoComponent implements OnInit, OnChanges {
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       education: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      email: ['', [Validators.required, this.mailValidatorService.checkMailFormat]],
       skills: [],
       languages: [],
     });
