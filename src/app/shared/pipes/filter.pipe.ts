@@ -1,23 +1,41 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { SimpleObject } from '../models/interfaces/simple-object';
 
 @Pipe({
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(data: any[], searchText: string, params: string[] | string) {
-    if (data.length === 0 || searchText === '') {
+  transform(data: any[], searchText: string, params: string) {
+    if (!data?.length || searchText === '') {
       return data;
     }
 
-    if (typeof params === 'string') {
-      return data.filter((item) => item[params as string].toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+    if (params.indexOf('.') === -1) {
+      return data.filter((item) => item[params as string].toLowerCase().indexOf(searchText?.toLowerCase()) !== -1);
     }
 
+    return this.resolveDifficultParams(data, searchText, params);
+  }
+
+  private resolveDifficultParams(data: any[], searchText: string, params: string) {
+    let arrayOfParams = params.split('.');
+
     return data.filter((item) => {
-      for (let i = 0; i < params.length; i++) {
-        item = item[params[i]];
-      }
-      return item.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
+      let value = this.deepClone(item);
+      let result = arrayOfParams.reduce((previous, current) => previous[current], value);
+      return result['toLowerCase']().indexOf(searchText?.toLowerCase()) !== -1;
     });
+  }
+
+  private deepClone(obj: SimpleObject) {
+    const clObj: SimpleObject = new Object();
+    for (let i in obj) {
+      if (obj[i] instanceof Object) {
+        clObj[i] = this.deepClone(obj[i]);
+        continue;
+      }
+      clObj[i] = obj[i];
+    }
+    return clObj;
   }
 }

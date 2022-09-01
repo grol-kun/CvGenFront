@@ -2,7 +2,7 @@
   <div class="page__menu">
     <div class="page__menu__first-block">
       <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="input search text" #search (input)="searchChange(search.value)" />
+        <input type="text" [formControl]="searchControl" nz-input placeholder="input search text" #search />
       </nz-input-group>
 
       <ng-template #suffixIconSearch>
@@ -13,7 +13,7 @@
         <li
           nz-menu-item
           class="page__menu__first-block__nz-menu__nz-menu-item"
-          *ngFor="let cv of cvs | filter: searchCv:['attributes', 'name']; let idx = index; trackBy: trackByFn"
+          *ngFor="let cv of cvs | filter: searchCv:'attributes.name'; let i = index; trackBy: trackByFn"
           (click)="activateForm(cv)"
         >
           <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
@@ -26,8 +26,8 @@
               nz-popconfirm
               nzPopconfirmTitle="Are you sure delete this item?"
               nzPopconfirmPlacement="left"
-              (nzOnConfirm)="deleteCv(idx)"
-              (click)="catchClick($event)"
+              (nzOnConfirm)="deleteCv(i)"
+              (click)="stopPropagation($event)"
             ></i>
           </div>
         </li>

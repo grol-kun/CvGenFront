@@ -85,8 +85,8 @@ export class AppProjectsArrayComponent implements ControlValueAccessor, OnInit, 
   public registerOnChange(fn: any): void {
     this.form.valueChanges
       .pipe(
-        takeUntil(this.destroy$),
-        map((value) => value.items)
+        map((value) => value.items),
+        takeUntil(this.destroy$)
       )
       .subscribe(fn);
   }

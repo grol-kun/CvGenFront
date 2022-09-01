@@ -1,9 +1,18 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Subject, finalize, takeUntil } from 'rxjs';
+import { Subject, finalize, takeUntil, Observable, debounceTime } from 'rxjs';
 import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { Project } from 'src/app/shared/models/interfaces/project';
@@ -14,32 +23,46 @@ import { UserService } from 'src/app/shared/services/user.service';
   selector: 'app-cv-list',
   templateUrl: './cv-list.component.html',
   styleUrls: ['./cv-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   @Input() user: UserInfo | null = null;
 
   form!: FormGroup;
+  searchControl = new FormControl<string>('');
   cvs: Cv[] = [];
   searchCv = '';
   isCvModalVisible = false;
   isProjectModalVisible = false;
   isFormVisible = false;
 
-  private currentCv: Cv | null = null;
+  private currentCv!: Cv;
   private destroy$ = new Subject<void>();
+
+  cvs$!: Observable<Cv[]>;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private messageService: NzMessageService,
     private userService: UserService,
-    private store: Store
+    private store: Store,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     if (!this.form) {
       this.initForm();
     }
+
+    this.initSearch();
+  }
+
+  initSearch() {
+    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+      this.searchCv = data ?? '';
+      this.cdr.detectChanges();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -65,41 +88,68 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onAuthSubmit() {
-    const { firstName, lastName, education, skills, languages, description, projects } = this.form.getRawValue();
-    const cvs = [...this.cvs];
-    const currentCv = { ...this.currentCv };
+    const currentCv = this.getNewCurrentCv();
+    const newCvs = this.getNewCvs(currentCv);
+    const user = this.getNewUser(newCvs);
 
-    if (currentCv && currentCv.attributes && currentCv.attributes.projects) {
-      if (projects.length > 0) {
-        currentCv.attributes.projects.data = [...projects];
-      } else {
-        currentCv.attributes.projects = null;
-      }
-    }
-
-    if (this.currentCv && this.currentCv.id) {
-      cvs.map((cv) => (cv.id === this.currentCv!.id ? currentCv : cv));
-    }
-
-    if (!this.user) {
+    if (!user) {
       return;
     }
 
-    const user: UserInfo = { ...this.user, firstName, lastName, education, skills, languages, description, cvs };
+    this.form.disable();
+    this.userService
+      .updateUser(user.id, user)
+      .pipe(
+        finalize(() => this.form.enable()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
+        this.store.dispatch(updateMyInfo());
+      });
+  }
 
-    if (user.id) {
-      this.form.disable();
-      this.userService
-        .updateUser(user.id, user)
-        .pipe(
-          takeUntil(this.destroy$),
-          finalize(() => this.form.enable())
-        )
-        .subscribe(() => {
-          this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
-          this.store.dispatch(updateMyInfo());
-        });
+  getNewUser(newCvs: Cv[]): UserInfo | null {
+    const { firstName, lastName, education, skills, languages, description } = this.form.getRawValue();
+    if (this.user?.id) {
+      return {
+        ...this.user,
+        firstName,
+        lastName,
+        education,
+        skills,
+        languages,
+        description,
+        cvs: newCvs,
+      };
     }
+    return null;
+  }
+
+  getNewCvs(currentCv: Cv): Cv[] {
+    const cvs = [...this.cvs];
+    if (this?.currentCv?.id) {
+      return cvs.map((cv) => (cv.id === this.currentCv!.id ? currentCv : cv));
+    }
+    return cvs;
+  }
+
+  getNewCurrentCv(): Cv {
+    const currentCv = { ...this.currentCv };
+
+    if (this.form.get('projects')?.value) {
+      const projects = this.form.get('projects')!.value;
+
+      if (currentCv?.attributes?.projects) {
+        if (projects.length > 0) {
+          currentCv.attributes.projects.data = [...projects];
+        } else {
+          currentCv.attributes.projects = null;
+        }
+      }
+    }
+
+    return currentCv;
   }
 
   activateForm(cv: Cv) {
@@ -147,7 +197,8 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onHideModals() {
-    this.isCvModalVisible = this.isProjectModalVisible = false;
+    this.isCvModalVisible = false;
+    this.isProjectModalVisible = false;
   }
 
   deleteCv(idx: number) {
@@ -158,16 +209,12 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  catchClick(event: Event) {
+  stopPropagation(event: Event) {
     event.stopPropagation();
   }
 
   onCancel() {
     this.router.navigate(['/employees']);
-  }
-
-  searchChange(value: string) {
-    this.searchCv = value;
   }
 
   trackByFn(index: number, cv: Cv) {

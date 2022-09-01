@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { PROJECT_COLUMNS } from 'src/app/shared/models/constants/project-columns';
 import { ColumnItem } from 'src/app/shared/models/interfaces/column-item';
 import { Project } from 'src/app/shared/models/interfaces/project';
@@ -10,7 +10,7 @@ import { ProjectService } from 'src/app/shared/services/project.service';
   templateUrl: './project-modal.component.html',
   styleUrls: ['./project-modal.component.scss'],
 })
-export class ProjectModalComponent implements OnInit, OnChanges, OnDestroy {
+export class ProjectModalComponent implements OnInit {
   @Output()
   projectSelected = new EventEmitter<Project>();
   @Output()
@@ -20,23 +20,10 @@ export class ProjectModalComponent implements OnInit, OnChanges, OnDestroy {
   projectList$!: Observable<Project[]>;
   listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
 
-  private destroy$ = new Subject<void>();
-
   constructor(private projectService: ProjectService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const isVisible: boolean = changes?.['isVisible']?.currentValue;
-
-    if (isVisible) {
-      this.isVisible = isVisible;
-    }
-  }
-
   ngOnInit(): void {
-    this.projectList$ = this.projectService.getProjects().pipe(
-      takeUntil(this.destroy$),
-      map((data) => data.data)
-    );
+    this.projectList$ = this.projectService.getProjects().pipe(map((data) => data.data));
   }
 
   handleCancel(): void {
@@ -46,10 +33,5 @@ export class ProjectModalComponent implements OnInit, OnChanges, OnDestroy {
 
   selectProject(project: Project) {
     this.projectSelected.emit(project);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

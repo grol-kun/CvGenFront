@@ -38,6 +38,7 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
   form!: FormGroup;
   fullList: Skill[] = [];
 
+  private currentSkill: Skill | undefined = undefined;
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {}
@@ -64,8 +65,11 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
 
   public writeValue(val: any): void {
     if (val) {
+      this.currentSkill = val;
+
       const { internalName, name, from, to, domain, skills, description } = val.attributes;
       const skillsNames = skills.map((skill: Skill) => skill.attributes.name);
+
       this.form.setValue(
         { internalName, name, from, to, domain, skills: skillsNames, description },
         { emitEvent: false }
@@ -78,17 +82,20 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
   public registerOnChange(fn: any): void {
     this.form.valueChanges
       .pipe(
-        takeUntil(this.destroy$),
         map((value) => {
           if (value.skills) {
             const objSkills = value.skills.map((skillName: string) =>
               this.fullList.find((skill) => skill.attributes.name === skillName)
             );
 
-            return { ...value, skills: [...objSkills] };
+            return {
+              id: this.currentSkill?.id,
+              attributes: { ...this.currentSkill?.attributes, ...value, skills: [...objSkills] },
+            };
           }
           return { ...value, skills: null };
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe(fn);
   }
