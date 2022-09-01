@@ -1,8 +1,10 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, finalize, takeUntil } from 'rxjs';
+import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { Project } from 'src/app/shared/models/interfaces/project';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
@@ -30,7 +32,8 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     private fb: FormBuilder,
     private router: Router,
     private messageService: NzMessageService,
-    private userService: UserService
+    private userService: UserService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +95,10 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
           takeUntil(this.destroy$),
           finalize(() => this.form.enable())
         )
-        .subscribe(() => this.messageService.create('success', `User ${user.firstName} was updated successfully!`));
+        .subscribe(() => {
+          this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
+          this.store.dispatch(updateMyInfo());
+        });
     }
   }
 
