@@ -12,6 +12,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 import { AppAutocompleteModule } from 'src/app/shared/components/app-autocomplete/app-autocomplete.module';
 import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block/form-array-block.module';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { AppTextareaModule } from 'src/app/shared/components/app-textarea/app-textarea.module';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CvModalModule } from './cv-list/cv-modal/cv-modal.module';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { ProjectModalModule } from './cv-list/project-modal/project-modal.module';
+import { AppProjectsArrayModule } from 'src/app/shared/components/app-projects-array/app-projects-array.module';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -26,6 +34,14 @@ import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block
     ApplicationPipesModule,
     AppAutocompleteModule,
     FormArrayBlockModule,
+    NzMenuModule,
+    AppTextareaModule,
+    NzInputModule,
+    NzIconModule,
+    CvModalModule,
+    NzPopconfirmModule,
+    ProjectModalModule,
+    AppProjectsArrayModule,
   ],
 })
 export class EmployeeModule {}

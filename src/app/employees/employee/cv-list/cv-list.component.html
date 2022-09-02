@@ -1,1 +1,149 @@
-<p>cv-list works!</p>
+<div class="page">
+  <div class="page__menu">
+    <div class="page__menu__first-block">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" [formControl]="searchControl" nz-input placeholder="input search text" #search />
+      </nz-input-group>
+
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+
+      <ul nz-menu nzMode="inline" class="page__menu__first-block__nz-menu">
+        <li
+          nz-menu-item
+          class="page__menu__first-block__nz-menu__nz-menu-item"
+          *ngFor="let cv of cvs | filter: searchCv:'attributes.name'; let i = index; trackBy: trackByFn"
+          (click)="activateForm(cv)"
+        >
+          <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
+            {{ cv.attributes.name }}
+            <i
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper__nz-icon"
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this item?"
+              nzPopconfirmPlacement="left"
+              (nzOnConfirm)="deleteCv(i)"
+              (click)="stopPropagation($event)"
+            ></i>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="page__menu__second-block">
+      <button
+        class="page__menu__second-block__nz-button"
+        type="button"
+        nz-button
+        nzType="primary"
+        (click)="showCvModal()"
+      >
+        Add CV
+      </button>
+    </div>
+  </div>
+
+  <app-cv-modal
+    [isVisible]="isCvModalVisible"
+    (cvSelected)="onCvSelected($event)"
+    (hideModals)="onHideModals()"
+  ></app-cv-modal>
+
+  <app-project-modal
+    [isVisible]="isProjectModalVisible"
+    (projectSelected)="onProjectSelected($event)"
+    (hideModals)="onHideModals()"
+  >
+  </app-project-modal>
+
+  <div class="page__wrapper" *ngIf="isFormVisible">
+    <div class="page__wrapper__button-block">
+      <button type="button" nz-button nzType="default">Preview</button>
+    </div>
+
+    <div class="page__wrapper__form">
+      <form class="page__wrapper__form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
+        <nz-collapse>
+          <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+            <div class="page__wrapper__form__collapse-panel__inner">
+              <div class="page__wrapper__form__collapse-panel__inner__block">
+                <app-input
+                  formControlName="firstName"
+                  [label]="'First Name'"
+                  [placeholder]="'First Name'"
+                  class="page__wrapper__form__collapse-panel__inner__block__app-input"
+                ></app-input>
+
+                <app-input
+                  formControlName="lastName"
+                  [label]="'Last Name'"
+                  [placeholder]="'Last Name'"
+                  class="page__wrapper__form__collapse-panel__inner__block__app-input"
+                ></app-input>
+
+                <app-input
+                  formControlName="education"
+                  [label]="'Education'"
+                  [placeholder]="'Education'"
+                  class="page__wrapper__form__collapse-panel__inner__block__app-input"
+                ></app-input>
+
+                <app-textarea
+                  formControlName="description"
+                  [label]="'Description'"
+                  [placeholder]="'Description'"
+                  class="page__wrapper__form__collapse-panel__inner__block__app-textarea"
+                ></app-textarea>
+              </div>
+            </div>
+          </nz-collapse-panel>
+
+          <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+            <div class="page__wrapper__form__collapse-panel__inner">
+              <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
+            </div>
+          </nz-collapse-panel>
+
+          <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+            <div class="page__wrapper__form__collapse-panel__inner">
+              <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+
+        <div class="page__wrapper__form__button_wrapper">
+          <button type="button" nz-button nzType="text" type="button" (click)="showProjectModal()">
+            +Add projects
+          </button>
+        </div>
+
+        <app-projects-array formControlName="projects"></app-projects-array>
+
+        <div class="page__wrapper__form__buttons-block">
+          <button
+            type="submit"
+            class="page__wrapper__form__buttons-block__button"
+            nz-button
+            nzType="primary"
+            [disabled]="!form.valid"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            class="page__wrapper__form__buttons-block__button"
+            nz-button
+            nzType="default"
+            (click)="onCancel()"
+          >
+            Сancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

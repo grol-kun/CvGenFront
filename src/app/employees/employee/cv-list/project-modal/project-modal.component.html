@@ -1,0 +1,29 @@
+<nz-modal [nzVisible]="isVisible" nzTitle="List of Projects" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <nz-table #filterTable [nzData]="projectList" nzTableLayout="fixed" *ngIf="projectList$ | async as projectList">
+      <thead>
+        <tr>
+          <th
+            *ngFor="let column of listOfColumns"
+            [nzSortOrder]="column.sortOrder"
+            [nzSortFn]="column.sortFn"
+            [nzSortDirections]="column.sortDirections"
+          >
+            {{ column.name }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of filterTable.data" (click)="selectProject(data)">
+          <td>{{ data.attributes.name }}</td>
+          <td>{{ data.attributes.from }}</td>
+          <td>{{ data.attributes.to }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+  </div>
+</nz-modal>

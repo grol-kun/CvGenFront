@@ -1,0 +1,18 @@
+@import "../../../../styles/variables";
+
+.form {
+  &__wrapper {
+    &__collapse-panel {
+      font-weight: $font-weight-bold;
+      &__app-input-block {
+        font-weight: $font-weight-normal;
+      }
+      &__nz-icon {
+        padding: 10px;
+        &:hover {
+          color: var(--status-error);
+        }
+      }
+    }
+  }
+}

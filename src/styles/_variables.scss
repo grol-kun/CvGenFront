@@ -1,6 +1,8 @@
 $font-SimSong: SimSong;
 $font-size-12: 12px;
 $header-logo-size-64: 64px;
+$font-weight-bold: 800;
+$font-weight-normal: 400;
 
 $background-primary-light: #f0f2f5;
 $background-primary-dark: #2b2d30;
@@ -29,6 +31,9 @@ $status-success-dark: #00c851;
 $overlay-bg-color: rgba(85, 85, 86, 0.1);
 $simple-white: #fff;
 
+$borders-light: rgba(128, 128, 128, 0.5);
+$borders-dark: rgba(208, 208, 208, 0.5);
+
 @mixin light() {
   --background-primary: #{$background-primary-light};
   --background-secondary: #{$background-secondary-light};
@@ -38,6 +43,7 @@ $simple-white: #fff;
   --text-secondary: #{$text-secondary-light};
   --status-error: #{$status-error-light};
   --status-success: #{$status-success-light};
+  --borders-light-gray: #{$borders-light};
 }
 
 @mixin dark() {
@@ -49,4 +55,5 @@ $simple-white: #fff;
   --text-secondary: #{$text-secondary-dark};
   --status-error: #{$status-error-dark};
   --status-success: #{$status-success-dark};
+  --borders-light-gray: #{$borders-dark};
 }

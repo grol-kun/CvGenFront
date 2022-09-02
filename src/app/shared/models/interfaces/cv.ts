@@ -1,5 +1,5 @@
+import { DataProject } from './data-project';
 import { Language } from './language';
-import { Project } from './project';
 import { Skill } from './skill';
 
 export interface Cv {
@@ -7,7 +7,7 @@ export interface Cv {
   attributes: {
     name: string;
     description: string;
-    projects: Project[];
+    projects: DataProject | null;
     languages: Language[];
     skills: Skill[];
     createdAt: string;

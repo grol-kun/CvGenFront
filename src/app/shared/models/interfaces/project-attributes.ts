@@ -1,3 +1,5 @@
+import { Skill } from './skill';
+
 export interface ProjectAttributes {
   name: string;
   description: string;
@@ -8,4 +10,5 @@ export interface ProjectAttributes {
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  skills: Skill[];
 }
