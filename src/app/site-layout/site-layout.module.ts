@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteLayoutComponent } from './site-layout.component';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzListModule } from 'ng-zorro-antd/list';
@@ -10,11 +9,11 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { RouterModule } from '@angular/router';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 import { DropdownMenuModule } from './dropdown-menu/dropdown-menu.module';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    NzBreadCrumbModule,
     NzIconModule,
     NzLayoutModule,
     NzListModule,
@@ -23,6 +22,7 @@ import { DropdownMenuModule } from './dropdown-menu/dropdown-menu.module';
     RouterModule,
     LoaderModule,
     DropdownMenuModule,
+    BreadcrumbModule,
   ],
   declarations: [SiteLayoutComponent],
   exports: [SiteLayoutComponent],

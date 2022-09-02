@@ -1,0 +1,8 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>
+    <a [routerLink]="['']"><span nz-icon nzType="home" nzTheme="outline"></span></a>
+  </nz-breadcrumb-item>
+  <nz-breadcrumb-item *ngFor="let item of menuItems"
+    ><a [routerLink]="[item.url]">{{ item.label }}</a></nz-breadcrumb-item
+  >
+</nz-breadcrumb>
