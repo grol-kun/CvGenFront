@@ -1,0 +1,62 @@
+<ng-container [formGroup]="form" class="container">
+  <div class="container__form-wrapper">
+    <app-input formControlName="internalName" [label]="'Internal name'" [placeholder]="'Internal name'"></app-input>
+
+    <div class="container__form-wrapper__first-block">
+      <app-input
+        formControlName="name"
+        [label]="'Name'"
+        [placeholder]="'Name'"
+        class="container__form-wrapper__first-block__control"
+      ></app-input>
+
+      <app-app-data-picker
+        formControlName="from"
+        [label]="'Start date'"
+        [placeholder]="'Start date'"
+        class="container__form-wrapper__first-block__control"
+      ></app-app-data-picker>
+
+      <app-app-data-picker
+        formControlName="to"
+        [label]="'End date'"
+        [placeholder]="'End date'"
+        class="container__form-wrapper__first-block__control"
+      ></app-app-data-picker>
+    </div>
+
+    <div class="container__form-wrapper__second-block">
+      <app-select
+        formControlName="skills"
+        label="Tech stack"
+        [options]="skillOptions"
+        [nzMode]="'tags'"
+        class="container__form-wrapper__second-block__control"
+      >
+      </app-select>
+
+      <app-select
+        formControlName="responsibilities"
+        label="Responsibilities"
+        [options]="respOptions"
+        [nzMode]="'tags'"
+        class="container__form-wrapper__second-block__control"
+      >
+      </app-select>
+
+      <app-input
+        formControlName="domain"
+        [label]="'Domain'"
+        [placeholder]="'Domain'"
+        class="container__form-wrapper__second-block__control"
+      ></app-input>
+    </div>
+
+    <app-textarea
+      formControlName="description"
+      [label]="'Description'"
+      [placeholder]="'Description'"
+      [minRows]="5"
+    ></app-textarea>
+  </div>
+</ng-container>

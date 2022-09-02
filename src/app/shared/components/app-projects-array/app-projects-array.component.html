@@ -1,0 +1,35 @@
+<ng-container [formGroup]="form" class="form">
+  <div formArrayName="items">
+    <div *ngFor="let item of items.controls; let i = index" class="form__wrapper">
+      <nz-collapse>
+        <nz-collapse-panel
+          [nzHeader]="projects[i].attributes.name"
+          [nzExtra]="extraTpl"
+          [nzActive]="true"
+          class="form__wrapper__collapse-panel"
+        >
+          <app-project-card
+            [formControlName]="i"
+            [skillListResponse]="skillListResponse"
+            [respListResponse]="respListResponse"
+            class="form__wrapper__collapse-panel__app-input-block"
+          >
+          </app-project-card>
+          <ng-template #extraTpl>
+            <i
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              class="form__wrapper__collapse-panel__nz-icon"
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this item?"
+              nzPopconfirmPlacement="left"
+              (nzOnConfirm)="deleteItem(i)"
+              (click)="catchClick($event)"
+            ></i>
+          </ng-template>
+        </nz-collapse-panel>
+      </nz-collapse>
+    </div>
+  </div>
+</ng-container>

@@ -4,4 +4,5 @@ export const COMMON_ERRORS: ErrorMessages = {
   required: 'errors.required',
   minlength: 'errors.minLength',
   maxlength: 'errors.maxLength',
+  mailFormatError: 'Input correct email',
 };

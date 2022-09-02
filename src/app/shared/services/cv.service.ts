@@ -6,6 +6,7 @@ import { Response } from '../models/interfaces/response';
 import { ProjectBody } from '../models/interfaces/project-body';
 import { Cv } from '../models/interfaces/cv';
 import { ResponseOneEntity } from '../models/interfaces/response-one-entity';
+import { POPULATE } from '../models/constants/populate';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +15,11 @@ export class CvService {
   constructor(private httpClient: HttpClient) {}
 
   getCvs(): Observable<Cv[]> {
-    return this.httpClient.get<Response<Cv>>(`/api/cvs`).pipe(map((data) => data.data));
+    return this.httpClient.get<Response<Cv>>(`/api/cvs${POPULATE}`).pipe(map((data) => data.data));
   }
 
   getCvById(id: string | number): Observable<ResponseOneEntity<Cv>> {
-    return this.httpClient.get<ResponseOneEntity<Cv>>(`/api/cvs/${id}`);
+    return this.httpClient.get<ResponseOneEntity<Cv>>(`/api/cvs/${id}${POPULATE}`);
   }
 
   updateCv(id: string | number, body: ProjectBody) {

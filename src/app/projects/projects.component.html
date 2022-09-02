@@ -3,7 +3,7 @@
     {{ 'projects.actions.new_project' | translate }}
   </button>
 </div>
-<nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="projectList$ | async as userList">
+<nz-table #filterTable [nzData]="projectList" nzTableLayout="fixed" *ngIf="projectList$ | async as projectList">
   <thead>
     <tr>
       <th

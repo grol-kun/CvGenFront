@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateControlService } from '../translate-control.service';
+import { TranslateMode } from '../translate.model';
 
 @Component({
   selector: 'app-translate-control',
@@ -8,20 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TranslateControlComponent {
   langs: string[];
-  constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'ru']);
-    if (localStorage.getItem('locale')) {
-      const browserLang = localStorage.getItem('locale');
-      translate.use(browserLang?.match(/en|ru/) ? browserLang : 'en');
-    } else {
-      localStorage.setItem('locale', 'en');
-      translate.setDefaultLang('en');
-      translate.use('en');
-    }
-    this.langs = translate.getLangs();
+  constructor(public translate: TranslateControlService) {
+    this.langs = this.translate.getLanguages();
   }
   changeLang(language: string) {
-    localStorage.setItem('locale', language);
-    this.translate.use(language);
+    this.translate.changeLang(language);
   }
 }
