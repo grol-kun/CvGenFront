@@ -99,7 +99,8 @@
   "errors": {
     "required": "Это обязательное поле",
     "minLength": "Слишком мало символов",
-    "maxLength": "Слишком много символов"
+    "maxLength": "Слишком много символов",
+    "mailFormat": "Некорректный почтовый адрес"
   },
   "form_array_block": {
     "actions": {

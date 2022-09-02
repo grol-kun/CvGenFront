@@ -99,7 +99,8 @@
   "errors": {
     "required": "The field is required",
     "minLength": "It is too short",
-    "maxLength": "It is too long"
+    "maxLength": "It is too long",
+    "mailFormat": "Input correct email"
   },
   "form_array_block": {
     "actions": {
