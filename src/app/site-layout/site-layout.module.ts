@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 import { DropdownMenuModule } from './dropdown-menu/dropdown-menu.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
+import { ThemeModule } from '../shared/theme/theme.module';
+import { TranslateControlModule } from '../shared/translate/translate-control.module';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
     RouterModule,
     LoaderModule,
     DropdownMenuModule,
+    ThemeModule,
+    TranslateControlModule
     BreadcrumbModule,
   ],
   declarations: [SiteLayoutComponent],
