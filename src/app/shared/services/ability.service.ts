@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ability } from '../models/interfaces/ability';
 import { ResponseOneEntity } from '../models/interfaces/response-one-entity';
 
 @Injectable({
