@@ -3,12 +3,10 @@ import { TranslateStorage } from './translate-storage.interface';
 import { TranslateMode } from './translate.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TranslateStorageService implements TranslateStorage {
   private storageKey = 'locale';
-  constructor() { }
-
   public set(translateMode: TranslateMode): void {
     localStorage.setItem(this.storageKey, translateMode.toString());
   }

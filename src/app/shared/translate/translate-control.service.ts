@@ -16,7 +16,7 @@ export class TranslateControlService {
 
   changeLang(language: string) {
     const mode = this.functions.getEnumKeyByValue(TranslateMode, language);
-    this.storage.set(TranslateMode[mode]);
+    this.storage.set(TranslateMode[mode!]);
     this.translate.use(language);
   }
 
