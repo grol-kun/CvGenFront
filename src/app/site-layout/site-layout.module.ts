@@ -25,7 +25,7 @@ import { TranslateControlModule } from '../shared/translate/translate-control.mo
     LoaderModule,
     DropdownMenuModule,
     ThemeModule,
-    TranslateControlModule
+    TranslateControlModule,
     BreadcrumbModule,
   ],
   declarations: [SiteLayoutComponent],
