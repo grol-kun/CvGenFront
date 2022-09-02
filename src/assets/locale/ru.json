@@ -7,7 +7,10 @@
     "employees": "Сотрудники",
     "projects": "Проекты",
     "cvs": "Резюме",
-    "entities": "Сущности"
+    "entities": "Сущности",
+    "text":{
+      "user_hi": "Привет,"
+    }
   },
   "auth": {
     "title": "Авторизация",
@@ -23,6 +26,20 @@
       "forgot_password": "Забыли пароль?"
     }
   },
+  "user_modal": {
+    "title": "Информация о пользователе",
+    "actions":{
+      "user": "Пользователь",
+      "logout": "Выйти"
+    },
+    "text": {
+      "user_id": "ID пользователя:",
+      "username": "Никнейм:",
+      "email": "Электронная почта:",
+      "first_name": "Имя:",
+      "last_name": "Фамилия:"
+    }
+  },
   "employees": {
     "title": "Сотрудники",
     "actions": {
@@ -33,19 +50,30 @@
       "cv_tab": "Резюме",
       "info_collapse": "Информация",
       "skills_collapse": "Навыки",
-      "languages_collapse": "Языки"
+      "languages_collapse": "Языки",
+      "add_cv": "Добавить резюме",
+      "preview": "Предпросмотр",
+      "projects_modal":{
+        "title": "Список проектов"
+      },
+      "cv_modal": {
+        "title": "Список резюме"
+      }
     },
     "labels": {
       "first_name": "Имя",
       "last_name": "Фамилия",
       "education": "Образование",
+      "description":"Описание",
       "email": "Электронная почта"
     },
     "placeholders": {
       "first_name": "Введите имя",
       "last_name": "Введите фамилию",
       "education": "Укажите информацию о образовании",
-      "email": "Укажите электронную почту"
+      "description": "Введите описание",
+      "email": "Укажите электронную почту",
+      "search_field": "Введите поисковой запрос"
     }
   },
   "projects": {
@@ -105,7 +133,8 @@
   "form_array_block": {
     "actions": {
       "add_skills": "+ Добавить навык",
-      "add_languages": "+ Добавить язык"
+      "add_languages": "+ Добавить язык",
+      "add_projects": "+ Добавить проект"
     }
   },
   "input_block": {
@@ -121,6 +150,11 @@
   "buttons": {
     "save": "Сохранить",
     "cancel": "Отмена"
+  },
+  "modals":{
+    "actions":{
+      "close": "Закрыть"
+    }
   },
   "popconfirm":{
     "title": "Вы действительно хотите удалить этот элемент?",

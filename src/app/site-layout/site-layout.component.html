@@ -49,7 +49,7 @@
           <app-theme></app-theme>
           <app-translate-control></app-translate-control>
         </div>
-        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">Hello, {{ (info$ | async)?.firstName }}</p>
+        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">{{ 'layout.text.user_hi' | translate}} {{ (info$ | async)?.firstName }}</p>
         <app-dropdown-menu></app-dropdown-menu>
       </div>
     </nz-header>

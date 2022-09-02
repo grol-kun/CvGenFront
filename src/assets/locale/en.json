@@ -7,7 +7,10 @@
     "employees": "Employees",
     "projects": "Projects",
     "cvs": "CVs",
-    "entities": "Entities"
+    "entities": "Entities",
+    "text":{
+      "user_hi": "Hello,"
+    }
   },
   "auth": {
     "title": "Auth",
@@ -23,6 +26,20 @@
       "forgot_password": "Forgot your password?"
     }
   },
+  "user_modal": {
+    "title": "User Information",
+    "actions":{
+      "user": "User",
+      "logout": "Logout"
+    },
+    "text": {
+      "user_id": "User ID:",
+      "username": "Username:",
+      "email": "Email:",
+      "first_name": "First Name:",
+      "last_name": "Last Name:"
+    }
+  },
   "employees": {
     "title": "Employees",
     "actions": {
@@ -33,19 +50,30 @@
       "cv_tab": "CV",
       "info_collapse": "Info",
       "skills_collapse": "Skills",
-      "languages_collapse": "Languages"
+      "languages_collapse": "Languages",
+      "add_cv": "Add CV",
+      "preview": "Preview",
+      "projects_modal": {
+        "title": "List of projects"
+      },
+      "cv_modal": {
+        "title": "List of CVs"
+      }
     },
     "labels": {
       "first_name": "First Name",
       "last_name": "Last Name",
       "education": "Education",
+      "description": "Description",
       "email": "Email"
     },
     "placeholders": {
       "first_name": "Enter first name",
       "last_name": "Enter last name",
       "education": "Enter education info",
-      "email": "Enter email"
+      "description": "Enter description",
+      "email": "Enter email",
+      "search_field": "Input search query"
     }
   },
   "projects": {
@@ -77,9 +105,9 @@
       }
     }
   },
-  "cvs":{
+  "cvs": {
     "title": "CVs",
-    "actions":{
+    "actions": {
       "new_cv": "New CV",
       "name": "Name",
       "description": "Description",
@@ -87,11 +115,11 @@
       "skills_collapse": "Skills",
       "languages_collapse": "Languages"
     },
-    "labels":{
+    "labels": {
       "name": "Name",
       "description": "Description"
     },
-    "placeholders":{
+    "placeholders": {
       "name": "Enter name",
       "description": "Enter description"
     }
@@ -105,7 +133,8 @@
   "form_array_block": {
     "actions": {
       "add_skills": "+ Add skill",
-      "add_languages": "+ Add language"
+      "add_languages": "+ Add language",
+      "add_projects": "+ Add project"
     }
   },
   "input_block": {
@@ -122,7 +151,12 @@
     "save": "Save",
     "cancel": "Cancel"
   },
-  "popconfirm":{
+  "modals": {
+    "actions": {
+      "close": "Close"
+    }
+  },
+  "popconfirm": {
     "title": "Are you sure delete this item?",
     "ok": "Yes, delete",
     "cancel": "Cancel"
