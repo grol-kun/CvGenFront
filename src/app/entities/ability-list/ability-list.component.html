@@ -1,0 +1,44 @@
+<div class="button-block">
+    <button nz-button nzType="primary" (click)="showModal()">{{ 'entities.actions.new_ability' | translate }}</button>
+</div>
+<div class="page__menu__first-block">
+  <nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" [formControl]="searchControl" nz-input [placeholder]="'entities.placeholders.search_field' | translate" #search />
+  </nz-input-group>
+
+  <ng-template #suffixIconSearch>
+    <span nz-icon nzType="search"></span>
+  </ng-template>
+
+  <ul nz-menu nzMode="inline" class="page__menu__first-block__nz-menu" *ngIf="abilitiesList$ | async as abilities">
+    <li
+      nz-menu-item
+      class="page__menu__first-block__nz-menu__nz-menu-item"
+      *ngFor="let ability of abilities | filter: searchAbility:'attributes.name' trackBy: trackByFn"
+    >
+      <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
+        {{ ability.attributes.name }}
+        <i
+        nz-icon
+        nzType="delete"
+        nzTheme="outline"
+        class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper__nz-icon"
+        nz-popconfirm
+        [nzPopconfirmTitle]="'popconfrim.title' | translate"
+        [nzOkText]="'popconfrim.ok' | translate"
+        [nzCancelText]="'popconfrim.cancel' | translate"
+        nzPopconfirmPlacement="left"
+        (nzOnConfirm)="deleteItem(ability.id)"
+        (click)="stopPropagation($event)"
+      ></i>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<app-ability-modal
+[isVisible]="isModalVisible"
+[type]="abilityType"
+(abilityAdded)="onAbilityAdded($event)"
+(hideModal)="onHideModal()"
+></app-ability-modal>
