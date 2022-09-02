@@ -22,11 +22,19 @@
 
     &__second-block {
       display: flex;
-      width: 50%;
-      flex-direction: column;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
 
       &__control {
-        margin-bottom: 10px;
+        width: 100%;
+        flex: 1 1 45%;
+        margin: 0 10px 10px 10px;
+
+        &:last-child {
+          flex: 0 0 48%;
+        }
       }
     }
   }

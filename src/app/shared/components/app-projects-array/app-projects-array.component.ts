@@ -11,11 +11,13 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { map, Subject, takeUntil } from 'rxjs';
+import { forkJoin, map, Subject, takeUntil } from 'rxjs';
 import { Response } from '../../models/interfaces/response';
 import { Project } from '../../models/interfaces/project';
 import { Skill } from '../../models/interfaces/skill';
 import { AbilityService } from '../../services/ability.service';
+import { ResponsibilityService } from '../../services/responsibility.service';
+import { Responsibility } from '../../models/interfaces/responsibility';
 
 @Component({
   selector: 'app-projects-array',
@@ -36,22 +38,34 @@ import { AbilityService } from '../../services/ability.service';
 })
 export class AppProjectsArrayComponent implements ControlValueAccessor, OnInit, OnDestroy {
   form!: FormGroup;
-  fullListResponse: Response<Skill> | null = null;
+  skillListResponse: Response<Skill> | null = null;
+  respListResponse: Response<Responsibility> | null = null;
   private destroy$ = new Subject<void>();
   projects: Project[] = [];
 
-  constructor(private fb: FormBuilder, private abilityService: AbilityService) {}
+  constructor(
+    private fb: FormBuilder,
+    private abilityService: AbilityService,
+    private responsibilityService: ResponsibilityService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       items: this.fb.array([]),
     });
 
-    this.abilityService
-      .getFullList<Response<Skill>>('skills')
+    this.makeRequests();
+  }
+
+  private makeRequests() {
+    const skillsReq$ = this.abilityService.getFullList<Response<Skill>>('skills');
+    const respReq$ = this.responsibilityService.getResponsibilities();
+
+    forkJoin([skillsReq$, respReq$])
       .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.fullListResponse = data;
+      .subscribe(([skills, resps]) => {
+        this.skillListResponse = skills;
+        this.respListResponse = resps;
       });
   }
 
