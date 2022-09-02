@@ -20,6 +20,8 @@ export class Initializer {
     this.translateService.init();
     this.themeService.startTheme();
     this.authService.setTokenIfAvailable();
-    this.store.dispatch(updateMyInfo());
+    if (this.authService.getTokenFromCookies()) {
+      this.store.dispatch(updateMyInfo());
+    }
   }
 }
