@@ -1,3 +1,5 @@
+import { Response } from './response';
+import { Responsibility } from './responsibility';
 import { Skill } from './skill';
 
 export interface Project {
@@ -13,5 +15,6 @@ export interface Project {
     updatedAt: string;
     publishedAt: string;
     skills: Skill[];
+    responsibilities: Response<Responsibility>;
   };
 }

@@ -11,7 +11,9 @@ import {
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Project } from '../../models/interfaces/project';
 import { Response } from '../../models/interfaces/response';
+import { Responsibility } from '../../models/interfaces/responsibility';
 import { Skill } from '../../models/interfaces/skill';
 
 @Component({
@@ -32,13 +34,16 @@ import { Skill } from '../../models/interfaces/skill';
   ],
 })
 export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
-  @Input() fullListResponse: Response<Skill> | null = null;
+  @Input() skillListResponse: Response<Skill> | null = null;
+  @Input() respListResponse: Response<Responsibility> | null = null;
 
-  options: string[] = [];
+  skillOptions: string[] = [];
+  respOptions: string[] = [];
   form!: FormGroup;
-  fullList: Skill[] = [];
+  fullSkillList: Skill[] = [];
+  fullRespList: Responsibility[] = [];
 
-  private currentSkill: Skill | undefined = undefined;
+  private currentProject: Project | null = null;
   private destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder) {}
@@ -52,29 +57,51 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
       domain: ['', [Validators.required]],
       skills: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      responsibilities: ['', [Validators.required]],
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const fullListResponse = changes?.['fullListResponse']?.currentValue;
-    if (fullListResponse) {
-      this.fullList = fullListResponse.data;
-      this.options = fullListResponse.data.map((item: Skill) => item.attributes.name);
+    const skillListResponse = changes?.['skillListResponse']?.currentValue;
+    const respListResponse = changes?.['respListResponse']?.currentValue;
+
+    if (skillListResponse) {
+      this.fullSkillList = skillListResponse.data;
+      this.skillOptions = skillListResponse.data.map((item: Skill) => item.attributes.name);
+    }
+
+    if (respListResponse) {
+      this.fullRespList = respListResponse.data;
+      this.respOptions = respListResponse.data.map((item: Responsibility) => item.attributes.name);
     }
   }
 
-  public writeValue(val: any): void {
+  public writeValue(val: Project): void {
     if (val) {
-      this.currentSkill = val;
-
-      const { internalName, name, from, to, domain, skills, description } = val.attributes;
-      const skillsNames = skills.map((skill: Skill) => skill.attributes.name);
-
-      this.form.setValue(
-        { internalName, name, from, to, domain, skills: skillsNames, description },
-        { emitEvent: false }
-      );
+      this.currentProject = val;
+      const skillsNames = this.getSkillsNames(val);
+      const respNames = this.getRespNames(val);
+      this.setFormValue(val, skillsNames, respNames);
     }
+  }
+
+  setFormValue(val: Project, skillsNames: string[], respNames: string[]): void {
+    const { internalName, name, from, to, domain, description } = val.attributes;
+    this.form.setValue(
+      { internalName, name, from, to, domain, skills: skillsNames, description, responsibilities: respNames },
+      { emitEvent: false }
+    );
+  }
+
+  getRespNames(val: Project): string[] {
+    return val.attributes.responsibilities
+      ? val.attributes.responsibilities.data.map((resp: Responsibility) => resp.attributes.name)
+      : [];
+  }
+
+  getSkillsNames(val: Project): string[] {
+    const { skills } = val.attributes;
+    return skills.map((skill: Skill) => skill.attributes.name);
   }
 
   public onTouched: () => void = () => {};
@@ -83,21 +110,41 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
     this.form.valueChanges
       .pipe(
         map((value) => {
-          if (value.skills) {
-            const objSkills = value.skills.map((skillName: string) =>
-              this.fullList.find((skill) => skill.attributes.name === skillName)
-            );
+          const objSkills = this.formSkills(value);
+          const objResps = this.formResps(value);
 
-            return {
-              id: this.currentSkill?.id,
-              attributes: { ...this.currentSkill?.attributes, ...value, skills: [...objSkills] },
-            };
-          }
-          return { ...value, skills: null };
+          return this.getProjectBody(objSkills, objResps, value);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe(fn);
+  }
+
+  getProjectBody(objSkills: Skill[], objResps: Responsibility[], value: any): Project | null {
+    if (this.currentProject) {
+      return {
+        id: this.currentProject.id,
+        attributes: {
+          ...this.currentProject?.attributes,
+          ...value,
+          skills: [...objSkills],
+          responsibilities: { data: [...objResps] },
+        },
+      };
+    }
+    return this.currentProject;
+  }
+
+  formResps(value: any) {
+    return value.responsibilities.map((respName: string) =>
+      this.fullRespList.find((resp) => resp.attributes.name === respName)
+    );
+  }
+
+  formSkills(value: any): Skill[] {
+    return value.skills.map((skillName: string) =>
+      this.fullSkillList.find((skill) => skill.attributes.name === skillName)
+    );
   }
 
   public registerOnTouched(fn: any): void {

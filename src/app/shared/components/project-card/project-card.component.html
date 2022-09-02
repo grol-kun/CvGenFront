@@ -26,16 +26,30 @@
     </div>
 
     <div class="container__form-wrapper__second-block">
-      <app-input formControlName="domain" [label]="'Domain'" [placeholder]="'Domain'"></app-input>
-
       <app-select
         formControlName="skills"
         label="Tech stack"
-        [options]="options"
+        [options]="skillOptions"
         [nzMode]="'tags'"
         class="container__form-wrapper__second-block__control"
       >
       </app-select>
+
+      <app-select
+        formControlName="responsibilities"
+        label="Responsibilities"
+        [options]="respOptions"
+        [nzMode]="'tags'"
+        class="container__form-wrapper__second-block__control"
+      >
+      </app-select>
+
+      <app-input
+        formControlName="domain"
+        [label]="'Domain'"
+        [placeholder]="'Domain'"
+        class="container__form-wrapper__second-block__control"
+      ></app-input>
     </div>
 
     <app-textarea
