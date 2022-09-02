@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuItem } from 'src/app/shared/models/interfaces/menu-item';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,13 +13,31 @@ export class BreadcrumbComponent implements OnInit {
   static readonly ROUTE_DATA_BREADCRUMB = 'breadcrumb';
   menuItems: MenuItem[] = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
+    this.getInitialPath();
+
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       const breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
       this.menuItems = this.deleteDuplicate(breadcrumbs);
+      this.saveLastPath();
     });
+  }
+
+  saveLastPath() {
+    this.localStorageService.setItem('path', JSON.stringify(this.menuItems));
+  }
+
+  getInitialPath() {
+    const path = this.localStorageService.getItem('path');
+    if (path) {
+      this.menuItems = JSON.parse(path);
+    }
   }
 
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] {
@@ -58,7 +77,6 @@ export class BreadcrumbComponent implements OnInit {
       }
     });
 
-    console.log('result: ', result);
     return result;
   }
 }
