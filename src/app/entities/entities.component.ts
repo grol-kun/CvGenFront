@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ABILITIES } from '../shared/models/constants/abilities';
+import { ABILITY_TYPES } from '../shared/models/constants/abilities';
 import { Ability } from '../shared/models/interfaces/ability';
+import { AbilityType } from '../shared/models/interfaces/ability-type';
 
 @Component({
   selector: 'app-entities',
@@ -13,14 +14,13 @@ import { Ability } from '../shared/models/interfaces/ability';
 export class EntitiesComponent implements OnInit, OnDestroy {
   searchControl = new FormControl<string>('');
   searchAbility = '';
-  isTableVisible = false;
-  abilities: object[];
+  abilities: AbilityType[];
   abilityType!: string;
+  isTableVisible = false;
   private destroy$ = new Subject<void>();
-  
 
   constructor() {
-    this.abilities = ABILITIES
+    this.abilities = ABILITY_TYPES;
   }
 
   ngOnInit(): void {

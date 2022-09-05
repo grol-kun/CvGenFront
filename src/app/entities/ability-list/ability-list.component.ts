@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
+import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
 import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
-
 
 @Component({
   selector: 'app-ability-list',
@@ -17,18 +16,13 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() abilityType!: string;
   searchControl = new FormControl<string>('');
   searchAbility = '';
-  abilitiesList$!: Observable<Ability[]>;
+  abilitiesList$ = new BehaviorSubject<Ability[]>([]);
   isModalVisible = false;
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private abilityService: AbilityService,
-    private message: NzMessageService,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  constructor(private abilityService: AbilityService, private message: NzMessageService) {}
 
   ngOnInit() {
-    this.getAbilitiesList();
     this.initSearch();
   }
 
@@ -38,23 +32,27 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.getAbilitiesList();
-  }
-
-  getAbilitiesList() {
-    this.abilitiesList$ = this.abilityService.getFullList<Response<Ability>>(this.abilityType).pipe(map((data) => data.data));
+  getAbilities() {
+    return this.abilityService.getFullList<Response<Ability>>(this.abilityType);
   }
 
   deleteItem(id: number) {
     this.abilityService
-      .deleteItemById(this.abilityType!, id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .deleteItemById(this.abilityType, id)
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap(() => this.getAbilities())
+      )
+      .subscribe((data) => {
+        this.abilitiesList$.next(data.data);
         this.message.create('success', `Item has just been deleted!`);
-        this.getAbilitiesList();
-        this.cdr.markForCheck();
       });
+  }
+
+  ngOnChanges() {
+    this.getAbilities()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => this.abilitiesList$.next(data.data));
   }
 
   trackByFn(index: number, ability: Ability) {
@@ -63,11 +61,12 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
 
   showModal() {
     this.isModalVisible = true;
+    console.log(this.abilityType);
+    console.log(this.abilitiesList$);
   }
 
   onHideModal() {
     this.isModalVisible = false;
-    this.cdr.markForCheck();
   }
 
   onAbilityAdded(ability: Ability) {
