@@ -8,7 +8,11 @@ export class SessionStorageService {
     sessionStorage.setItem(key, value);
   }
 
-  getItem(key: string): string | null {
-    return sessionStorage.getItem(key);
+  getItem(key: string): any | null {
+    const result = sessionStorage.getItem(key);
+    if (result) {
+      return JSON.parse(result);
+    }
+    return null;
   }
 }

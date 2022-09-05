@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { MenuItem } from 'src/app/shared/models/interfaces/menu-item';
 import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
+import { ROUTE_DATA_BREADCRUMB } from '../../shared/models/constants/route-data-breadcrumb';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
 })
-export class BreadcrumbComponent implements OnInit {
-  static readonly ROUTE_DATA_BREADCRUMB = 'breadcrumb';
+export class BreadcrumbComponent implements OnInit, OnDestroy {
   menuItems: MenuItem[] = [];
+  private destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -20,13 +22,18 @@ export class BreadcrumbComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getInitialPath();
+    this.menuItems = this.getInitialPath();
 
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      const breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root);
-      this.menuItems = this.deleteDuplicate(breadcrumbs);
-      this.saveLastPath();
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        const breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root.children);
+        this.menuItems = this.deleteDuplicate(breadcrumbs);
+        this.saveLastPath();
+      });
   }
 
   saveLastPath() {
@@ -34,18 +41,11 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   getInitialPath() {
-    const path = this.sessionStorageService.getItem('path');
-    if (path) {
-      this.menuItems = JSON.parse(path);
-    }
+    return this.sessionStorageService.getItem('path') ? this.sessionStorageService.getItem('path') : [];
   }
 
-  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] {
-    const children: ActivatedRoute[] = route.children;
-    let result;
-    let previusLabel = '';
-
-    if (children.length === 0) {
+  private createBreadcrumbs(children: ActivatedRoute[], url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] {
+    if (!children?.length) {
       return breadcrumbs;
     }
 
@@ -55,28 +55,23 @@ export class BreadcrumbComponent implements OnInit {
         url += `/${routeURL}`;
       }
 
-      const label = child.snapshot.data[BreadcrumbComponent.ROUTE_DATA_BREADCRUMB];
-      if (label !== undefined && label !== null && label !== previusLabel) {
+      const label = child.snapshot.data[ROUTE_DATA_BREADCRUMB];
+      if (label != null) {
         breadcrumbs.push({ label, url });
-        previusLabel = label;
       }
 
-      result = this.createBreadcrumbs(child, url, breadcrumbs);
+      return this.createBreadcrumbs(child.children, url, breadcrumbs);
     }
-    return result as MenuItem[];
+
+    return [];
   }
 
-  deleteDuplicate(breadcrumbs: MenuItem[]): MenuItem[] {
-    let result: MenuItem[] = [];
-    let previusLabel = '';
+  private deleteDuplicate(breadcrumbs: MenuItem[]): MenuItem[] {
+    return breadcrumbs.filter((value, index, arr) => index === 0 || value.label !== arr[index - 1].label);
+  }
 
-    breadcrumbs.forEach((item) => {
-      if (item.label !== previusLabel) {
-        result.push(item);
-        previusLabel = item.label;
-      }
-    });
-
-    return result;
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
