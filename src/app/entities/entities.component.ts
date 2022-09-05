@@ -14,14 +14,10 @@ import { AbilityType } from '../shared/models/interfaces/ability-type';
 export class EntitiesComponent implements OnInit, OnDestroy {
   searchControl = new FormControl<string>('');
   searchAbility = '';
-  abilities: AbilityType[];
+  abilities: AbilityType[] = ABILITY_TYPES;
   abilityType!: string;
   isTableVisible = false;
   private destroy$ = new Subject<void>();
-
-  constructor() {
-    this.abilities = ABILITY_TYPES;
-  }
 
   ngOnInit(): void {
     this.initSearch();
