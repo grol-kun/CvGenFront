@@ -4,6 +4,7 @@ import { AppDataPickerComponent } from './app-data-picker.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { TranslateControlModule } from '../../translate/translate-control.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     CommonModule,
     NzDatePickerModule,
     ReactiveFormsModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    TranslateControlModule
   ],
   exports: [
     AppDataPickerComponent

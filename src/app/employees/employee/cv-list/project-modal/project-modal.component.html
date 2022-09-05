@@ -1,4 +1,8 @@
-<nz-modal [nzVisible]="isVisible" nzTitle="List of Projects" (nzOnCancel)="handleCancel()">
+<nz-modal
+  [nzVisible]="isVisible"
+  [nzTitle]="'employees.actions.projects_modal.title' | translate"
+  (nzOnCancel)="handleCancel()"
+>
   <ng-container *nzModalContent>
     <nz-table #filterTable [nzData]="projectList" nzTableLayout="fixed" *ngIf="projectList$ | async as projectList">
       <thead>
@@ -9,7 +13,7 @@
             [nzSortFn]="column.sortFn"
             [nzSortDirections]="column.sortDirections"
           >
-            {{ column.name }}
+            {{ column.name | translate }}
           </th>
         </tr>
       </thead>
@@ -24,6 +28,6 @@
   </ng-container>
 
   <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'modals.actions.close' | translate }}</button>
   </div>
 </nz-modal>
