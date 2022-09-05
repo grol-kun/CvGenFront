@@ -34,7 +34,7 @@ export class EntitiesComponent implements OnInit, OnDestroy {
   }
 
   initTable(abilityType: string) {
-    this.abilityType = abilityType.toLowerCase();
+    this.abilityType = abilityType.substring('entities.labels.'.length).toLowerCase();
     this.isTableVisible = true;
   }
 

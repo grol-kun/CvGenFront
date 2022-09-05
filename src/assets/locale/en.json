@@ -127,7 +127,10 @@
   "entities": {
     "title": "Entities",
     "labels": {
-      "name": "Name"
+      "name": "Name",
+      "skills": "Skills",
+      "languages": "Languages",
+      "responsibilities": "Responsibilities"
     },
     "placeholders": {
       "search_field": "Input search query",

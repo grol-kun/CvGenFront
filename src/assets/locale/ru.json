@@ -127,7 +127,10 @@
   "entities":{
     "title": "Сущности",
     "labels":{
-      "name": "Название"
+      "name": "Название",
+      "skills": "Навыки",
+      "languages": "Языки",
+      "responsibilities": "Ответственности"
     },
     "placeholders":{
       "search_field": "Введите поисковой запрос",

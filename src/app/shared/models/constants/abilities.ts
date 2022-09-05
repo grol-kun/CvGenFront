@@ -3,14 +3,14 @@ import { AbilityType } from "../interfaces/ability-type";
 export const ABILITY_TYPES: AbilityType[] = [
   {
     id: 1,
-    name: 'Skills',
+    name: 'entities.labels.skills',
   },
   {
     id: 2,
-    name: 'Languages',
+    name: 'entities.labels.languages',
   },
   {
     id: 3,
-    name: 'Responsibilities',
+    name: 'entities.labels.responsibilities',
   },
 ];

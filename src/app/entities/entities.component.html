@@ -2,7 +2,13 @@
   <div class="page__menu">
     <div class="page__menu__first-block">
       <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" [formControl]="searchControl" nz-input [placeholder]="'entities.placeholders.search_field' | translate" #search />
+        <input
+          type="text"
+          [formControl]="searchControl"
+          nz-input
+          [placeholder]="'entities.placeholders.search_field' | translate"
+          #search
+        />
       </nz-input-group>
 
       <ng-template #suffixIconSearch>
@@ -17,7 +23,7 @@
           (click)="initTable(ability.name)"
         >
           <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
-            {{ ability.name }}
+            {{ ability.name | translate }}
           </div>
         </li>
       </ul>
@@ -26,7 +32,7 @@
 
   <div class="page__wrapper" *ngIf="isTableVisible">
     <div class="page__wrapper__list">
-        <app-ability-list [abilityType]="abilityType"></app-ability-list>
+      <app-ability-list [abilityType]="abilityType"></app-ability-list>
     </div>
   </div>
 </div>
