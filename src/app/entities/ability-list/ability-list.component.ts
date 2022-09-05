@@ -61,20 +61,10 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
 
   showModal() {
     this.isModalVisible = true;
-    console.log(this.abilityType);
-    console.log(this.abilitiesList$);
   }
 
   onHideModal() {
     this.isModalVisible = false;
-  }
-
-  onAbilityAdded(ability: Ability) {
-    this.isModalVisible = false;
-  }
-
-  onClick(event: Event) {
-    event.stopPropagation();
   }
 
   ngOnDestroy(): void {
