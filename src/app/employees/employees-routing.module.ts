@@ -5,12 +5,25 @@ import { EmployeesComponent } from './employees.component';
 const routes: Routes = [
   {
     path: '',
-    component: EmployeesComponent,
-  },
-  {
-    path: ':id',
-    loadChildren: () => import('./employee/employee.module').then((m) => m.EmployeeModule),
-    title: 'Employee',
+    children: [
+      {
+        path: '',
+        data: {
+          breadcrumb: null,
+        },
+        component: EmployeesComponent,
+        title: 'Employees',
+      },
+
+      {
+        path: ':id',
+        data: {
+          breadcrumb: 'Employee',
+        },
+        loadChildren: () => import('./employee/employee.module').then((m) => m.EmployeeModule),
+        title: 'Employee',
+      },
+    ],
   },
 ];
 
