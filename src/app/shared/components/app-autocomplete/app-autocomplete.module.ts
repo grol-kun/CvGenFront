@@ -4,6 +4,7 @@ import { AppAutocompleteComponent } from './app-autocomplete.component';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { TranslateControlModule } from '../../translate/translate-control.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     CommonModule,
     ReactiveFormsModule,
     NzAutocompleteModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    TranslateControlModule
   ],
   exports: [
     AppAutocompleteComponent

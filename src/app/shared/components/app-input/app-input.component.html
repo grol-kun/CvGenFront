@@ -1,6 +1,9 @@
 <div class="input-component">
   <div class="input-component__label-wrapper">
-    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
+    <label
+      class="input-component__label-wrapper__label"
+      [textContent]="label"
+    ></label>
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
@@ -19,8 +22,11 @@
   </ng-template>
 
   <div class="input-component__error-wrapper">
-    <span class="input-component__error-wrapper__error-message" *ngIf="ngControl.control?.errors && control.touched">
-      {{ ngControl.control?.errors | errorMessage }}
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors && control.touched"
+    >
+      {{ ngControl.control?.errors | errorMessage | translate }}
     </span>
   </div>
 </div>
