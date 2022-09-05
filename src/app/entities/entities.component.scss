@@ -2,7 +2,6 @@
 
 .page {
   display: flex;
-
   &__menu {
     max-width: 240px;
     min-height: 75vh;
@@ -30,13 +29,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            &__nz-icon {
-              padding: 10px;
-              &:hover {
-                color: var(--status-error);
-              }
-            }
           }
         }
       }

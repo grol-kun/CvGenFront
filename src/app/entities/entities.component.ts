@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subject, takeUntil, debounceTime } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { ABILITIES } from '../shared/models/constants/abilities';
 import { Ability } from '../shared/models/interfaces/ability';
 
@@ -19,7 +19,7 @@ export class EntitiesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     this.abilities = ABILITIES
   }
 
@@ -28,19 +28,14 @@ export class EntitiesComponent implements OnInit, OnDestroy {
   }
 
   initSearch() {
-    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+    this.searchControl.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.searchAbility = data ?? '';
-      this.cdr.detectChanges();
     });
   }
 
   initTable(abilityType: string) {
     this.abilityType = abilityType.toLowerCase();
     this.isTableVisible = true;
-  }
-
-  stopPropagation(event: Event) {
-    event.stopPropagation();
   }
 
   trackByFn(index: number, ability: Ability) {

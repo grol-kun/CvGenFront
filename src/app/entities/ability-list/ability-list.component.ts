@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges
 import { FormControl } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
-import { ABILITY_COLUMNS } from 'src/app/shared/models/constants/ability-columns';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
-import { ColumnItem } from 'src/app/shared/models/interfaces/column-item';
 import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 
@@ -35,18 +33,13 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   initSearch() {
-    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+    this.searchControl.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.searchAbility = data ?? '';
-      this.cdr.detectChanges();
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.getAbilitiesList();
-  }
-
-  stopPropagation(event: Event) {
-    event.stopPropagation();
   }
 
   getAbilitiesList() {
@@ -60,7 +53,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe(() => {
         this.message.create('success', `Item has just been deleted!`);
         this.getAbilitiesList();
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       });
   }
 
@@ -74,7 +67,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
 
   onHideModal() {
     this.isModalVisible = false;
-    this.cdr.detectChanges();
+    this.cdr.markForCheck();
   }
 
   onAbilityAdded(ability: Ability) {
