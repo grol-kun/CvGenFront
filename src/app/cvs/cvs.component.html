@@ -1,5 +1,5 @@
 <div class="button-block">
-  <button nz-button nzType="primary" [routerLink]="['/cvs/new']">New CV</button>
+  <button nz-button nzType="primary" [routerLink]="['/cvs/new']">{{ 'cvs.actions.new_cv' | translate }}</button>
 </div>
 <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
   <thead>
@@ -10,7 +10,7 @@
         [nzSortFn]="column.sortFn"
         [nzSortDirections]="column.sortDirections"
       >
-        {{ column.name }}
+        {{ column.name | translate }}
       </th>
     </tr>
   </thead>
@@ -26,7 +26,9 @@
             nzTheme="outline"
             class="td-wrapper__nz-icon"
             nz-popconfirm
-            nzPopconfirmTitle="Are you sure delete this item?"
+            [nzPopconfirmTitle]="'popconfirm.title'| translate"
+            [nzOkText]="'popconfirm.ok' | translate"
+            [nzCancelText]="'popconfirm.cancel'| translate"
             nzPopconfirmPlacement="left"
             (nzOnConfirm)="deleteItem(data.id)"
             (click)="onClick($event)"

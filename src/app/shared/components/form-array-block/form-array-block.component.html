@@ -10,7 +10,7 @@
       <i nz-icon nzType="close" nzTheme="outline" (click)="deleteItem(i)" class="form__wrapper__cross"></i>
     </div>
     <div class="form__button_wrapper">
-      <button nz-button nzType="text" type="button" (click)="addItem()">+Add {{ datatype }}</button>
+      <button nz-button nzType="text" type="button" (click)="addItem()">{{ "form_array_block.actions.add_" + datatype | translate }}</button>
     </div>
   </div>
 </ng-container>

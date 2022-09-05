@@ -3,6 +3,15 @@
     "ru": "Русский",
     "en": "English"
   },
+  "layout": {
+    "employees": "Сотрудники",
+    "projects": "Проекты",
+    "cvs": "Резюме",
+    "entities": "Сущности",
+    "text":{
+      "user_hi": "Привет,"
+    }
+  },
   "auth": {
     "title": "Авторизация",
     "text": {
@@ -16,5 +25,140 @@
       "remember_me": "Запомнить меня",
       "forgot_password": "Забыли пароль?"
     }
+  },
+  "user_modal": {
+    "title": "Информация о пользователе",
+    "actions":{
+      "user": "Пользователь",
+      "logout": "Выйти"
+    },
+    "text": {
+      "user_id": "ID пользователя:",
+      "username": "Никнейм:",
+      "email": "Электронная почта:",
+      "first_name": "Имя:",
+      "last_name": "Фамилия:"
+    }
+  },
+  "employees": {
+    "title": "Сотрудники",
+    "actions": {
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "email": "Электронная почта",
+      "info_tab": "Информация",
+      "cv_tab": "Резюме",
+      "info_collapse": "Информация",
+      "skills_collapse": "Навыки",
+      "languages_collapse": "Языки",
+      "add_cv": "Добавить резюме",
+      "preview": "Предпросмотр",
+      "projects_modal":{
+        "title": "Список проектов"
+      },
+      "cv_modal": {
+        "title": "Список резюме"
+      }
+    },
+    "labels": {
+      "first_name": "Имя",
+      "last_name": "Фамилия",
+      "education": "Образование",
+      "description":"Описание",
+      "email": "Электронная почта"
+    },
+    "placeholders": {
+      "first_name": "Введите имя",
+      "last_name": "Введите фамилию",
+      "education": "Укажите информацию о образовании",
+      "description": "Введите описание",
+      "email": "Укажите электронную почту",
+      "search_field": "Введите поисковой запрос"
+    }
+  },
+  "projects": {
+    "title": "Проекты",
+    "actions": {
+      "name": "Название",
+      "from": "Дата начала",
+      "to": "Дата окончания",
+      "new_project": "Новый проект"
+    },
+    "forms": {
+      "labels": {
+        "internalName": "Внутреннее название",
+        "name": "Название",
+        "from": "Дата начала",
+        "to": "Дата окончания",
+        "domain": "Направление",
+        "stack": "Технический стек",
+        "description": "Описание"
+      },
+      "placeholders": {
+        "internalName": "Введите внутреннее название",
+        "name": "Введите название",
+        "from": "Укажите дату начала",
+        "to": "Укажите дату окончания",
+        "domain": "Укажите направление",
+        "stack": "Укажите технический стек",
+        "description": "Введите описание"
+      }
+    }
+  },
+  "cvs":{
+    "title": "Резюме",
+    "actions":{
+      "new_cv": "Новое резюме",
+      "name": "Название",
+      "description": "Описание",
+      "info_collapse": "Информация",
+      "skills_collapse": "Навыки",
+      "languages_collapse": "Языки"
+    },
+    "labels":{
+      "name": "Название",
+      "description": "Описание"
+    },
+    "placeholders":{
+      "name": "Введите название",
+      "description": "Введите описание"
+    }
+  },
+  "errors": {
+    "required": "Это обязательное поле",
+    "minLength": "Слишком мало символов",
+    "maxLength": "Слишком много символов",
+    "mailFormat": "Некорректный почтовый адрес"
+  },
+  "form_array_block": {
+    "actions": {
+      "add_skills": "+ Добавить навык",
+      "add_languages": "+ Добавить язык",
+      "add_projects": "+ Добавить проект"
+    }
+  },
+  "input_block": {
+    "labels": {
+      "name": "Название",
+      "level": "Уровень"
+    },
+    "placeholders": {
+      "name": "Выберите один вариант",
+      "level": "Укажите уровень"
+    }
+  },
+  "buttons": {
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "modals":{
+    "actions":{
+      "close": "Закрыть"
+    }
+  },
+  "popconfirm":{
+    "title": "Вы действительно хотите удалить этот элемент?",
+    "ok": "Удалить",
+    "cancel": "Отмена"
   }
 }
