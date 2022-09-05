@@ -5,7 +5,7 @@ import { SimpleObject } from '../models/interfaces/simple-object';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(data: any[], searchText: string, params: string) {
+  transform(data: readonly any[], searchText: string, params: string) {
     if (!data?.length || searchText === '') {
       return data;
     }
@@ -17,7 +17,7 @@ export class FilterPipe implements PipeTransform {
     return this.resolveDifficultParams(data, searchText, params);
   }
 
-  private resolveDifficultParams(data: any[], searchText: string, params: string) {
+  private resolveDifficultParams(data: readonly any[], searchText: string, params: string) {
     let arrayOfParams = params.split('.');
 
     return data.filter((item) => {
