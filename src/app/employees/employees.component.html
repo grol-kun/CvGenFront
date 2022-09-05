@@ -8,7 +8,7 @@
         [nzSortFn]="column.sortFn"
         [nzSortDirections]="column.sortDirections"
       >
-        {{ column.name }}
+        {{ column.name | translate }}
 
         <nz-filter-trigger [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
           <span nz-icon nzType="search" (click)="onFilterTrigger(column.searchField)"></span>

@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { TranslateControlModule } from '../shared/translate/translate-control.module';
 
 @NgModule({
   declarations: [EmployeesComponent],
@@ -15,6 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     CommonModule,
     EmployeesRoutingModule,
     NzTableModule,
+    TranslateControlModule,
     NzDropDownModule,
     ReactiveFormsModule,
     ApplicationPipesModule,

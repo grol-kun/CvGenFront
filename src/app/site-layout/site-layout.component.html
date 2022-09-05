@@ -6,19 +6,19 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item [routerLink]="['/employees/']">
         <i nz-icon nzType="user"></i>
-        <span>Employees</span>
+        <span>{{ 'layout.employees' | translate }}</span>
       </li>
       <li nz-menu-item [routerLink]="['/projects/']">
         <i nz-icon nzType="database"></i>
-        <span>Projects</span>
+        <span>{{ 'layout.projects' | translate }}</span>
       </li>
       <li nz-menu-item [routerLink]="['/cvs/']">
         <i nz-icon nzType="folder"></i>
-        <span>CVs</span>
+        <span>{{ 'layout.cvs' | translate }}</span>
       </li>
       <li nz-menu-item [routerLink]="['/entities/']">
         <i nz-icon nzType="file"></i>
-        <span>Entities</span>
+        <span>{{ 'layout.entities' | translate }}</span>
       </li>
     </ul>
   </nz-sider>
@@ -49,7 +49,7 @@
           <app-theme></app-theme>
           <app-translate-control></app-translate-control>
         </div>
-        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">Hello, {{ (info$ | async)?.firstName }}</p>
+        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">{{ 'layout.text.user_hi' | translate}} {{ (info$ | async)?.firstName }}</p>
         <app-dropdown-menu></app-dropdown-menu>
       </div>
     </nz-header>
