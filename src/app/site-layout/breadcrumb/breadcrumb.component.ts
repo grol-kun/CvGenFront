@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuItem } from 'src/app/shared/models/interfaces/menu-item';
-import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { SessionStorageService } from 'src/app/shared/services/session-storage.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -16,7 +16,7 @@ export class BreadcrumbComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private localStorageService: LocalStorageService
+    private sessionStorageService: SessionStorageService
   ) {}
 
   ngOnInit(): void {
@@ -30,11 +30,11 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   saveLastPath() {
-    this.localStorageService.setItem('path', JSON.stringify(this.menuItems));
+    this.sessionStorageService.setItem('path', JSON.stringify(this.menuItems));
   }
 
   getInitialPath() {
-    const path = this.localStorageService.getItem('path');
+    const path = this.sessionStorageService.getItem('path');
     if (path) {
       this.menuItems = JSON.parse(path);
     }
