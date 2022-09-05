@@ -7,7 +7,6 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     ReactiveFormsModule,
     ApplicationPipesModule,
     NzIconModule,
-    NzButtonModule,
     NzInputModule,
   ],
 })

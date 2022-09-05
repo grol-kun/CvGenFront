@@ -7,6 +7,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ApplicationPipesModule } from '../shared/pipes/application-pipes.module';
+import { NzInputModule } from 'ng-zorro-antd/input';
 @NgModule({
   declarations: [CvsComponent],
   imports: [
@@ -17,6 +20,9 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzIconModule,
     NzButtonModule,
     NzPopconfirmModule,
+    NzDropDownModule,
+    ApplicationPipesModule,
+    NzInputModule,
   ],
 })
 export class CvsModule {}

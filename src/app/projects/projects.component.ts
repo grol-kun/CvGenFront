@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, map, takeUntil, Subject } from 'rxjs';
+import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
 import { PROJECT_COLUMNS } from '../shared/models/constants/project-columns';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { Project } from '../shared/models/interfaces/project';
@@ -14,6 +15,11 @@ import { ProjectService } from '../shared/services/project.service';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   projectList$!: Observable<Project[]>;
+  searchField = '';
+  searchValue = '';
+  searchControl = new FormControl<string>('');
+  listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -24,13 +30,26 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getProjectList();
+    this.initSearch();
+  }
+
+  initSearch() {
+    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+      this.searchValue = data ?? '';
+      this.cdr.detectChanges();
+    });
   }
 
   getProjectList() {
     this.projectList$ = this.projectService.getProjects().pipe(map((data) => data.data));
   }
 
-  listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
+  onFilterTrigger(searchField: string) {
+    if (this.searchField !== searchField) {
+      this.searchValue = '';
+    }
+    this.searchField = searchField;
+  }
 
   deleteItem(id: number) {
     this.projectService

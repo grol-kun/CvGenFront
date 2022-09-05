@@ -10,14 +10,14 @@
       >
         {{ column.name }}
 
-        <nz-filter-trigger [nzVisible]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-          <span nz-icon nzType="search"></span>
+        <nz-filter-trigger [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search" (click)="onFilterTrigger(column.searchField)"></span>
         </nz-filter-trigger>
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of filterTable.data | filter: searchValue:'firstName'" [routerLink]="['/employees/', data.id]">
+    <tr *ngFor="let data of filterTable.data | filter: searchValue:searchField" [routerLink]="['/employees/', data.id]">
       <td>{{ data.firstName }}</td>
       <td>{{ data.lastName }}</td>
       <td>{{ data.email }}</td>
@@ -28,9 +28,7 @@
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <div class="ant-table-filter-dropdown">
     <div class="search-box">
-      <input type="text" nz-input placeholder="Search name" [formControl]="searchControl" />
-      <button nz-button nzSize="small" nzType="primary" (click)="close()" class="search-button">Ok</button>
-      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+      <input type="text" nz-input placeholder="Input search..." [formControl]="searchControl" />
     </div>
   </div>
 </nz-dropdown-menu>
