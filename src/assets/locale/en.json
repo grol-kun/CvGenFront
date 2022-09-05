@@ -8,7 +8,7 @@
     "projects": "Projects",
     "cvs": "CVs",
     "entities": "Entities",
-    "text":{
+    "text": {
       "user_hi": "Hello,"
     }
   },
@@ -28,7 +28,7 @@
   },
   "user_modal": {
     "title": "User Information",
-    "actions":{
+    "actions": {
       "user": "User",
       "logout": "Logout"
     },
@@ -124,6 +124,22 @@
       "description": "Enter description"
     }
   },
+  "entities": {
+    "title": "Entities",
+    "labels": {
+      "name": "Name"
+    },
+    "placeholders": {
+      "search_field": "Input search query",
+      "name": "Enter name"
+    },
+    "actions": {
+      "new_ability": "New entity"
+    },
+    "modal": {
+      "title": "New entity"
+    }
+  },
   "errors": {
     "required": "The field is required",
     "minLength": "It is too short",
@@ -149,7 +165,8 @@
   },
   "buttons": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "add": "Add"
   },
   "modals": {
     "actions": {

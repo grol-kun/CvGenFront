@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="isVisible" [nzTitle]="'entites.modal.title' | translate" (nzOnCancel)="handleCancel()">
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'entities.modal.title' | translate" (nzOnCancel)="handleCancel()">
   <ng-container *nzModalContent>
     <form [formGroup]="form" class="auth__form" (ngSubmit)="onAbilityFormSubmit()">
       <app-input
@@ -19,6 +19,6 @@
   </ng-container>
 
   <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">{{ 'buttons.close' | translate }}</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'modals.actions.close' | translate }}</button>
   </div>
 </nz-modal>

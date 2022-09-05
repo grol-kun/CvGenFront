@@ -124,6 +124,22 @@
       "description": "Введите описание"
     }
   },
+  "entities":{
+    "title": "Сущности",
+    "labels":{
+      "name": "Название"
+    },
+    "placeholders":{
+      "search_field": "Введите поисковой запрос",
+      "name": "Введите название"
+    },
+    "actions":{
+      "new_ability": "Добавить сущность"
+    },
+    "modal":{
+      "title": "Новая сущность"
+    }
+  },
   "errors": {
     "required": "Это обязательное поле",
     "minLength": "Слишком мало символов",
@@ -149,7 +165,8 @@
   },
   "buttons": {
     "save": "Сохранить",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "add": "Добавить"
   },
   "modals":{
     "actions":{

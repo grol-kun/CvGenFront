@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { finalize, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 
@@ -33,20 +33,13 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
     if (!this.form.valid) {
       return;
     }
-    this.form.disable();
-
-    const request$ = this.abilityService.addItem(this.type, { data: this.form.getRawValue() });
-
-    if (request$) {
-      request$
-        .pipe(
-          takeUntil(this.destroy$),
-          finalize(() => this.form.enable())
-        )
-        .subscribe(() => {
-          this.message.create('success', 'New ability was created successfully!');
-        });
-    }
+    this.abilityService
+      .addItem(this.type, { data: this.form.getRawValue() })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.form.reset();
+        this.message.create('success', 'New ability was created successfully!');
+      });
   }
 
   handleCancel(): void {
