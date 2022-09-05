@@ -7,6 +7,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { TranslateControlModule } from '../shared/translate/translate-control.module';
 @NgModule({
   declarations: [CvsComponent],
   imports: [
@@ -17,6 +18,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzIconModule,
     NzButtonModule,
     NzPopconfirmModule,
+    TranslateControlModule
   ],
 })
 export class CvsModule {}

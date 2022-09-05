@@ -13,7 +13,7 @@
 
   <div class="input-component__error-wrapper">
     <span class="input-component__error-wrapper__error-message" *ngIf="ngControl.control?.errors && control.touched">
-      {{ ngControl.control?.errors | errorMessage }}
+      {{ ngControl.control?.errors | errorMessage | translate }}
     </span>
   </div>
 </div>
