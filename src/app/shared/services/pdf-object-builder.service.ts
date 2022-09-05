@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CANVAS } from '../models/constants/canvas';
 import { STYLES } from '../models/constants/styles';
-import { CV } from '../models/interfaces/cv';
+import { Cv } from '../models/interfaces/cv';
 import { UserInfo } from '../models/interfaces/user-info';
 
 @Injectable({
@@ -17,8 +17,8 @@ export class PdfObjectBuilderService {
     });
   }
 
-  private buildProjectsList(cvObj: CV) {
-    return cvObj.attributes.projects.reduce(
+  private buildProjectsList(cvObj: Cv) {
+    return cvObj.attributes.projects?.data.reduce(
       (a: object[], c) => [
         ...a,
         {
@@ -29,6 +29,7 @@ export class PdfObjectBuilderService {
               style: 'listItemSubHeader',
             },
             { text: c.attributes.description, style: 'listItemDesc' },
+            //{ text: c.attributes.responsibilities.data, style: 'listItemDesc' },
           ],
           style: 'listItem',
         },
@@ -52,7 +53,7 @@ export class PdfObjectBuilderService {
     ];
   }
 
-  private buildSkillList(cvObj: CV) {
+  private buildSkillList(cvObj: Cv) {
     return cvObj.attributes.skills.reduce(
       (a: object[], c) => [
         ...a,
@@ -65,7 +66,7 @@ export class PdfObjectBuilderService {
     );
   }
 
-  private buildLanguagesList(cvObj: CV) {
+  private buildLanguagesList(cvObj: Cv) {
     return cvObj.attributes.languages.reduce(
       (a: object[], c) => [
         ...a,
@@ -110,14 +111,14 @@ export class PdfObjectBuilderService {
     return [{ stack: this.buildLogo(), style: 'headerLinks' }];
   }
 
-  private buildSkillsSection(cvObj: CV) {
+  private buildSkillsSection(cvObj: Cv) {
     return [
       { text: 'Skills', style: 'sectionTitle' },
       { stack: this.buildSkillList(cvObj), style: 'list' },
     ];
   }
 
-  private buildLanguagesSection(cvObj: CV) {
+  private buildLanguagesSection(cvObj: Cv) {
     return [
       { text: 'Languages', style: 'sectionTitle' },
       { stack: this.buildLanguagesList(cvObj), style: 'list' },
@@ -129,7 +130,7 @@ export class PdfObjectBuilderService {
       { stack: this.buildEducationList(userObj), style: 'list' },
     ];
   }
-  private buildProjectsSection(cvObj: CV) {
+  private buildProjectsSection(cvObj: Cv) {
     return [
       { text: 'Projects', style: 'sectionTitle' },
       { stack: this.buildProjectsList(cvObj), style: 'list' },
@@ -140,15 +141,15 @@ export class PdfObjectBuilderService {
     return [this.buildLogoSection()];
   }
 
-  private buildMain(userObj: UserInfo, cvObj: CV) {
+  private buildMain(userObj: UserInfo, cvObj: Cv) {
     return [this.buildEducationSection(userObj), this.buildProjectsSection(cvObj)];
   }
 
-  private buildSide(cvObj: CV) {
+  private buildSide(cvObj: Cv) {
     return [this.buildSkillsSection(cvObj), this.buildLanguagesSection(cvObj)];
   }
 
-  public buildDocDefinition(cvObj: CV, userObj: UserInfo) {
+  public buildDocDefinition(cvObj: Cv, userObj: UserInfo) {
     return {
       pageSize: 'A4',
       background: () => ({

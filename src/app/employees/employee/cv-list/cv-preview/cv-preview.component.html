@@ -1,0 +1,47 @@
+<nz-modal
+  nzWidth="60%"
+  [nzVisible]="isVisible"
+  [nzTitle]="'employees.cv_preview.title' | translate"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <div class="preview-container">
+      <div class="preview-container__head">
+        <div class="preview-container__head__left">
+          <img src="/assets/svgs/logo.svg" alt="Innowise" />
+        </div>
+        <div class="preview-container__head__right">
+          <p class="preview-container__head__right__username">{{ user?.firstName }} {{ user?.lastName }}</p>
+          <p class="preview-container__head__right__title">Front-end Developer</p>
+          <p class="preview-container__head__right__email">
+            {{ user?.email }}
+          </p>
+        </div>
+      </div>
+      <div class="preview-container__body">
+        <div class="preview-container__body__left">
+          <div class="preview-container__body__left__skills">
+            <p class="preview-container__body__left__skills__heading">Skills</p>
+            <ul class="preview-container__body__left__skills__list">
+              <li>Angular - 5</li>
+              <li>ngRx - 5</li>
+            </ul>
+          </div>
+          <div class="preview-container__body__left__languages">
+            <p class="preview-container__body__left__languages__heading">Languages</p>
+            <ul class="preview-container__body__left__languages__list">
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+        <div class="preview-container__body__right"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="exportPdf()">{{ 'buttons.export' | translate }}</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'buttons.close' | translate }}</button>
+  </div>
+</nz-modal>

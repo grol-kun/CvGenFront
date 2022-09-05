@@ -20,6 +20,7 @@ import { CvModalModule } from './cv-list/cv-modal/cv-modal.module';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ProjectModalModule } from './cv-list/project-modal/project-modal.module';
 import { AppProjectsArrayModule } from 'src/app/shared/components/app-projects-array/app-projects-array.module';
+import { CvPreviewModule } from './cv-list/cv-preview/cv-preview.module';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -42,6 +43,7 @@ import { AppProjectsArrayModule } from 'src/app/shared/components/app-projects-a
     NzPopconfirmModule,
     ProjectModalModule,
     AppProjectsArrayModule,
+    CvPreviewModule
   ],
 })
 export class EmployeeModule {}

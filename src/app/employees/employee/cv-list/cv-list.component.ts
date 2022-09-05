@@ -34,12 +34,15 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   searchCv = '';
   isCvModalVisible = false;
   isProjectModalVisible = false;
+  isPreviewModalVisible = false;
   isFormVisible = false;
 
   private currentCv!: Cv;
   private destroy$ = new Subject<void>();
 
   cvs$!: Observable<Cv[]>;
+
+  previewCv!: Cv;
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +94,8 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     const currentCv = this.getNewCurrentCv();
     const newCvs = this.getNewCvs(currentCv);
     const user = this.getNewUser(newCvs);
+
+    this.previewCv = currentCv;
 
     if (!user) {
       return;
@@ -184,6 +189,10 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     this.isProjectModalVisible = true;
   }
 
+  showPreviewModal() {
+    this.isPreviewModalVisible = true;
+  }
+
   onProjectSelected(project: Project) {
     this.isProjectModalVisible = false;
 
@@ -199,6 +208,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   onHideModals() {
     this.isCvModalVisible = false;
     this.isProjectModalVisible = false;
+    this.isPreviewModalVisible = false;
   }
 
   deleteCv(idx: number) {

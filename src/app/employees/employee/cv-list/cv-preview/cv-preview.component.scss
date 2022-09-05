@@ -1,0 +1,62 @@
+@import '../../../../../styles/variables';
+
+.preview-container {
+  background: $simple-white;
+  aspect-ratio: 9/16;
+  &__head {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    &__left {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &__right {
+      width: 70%;
+      background: $logo-red;
+      color: $simple-white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      &__username,
+      &__title,
+      &__email {
+        line-height: 0.9;
+        font-style: bold;
+        margin-left: 16px;
+      }
+      &__username {
+        font-size: 24px;
+      }
+      &__title {
+        font-size: 20px;
+      }
+      &__email {
+        font-size: 16px;
+      }
+    }
+  }
+  &__body {
+    color: $simple-black;
+    &__left {
+      width: 30%;
+      &__skills {
+        &__heading {
+        }
+        &__list {
+        }
+      }
+      &__languages {
+        &__heading {
+        }
+        &__list {
+        }
+      }
+    }
+    &__right {
+    }
+  }
+}
