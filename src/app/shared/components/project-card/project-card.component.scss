@@ -1,3 +1,4 @@
+@import "../../../../styles.scss";
 .container {
   margin-top: 30px;
 
@@ -34,6 +35,33 @@
 
         &:last-child {
           flex: 0 0 48%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $view-768) {
+  .container {
+    &__form-wrapper {
+      &__first-block {
+        flex-direction: column;
+
+        &__control {
+          flex: 1 1;
+          margin: 0;
+        }
+      }
+
+      &__second-block {
+        &__control {
+          flex: 1 0 100%;
+          margin: 0 0 30px 0;
+
+          &:last-child {
+            flex: 1 0 100%;
+            margin: 0;
+          }
         }
       }
     }

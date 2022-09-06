@@ -1,31 +1,56 @@
 <form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
   <nz-collapse>
-    <nz-collapse-panel [nzHeader]="'employees.actions.info_collapse' | translate" [nzActive]="true"
-      class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'employees.actions.info_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <div class="form__collapse-panel__inner__block">
-          <app-input formControlName="firstName" [label]="'employees.labels.first_name' | translate "
-            [placeholder]="'employees.placeholders.first_name' | translate "></app-input>
-          <app-input formControlName="lastName" [label]="'employees.labels.last_name' | translate "
-            [placeholder]="'employees.placeholders.last_name' | translate "></app-input>
-          <app-input formControlName="education" [label]="'employees.labels.education' | translate "
-            [placeholder]="'employees.placeholders.education' | translate "></app-input>
-          <app-input formControlName="email" [label]="'employees.labels.email' | translate "
-            [placeholder]="'employees.placeholders.email' | translate ">
+          <app-input
+            class="form__collapse-panel__inner__block__app-input"
+            formControlName="firstName"
+            [label]="'employees.labels.first_name' | translate"
+            [placeholder]="'employees.placeholders.first_name' | translate"
+          ></app-input>
+          <app-input
+            class="form__collapse-panel__inner__block__app-input"
+            formControlName="lastName"
+            [label]="'employees.labels.last_name' | translate"
+            [placeholder]="'employees.placeholders.last_name' | translate"
+          ></app-input>
+          <app-input
+            class="form__collapse-panel__inner__block__app-input"
+            formControlName="education"
+            [label]="'employees.labels.education' | translate"
+            [placeholder]="'employees.placeholders.education' | translate"
+          ></app-input>
+          <app-input
+            class="form__collapse-panel__inner__block__app-input"
+            formControlName="email"
+            [label]="'employees.labels.email' | translate"
+            [placeholder]="'employees.placeholders.email' | translate"
+          >
           </app-input>
         </div>
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel [nzHeader]="'employees.actions.skills_collapse' | translate" [nzActive]="true"
-      class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'employees.actions.skills_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel [nzHeader]="'employees.actions.languages_collapse' | translate" [nzActive]="true"
-      class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'employees.actions.languages_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
       </div>
