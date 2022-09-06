@@ -1,1 +1,1 @@
-export type Ability = 'languages' | 'skills';
+export type Ability = 'languages' | 'skills' | 'responsibilities';

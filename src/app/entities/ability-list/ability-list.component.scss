@@ -1,7 +1,22 @@
-@import '../../styles/variables';
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 20px;
+}
+.td-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__nz-icon {
+    z-index: 5;
+    cursor: pointer;
+  }
+}
 
 .page {
   display: flex;
+
   &__menu {
     max-width: 240px;
     min-height: 75vh;
@@ -29,32 +44,16 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            &__nz-icon {
+              padding: 10px;
+              &:hover {
+                color: var(--status-error);
+              }
+            }
           }
         }
       }
-    }
-
-    &__second-block {
-      &__nz-button {
-        margin-bottom: 10px;
-        width: 100%;
-      }
-    }
-  }
-
-  &__wrapper {
-    width: 100%;
-    max-height: 75vh;
-    overflow-y: auto;
-
-    &__button-block {
-      display: flex;
-      justify-content: flex-end;
-      margin: 10px 10px 20px 0;
-    }
-
-    &__list {
-      padding: 1%;
     }
   }
 }

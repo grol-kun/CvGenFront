@@ -1,0 +1,24 @@
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'entities.modal.title' | translate" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <form [formGroup]="form" class="auth__form" (ngSubmit)="onAbilityFormSubmit()">
+      <app-input
+        formControlName="name"
+        [label]="'entities.labels.name' | translate"
+        [placeholder]="'entities.placeholders.name' | translate"
+      ></app-input>
+      <button
+        type="submit"
+        class="container__form-wrapper__buttons-block__button"
+        nz-button
+        nzType="primary"
+        [disabled]="!form.valid"
+      >
+        {{ 'buttons.add' | translate }}
+      </button>
+    </form>
+  </ng-container>
+
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'modals.actions.close' | translate }}</button>
+  </div>
+</nz-modal>

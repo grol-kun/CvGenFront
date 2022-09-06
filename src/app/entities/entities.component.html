@@ -1,1 +1,38 @@
-<p>entities works!</p>
+<div class="page">
+  <div class="page__menu">
+    <div class="page__menu__first-block">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input
+          type="text"
+          [formControl]="searchControl"
+          nz-input
+          [placeholder]="'entities.placeholders.search_field' | translate"
+          #search
+        />
+      </nz-input-group>
+
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+
+      <ul nz-menu nzMode="inline" class="page__menu__first-block__nz-menu">
+        <li
+          nz-menu-item
+          class="page__menu__first-block__nz-menu__nz-menu-item"
+          *ngFor="let ability of abilities | filter: searchAbility:'name'; let i = index; trackBy: trackByFn"
+          (click)="initTable(ability.name)"
+        >
+          <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
+            {{ ability.name | translate }}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page__wrapper" *ngIf="isTableVisible">
+    <div class="page__wrapper__list">
+      <app-ability-list [abilityType]="abilityType"></app-ability-list>
+    </div>
+  </div>
+</div>
