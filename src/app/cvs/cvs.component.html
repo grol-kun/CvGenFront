@@ -6,16 +6,21 @@
     <tr>
       <th
         *ngFor="let column of listOfColumns"
+        nzCustomFilter
         [nzSortOrder]="column.sortOrder"
         [nzSortFn]="column.sortFn"
         [nzSortDirections]="column.sortDirections"
       >
         {{ column.name | translate }}
+
+        <nz-filter-trigger [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search" (click)="onFilterTrigger(column.searchField)"></span>
+        </nz-filter-trigger>
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of filterTable.data" [routerLink]="['/cvs/', data.id]">
+    <tr *ngFor="let data of filterTable.data | filter: searchValue:searchField" [routerLink]="['/cvs/', data.id]">
       <td>{{ data.attributes.name }}</td>
       <td>
         <div class="td-wrapper">
@@ -26,9 +31,9 @@
             nzTheme="outline"
             class="td-wrapper__nz-icon"
             nz-popconfirm
-            [nzPopconfirmTitle]="'popconfirm.title'| translate"
+            [nzPopconfirmTitle]="'popconfirm.title' | translate"
             [nzOkText]="'popconfirm.ok' | translate"
-            [nzCancelText]="'popconfirm.cancel'| translate"
+            [nzCancelText]="'popconfirm.cancel' | translate"
             nzPopconfirmPlacement="left"
             (nzOnConfirm)="deleteItem(data.id)"
             (click)="onClick($event)"
@@ -38,3 +43,16 @@
     </tr>
   </tbody>
 </nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        [placeholder]="'table_filter.placeholder' | translate"
+        [formControl]="searchControl"
+      />
+    </div>
+  </div>
+</nz-dropdown-menu>

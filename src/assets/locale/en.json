@@ -180,5 +180,8 @@
     "title": "Are you sure delete this item?",
     "ok": "Yes, delete",
     "cancel": "Cancel"
+  },
+  "table_filter": {
+    "placeholder": "Start input..."
   }
 }

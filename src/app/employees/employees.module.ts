@@ -3,10 +3,25 @@ import { CommonModule } from '@angular/common';
 import { EmployeesComponent } from './employees.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { TranslateControlModule } from '../shared/translate/translate-control.module';
 
 @NgModule({
   declarations: [EmployeesComponent],
-  imports: [CommonModule, EmployeesRoutingModule, NzTableModule, TranslateControlModule],
+  imports: [
+    CommonModule,
+    EmployeesRoutingModule,
+    NzTableModule,
+    TranslateControlModule,
+    NzDropDownModule,
+    ReactiveFormsModule,
+    ApplicationPipesModule,
+    NzIconModule,
+    NzInputModule,
+  ],
 })
 export class EmployeesModule {}
