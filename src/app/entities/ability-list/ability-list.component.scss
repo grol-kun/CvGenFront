@@ -1,0 +1,59 @@
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 20px;
+}
+.td-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__nz-icon {
+    z-index: 5;
+    cursor: pointer;
+  }
+}
+
+.page {
+  display: flex;
+
+  &__menu {
+    max-width: 240px;
+    min-height: 75vh;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 0.5px solid var(--borders-light-gray);
+
+    &__first-block {
+      &__nz-input {
+        width: 100%;
+        height: 28px;
+      }
+
+      &__nz-menu {
+        height: 100%;
+
+        &__nz-menu-item {
+          width: 100%;
+          border: dashed 1px var(--borders-light-gray);
+
+          &__inner-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &__nz-icon {
+              padding: 10px;
+              &:hover {
+                color: var(--status-error);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

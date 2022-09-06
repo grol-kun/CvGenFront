@@ -2,7 +2,7 @@
   <div class="page__menu">
     <div class="page__menu__first-block">
       <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" [formControl]="searchControl" nz-input placeholder="input search text" #search />
+        <input type="text" [formControl]="searchControl" nz-input [placeholder]="'employees.placeholders.search_field'| translate" #search />
       </nz-input-group>
 
       <ng-template #suffixIconSearch>
@@ -24,7 +24,9 @@
               nzTheme="outline"
               class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper__nz-icon"
               nz-popconfirm
-              nzPopconfirmTitle="Are you sure delete this item?"
+              [nzPopconfirmTitle]="'popconfirm.title' | translate"
+              [nzOkText]="'popconfirm.ok' | translate"
+              [nzCancelText]="'popconfirm.cancel' | translate"
               nzPopconfirmPlacement="left"
               (nzOnConfirm)="deleteCv(i)"
               (click)="stopPropagation($event)"
@@ -42,7 +44,7 @@
         nzType="primary"
         (click)="showCvModal()"
       >
-        Add CV
+        {{ 'employees.actions.add_cv' | translate }}
       </button>
     </div>
   </div>
@@ -69,53 +71,53 @@
 
   <div class="page__wrapper" *ngIf="isFormVisible">
     <div class="page__wrapper__button-block">
-      <button type="button" nz-button nzType="default" (click)="onAuthSubmit(); showPreviewModal()">Preview</button>
+      <button type="button" nz-button nzType="default" (click)="onAuthSubmit(); showPreviewModal()">{{'employees.actions.preview' | translate}}</button>
     </div>
 
     <div class="page__wrapper__form">
       <form class="page__wrapper__form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
         <nz-collapse>
-          <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+          <nz-collapse-panel [nzHeader]="'employees.actions.info_collapse' | translate" [nzActive]="true" class="page__wrapper__form__collapse-panel">
             <div class="page__wrapper__form__collapse-panel__inner">
               <div class="page__wrapper__form__collapse-panel__inner__block">
                 <app-input
                   formControlName="firstName"
-                  [label]="'First Name'"
-                  [placeholder]="'First Name'"
+                  [label]="'employees.labels.first_name' | translate"
+                  [placeholder]="'employees.placeholders.first_name' | translate"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
 
                 <app-input
                   formControlName="lastName"
-                  [label]="'Last Name'"
-                  [placeholder]="'Last Name'"
+                  [label]="'employees.labels.last_name' | translate"
+                  [placeholder]="'employees.placeholders.last_name' | translate"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
 
                 <app-input
                   formControlName="education"
-                  [label]="'Education'"
-                  [placeholder]="'Education'"
+                  [label]="'employees.labels.education' | translate"
+                  [placeholder]="'employees.placeholders.education' | translate"
                   class="page__wrapper__form__collapse-panel__inner__block__app-input"
                 ></app-input>
 
                 <app-textarea
                   formControlName="description"
-                  [label]="'Description'"
-                  [placeholder]="'Description'"
+                  [label]="'employees.labels.description' | translate"
+                  [placeholder]="'employees.placeholders.description' | translate"
                   class="page__wrapper__form__collapse-panel__inner__block__app-textarea"
                 ></app-textarea>
               </div>
             </div>
           </nz-collapse-panel>
 
-          <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+          <nz-collapse-panel [nzHeader]="'employees.actions.skills_collapse' | translate" [nzActive]="true" class="page__wrapper__form__collapse-panel">
             <div class="page__wrapper__form__collapse-panel__inner">
               <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
             </div>
           </nz-collapse-panel>
 
-          <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="page__wrapper__form__collapse-panel">
+          <nz-collapse-panel [nzHeader]="'employees.actions.languages_collapse' | translate" [nzActive]="true" class="page__wrapper__form__collapse-panel">
             <div class="page__wrapper__form__collapse-panel__inner">
               <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
             </div>
@@ -124,7 +126,7 @@
 
         <div class="page__wrapper__form__button_wrapper">
           <button type="button" nz-button nzType="text" type="button" (click)="showProjectModal()">
-            +Add projects
+            {{ 'form_array_block.actions.add_projects' | translate }}
           </button>
         </div>
 
@@ -138,7 +140,7 @@
             nzType="primary"
             [disabled]="!form.valid"
           >
-            Save
+            {{ 'buttons.save' | translate }}
           </button>
           <button
             type="button"
@@ -147,7 +149,7 @@
             nzType="default"
             (click)="onCancel()"
           >
-            Сancel
+          {{ 'buttons.cancel' | translate }}
           </button>
         </div>
       </form>

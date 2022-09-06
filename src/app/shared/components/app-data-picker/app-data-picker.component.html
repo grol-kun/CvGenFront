@@ -1,14 +1,24 @@
 <div class="input-component">
   <div class="input-component__label-wrapper">
-    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
+    <label
+      class="input-component__label-wrapper__label"
+      [textContent]="label"
+    ></label>
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <nz-date-picker class="nz-date-picker" [formControl]="control" [nzPlaceHolder]="placeholder"></nz-date-picker>
+  <nz-date-picker
+    class="nz-date-picker"
+    [formControl]="control"
+    [nzPlaceHolder]="placeholder"
+  ></nz-date-picker>
 
   <div class="input-component__error-wrapper">
-    <span class="input-component__error-wrapper__error-message" *ngIf="ngControl.control?.errors && control.touched">
-      {{ ngControl.control?.errors | errorMessage: customError }}
+    <span
+      class="input-component__error-wrapper__error-message"
+      *ngIf="ngControl.control?.errors && control.touched"
+    >
+      {{ ngControl.control?.errors | errorMessage: customError | translate }}
     </span>
   </div>
 </div>

@@ -1,13 +1,13 @@
 <form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
   <nz-collapse>
-    <nz-collapse-panel nzHeader="Info" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel [nzHeader]="'cvs.actions.info_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
       <div class="form__collapse-panel__inner">
         <div class="form__collapse-panel__inner__block">
-          <app-input formControlName="name" [label]="'Name'" [placeholder]="'Name'"></app-input>
+          <app-input formControlName="name" [label]="'cvs.labels.name' | translate" [placeholder]="'cvs.placeholders.name' | translate"></app-input>
           <app-textarea
             formControlName="description"
-            [label]="'Description'"
-            [placeholder]="'Description'"
+            [label]="'cvs.labels.description' | translate"
+            [placeholder]="'cvs.placeholders.description' | translate"
             [minRows]="5"
           >
           </app-textarea>
@@ -15,13 +15,13 @@
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel nzHeader="Skills" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel [nzHeader]="'cvs.actions.skills_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel nzHeader="Languages" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel [nzHeader]="'cvs.actions.languages_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
       </div>
@@ -30,10 +30,10 @@
 
   <div class="form__buttons-block">
     <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
-      Save
+      {{ 'buttons.save' | translate }}
     </button>
     <button type="button" class="form__buttons-block__button" nz-button nzType="default" (click)="onCancel()">
-      Сancel
+      {{ 'buttons.cancel' | translate }}
     </button>
   </div>
 </form>

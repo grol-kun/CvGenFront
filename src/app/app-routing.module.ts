@@ -17,22 +17,30 @@ const routes: Routes = [
       {
         path: 'employees',
         loadChildren: () => import('./employees/employees.module').then((m) => m.EmployeesModule),
-        title: 'Employees',
+        data: {
+          breadcrumb: 'Employees',
+        },
       },
       {
         path: 'projects',
         loadChildren: () => import('./projects/projects.module').then((m) => m.ProjectsModule),
-        title: 'Projects',
+        data: {
+          breadcrumb: 'Projects',
+        },
       },
       {
         path: 'cvs',
         loadChildren: () => import('./cvs/cvs.module').then((m) => m.CvsModule),
-        title: 'CVs',
+        data: {
+          breadcrumb: 'CVs',
+        },
       },
       {
         path: 'entities',
         loadChildren: () => import('./entities/entities.module').then((m) => m.EntitiesModule),
-        title: 'Entities',
+        data: {
+          breadcrumb: 'Entities',
+        },
       },
       {
         path: '**',

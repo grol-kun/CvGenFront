@@ -1,3 +1,5 @@
+@import 'variables';
+
 * {
   margin: 0;
   padding: 0;
@@ -168,4 +170,12 @@ template {
 
 ul {
   list-style: none;
+}
+
+::ng-deep .ant-btn-primary {
+  z-index: 12;
+}
+
+::ng-deep .ant-table-thead th.ant-table-column-has-sorters:hover {
+  background-color: $ext-antd-blue !important;
 }

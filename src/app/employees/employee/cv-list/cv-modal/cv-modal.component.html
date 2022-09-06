@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="isVisible" nzTitle="List of CVs" (nzOnCancel)="handleCancel()">
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'employees.actions.cv_modal.title' | translate" (nzOnCancel)="handleCancel()">
   <ng-container *nzModalContent>
     <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
       <thead>
@@ -9,7 +9,7 @@
             [nzSortFn]="column.sortFn"
             [nzSortDirections]="column.sortDirections"
           >
-            {{ column.name }}
+            {{ column.name | translate }}
           </th>
         </tr>
       </thead>
@@ -23,6 +23,6 @@
   </ng-container>
 
   <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{'modals.actions.close' | translate}}</button>
   </div>
 </nz-modal>

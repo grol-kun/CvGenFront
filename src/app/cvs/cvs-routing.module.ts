@@ -5,17 +5,32 @@ import { CvsComponent } from './cvs.component';
 const routes: Routes = [
   {
     path: '',
-    component: CvsComponent,
-  },
-  {
-    path: ':id',
-    loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
-    title: 'Project',
-  },
-  {
-    path: 'new',
-    loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
-    title: 'Project',
+    children: [
+      {
+        path: '',
+        component: CvsComponent,
+        title: 'CVs',
+        data: {
+          breadcrumb: null,
+        },
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
+        title: 'CV',
+        data: {
+          breadcrumb: 'CV',
+        },
+      },
+      {
+        path: 'new',
+        loadChildren: () => import('./cv/cv.module').then((m) => m.CvModule),
+        title: 'CV',
+        data: {
+          breadcrumb: 'New',
+        },
+      },
+    ],
   },
 ];
 

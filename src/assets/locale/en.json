@@ -3,6 +3,15 @@
     "ru": "Русский",
     "en": "English"
   },
+  "layout": {
+    "employees": "Employees",
+    "projects": "Projects",
+    "cvs": "CVs",
+    "entities": "Entities",
+    "text": {
+      "user_hi": "Hello,"
+    }
+  },
   "auth": {
     "title": "Auth",
     "text": {
@@ -15,6 +24,186 @@
       "login": "Login",
       "remember_me": "Remember me",
       "forgot_password": "Forgot your password?"
+    }
+  },
+  "user_modal": {
+    "title": "User Information",
+    "actions": {
+      "user": "User",
+      "logout": "Logout"
+    },
+    "text": {
+      "user_id": "User ID:",
+      "username": "Username:",
+      "email": "Email:",
+      "first_name": "First Name:",
+      "last_name": "Last Name:"
+    }
+  },
+  "employees": {
+    "title": "Employees",
+    "actions": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "info_tab": "Info",
+      "cv_tab": "CV",
+      "info_collapse": "Info",
+      "skills_collapse": "Skills",
+      "languages_collapse": "Languages",
+      "add_cv": "Add CV",
+      "preview": "Preview",
+      "projects_modal": {
+        "title": "List of projects"
+      },
+      "cv_modal": {
+        "title": "List of CVs"
+      }
+    },
+    "labels": {
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "education": "Education",
+      "description": "Description",
+      "email": "Email"
+    },
+    "placeholders": {
+      "first_name": "Enter first name",
+      "last_name": "Enter last name",
+      "education": "Enter education info",
+      "description": "Enter description",
+      "email": "Enter email",
+      "search_field": "Input search query"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "actions": {
+      "name": "Name",
+      "from": "Start Date",
+      "to": "End Date",
+      "new_project": "New Project"
+    },
+    "forms": {
+      "labels": {
+        "internalName": "Internal name",
+        "name": "Name",
+        "from": "Start Date",
+        "to": "End Date",
+        "domain": "Domain",
+        "stack": "Tech stack",
+        "description": "Description"
+      },
+      "placeholders": {
+        "internalName": "Specify internal name",
+        "name": "Enter name",
+        "from": "Select start Date",
+        "to": "Select end Date",
+        "domain": "Specify domain",
+        "stack": "Select tech stack",
+        "description": "Enter description"
+      }
+    }
+  },
+  "cvs": {
+    "title": "CVs",
+    "actions": {
+      "new_cv": "New CV",
+      "name": "Name",
+      "description": "Description",
+      "info_collapse": "Info",
+      "skills_collapse": "Skills",
+      "languages_collapse": "Languages"
+    },
+    "labels": {
+      "name": "Name",
+      "description": "Description"
+    },
+    "placeholders": {
+      "name": "Enter name",
+      "description": "Enter description"
+    }
+  },
+  "entities": {
+    "title": "Entities",
+    "labels": {
+      "name": "Name",
+      "skills": "Skills",
+      "languages": "Languages",
+      "responsibilities": "Responsibilities"
+    },
+    "placeholders": {
+      "search_field": "Input search query",
+      "name": "Enter name"
+    },
+    "actions": {
+      "new_ability": "New entity"
+    },
+    "modal": {
+      "title": "New entity"
+    }
+  },
+  "errors": {
+    "required": "The field is required",
+    "minLength": "It is too short",
+    "maxLength": "It is too long",
+    "mailFormat": "Input correct email"
+  },
+  "form_array_block": {
+    "actions": {
+      "add_skills": "+ Add skill",
+      "add_languages": "+ Add language",
+      "add_projects": "+ Add project"
+    }
+  },
+  "input_block": {
+    "labels": {
+      "name": "Name",
+      "level": "Level"
+    },
+    "placeholders": {
+      "name": "Select one",
+      "level": "Select a level"
+    }
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "add": "Add"
+  },
+  "modals": {
+    "actions": {
+      "close": "Close"
+    }
+  },
+  "popconfirm": {
+    "title": "Are you sure delete this item?",
+    "ok": "Yes, delete",
+    "cancel": "Cancel"
+  },
+  "table_filter": {
+    "placeholder": "Start input..."
+  },
+  "project_card": {
+    "labels": {
+      "internal_name": "Internal name",
+      "name": "Name",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "tech_stack": "Tech stack",
+      "responsibilities": "Responsibilities",
+      "domain": "Domain",
+      "description": "Description"
+    },
+    "placeholders": {
+      "internal_name": "Internal name",
+      "name": "Name",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "tech_stack": "Tech stack",
+      "responsibilities": "Responsibilities",
+      "domain": "Domain",
+      "description": "Description"
     }
   }
 }

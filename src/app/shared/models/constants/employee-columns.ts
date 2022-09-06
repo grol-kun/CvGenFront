@@ -3,20 +3,23 @@ import { UserInfo } from '../interfaces/user-info';
 
 export const EMPLOYEE_COLUMNS: ColumnItem[] = [
   {
-    name: 'First Name',
+    name: 'employees.actions.first_name',
     sortOrder: null,
+    searchField: 'firstName',
     sortDirections: ['ascend', 'descend', null],
     sortFn: (a: UserInfo, b: UserInfo) => a.firstName.localeCompare(b.firstName),
   },
   {
-    name: 'Last Name',
+    name: 'employees.actions.last_name',
     sortOrder: 'descend',
+    searchField: 'lastName',
     sortDirections: ['ascend', 'descend', null],
     sortFn: (a: UserInfo, b: UserInfo) => a.lastName.localeCompare(b.lastName),
   },
   {
-    name: 'Email',
+    name: 'employees.actions.email',
     sortOrder: null,
+    searchField: 'email',
     sortDirections: ['ascend', 'descend', null],
     sortFn: (a: UserInfo, b: UserInfo) => a.email.localeCompare(b.email),
   },
