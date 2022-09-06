@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CANVAS } from '../models/constants/canvas';
 import { STYLES } from '../models/constants/styles';
+import { TABLE_ITEM_EMPTY } from '../models/constants/table-item-empty';
+import { TABLE_ITEM_FILLED } from '../models/constants/table-item-filled';
 import { Cv } from '../models/interfaces/cv';
 import { UserInfo } from '../models/interfaces/user-info';
 
@@ -17,11 +19,18 @@ export class PdfObjectBuilderService {
     });
   }
 
-  private levelFilledCounter(i: string) {
-    return new Array(Number(i));
+  private buildLevelCell(i: number, counter: number) {
+    return i < counter ? TABLE_ITEM_FILLED : TABLE_ITEM_EMPTY;
   }
-  private levelEmptyCounter(i: string) {
-    return new Array(5 - Number(i));
+
+  private buildLevelTable(k: string) {
+    return {
+      table: {
+        body: [[...new Array(5)].map((e, i) => (e = this.buildLevelCell(i, +k)))],
+      },
+      layout: 'noBorders',
+      margin: [8, 0, 0, 0],
+    };
   }
 
   private buildProjectsList(cvObj: Cv) {
@@ -74,39 +83,7 @@ export class PdfObjectBuilderService {
       (a: object[], c) => [
         ...a,
         {
-          stack: [
-            { text: c.attributes.name },
-            {
-              table: {
-                body: [
-                  [
-                    this.levelFilledCounter(c.attributes.level!).reduce(
-                      (a: []) => [
-                        ...a,
-                        {
-                          text: '1',
-                          style: 'tableItemFilled',
-                          fontSize: 9,
-                        },
-                      ],
-                      []
-                    ),
-                    this.levelEmptyCounter(c.attributes.level!).reduce(
-                      (a: []) => [
-                        ...a,
-                        {
-                          text: '0',
-                          style: 'tableItemEmpty',
-                        },
-                      ],
-                      []
-                    ),
-                  ],
-                ],
-              },
-              layout: 'noBorders',
-            },
-          ],
+          stack: [{ text: c.attributes.name }, this.buildLevelTable(c.attributes.level!)],
           style: 'listItem',
         },
       ],
@@ -119,38 +96,7 @@ export class PdfObjectBuilderService {
       (a: object[], c) => [
         ...a,
         {
-          stack: [
-            { text: c.attributes.name },
-            {
-              table: {
-                body: [
-                  [
-                    this.levelFilledCounter(c.attributes.level!).reduce(
-                      (a: []) => [
-                        ...a,
-                        {
-                          text: '1',
-                          style: 'tableItemFilled',
-                        },
-                      ],
-                      []
-                    ),
-                    this.levelEmptyCounter(c.attributes.level!).reduce(
-                      (a: []) => [
-                        ...a,
-                        {
-                          text: '0',
-                          style: 'tableItemEmpty',
-                        },
-                      ],
-                      []
-                    ),
-                  ],
-                ],
-              },
-              layout: 'noBorders',
-            },
-          ],
+          stack: [{ text: c.attributes.name }, this.buildLevelTable(c.attributes.level!)],
           style: 'listItem',
         },
       ],

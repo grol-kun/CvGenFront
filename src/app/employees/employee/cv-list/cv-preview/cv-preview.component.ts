@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { PdfService } from 'src/app/shared/services/pdf.service';
@@ -8,15 +8,13 @@ import { PdfService } from 'src/app/shared/services/pdf.service';
   templateUrl: './cv-preview.component.html',
   styleUrls: ['./cv-preview.component.scss'],
 })
-export class CvPreviewComponent implements OnInit {
+export class CvPreviewComponent {
   @Output() hideModal = new EventEmitter<boolean>();
   @Input() isVisible = false;
   @Input() user: UserInfo | null = null;
   @Input() previewCv!: Cv;
 
   constructor(private pdf: PdfService) {}
-
-  ngOnInit(): void {}
 
   levelFilledCounter(i: string) {
     return new Array(Number(i));
@@ -30,9 +28,7 @@ export class CvPreviewComponent implements OnInit {
     this.hideModal.emit();
   }
 
-  exportPdf() {
-    console.log(this.previewCv);
-    console.log(this.user);
+  exportPdf() {  
     this.pdf.generatePdf(this.previewCv, this.user!);
   }
 }
