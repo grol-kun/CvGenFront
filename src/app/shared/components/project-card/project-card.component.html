@@ -1,25 +1,29 @@
 <ng-container [formGroup]="form" class="container">
   <div class="container__form-wrapper">
-    <app-input formControlName="internalName" [label]="'Internal name'" [placeholder]="'Internal name'"></app-input>
+    <app-input
+      formControlName="internalName"
+      [label]="'project_card.labels.internal_name' | translate"
+      [placeholder]="'Internal name'"
+    ></app-input>
 
     <div class="container__form-wrapper__first-block">
       <app-input
         formControlName="name"
-        [label]="'Name'"
+        [label]="'project_card.labels.name' | translate"
         [placeholder]="'Name'"
         class="container__form-wrapper__first-block__control"
       ></app-input>
 
       <app-app-data-picker
         formControlName="from"
-        [label]="'Start date'"
+        [label]="'project_card.labels.start_date' | translate"
         [placeholder]="'Start date'"
         class="container__form-wrapper__first-block__control"
       ></app-app-data-picker>
 
       <app-app-data-picker
         formControlName="to"
-        [label]="'End date'"
+        [label]="'project_card.labels.end_date' | translate"
         [placeholder]="'End date'"
         class="container__form-wrapper__first-block__control"
       ></app-app-data-picker>
@@ -28,7 +32,7 @@
     <div class="container__form-wrapper__second-block">
       <app-select
         formControlName="skills"
-        label="Tech stack"
+        [label]="'project_card.labels.tech_stack' | translate"
         [options]="skillOptions"
         [nzMode]="'tags'"
         class="container__form-wrapper__second-block__control"
@@ -37,7 +41,7 @@
 
       <app-select
         formControlName="responsibilities"
-        label="Responsibilities"
+        [label]="'project_card.labels.responsibilities' | translate"
         [options]="respOptions"
         [nzMode]="'tags'"
         class="container__form-wrapper__second-block__control"
@@ -46,7 +50,7 @@
 
       <app-input
         formControlName="domain"
-        [label]="'Domain'"
+        [label]="'project_card.labels.domain' | translate"
         [placeholder]="'Domain'"
         class="container__form-wrapper__second-block__control"
       ></app-input>
@@ -54,7 +58,7 @@
 
     <app-textarea
       formControlName="description"
-      [label]="'Description'"
+      [label]="'project_card.labels.description' | translate"
       [placeholder]="'Description'"
       [minRows]="5"
     ></app-textarea>

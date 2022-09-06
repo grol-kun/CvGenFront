@@ -90,7 +90,7 @@
         "name": "Название",
         "from": "Дата начала",
         "to": "Дата окончания",
-        "domain": "Направление",
+        "domain": "Домен",
         "stack": "Технический стек",
         "description": "Описание"
       },
@@ -124,22 +124,22 @@
       "description": "Введите описание"
     }
   },
-  "entities":{
+  "entities": {
     "title": "Сущности",
-    "labels":{
+    "labels": {
       "name": "Название",
       "skills": "Навыки",
       "languages": "Языки",
-      "responsibilities": "Ответственности"
+      "responsibilities": "Обязанности"
     },
-    "placeholders":{
+    "placeholders": {
       "search_field": "Введите поисковой запрос",
       "name": "Введите название"
     },
-    "actions":{
+    "actions": {
       "new_ability": "Добавить сущность"
     },
-    "modal":{
+    "modal": {
       "title": "Новая сущность"
     }
   },
@@ -183,5 +183,17 @@
   },
   "table_filter": {
     "placeholder": "Начните ввод..."
+  },
+  "project_card": {
+    "labels": {
+      "internal_name": "Внутреннее имя",
+      "name": "Имя",
+      "start_date": "Дата начала",
+      "end_date": "Дата окончания",
+      "tech_stack": "Технический стек",
+      "responsibilities": "Обязанности",
+      "domain": "Домен",
+      "description": "Описание"
+    }
   }
 }
