@@ -21,7 +21,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzIconModule,
     NzButtonModule,
     NzPopconfirmModule,
-    TranslateControlModule
+    TranslateControlModule,
     NzDropDownModule,
     ApplicationPipesModule,
     NzInputModule,

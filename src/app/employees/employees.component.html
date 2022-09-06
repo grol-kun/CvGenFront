@@ -28,7 +28,12 @@
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <div class="ant-table-filter-dropdown">
     <div class="search-box">
-      <input type="text" nz-input placeholder="Input search..." [formControl]="searchControl" />
+      <input
+        type="text"
+        nz-input
+        [placeholder]="'table_filter.placeholder' | translate"
+        [formControl]="searchControl"
+      />
     </div>
   </div>
 </nz-dropdown-menu>
