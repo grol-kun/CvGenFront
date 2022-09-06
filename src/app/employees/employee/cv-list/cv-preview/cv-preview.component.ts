@@ -11,21 +11,28 @@ import { PdfService } from 'src/app/shared/services/pdf.service';
 export class CvPreviewComponent implements OnInit {
   @Output() hideModal = new EventEmitter<boolean>();
   @Input() isVisible = false;
-  @Input() user: UserInfo | null = null
+  @Input() user: UserInfo | null = null;
   @Input() previewCv!: Cv;
 
   constructor(private pdf: PdfService) {}
 
   ngOnInit(): void {}
 
+  levelFilledCounter(i: string) {
+    return new Array(Number(i));
+  }
+  levelEmptyCounter(i: string) {
+    return new Array(5 - Number(i));
+  }
+
   handleCancel(): void {
     this.isVisible = false;
     this.hideModal.emit();
   }
 
-  exportPdf(){
+  exportPdf() {
     console.log(this.previewCv);
-    console.log(this.user);    
+    console.log(this.user);
     this.pdf.generatePdf(this.previewCv, this.user!);
   }
 }

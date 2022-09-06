@@ -37,6 +37,14 @@ export const STYLES = {
     fontSize: 9,
     margin: [0, 0, 0, 8],
   },
+  tableItemFilled:{
+    fontSize: 9,
+    background: '#C63031',
+  },
+  tableItemEmpty:{
+    fontSize: 9,
+    background: '#CFCFCF',
+  },
   listItemHeader: {
     color: '#C63031',
     fontSize: 10,

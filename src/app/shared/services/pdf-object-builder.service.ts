@@ -17,6 +17,13 @@ export class PdfObjectBuilderService {
     });
   }
 
+  private levelFilledCounter(i: string) {
+    return new Array(Number(i));
+  }
+  private levelEmptyCounter(i: string) {
+    return new Array(5 - Number(i));
+  }
+
   private buildProjectsList(cvObj: Cv) {
     return cvObj.attributes.projects?.data.reduce(
       (a: object[], c) => [
@@ -29,7 +36,17 @@ export class PdfObjectBuilderService {
               style: 'listItemSubHeader',
             },
             { text: c.attributes.description, style: 'listItemDesc' },
-            //{ text: c.attributes.responsibilities.data, style: 'listItemDesc' },
+            { text: 'Responsibilities', fontSize: 8 },
+            c.attributes.responsibilities.data.reduce(
+              (a: object[], c) => [
+                ...a,
+                {
+                  stack: [{ text: c.attributes.name }],
+                  style: 'listItem',
+                },
+              ],
+              []
+            ),
           ],
           style: 'listItem',
         },
@@ -42,7 +59,6 @@ export class PdfObjectBuilderService {
     return [
       {
         stack: [
-          { text: 'Higher Education', style: 'listItemHeader' },
           {
             text: `${userObj.education}`,
             style: 'listItemSubHeader',
@@ -58,7 +74,39 @@ export class PdfObjectBuilderService {
       (a: object[], c) => [
         ...a,
         {
-          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
+          stack: [
+            { text: c.attributes.name },
+            {
+              table: {
+                body: [
+                  [
+                    this.levelFilledCounter(c.attributes.level!).reduce(
+                      (a: []) => [
+                        ...a,
+                        {
+                          text: '1',
+                          style: 'tableItemFilled',
+                          fontSize: 9,
+                        },
+                      ],
+                      []
+                    ),
+                    this.levelEmptyCounter(c.attributes.level!).reduce(
+                      (a: []) => [
+                        ...a,
+                        {
+                          text: '0',
+                          style: 'tableItemEmpty',
+                        },
+                      ],
+                      []
+                    ),
+                  ],
+                ],
+              },
+              layout: 'noBorders',
+            },
+          ],
           style: 'listItem',
         },
       ],
@@ -71,7 +119,38 @@ export class PdfObjectBuilderService {
       (a: object[], c) => [
         ...a,
         {
-          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
+          stack: [
+            { text: c.attributes.name },
+            {
+              table: {
+                body: [
+                  [
+                    this.levelFilledCounter(c.attributes.level!).reduce(
+                      (a: []) => [
+                        ...a,
+                        {
+                          text: '1',
+                          style: 'tableItemFilled',
+                        },
+                      ],
+                      []
+                    ),
+                    this.levelEmptyCounter(c.attributes.level!).reduce(
+                      (a: []) => [
+                        ...a,
+                        {
+                          text: '0',
+                          style: 'tableItemEmpty',
+                        },
+                      ],
+                      []
+                    ),
+                  ],
+                ],
+              },
+              layout: 'noBorders',
+            },
+          ],
           style: 'listItem',
         },
       ],
@@ -100,7 +179,7 @@ export class PdfObjectBuilderService {
             text: `${userObj.firstName} ${userObj.lastName}`,
             style: 'name',
           },
-          { text: 'Front-end Developer', style: 'title' },
+          { text: '', style: 'title' },
           { text: userObj.email, style: 'headerListItem' },
         ],
       },

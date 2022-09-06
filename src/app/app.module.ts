@@ -60,7 +60,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      useDefaultLang: true,
+      useDefaultLang: false,
     }),
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(reducers, {

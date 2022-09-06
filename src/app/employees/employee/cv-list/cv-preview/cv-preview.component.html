@@ -1,7 +1,7 @@
 <nz-modal
   nzWidth="60%"
   [nzVisible]="isVisible"
-  [nzTitle]="'employees.cv_preview.title' | translate"
+  [nzTitle]="'employees.actions.cv_preview.title' | translate"
   (nzOnCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
@@ -10,32 +10,91 @@
         <div class="preview-container__head__left">
           <img src="/assets/svgs/logo.svg" alt="Innowise" />
         </div>
-        <div class="preview-container__head__right">
-          <p class="preview-container__head__right__username">{{ user?.firstName }} {{ user?.lastName }}</p>
-          <p class="preview-container__head__right__title">Front-end Developer</p>
+        <div class="preview-container__head__right" *ngIf="user">
+          <p class="preview-container__head__right__username">{{ user.firstName }} {{ user.lastName }}</p>
           <p class="preview-container__head__right__email">
-            {{ user?.email }}
+            {{ user.email }}
           </p>
         </div>
       </div>
       <div class="preview-container__body">
         <div class="preview-container__body__left">
-          <div class="preview-container__body__left__skills">
+          <div class="preview-container__body__left__skills" *ngIf="previewCv?.attributes?.skills">
             <p class="preview-container__body__left__skills__heading">Skills</p>
             <ul class="preview-container__body__left__skills__list">
-              <li>Angular - 5</li>
-              <li>ngRx - 5</li>
+              <li class="preview-container__body__left__skills__list__item" *ngFor="let skill of user?.skills">
+                <p class="preview-container__body__left__skills__list__item__name">{{ skill.attributes.name }}</p>
+                <div
+                  class="preview-container__body__left__skills__list__item__level"
+                  *ngIf="skill.attributes.level as level"
+                >
+                  <span
+                    class="preview-container__body__left__skills__list__item__level__filled"
+                    *ngFor="let in of levelFilledCounter(level)"
+                  ></span>
+                  <span
+                    class="preview-container__body__left__skills__list__item__level__empty"
+                    *ngFor="let in of levelEmptyCounter(level)"
+                  ></span>
+                </div>
+              </li>
             </ul>
           </div>
-          <div class="preview-container__body__left__languages">
+          <div class="preview-container__body__left__languages" *ngIf="previewCv?.attributes?.languages">
             <p class="preview-container__body__left__languages__heading">Languages</p>
             <ul class="preview-container__body__left__languages__list">
-              <li></li>
-              <li></li>
+              <li class="preview-container__body__left__languages__list__item" *ngFor="let language of user?.languages">
+                <p class="preview-container__body__left__languages__list__item__name">{{ language.attributes.name }}</p>
+                <div
+                  class="preview-container__body__left__languages__list__item__level"
+                  *ngIf="language.attributes.level as level"
+                >
+                  <span
+                    class="preview-container__body__left__languages__list__item__level__filled"
+                    *ngFor="let in of levelFilledCounter(level)"
+                  ></span>
+                  <span
+                    class="preview-container__body__left__languages__list__item__level__empty"
+                    *ngFor="let in of levelEmptyCounter(level)"
+                  ></span>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
-        <div class="preview-container__body__right"></div>
+        <div class="preview-container__body__right">
+          <div class="preview-container__body__right__education" *ngIf="user?.education">
+            <p class="preview-container__body__right__education__heading">Education</p>
+            <p class="preview-container__body__right__education__info">{{ user?.education }}</p>
+          </div>
+          <div class="preview-container__body__right__projects" *ngIf="previewCv?.attributes?.projects">
+            <p class="preview-container__body__right__projects__heading">Projects</p>
+            <ul class="preview-container__body__right__projects__list">
+              <li
+                class="preview-container__body__right__projects__list__item"
+                *ngFor="let project of previewCv.attributes.projects?.data"
+              >
+                <p class="preview-container__body__right__projects__list__item__heading">
+                  {{ project.attributes.name }}
+                </p>
+                <p class="preview-container__body__right__projects__list__item__date">
+                  {{ project.attributes.from }} - {{ project.attributes.to }}
+                </p>
+                <p class="preview-container__body__right__projects__list__item__description">
+                  {{ project.attributes.description }}
+                </p>
+                <p class="preview-container__body__right__projects__list__item__responsibilities__heading">
+                  Responsibilities
+                </p>
+                <ul class="preview-container__body__right__projects__list__item__responsibilities__list">
+                  <li *ngFor="let responsibility of project.attributes.responsibilities.data">
+                    {{ responsibility.attributes.name }}
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
