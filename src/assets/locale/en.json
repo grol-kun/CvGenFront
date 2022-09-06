@@ -183,5 +183,27 @@
   },
   "table_filter": {
     "placeholder": "Start input..."
+  },
+  "project_card": {
+    "labels": {
+      "internal_name": "Internal name",
+      "name": "Name",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "tech_stack": "Tech stack",
+      "responsibilities": "Responsibilities",
+      "domain": "Domain",
+      "description": "Description"
+    },
+    "placeholders": {
+      "internal_name": "Internal name",
+      "name": "Name",
+      "start_date": "Start date",
+      "end_date": "End date",
+      "tech_stack": "Tech stack",
+      "responsibilities": "Responsibilities",
+      "domain": "Domain",
+      "description": "Description"
+    }
   }
 }
