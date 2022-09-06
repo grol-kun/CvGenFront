@@ -194,6 +194,16 @@
       "responsibilities": "Обязанности",
       "domain": "Домен",
       "description": "Описание"
+    },
+    "placeholders": {
+      "internal_name": "Внутреннее имя",
+      "name": "Имя",
+      "start_date": "Дата начала",
+      "end_date": "Дата окончания",
+      "tech_stack": "Технический стек",
+      "responsibilities": "Обязанности",
+      "domain": "Домен",
+      "description": "Описание"
     }
   }
 }

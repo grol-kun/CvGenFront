@@ -3,28 +3,28 @@
     <app-input
       formControlName="internalName"
       [label]="'project_card.labels.internal_name' | translate"
-      [placeholder]="'Internal name'"
+      [placeholder]="'project_card.placeholders.internal_name' | translate"
     ></app-input>
 
     <div class="container__form-wrapper__first-block">
       <app-input
         formControlName="name"
         [label]="'project_card.labels.name' | translate"
-        [placeholder]="'Name'"
+        [placeholder]="'project_card.placeholders.name' | translate"
         class="container__form-wrapper__first-block__control"
       ></app-input>
 
       <app-app-data-picker
         formControlName="from"
         [label]="'project_card.labels.start_date' | translate"
-        [placeholder]="'Start date'"
+        [placeholder]="'project_card.placeholders.start_date' | translate"
         class="container__form-wrapper__first-block__control"
       ></app-app-data-picker>
 
       <app-app-data-picker
         formControlName="to"
         [label]="'project_card.labels.end_date' | translate"
-        [placeholder]="'End date'"
+        [placeholder]="'project_card.placeholders.end_date' | translate"
         class="container__form-wrapper__first-block__control"
       ></app-app-data-picker>
     </div>
@@ -51,7 +51,7 @@
       <app-input
         formControlName="domain"
         [label]="'project_card.labels.domain' | translate"
-        [placeholder]="'Domain'"
+        [placeholder]="'project_card.placeholders.domain' | translate"
         class="container__form-wrapper__second-block__control"
       ></app-input>
     </div>
@@ -59,7 +59,7 @@
     <app-textarea
       formControlName="description"
       [label]="'project_card.labels.description' | translate"
-      [placeholder]="'Description'"
+      [placeholder]="'project_card.placeholders.description' | translate"
       [minRows]="5"
     ></app-textarea>
   </div>
