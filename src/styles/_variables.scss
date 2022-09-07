@@ -28,10 +28,12 @@ $status-error-dark: #ff4d4f;
 $status-success-light: #00c851;
 $status-success-dark: #00c851;
 
+$ext-antd-blue: #1890ff;
+$ext-antd-gray: rgba(255, 255, 255, 0.9);
+
 $overlay-bg-color: rgba(85, 85, 86, 0.1);
 $simple-white: #fff;
 $simple-black: #000;
-$ext-antd-blue: #1890ff;
 
 $borders-light: rgba(128, 128, 128, 0.5);
 $borders-dark: rgba(208, 208, 208, 0.5);
@@ -46,6 +48,7 @@ $borders-dark: rgba(208, 208, 208, 0.5);
   --status-error: #{$status-error-light};
   --status-success: #{$status-success-light};
   --borders-light-gray: #{$borders-light};
+  --table-head: #{$ext-antd-gray};
 }
 
 @mixin dark() {
@@ -58,4 +61,5 @@ $borders-dark: rgba(208, 208, 208, 0.5);
   --status-error: #{$status-error-dark};
   --status-success: #{$status-success-dark};
   --borders-light-gray: #{$borders-dark};
+  --table-head: #{$ext-antd-blue};
 }
