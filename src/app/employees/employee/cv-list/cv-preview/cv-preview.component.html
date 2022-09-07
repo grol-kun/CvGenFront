@@ -78,7 +78,7 @@
                   {{ project.attributes.name }}
                 </p>
                 <p class="preview-container__body__right__projects__list__item__date">
-                  {{ project.attributes.from }} - {{ project.attributes.to }}
+                  {{ project.attributes.from | date }} - {{ project.attributes.to | date }}
                 </p>
                 <p class="preview-container__body__right__projects__list__item__description">
                   {{ project.attributes.description }}
