@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
@@ -23,8 +23,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     private abilityService: AbilityService,
-    private message: NzMessageService,
-    private cdr: ChangeDetectorRef
+    private message: NzMessageService
   ) {}
 
   ngOnInit() {
