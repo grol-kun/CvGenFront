@@ -14,7 +14,7 @@ import { AbilityService } from 'src/app/shared/services/ability.service';
 })
 export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() abilityType!: string;
-  emitSubject = new BehaviorSubject(null);
+  abilitiesListSubject = new BehaviorSubject(null);
   searchControl = new FormControl<string>('');
   searchAbility = '';
   abilitiesList$ = new BehaviorSubject<Ability[]>([]);
@@ -55,7 +55,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges() {
-    this.emitSubject
+    this.abilitiesListSubject
       .asObservable()
       .pipe(switchMap(() => this.getAbilities()))
       .pipe(takeUntil(this.destroy$))
@@ -74,11 +74,11 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
 
   onHideModal() {
     this.isModalVisible = false;
-    this.emitCalled();
+    this.forceAbilitiesListSubject();
   }
 
-  emitCalled() {
-    this.emitSubject.next(null);
+  forceAbilitiesListSubject() {
+    this.abilitiesListSubject.next(null);
   }
 
   ngOnDestroy(): void {
