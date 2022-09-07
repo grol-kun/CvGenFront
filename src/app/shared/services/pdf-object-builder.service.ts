@@ -78,8 +78,8 @@ export class PdfObjectBuilderService {
     ];
   }
 
-  private buildSkillList(cvObj: Cv) {
-    return cvObj.attributes.skills.reduce(
+  private buildSkillList(userObj: UserInfo) {
+    return userObj.skills.reduce(
       (a: object[], c) => [
         ...a,
         {
@@ -91,8 +91,8 @@ export class PdfObjectBuilderService {
     );
   }
 
-  private buildLanguagesList(cvObj: Cv) {
-    return cvObj.attributes.languages.reduce(
+  private buildLanguagesList(userObj: UserInfo) {
+    return userObj.languages.reduce(
       (a: object[], c) => [
         ...a,
         {
@@ -136,17 +136,17 @@ export class PdfObjectBuilderService {
     return [{ stack: this.buildLogo(), style: 'headerLinks' }];
   }
 
-  private buildSkillsSection(cvObj: Cv) {
+  private buildSkillsSection(userObj: UserInfo) {
     return [
       { text: 'Skills', style: 'sectionTitle' },
-      { stack: this.buildSkillList(cvObj), style: 'list' },
+      { stack: this.buildSkillList(userObj), style: 'list' },
     ];
   }
 
-  private buildLanguagesSection(cvObj: Cv) {
+  private buildLanguagesSection(userObj: UserInfo) {
     return [
       { text: 'Languages', style: 'sectionTitle' },
-      { stack: this.buildLanguagesList(cvObj), style: 'list' },
+      { stack: this.buildLanguagesList(userObj), style: 'list' },
     ];
   }
   private buildEducationSection(userObj: UserInfo) {
@@ -170,8 +170,8 @@ export class PdfObjectBuilderService {
     return [this.buildEducationSection(userObj), this.buildProjectsSection(cvObj)];
   }
 
-  private buildSide(cvObj: Cv) {
-    return [this.buildSkillsSection(cvObj), this.buildLanguagesSection(cvObj)];
+  private buildSide(userObj: UserInfo) {
+    return [this.buildSkillsSection(userObj), this.buildLanguagesSection(userObj)];
   }
 
   public buildDocDefinition(cvObj: Cv, userObj: UserInfo) {
@@ -200,7 +200,7 @@ export class PdfObjectBuilderService {
           columns: [
             {
               width: '25%',
-              stack: this.buildSide(cvObj),
+              stack: this.buildSide(userObj),
               style: 'side',
             },
             {
