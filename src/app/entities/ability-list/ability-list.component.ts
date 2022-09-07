@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
@@ -10,6 +10,7 @@ import { AbilityService } from 'src/app/shared/services/ability.service';
   selector: 'app-ability-list',
   templateUrl: './ability-list.component.html',
   styleUrls: ['./ability-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() abilityType!: string;
