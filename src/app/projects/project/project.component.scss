@@ -74,6 +74,18 @@
         &__control {
           margin: 0;
         }
+
+        &__date_wrapper {
+          flex: 1 1;
+
+          &__date_group {
+            flex-direction: column;
+
+            &__control {
+              margin: 0;
+            }
+          }
+        }
       }
 
       &__second-block {
