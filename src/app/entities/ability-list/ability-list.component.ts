@@ -48,7 +48,6 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
         switchMap(() => this.getAbilities())
       )
       .subscribe((data) => {
-        console.log(data.data);
         this.abilitiesList$.next(data.data);
         this.message.create('success', `Item has just been deleted!`);
       });
