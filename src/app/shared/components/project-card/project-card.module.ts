@@ -9,6 +9,7 @@ import { AppSelectModule } from '../app-select/app-select.module';
 import { AppDataPickerModule } from '../app-data-picker/app-data-picker.module';
 import { AppTextareaModule } from '../app-textarea/app-textarea.module';
 import { TranslateControlModule } from '../../translate/translate-control.module';
+import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 
 @NgModule({
   declarations: [ProjectCardComponent],
@@ -22,6 +23,7 @@ import { TranslateControlModule } from '../../translate/translate-control.module
     AppDataPickerModule,
     AppTextareaModule,
     TranslateControlModule,
+    ApplicationPipesModule,
   ],
   exports: [ProjectCardComponent],
 })

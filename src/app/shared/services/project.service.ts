@@ -40,7 +40,12 @@ export class ProjectService {
       .getRawValue()
       .skills.map((skillName: string) => SkillList.find((elem) => elem.attributes.name === skillName));
 
-    const project: ProjectBody = { data: { ...form.getRawValue(), skills } };
+    const { description, domain, internalName, name, dateGroup } = form.getRawValue();
+
+    const project: ProjectBody = {
+      data: { description, domain, internalName, name, from: dateGroup.from, to: dateGroup.to, skills },
+    };
+
     return project;
   }
 }

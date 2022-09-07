@@ -147,7 +147,8 @@
     "required": "The field is required",
     "minLength": "It is too short",
     "maxLength": "It is too long",
-    "mailFormat": "Input correct email"
+    "mailFormat": "Input correct email",
+    "dateSequence": "'Start Date' should be smaller than 'End Date'"
   },
   "form_array_block": {
     "actions": {

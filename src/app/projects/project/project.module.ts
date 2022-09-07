@@ -9,6 +9,7 @@ import { AppTextareaModule } from 'src/app/shared/components/app-textarea/app-te
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
+import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 
 @NgModule({
   declarations: [ProjectComponent],
@@ -21,7 +22,8 @@ import { TranslateControlModule } from 'src/app/shared/translate/translate-contr
     AppTextareaModule,
     ReactiveFormsModule,
     NzButtonModule,
-    TranslateControlModule
+    TranslateControlModule,
+    ApplicationPipesModule,
   ],
 })
 export class ProjectModule {}

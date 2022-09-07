@@ -5,4 +5,5 @@ export const COMMON_ERRORS: ErrorMessages = {
   minlength: 'errors.minLength',
   maxlength: 'errors.maxLength',
   mailFormatError: 'errors.mailFormat',
+  dates: 'errors.dateSequence',
 };
