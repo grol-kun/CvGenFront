@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CANVAS } from '../models/constants/canvas';
+import { PDF_COLORS } from '../models/constants/pdf-colors';
 import { STYLES } from '../models/constants/styles';
 import { TABLE_ITEM_EMPTY } from '../models/constants/table-item-empty';
 import { TABLE_ITEM_FILLED } from '../models/constants/table-item-filled';
@@ -20,7 +21,7 @@ export class PdfObjectBuilderService {
   }
 
   private buildLevelCell(i: number, counter: number) {
-    return i < counter ? TABLE_ITEM_FILLED : TABLE_ITEM_EMPTY;
+    return i < counter ? { ...TABLE_ITEM_FILLED } : { ...TABLE_ITEM_EMPTY };
   }
 
   private buildLevelTable(k: string) {
@@ -28,8 +29,13 @@ export class PdfObjectBuilderService {
       table: {
         body: [[...new Array(5)].map((e, i) => (e = this.buildLevelCell(i, +k)))],
       },
-      layout: 'noBorders',
-      margin: [8, 0, 0, 0],
+      margin: [-4, 0, 0, 0],
+      layout: {
+        hLineWidth: () => 4,
+        vLineWidth: () => 4,
+        hLineColor: () => PDF_COLORS.WHITE,
+        vLineColor: () => PDF_COLORS.WHITE,
+      },
     };
   }
 

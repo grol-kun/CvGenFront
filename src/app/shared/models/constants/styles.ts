@@ -38,14 +38,6 @@ export const STYLES = {
     fontSize: 9,
     margin: [0, 0, 0, 8],
   },
-  tableItemEmpty: {
-    fontSize: 9,
-    background: PDF_COLORS.GRAY,
-  },
-  tableItemFilled: {
-    fontSize: 9,
-    background: PDF_COLORS.RED,
-  },
   listItemHeader: {
     color: PDF_COLORS.RED,
     fontSize: 10,
