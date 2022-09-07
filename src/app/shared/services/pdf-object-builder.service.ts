@@ -39,6 +39,10 @@ export class PdfObjectBuilderService {
     };
   }
 
+  private buildDate(date: string) {
+    return new Date(date).toLocaleDateString('en-US', { dateStyle: 'long' });
+  }
+
   private buildProjectsList(cvObj: Cv) {
     return cvObj.attributes.projects?.data.reduce(
       (a: object[], c) => [
@@ -47,7 +51,9 @@ export class PdfObjectBuilderService {
           stack: [
             { text: c.attributes.name, style: 'listItemHeader' },
             {
-              text: `${c.attributes.from} ${c.attributes.to && `- ${c.attributes.to}`}`,
+              text: `${this.buildDate(c.attributes.from)} ${
+                this.buildDate(c.attributes.to) && `- ${this.buildDate(c.attributes.to)}`
+              }`,
               style: 'listItemSubHeader',
             },
             { text: c.attributes.description, style: 'listItemDesc' },
