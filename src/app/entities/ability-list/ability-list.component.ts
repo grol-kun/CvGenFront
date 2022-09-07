@@ -56,7 +56,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges() {
     this.emitSubject
       .asObservable()
-      .pipe(switchMap((_) => this.getAbilities()))
+      .pipe(switchMap(() => this.getAbilities()))
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.abilitiesList$.next(data.data);
