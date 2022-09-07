@@ -1,4 +1,4 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
 
 :host {
   height: 100%;
@@ -75,7 +75,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 568px) {
+@media screen and (max-width: $view-768) {
   .nz-layout__nz-sider {
     display: none;
   }

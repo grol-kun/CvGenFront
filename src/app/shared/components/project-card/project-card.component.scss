@@ -1,3 +1,4 @@
+@import "../../../../styles.scss";
 .container {
   margin-top: 30px;
 
@@ -7,7 +8,7 @@
       width: 100%;
 
       &__control {
-        flex: 1 1;
+        flex: 1 1 30%;
         margin: 0 10px;
 
         &:first-child {
@@ -16,6 +17,26 @@
 
         &:last-child {
           margin-right: 0;
+        }
+      }
+      &__date_wrapper {
+        flex: 1 1 60%;
+
+        &__date_group {
+          display: flex;
+
+          &__control {
+            flex: 1 1;
+            margin: 0 10px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
@@ -34,6 +55,33 @@
 
         &:last-child {
           flex: 0 0 48%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $view-768) {
+  .container {
+    &__form-wrapper {
+      &__first-block {
+        flex-direction: column;
+
+        &__control {
+          flex: 1 1;
+          margin: 0;
+        }
+      }
+
+      &__second-block {
+        &__control {
+          flex: 1 0 100%;
+          margin: 0 0 30px 0;
+
+          &:last-child {
+            flex: 1 0 100%;
+            margin: 0;
+          }
         }
       }
     }

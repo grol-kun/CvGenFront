@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .page {
   display: flex;
@@ -55,6 +55,18 @@
 
     &__list {
       padding: 1%;
+    }
+  }
+}
+
+@media (max-width: $view-768) {
+  .page {
+    flex-wrap: wrap;
+
+    &__menu {
+      max-width: 100%;
+      min-height: 25vh;
+      width: 100vw;
     }
   }
 }

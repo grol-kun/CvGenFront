@@ -3,6 +3,7 @@ $font-size-12: 12px;
 $header-logo-size-64: 64px;
 $font-weight-bold: 800;
 $font-weight-normal: 400;
+$view-768: 768px;
 
 $background-primary-light: #f0f2f5;
 $background-primary-dark: #2b2d30;
@@ -28,11 +29,13 @@ $status-error-dark: #ff4d4f;
 $status-success-light: #00c851;
 $status-success-dark: #00c851;
 
+$ext-antd-blue: #1890ff;
+$ext-antd-gray: rgba(255, 255, 255, 0.9);
+
 $overlay-bg-color: rgba(85, 85, 86, 0.1);
 $simple-white: #fff;
 $simple-black: #000;
 $simple-gray: #cfcfcf;
-$ext-antd-blue: #1890ff;
 $logo-red: #c63031;
 
 $borders-light: rgba(128, 128, 128, 0.5);
@@ -48,6 +51,7 @@ $borders-dark: rgba(208, 208, 208, 0.5);
   --status-error: #{$status-error-light};
   --status-success: #{$status-success-light};
   --borders-light-gray: #{$borders-light};
+  --table-head: #{$ext-antd-gray};
 }
 
 @mixin dark() {
@@ -60,4 +64,5 @@ $borders-dark: rgba(208, 208, 208, 0.5);
   --status-error: #{$status-error-dark};
   --status-success: #{$status-success-dark};
   --borders-light-gray: #{$borders-dark};
+  --table-head: #{$ext-antd-blue};
 }

@@ -15,6 +15,7 @@ import { Project } from '../../models/interfaces/project';
 import { Response } from '../../models/interfaces/response';
 import { Responsibility } from '../../models/interfaces/responsibility';
 import { Skill } from '../../models/interfaces/skill';
+import { DateValidator } from '../../validators/date.validator';
 
 @Component({
   selector: 'app-project-card',
@@ -52,8 +53,13 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
     this.form = this.fb.group({
       internalName: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      from: ['', [Validators.required]],
-      to: ['', [Validators.required]],
+      dateGroup: this.fb.group(
+        {
+          from: ['', [Validators.required]],
+          to: ['', [Validators.required]],
+        },
+        { validator: DateValidator }
+      ),
       domain: ['', [Validators.required]],
       skills: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -85,10 +91,18 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
     }
   }
 
-  setFormValue(val: Project, skillsNames: string[], respNames: string[]): void {
+  private setFormValue(val: Project, skillsNames: string[], respNames: string[]): void {
     const { internalName, name, from, to, domain, description } = val.attributes;
     this.form.setValue(
-      { internalName, name, from, to, domain, skills: skillsNames, description, responsibilities: respNames },
+      {
+        internalName,
+        name,
+        dateGroup: { from, to },
+        domain,
+        skills: skillsNames,
+        description,
+        responsibilities: respNames,
+      },
       { emitEvent: false }
     );
   }
@@ -112,12 +126,18 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
         map((value) => {
           const objSkills = this.formSkills(value);
           const objResps = this.formResps(value);
+          const formatedValue = this.formateValue(value);
 
-          return this.getProjectBody(objSkills, objResps, value);
+          return this.getProjectBody(objSkills, objResps, formatedValue);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe(fn);
+  }
+
+  formateValue(value: any) {
+    const { dateGroup, description, domain, internalName, name } = value;
+    return { description, domain, internalName, name, from: dateGroup.from, to: dateGroup.to };
   }
 
   getProjectBody(objSkills: Skill[], objResps: Responsibility[], value: any): Project | null {
