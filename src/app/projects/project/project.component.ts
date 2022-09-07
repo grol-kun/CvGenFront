@@ -8,6 +8,7 @@ import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { DateValidator } from 'src/app/shared/validators/date.validator';
 
 @Component({
   selector: 'app-project',
@@ -58,7 +59,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         const skillsNames = skills.map((skill) => skill.attributes.name);
 
         this.form.patchValue(
-          { internalName, name, from, to, domain, description, skills: skillsNames },
+          { internalName, name, dateGroup: { from, to }, domain, description, skills: skillsNames },
           { emitEvent: false }
         );
       }
@@ -75,8 +76,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       internalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      from: ['', [Validators.required]],
-      to: ['', [Validators.required]],
+      dateGroup: this.fb.group(
+        {
+          from: ['', [Validators.required]],
+          to: ['', [Validators.required]],
+        },
+        { validator: DateValidator }
+      ),
       skills: [[], [Validators.required]],
       domain: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       description: ['', [Validators.required]],
@@ -84,10 +90,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   onAuthSubmit() {
-    this.form.markAllAsTouched();
-    if (!this.form.valid) {
-      return;
-    }
     const requestBody = this.projectService.makeRequestBody(this.form, this.skills);
     this.form.disable();
 
