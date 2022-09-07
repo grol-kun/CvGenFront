@@ -190,6 +190,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   showPreviewModal() {
+    this.onAuthSubmit();
     this.isPreviewModalVisible = true;
   }
 
