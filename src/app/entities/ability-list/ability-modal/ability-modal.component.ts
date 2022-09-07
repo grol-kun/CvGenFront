@@ -11,7 +11,6 @@ import { AbilityService } from 'src/app/shared/services/ability.service';
   styleUrls: ['./ability-modal.component.scss'],
 })
 export class AbilityModalComponent implements OnInit, OnDestroy {
-  @Output() abilityAdded = new EventEmitter<Ability>();
   @Output() hideModal = new EventEmitter<boolean>();
   @Input() isVisible = false;
   @Input() type = '';
@@ -40,15 +39,12 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
         this.form.reset();
         this.message.create('success', 'New ability was created successfully!');
       });
+    this.handleCancel();
   }
 
   handleCancel(): void {
     this.isVisible = false;
     this.hideModal.emit();
-  }
-
-  addAbility(ability: Ability) {
-    this.abilityAdded.emit(ability);
   }
 
   ngOnDestroy(): void {
