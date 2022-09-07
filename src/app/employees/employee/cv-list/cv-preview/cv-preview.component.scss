@@ -3,10 +3,12 @@
 .preview-container {
   background: $simple-white;
   aspect-ratio: 9/16;
+
   &__head {
     height: 10%;
     display: flex;
     flex-direction: row;
+
     &__left {
       width: 30%;
       display: flex;
@@ -21,15 +23,18 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-end;
+
       &__username,
       &__email {
         line-height: 2;
         font-style: bold;
         margin-left: 16px;
       }
+
       &__username {
         font-size: 24px;
       }
+
       &__email {
         font-size: 16px;
       }
@@ -40,8 +45,10 @@
     display: flex;
     margin-left: 5%;
     margin-top: 3%;
+
     &__left {
       width: 30%;
+
       &__skills {
         &__heading {
           font-size: 22px;
@@ -55,14 +62,16 @@
               align-content: flex-start;
               width: 35%;
               gap: 2%;
+
               &__filled {
-                content: "";
+                content: '';
                 width: 60px;
                 height: 10px;
                 background-color: $logo-red;
               }
+
               &__empty {
-                content: "";
+                content: '';
                 width: 60px;
                 height: 10px;
                 background-color: $simple-gray;
@@ -84,14 +93,16 @@
               align-content: flex-start;
               width: 35%;
               gap: 2%;
+
               &__filled {
-                content: "";
+                content: '';
                 width: 60px;
                 height: 10px;
                 background-color: $logo-red;
               }
+
               &__empty {
-                content: "";
+                content: '';
                 width: 60px;
                 height: 10px;
                 background-color: $simple-gray;
@@ -104,6 +115,7 @@
     &__right {
       width: 70%;
       margin-left: -2.2%;
+
       &__education {
         &__heading {
           font-size: 22px;
@@ -119,12 +131,15 @@
           &__item {
             margin-bottom: 5%;
             line-height: 1.1;
+
             &__heading {
               color: $logo-red;
             }
+
             &__date {
               font-size: 10px;
             }
+
             &__responsibilities {
               &__heading {
                 font-size: 12px;
