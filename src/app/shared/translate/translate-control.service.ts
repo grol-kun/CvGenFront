@@ -34,6 +34,5 @@ export class TranslateControlService {
       this.translate.setDefaultLang('en');
     }
     this.languages = this.translate.getLangs();
-    this.translate.use('en');
   }
 }

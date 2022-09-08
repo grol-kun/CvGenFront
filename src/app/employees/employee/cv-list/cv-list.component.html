@@ -62,9 +62,16 @@
   >
   </app-project-modal>
 
+  <app-cv-preview
+  [user]="user"
+  [previewCv]="previewCv"
+  [isVisible]="isPreviewModalVisible"
+  (hideModal)="onHideModals()"
+></app-cv-preview>
+
   <div class="page__wrapper" *ngIf="isFormVisible">
     <div class="page__wrapper__button-block">
-      <button type="button" nz-button nzType="default">{{'employees.actions.preview' | translate}}</button>
+      <button type="button" nz-button nzType="default" (click)="showPreviewModal()">{{'employees.actions.preview' | translate}}</button>
     </div>
 
     <div class="page__wrapper__form">

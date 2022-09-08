@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CANVAS } from '../models/constants/canvas';
+import { PDF_COLORS } from '../models/constants/pdf-colors';
 import { STYLES } from '../models/constants/styles';
-import { CV } from '../models/interfaces/cv';
+import { TABLE_ITEM_EMPTY } from '../models/constants/table-item-empty';
+import { TABLE_ITEM_FILLED } from '../models/constants/table-item-filled';
+import { Cv } from '../models/interfaces/cv';
 import { UserInfo } from '../models/interfaces/user-info';
 
 @Injectable({
@@ -17,18 +20,54 @@ export class PdfObjectBuilderService {
     });
   }
 
-  private buildProjectsList(cvObj: CV) {
-    return cvObj.attributes.projects.reduce(
+  private buildLevelCell(i: number, counter: number) {
+    return i < counter ? { ...TABLE_ITEM_FILLED } : { ...TABLE_ITEM_EMPTY };
+  }
+
+  private buildLevelTable(k: string) {
+    return {
+      table: {
+        body: [[...new Array(5)].map((e, i) => (e = this.buildLevelCell(i, +k)))],
+      },
+      margin: [-4, 0, 0, 0],
+      layout: {
+        hLineWidth: () => 4,
+        vLineWidth: () => 4,
+        hLineColor: () => PDF_COLORS.WHITE,
+        vLineColor: () => PDF_COLORS.WHITE,
+      },
+    };
+  }
+
+  private buildDate(date: string) {
+    return new Date(date).toLocaleDateString('en-US', { dateStyle: 'long' });
+  }
+
+  private buildProjectsList(cvObj: Cv) {
+    return cvObj.attributes.projects?.data.reduce(
       (a: object[], c) => [
         ...a,
         {
           stack: [
             { text: c.attributes.name, style: 'listItemHeader' },
             {
-              text: `${c.attributes.from} ${c.attributes.to && `- ${c.attributes.to}`}`,
+              text: `${this.buildDate(c.attributes.from)} ${
+                this.buildDate(c.attributes.to) && `- ${this.buildDate(c.attributes.to)}`
+              }`,
               style: 'listItemSubHeader',
             },
             { text: c.attributes.description, style: 'listItemDesc' },
+            { text: 'Responsibilities', fontSize: 8 },
+            c.attributes.responsibilities.data.reduce(
+              (a: object[], c) => [
+                ...a,
+                {
+                  stack: [{ text: c.attributes.name }],
+                  style: 'listItem',
+                },
+              ],
+              []
+            ),
           ],
           style: 'listItem',
         },
@@ -41,7 +80,6 @@ export class PdfObjectBuilderService {
     return [
       {
         stack: [
-          { text: 'Higher Education', style: 'listItemHeader' },
           {
             text: `${userObj.education}`,
             style: 'listItemSubHeader',
@@ -52,12 +90,12 @@ export class PdfObjectBuilderService {
     ];
   }
 
-  private buildSkillList(cvObj: CV) {
-    return cvObj.attributes.skills.reduce(
+  private buildSkillList(userObj: UserInfo) {
+    return userObj.skills.reduce(
       (a: object[], c) => [
         ...a,
         {
-          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
+          stack: [{ text: c.attributes.name }, this.buildLevelTable(c.attributes.level!)],
           style: 'listItem',
         },
       ],
@@ -65,12 +103,12 @@ export class PdfObjectBuilderService {
     );
   }
 
-  private buildLanguagesList(cvObj: CV) {
-    return cvObj.attributes.languages.reduce(
+  private buildLanguagesList(userObj: UserInfo) {
+    return userObj.languages.reduce(
       (a: object[], c) => [
         ...a,
         {
-          stack: [{ text: c.attributes.name }, { text: c.attributes.level, fontSize: 7 }],
+          stack: [{ text: c.attributes.name }, this.buildLevelTable(c.attributes.level!)],
           style: 'listItem',
         },
       ],
@@ -99,7 +137,7 @@ export class PdfObjectBuilderService {
             text: `${userObj.firstName} ${userObj.lastName}`,
             style: 'name',
           },
-          { text: 'Front-end Developer', style: 'title' },
+          { text: '', style: 'title' },
           { text: userObj.email, style: 'headerListItem' },
         ],
       },
@@ -110,17 +148,17 @@ export class PdfObjectBuilderService {
     return [{ stack: this.buildLogo(), style: 'headerLinks' }];
   }
 
-  private buildSkillsSection(cvObj: CV) {
+  private buildSkillsSection(userObj: UserInfo) {
     return [
       { text: 'Skills', style: 'sectionTitle' },
-      { stack: this.buildSkillList(cvObj), style: 'list' },
+      { stack: this.buildSkillList(userObj), style: 'list' },
     ];
   }
 
-  private buildLanguagesSection(cvObj: CV) {
+  private buildLanguagesSection(userObj: UserInfo) {
     return [
       { text: 'Languages', style: 'sectionTitle' },
-      { stack: this.buildLanguagesList(cvObj), style: 'list' },
+      { stack: this.buildLanguagesList(userObj), style: 'list' },
     ];
   }
   private buildEducationSection(userObj: UserInfo) {
@@ -129,7 +167,7 @@ export class PdfObjectBuilderService {
       { stack: this.buildEducationList(userObj), style: 'list' },
     ];
   }
-  private buildProjectsSection(cvObj: CV) {
+  private buildProjectsSection(cvObj: Cv) {
     return [
       { text: 'Projects', style: 'sectionTitle' },
       { stack: this.buildProjectsList(cvObj), style: 'list' },
@@ -140,15 +178,15 @@ export class PdfObjectBuilderService {
     return [this.buildLogoSection()];
   }
 
-  private buildMain(userObj: UserInfo, cvObj: CV) {
+  private buildMain(userObj: UserInfo, cvObj: Cv) {
     return [this.buildEducationSection(userObj), this.buildProjectsSection(cvObj)];
   }
 
-  private buildSide(cvObj: CV) {
-    return [this.buildSkillsSection(cvObj), this.buildLanguagesSection(cvObj)];
+  private buildSide(userObj: UserInfo) {
+    return [this.buildSkillsSection(userObj), this.buildLanguagesSection(userObj)];
   }
 
-  public buildDocDefinition(cvObj: CV, userObj: UserInfo) {
+  public buildDocDefinition(cvObj: Cv, userObj: UserInfo) {
     return {
       pageSize: 'A4',
       background: () => ({
@@ -174,7 +212,7 @@ export class PdfObjectBuilderService {
           columns: [
             {
               width: '25%',
-              stack: this.buildSide(cvObj),
+              stack: this.buildSide(userObj),
               style: 'side',
             },
             {

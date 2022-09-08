@@ -20,6 +20,7 @@ import { CvModalModule } from './cv-list/cv-modal/cv-modal.module';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ProjectModalModule } from './cv-list/project-modal/project-modal.module';
 import { AppProjectsArrayModule } from 'src/app/shared/components/app-projects-array/app-projects-array.module';
+import { CvPreviewModule } from './cv-list/cv-preview/cv-preview.module';
 import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
 
 @NgModule({
@@ -43,6 +44,7 @@ import { TranslateControlModule } from 'src/app/shared/translate/translate-contr
     NzPopconfirmModule,
     ProjectModalModule,
     AppProjectsArrayModule,
+    CvPreviewModule,
     TranslateControlModule
   ],
 })

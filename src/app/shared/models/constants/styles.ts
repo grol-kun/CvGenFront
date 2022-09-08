@@ -1,3 +1,5 @@
+import { PDF_COLORS } from "./pdf-colors";
+
 export const STYLES = {
   list: {
     margin: [0, 0, 0, 16],
@@ -5,11 +7,10 @@ export const STYLES = {
   },
   headerMain: {
     margin: [0, 0, 0, 24],
-    color: '#1F2937',
   },
   headerSide: {
     fontSize: 10,
-    color: 'white',
+    color: PDF_COLORS.WHITE,
     margin: [0, 0, 0, 24],
   },
   sectionTitle: {
@@ -19,13 +20,13 @@ export const STYLES = {
     margin: [0, 0, 0, 16],
   },
   name: {
-    color: 'white',
+    color: PDF_COLORS.WHITE,
     fontSize: 18,
     margin: [0, 0, 0, 4],
     bold: true,
   },
   title: {
-    color: 'white',
+    color: PDF_COLORS.WHITE,
     fontSize: 14,
     margin: [0, 0, 0, 4],
     bold: true,
@@ -38,7 +39,7 @@ export const STYLES = {
     margin: [0, 0, 0, 8],
   },
   listItemHeader: {
-    color: '#C63031',
+    color: PDF_COLORS.RED,
     fontSize: 10,
     bold: true,
     margin: [0, 0, 0, 3],
@@ -52,7 +53,7 @@ export const STYLES = {
     fontSize: 9,
   },
   headerListItem: {
-    color: 'white',
+    color: PDF_COLORS.WHITE,
     lineHeight: 1.2,
     margin: [0, 0, 0, 3],
   },
