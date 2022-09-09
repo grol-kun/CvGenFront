@@ -1,24 +1,12 @@
 <nz-layout class="nz-layout">
   <nz-sider nzCollapsible nzWidth="200px" class="nz-layout__nz-sider">
     <div class="nz-layout__nz-sider__logo" [routerLink]="['']">
-      <img class="nz-layout__nz-sider__logo__inner" src="/assets/svgs/Frame.svg" alt="Innowise">
+      <img class="nz-layout__nz-sider__logo__inner" src="/assets/svgs/Frame.svg" alt="Innowise" />
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li nz-menu-item [routerLink]="['/employees/']">
-        <i nz-icon nzType="user"></i>
-        <span>{{ 'layout.employees' | translate }}</span>
-      </li>
-      <li nz-menu-item [routerLink]="['/projects/']">
-        <i nz-icon nzType="database"></i>
-        <span>{{ 'layout.projects' | translate }}</span>
-      </li>
-      <li nz-menu-item [routerLink]="['/cvs/']">
-        <i nz-icon nzType="folder"></i>
-        <span>{{ 'layout.cvs' | translate }}</span>
-      </li>
-      <li nz-menu-item [routerLink]="['/entities/']">
-        <i nz-icon nzType="file"></i>
-        <span>{{ 'layout.entities' | translate }}</span>
+      <li nz-menu-item nzMatchRouter [routerLink]="link.routerLink" *ngFor="let link of layoutLinks">
+        <i nz-icon [nzType]="link.nzTypeName"></i>
+        <span>{{ link.localeData | translate }}</span>
       </li>
     </ul>
   </nz-sider>
@@ -27,20 +15,15 @@
     <nz-header class="nz-layout__nz-layout__nz-header">
       <div class="nz-layout__nz-layout__nz-header__adaptive">
         <div class="nz-layout__nz-layout__nz-header__adaptive__logo" [routerLink]="['']">
-          <img class="nz-layout__nz-layout__nz-header__adaptive__logo__inner" src="/assets/svgs/Frame.svg" alt="Innowise" />
+          <img
+            class="nz-layout__nz-layout__nz-header__adaptive__logo__inner"
+            src="/assets/svgs/Frame.svg"
+            alt="Innowise"
+          />
         </div>
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu nz-layout__nz-header__adaptive__menu">
-          <li nz-menu-item [routerLink]="['/employees/']">
-            <i nz-icon nzType="user"></i>
-          </li>
-          <li nz-menu-item [routerLink]="['/projects/']">
-            <i nz-icon nzType="database"></i>
-          </li>
-          <li nz-menu-item [routerLink]="['/cvs/']">
-            <i nz-icon nzType="folder"></i>
-          </li>
-          <li nz-menu-item [routerLink]="['/entities/']">
-            <i nz-icon nzType="file"></i>
+          <li nz-menu-item nzMatchRouter [routerLink]="link.routerLink" *ngFor="let link of layoutLinks">
+            <i nz-icon [nzType]="link.nzTypeName"></i>
           </li>
         </ul>
       </div>
@@ -49,7 +32,9 @@
           <app-theme></app-theme>
           <app-translate-control></app-translate-control>
         </div>
-        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">{{ 'layout.text.user_hi' | translate}} {{ (info$ | async)?.firstName }}</p>
+        <p class="nz-layout__nz-layout__nz-header__menu-wrapper__user-hi">
+          {{ 'layout.text.user_hi' | translate }} {{ (info$ | async)?.firstName }}
+        </p>
         <app-dropdown-menu></app-dropdown-menu>
       </div>
     </nz-header>
