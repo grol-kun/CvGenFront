@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { infoSelector } from '../core/store/selectors/auth.selector';
+import { LAYOUT_LINKS } from '../shared/models/constants/layout-links';
+import { LayoutLink } from '../shared/models/interfaces/layout-link';
 import { MyInfo } from '../shared/models/interfaces/my-info';
 import { LoaderService } from '../shared/services/loader.service';
 
@@ -14,6 +17,7 @@ import { LoaderService } from '../shared/services/loader.service';
 export class SiteLayoutComponent implements OnInit {
   loader$?: Observable<boolean>;
   info$!: Observable<MyInfo | null>;
+  layoutLinks: LayoutLink[] = LAYOUT_LINKS;
 
   constructor(private loaderService: LoaderService, private cd: ChangeDetectorRef, private store: Store) {}
 
