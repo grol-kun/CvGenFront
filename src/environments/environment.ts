@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:1337',
-  tokenName: 'CVgen',
+  tokenName: '_t0k6n_098765',
 };
 /*
  * For easier debugging in development mode, you can import the following file
