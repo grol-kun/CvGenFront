@@ -16,6 +16,7 @@ export class CvModalComponent implements OnInit {
   @Output()
   hideModals = new EventEmitter<boolean>();
   @Input() isVisible = false;
+  @Input() currentCvList: Cv[] = [];
 
   cvList$!: Observable<Cv[]>;
   listOfColumns: ColumnItem[] = CV_COLUMNS;
@@ -32,6 +33,9 @@ export class CvModalComponent implements OnInit {
   }
 
   selectCv(cv: Cv) {
-    this.cvSelected.emit(cv);
+    const existIds = this.currentCvList.map((cv) => cv.id);
+    if (!existIds.includes(cv.id)) {
+      this.cvSelected.emit(cv);
+    }
   }
 }
