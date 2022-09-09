@@ -90,7 +90,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     });
   }
 
-  onAuthSubmit() {
+  onAuthSubmit(isFormCalled: boolean) {
     const currentCv = this.getNewCurrentCv();
     const newCvs = this.getNewCvs(currentCv);
     const user = this.getNewUser(newCvs);
@@ -109,7 +109,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
-        this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
+        if(isFormCalled) this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
         this.store.dispatch(updateMyInfo());
       });
   }
@@ -190,7 +190,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   showPreviewModal() {
-    this.onAuthSubmit();
+    this.onAuthSubmit(false);
     this.isPreviewModalVisible = true;
   }
 

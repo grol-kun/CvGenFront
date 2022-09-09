@@ -75,7 +75,7 @@
     </div>
 
     <div class="page__wrapper__form">
-      <form class="page__wrapper__form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
+      <form class="page__wrapper__form" [formGroup]="form" (ngSubmit)="onAuthSubmit(true)">
         <nz-collapse>
           <nz-collapse-panel [nzHeader]="'employees.actions.info_collapse' | translate" [nzActive]="true" class="page__wrapper__form__collapse-panel">
             <div class="page__wrapper__form__collapse-panel__inner">
