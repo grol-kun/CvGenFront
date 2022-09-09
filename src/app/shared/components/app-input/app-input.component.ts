@@ -44,6 +44,14 @@ export class AppInputComponent implements ControlValueAccessor, OnInit, OnDestro
     this.control.setValue(value, { emitEvent: false });
   }
 
+  setDisabledState(isDisabled: boolean) {
+    if (isDisabled) {
+      this.control.disable();
+    } else {
+      this.control.enable();
+    }
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
