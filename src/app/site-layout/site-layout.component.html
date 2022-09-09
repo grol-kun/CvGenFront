@@ -14,13 +14,6 @@
   <nz-layout class="nz-layout__nz-layout">
     <nz-header class="nz-layout__nz-layout__nz-header">
       <div class="nz-layout__nz-layout__nz-header__adaptive">
-        <div class="nz-layout__nz-layout__nz-header__adaptive__logo" [routerLink]="['']">
-          <img
-            class="nz-layout__nz-layout__nz-header__adaptive__logo__inner"
-            src="/assets/svgs/Frame.svg"
-            alt="Innowise"
-          />
-        </div>
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu nz-layout__nz-header__adaptive__menu">
           <li nz-menu-item nzMatchRouter [routerLink]="link.routerLink" *ngFor="let link of layoutLinks">
             <i nz-icon [nzType]="link.nzTypeName"></i>
