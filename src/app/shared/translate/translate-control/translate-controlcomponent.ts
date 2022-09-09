@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TranslateControlService } from '../translate-control.service';
-import { TranslateMode } from '../translate.model';
 
 @Component({
   selector: 'app-translate-control',
@@ -14,5 +13,8 @@ export class TranslateControlComponent {
   }
   changeLang(language: string) {
     this.translate.changeLang(language);
+  }
+  isLangSelected(language: string) {
+    return language == this.translate.getCurrentLanguage();
   }
 }

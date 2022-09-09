@@ -9,7 +9,11 @@ import { FunctionsService } from '../services/functions.service';
 })
 export class TranslateControlService {
   languages: string[];
-  constructor(private translate: TranslateService, private storage: TranslateStorageService, private functions: FunctionsService) {
+  constructor(
+    private translate: TranslateService,
+    private storage: TranslateStorageService,
+    private functions: FunctionsService
+  ) {
     this.init();
     this.languages = this.translate.getLangs();
   }
@@ -24,7 +28,11 @@ export class TranslateControlService {
     return this.languages;
   }
 
-  init(){
+  getCurrentLanguage() {
+    return this.storage.get();
+  }
+
+  init() {
     this.translate.addLangs([TranslateMode.EN, TranslateMode.RU]);
     if (this.storage.get()) {
       const browserLang = this.storage.get();
