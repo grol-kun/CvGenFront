@@ -4,12 +4,7 @@
       <img class="nz-layout__nz-sider__logo__inner" src="/assets/svgs/Frame.svg" alt="Innowise" />
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
-      <li
-        nz-menu-item
-        [nzMatchRouter]="true"
-        [routerLink]="link.routerLink"
-        *ngFor="let link of layoutLinks"
-      >
+      <li nz-menu-item nzMatchRouter [routerLink]="link.routerLink" *ngFor="let link of layoutLinks">
         <i nz-icon [nzType]="link.nzTypeName"></i>
         <span>{{ link.localeData | translate }}</span>
       </li>
@@ -27,12 +22,7 @@
           />
         </div>
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu nz-layout__nz-header__adaptive__menu">
-          <li
-            nz-menu-item
-            [nzMatchRouter]="true"
-            [routerLink]="link.routerLink"
-            *ngFor="let link of layoutLinks"
-          >
+          <li nz-menu-item nzMatchRouter [routerLink]="link.routerLink" *ngFor="let link of layoutLinks">
             <i nz-icon [nzType]="link.nzTypeName"></i>
           </li>
         </ul>
