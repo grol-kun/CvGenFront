@@ -17,29 +17,9 @@ import { LoaderService } from '../shared/services/loader.service';
 export class SiteLayoutComponent implements OnInit {
   loader$?: Observable<boolean>;
   info$!: Observable<MyInfo | null>;
-  currentPath!: string;
   layoutLinks: LayoutLink[] = LAYOUT_LINKS;
 
-  constructor(
-    private loaderService: LoaderService,
-    private cd: ChangeDetectorRef,
-    private store: Store,
-    private router: Router
-  ) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        if (this.router.parseUrl(event.url).root.children['primary']) {
-          this.currentPath = this.router
-            .parseUrl(event.url)
-            .root.children['primary']?.segments.map((it) => it.path)
-            .slice(0, 1)
-            .join();
-        } else {
-          this.currentPath = LAYOUT_LINKS[0].name;
-        }
-      }
-    });
-  }
+  constructor(private loaderService: LoaderService, private cd: ChangeDetectorRef, private store: Store) {}
 
   ngOnInit(): void {
     this.loader$ = this.loaderService.loaderStatus$;

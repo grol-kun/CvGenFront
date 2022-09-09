@@ -6,7 +6,7 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li
         nz-menu-item
-        [nzSelected]="link.name == currentPath"
+        [nzMatchRouter]="true"
         [routerLink]="link.routerLink"
         *ngFor="let link of layoutLinks"
       >
@@ -29,7 +29,7 @@
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu nz-layout__nz-header__adaptive__menu">
           <li
             nz-menu-item
-            [nzSelected]="link.name == currentPath"
+            [nzMatchRouter]="true"
             [routerLink]="link.routerLink"
             *ngFor="let link of layoutLinks"
           >
