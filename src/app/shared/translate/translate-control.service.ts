@@ -9,30 +9,38 @@ import { FunctionsService } from '../services/functions.service';
 })
 export class TranslateControlService {
   languages: string[];
-  constructor(private translate: TranslateService, private storage: TranslateStorageService, private functions: FunctionsService) {
+  constructor(
+    private translateService: TranslateService,
+    private translateStorageService: TranslateStorageService,
+    private functionsService: FunctionsService
+  ) {
     this.init();
-    this.languages = this.translate.getLangs();
+    this.languages = this.translateService.getLangs();
   }
 
   changeLang(language: string) {
-    const mode = this.functions.getEnumKeyByValue(TranslateMode, language);
-    this.storage.set(TranslateMode[mode!]);
-    this.translate.use(language);
+    const mode = this.functionsService.getEnumKeyByValue(TranslateMode, language);
+    this.translateStorageService.set(TranslateMode[mode!]);
+    this.translateService.use(language);
   }
 
   getLanguages() {
     return this.languages;
   }
 
-  init(){
-    this.translate.addLangs([TranslateMode.EN, TranslateMode.RU]);
-    if (this.storage.get()) {
-      const browserLang = this.storage.get();
-      this.translate.use(browserLang?.match(/en|ru/) ? browserLang : 'en');
+  getCurrentLanguage() {
+    return this.translateStorageService.get();
+  }
+
+  init() {
+    this.translateService.addLangs([TranslateMode.EN, TranslateMode.RU]);
+    if (this.translateStorageService.get()) {
+      const browserLang = this.translateStorageService.get();
+      this.translateService.use(browserLang?.match(/en|ru/) ? browserLang : 'en');
     } else {
-      this.storage.set(TranslateMode.EN);
-      this.translate.setDefaultLang('en');
+      this.translateStorageService.set(TranslateMode.EN);
+      this.translateService.setDefaultLang('en');
     }
-    this.languages = this.translate.getLangs();
+    this.languages = this.translateService.getLangs();
   }
 }
