@@ -11,13 +11,13 @@ import { AuthService } from './auth.service';
 export class Initializer {
   constructor(
     private themeService: ThemeService,
-    private translateService: TranslateControlService,
+    private translateControlService: TranslateControlService,
     private authService: AuthService,
     private store: Store
   ) {}
 
   initApp() {
-    this.translateService.init();
+    this.translateControlService.init();
     this.themeService.startTheme();
     this.authService.setTokenIfAvailable();
     if (this.authService.getTokenFromCookies()) {

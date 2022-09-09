@@ -8,13 +8,13 @@ import { TranslateControlService } from '../translate-control.service';
 })
 export class TranslateControlComponent {
   langs: string[];
-  constructor(public translate: TranslateControlService) {
-    this.langs = this.translate.getLanguages();
+  constructor(public translateControlService: TranslateControlService) {
+    this.langs = this.translateControlService.getLanguages();
   }
   changeLang(language: string) {
-    this.translate.changeLang(language);
+    this.translateControlService.changeLang(language);
   }
   isLangSelected(language: string) {
-    return language == this.translate.getCurrentLanguage();
+    return language == this.translateControlService.getCurrentLanguage();
   }
 }
