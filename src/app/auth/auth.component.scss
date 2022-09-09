@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 :host {
   display: flex;
   flex-direction: column;
@@ -58,4 +60,20 @@
   align-items: center;
   margin-top: 20px;
   margin-right: 20px;
+}
+
+@media (max-width: $view-420) {
+  .auth {
+    &__form {
+      align-items: center;
+
+      &__app-input {
+        width: 240px;
+      }
+
+      &__button {
+        width: 240px;
+      }
+    }
+  }
 }

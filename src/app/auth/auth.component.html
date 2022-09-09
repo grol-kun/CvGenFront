@@ -1,12 +1,14 @@
 <div class="auth">
   <form [formGroup]="form" class="auth__form" (ngSubmit)="onAuthSubmit()">
     <app-input
+      class="auth__form__app-input"
       formControlName="identifier"
       [label]="'auth.text.username' | translate"
       [placeholder]="'auth.text.username_placeholder' | translate"
     ></app-input>
 
     <app-input
+      class="auth__form__app-input"
       formControlName="password"
       [isPassword]="true"
       [label]="'auth.text.password' | translate"
@@ -15,9 +17,6 @@
 
     <div class="auth__form__inner-wrapper">
       <label nz-checkbox formControlName="remember">{{ 'auth.actions.remember_me' | translate }}</label>
-      <a nz-button nzType="link" class="auth__form__inner-wrapper__link-button">
-        {{ 'auth.actions.forgot_password' | translate }}
-      </a>
     </div>
 
     <button type="submit" nz-button nzType="primary" class="auth__form__button" [disabled]="!form.valid">
