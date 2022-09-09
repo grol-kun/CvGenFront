@@ -13,7 +13,6 @@
     }
   },
   "auth": {
-    "title": "Auth",
     "text": {
       "username": "Username",
       "username_placeholder": "Enter username",
@@ -41,7 +40,6 @@
     }
   },
   "employees": {
-    "title": "Employees",
     "actions": {
       "first_name": "First Name",
       "last_name": "Last Name",
@@ -59,7 +57,7 @@
       "cv_modal": {
         "title": "List of CVs"
       },
-      "cv_preview":{
+      "cv_preview": {
         "title": "CV Preview"
       }
     },
@@ -80,7 +78,6 @@
     }
   },
   "projects": {
-    "title": "Projects",
     "actions": {
       "name": "Name",
       "from": "Start Date",
@@ -109,7 +106,6 @@
     }
   },
   "cvs": {
-    "title": "CVs",
     "actions": {
       "new_cv": "New CV",
       "name": "Name",
@@ -128,7 +124,6 @@
     }
   },
   "entities": {
-    "title": "Entities",
     "labels": {
       "name": "Name",
       "skills": "Skills",
@@ -174,7 +169,7 @@
     "export": "Export as Pdf",
     "save": "Save",
     "cancel": "Cancel",
-    "close":  "Close",
+    "close": "Close",
     "add": "Add"
   },
   "modals": {
@@ -211,5 +206,14 @@
       "domain": "Domain",
       "description": "Description"
     }
+  },
+  "breadcrumbs": {
+    "Employees": "Employees list",
+    "Employee": "Employee",
+    "Projects": "Projects list",
+    "Project": "Project",
+    "CVs": "CVs list",
+    "CV": "CV",
+    "Entities": "Entities list"
   }
 }
