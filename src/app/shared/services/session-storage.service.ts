@@ -15,4 +15,8 @@ export class SessionStorageService {
     }
     return null;
   }
+
+  removeItem(key: string): void {
+    sessionStorage.removeItem(key);
+  }
 }
