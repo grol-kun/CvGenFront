@@ -33,9 +33,6 @@ export class CvModalComponent implements OnInit {
   }
 
   selectCv(cv: Cv) {
-    const existIds = this.currentCvList.map((cv) => cv.id);
-    if (!existIds.includes(cv.id)) {
-      this.cvSelected.emit(cv);
-    }
+    this.cvSelected.emit(cv);
   }
 }
