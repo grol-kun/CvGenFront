@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateMode } from './translate.model';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateStorageService } from './translate-storage.service';
-import { FunctionsService } from '../services/functions.service';
+import { FunctionsService } from '../../services/functions.service';
 
 @Injectable({
   providedIn: 'root',

@@ -5,11 +5,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { TranslateControlModule } from '../../translate/translate-control.module';
+import { TranslateControlModule } from '../translate/translate-control.module';
 
 @NgModule({
   declarations: [AppInputComponent],
-  imports: [CommonModule, ReactiveFormsModule, ApplicationPipesModule, NzInputModule, NzIconModule, TranslateControlModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ApplicationPipesModule,
+    NzInputModule,
+    NzIconModule,
+    TranslateControlModule,
+  ],
   exports: [AppInputComponent],
 })
 export class AppInputModule {}

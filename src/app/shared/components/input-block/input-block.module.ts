@@ -6,11 +6,19 @@ import { AppInputModule } from '../app-input/app-input.module';
 import { AppAutocompleteModule } from '../app-autocomplete/app-autocomplete.module';
 import { AppSelectModule } from '../app-select/app-select.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { TranslateControlModule } from '../../translate/translate-control.module';
+import { TranslateControlModule } from '../translate/translate-control.module';
 
 @NgModule({
   declarations: [InputBlockComponent],
-  imports: [CommonModule, ReactiveFormsModule, AppInputModule, AppAutocompleteModule, AppSelectModule, NzIconModule, TranslateControlModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AppInputModule,
+    AppAutocompleteModule,
+    AppSelectModule,
+    NzIconModule,
+    TranslateControlModule,
+  ],
   exports: [InputBlockComponent],
 })
 export class InputBlockModule {}

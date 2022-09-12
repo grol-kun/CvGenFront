@@ -10,7 +10,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { TranslateControlModule } from '../shared/translate/translate-control.module';
+import { TranslateControlModule } from '../shared/components/translate/translate-control.module';
 import { AbilityListComponent } from './ability-list/ability-list.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { AbilityModalComponent } from './ability-list/ability-modal/ability-modal.component';
@@ -33,7 +33,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzModalModule,
     NzMessageModule,
     NzPopconfirmModule,
-    TranslateControlModule
+    TranslateControlModule,
   ],
 })
 export class EntitiesModule {}
