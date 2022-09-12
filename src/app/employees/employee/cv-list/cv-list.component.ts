@@ -73,8 +73,14 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
 
     if (user) {
       const { firstName, lastName, education, skills, languages, description } = user;
-      this.cvs = user.cvs;
+      this.fillCvs(user);
       this.form.patchValue({ firstName, lastName, education, skills, languages, description }, { emitEvent: false });
+    }
+  }
+
+  fillCvs(user: UserInfo) {
+    if (user.cvs) {
+      this.cvs = [...user.cvs];
     }
   }
 

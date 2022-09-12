@@ -6,7 +6,7 @@ import { Cv } from '../models/interfaces/cv';
 })
 export class CvModalFilterPipe implements PipeTransform {
   transform(data: readonly Cv[], currentCvList: Cv[]) {
-    if (!data.length || !currentCvList.length) {
+    if (!data?.length || !currentCvList?.length) {
       return data;
     }
 
