@@ -5,7 +5,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
+import { TranslateControlModule } from 'src/app/shared/components/translate/translate-control.module';
 
 @NgModule({
   declarations: [DropdownMenuComponent],

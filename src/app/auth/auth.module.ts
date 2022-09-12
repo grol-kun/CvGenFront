@@ -6,8 +6,8 @@ import { AppInputModule } from '../shared/components/app-input/app-input.module'
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { ThemeModule } from '../shared/theme/theme.module';
-import { TranslateControlModule } from '../shared/translate/translate-control.module';
+import { ThemeModule } from '../shared/components/theme/theme.module';
+import { TranslateControlModule } from '../shared/components/translate/translate-control.module';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 
 @NgModule({

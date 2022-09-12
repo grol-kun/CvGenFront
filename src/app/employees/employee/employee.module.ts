@@ -21,7 +21,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { ProjectModalModule } from './cv-list/project-modal/project-modal.module';
 import { AppProjectsArrayModule } from 'src/app/shared/components/app-projects-array/app-projects-array.module';
 import { CvPreviewModule } from './cv-list/cv-preview/cv-preview.module';
-import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
+import { TranslateControlModule } from 'src/app/shared/components/translate/translate-control.module';
 
 @NgModule({
   declarations: [EmployeeComponent, InfoComponent, CvListComponent],
@@ -45,7 +45,7 @@ import { TranslateControlModule } from 'src/app/shared/translate/translate-contr
     ProjectModalModule,
     AppProjectsArrayModule,
     CvPreviewModule,
-    TranslateControlModule
+    TranslateControlModule,
   ],
 })
 export class EmployeeModule {}
