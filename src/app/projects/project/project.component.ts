@@ -52,8 +52,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
         this.handleDisable();
       }
 
-      if (this.form.get('dateGroup')?.errors) {
-        const errors = this.form.get('dateGroup')?.errors;
+      const errors = this.form.get('dateGroup')?.errors;
+      if (errors) {
         if (errors && Object.keys(errors)[0] === 'dates') {
           this.handleDisable();
         }
