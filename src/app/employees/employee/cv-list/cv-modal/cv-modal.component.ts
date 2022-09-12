@@ -35,11 +35,4 @@ export class CvModalComponent implements OnInit {
   selectCv(cv: Cv) {
     this.cvSelected.emit(cv);
   }
-
-  isNotEmpty(cvList$: Cv[] | null) {
-    if (cvList$) {
-      return this.currentCvList ? cvList$.length > this.currentCvList.length : !this.currentCvList;
-    }
-    return null;
-  }
 }
