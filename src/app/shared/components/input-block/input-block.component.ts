@@ -73,7 +73,6 @@ export class InputBlockComponent implements ControlValueAccessor, OnInit, OnDest
   public registerOnChange(fn: any): void {
     this.form.valueChanges
       .pipe(
-        takeUntil(this.destroy$),
         map((value: SelectResult) => {
           if (value.name) {
             const currentObj = this.fullList.find((skill) => skill.attributes.name === value.name);
@@ -83,7 +82,8 @@ export class InputBlockComponent implements ControlValueAccessor, OnInit, OnDest
             return currentObj;
           }
           return null;
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe(fn);
   }

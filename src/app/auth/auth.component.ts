@@ -50,8 +50,8 @@ export class AuthComponent implements OnInit {
         password,
       })
       .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => this.form.enable())
+        finalize(() => this.form.enable()),
+        takeUntil(this.destroy$)
       )
       .subscribe({
         next: (data) => {
