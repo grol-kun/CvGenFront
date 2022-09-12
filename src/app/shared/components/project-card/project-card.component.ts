@@ -38,6 +38,8 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
   @Input() skillListResponse: Response<Skill> | null = null;
   @Input() respListResponse: Response<Responsibility> | null = null;
 
+  isDisabledDate = true;
+  startDate: Date | number | null = null;
   skillOptions: string[] = [];
   respOptions: string[] = [];
   form!: FormGroup;
@@ -50,6 +52,42 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.initForm();
+    this.subscribeOnFormChanges();
+  }
+
+  subscribeOnFormChanges() {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      if (data.dateGroup.from) {
+        this.undisableEndDate();
+        this.startDate = new Date(data.dateGroup.from);
+      } else {
+        this.handleDisable();
+      }
+
+      if (this.form.get('dateGroup')?.errors) {
+        const errors = this.form.get('dateGroup')?.errors;
+        if (errors && Object.keys(errors)[0] === 'dates') {
+          this.handleDisable();
+        }
+      }
+    });
+  }
+
+  handleDisable() {
+    this.disableEndDate();
+    this.form.patchValue({ dateGroup: { from: null, to: null } }, { emitEvent: false });
+  }
+
+  undisableEndDate() {
+    this.isDisabledDate = false;
+  }
+
+  disableEndDate() {
+    this.isDisabledDate = true;
+  }
+
+  initForm() {
     this.form = this.fb.group({
       internalName: ['', [Validators.required]],
       name: ['', [Validators.required]],
@@ -105,6 +143,10 @@ export class ProjectCardComponent implements ControlValueAccessor, OnInit, OnDes
       },
       { emitEvent: false }
     );
+
+    if (from) {
+      this.undisableEndDate();
+    }
   }
 
   getRespNames(val: Project): string[] {
