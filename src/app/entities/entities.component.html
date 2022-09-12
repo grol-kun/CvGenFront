@@ -19,7 +19,7 @@
         <li
           nz-menu-item
           class="page__menu__first-block__nz-menu__nz-menu-item"
-          *ngFor="let ability of abilities | filter: searchAbility:'name'; let i = index; trackBy: trackByFn"
+          *ngFor="let ability of abilities | filter: searchAbility:'search'; let i = index; trackBy: trackByFn"
           (click)="initTable(ability.name)"
         >
           <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
