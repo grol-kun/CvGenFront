@@ -40,7 +40,7 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
     if (!this.form.valid) {
       return;
     }
-    if (this.abilityList.some((e) => e.attributes.name.toLowerCase() == this.form.getRawValue().name.toLowerCase())) {
+    if (this.abilityList.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())) {
       this.form.reset();
       this.message.create('error', 'Cannot add ability that already exists!');
       return;
