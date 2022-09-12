@@ -178,10 +178,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   onCvSelected(cv: Cv) {
-    const existIds = this.cvs.map((cv) => cv.id);
-    if (!existIds.includes(cv.id)) {
-      this.cvs.push(cv);
-    }
+    this.cvs.push(cv);
     this.isCvModalVisible = false;
   }
 

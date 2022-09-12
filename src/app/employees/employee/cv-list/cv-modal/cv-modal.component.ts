@@ -16,6 +16,7 @@ export class CvModalComponent implements OnInit {
   @Output()
   hideModals = new EventEmitter<boolean>();
   @Input() isVisible = false;
+  @Input() currentCvList: Cv[] = [];
 
   cvList$!: Observable<Cv[]>;
   listOfColumns: ColumnItem[] = CV_COLUMNS;
