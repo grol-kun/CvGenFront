@@ -151,3 +151,13 @@
     }
   }
 }
+
+::ng-deep .ant-modal-wrap{
+  overflow: hidden !important;
+}
+
+::ng-deep .ant-modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
