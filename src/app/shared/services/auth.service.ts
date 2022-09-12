@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { removeToken, setToken } from 'src/app/core/store/actions/auth.actions';
 import { tokenSelector } from 'src/app/core/store/selectors/auth.selector';
 import { MyInfo } from '../models/interfaces/my-info';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,8 @@ export class AuthService {
     private cookieService: CookieService,
     private router: Router,
     private expDate: ExpireDateService,
-    private store: Store
+    private store: Store,
+    private sessionStorageService: SessionStorageService
   ) {}
 
   login(userData: loginInfo): Observable<AuthorizationResponse> {
@@ -58,6 +60,7 @@ export class AuthService {
   logout(): void {
     this.removeToken();
     this.cookieService.remove(environment.tokenName);
+    this.sessionStorageService.removeItem('path');
     this.router.navigate(['/auth']);
   }
 
