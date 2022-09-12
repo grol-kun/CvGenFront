@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
 import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
