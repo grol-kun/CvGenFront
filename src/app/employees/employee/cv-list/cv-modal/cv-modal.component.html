@@ -4,7 +4,7 @@
   (nzOnCancel)="handleCancel()"
 >
   <ng-container *nzModalContent>
-    <div *ngIf="(cvList$ | async)!.length > currentCvList.length; else emptyList">
+    <div *ngIf="isNotEmpty(cvList$ | async); else emptyList">
       <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
         <thead>
           <tr>
