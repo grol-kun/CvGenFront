@@ -37,14 +37,14 @@ export class CvComponent implements OnInit, OnDestroy {
   private initData(): void {
     this.route.params
       .pipe(
-        takeUntil(this.destroy$),
         switchMap(({ id }) => {
           if (id !== 'new') {
             return this.cvService.getCvById(id);
           }
           this.isNew = true;
           return of(null);
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe((data) => {
         if (data) {

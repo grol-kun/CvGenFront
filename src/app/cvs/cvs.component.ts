@@ -53,8 +53,8 @@ export class CvsComponent implements OnInit, OnDestroy {
     this.cvService
       .deleteCvById(id)
       .pipe(
-        takeUntil(this.destroy$),
-        switchMap(() => this.getCvList())
+        switchMap(() => this.getCvList()),
+        takeUntil(this.destroy$)
       )
       .subscribe((data) => {
         this.cvList$.next(data);

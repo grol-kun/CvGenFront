@@ -40,14 +40,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
     combineLatest([
       this.route.params.pipe(
-        takeUntil(this.destroy$),
         switchMap(({ id }) => {
           if (id !== 'new') {
             return this.projectService.getProjectById(id);
           }
           this.isNew = true;
           return of(null);
-        })
+        }),
+        takeUntil(this.destroy$)
       ),
       this.abilityService.getFullList<Response<Skill>>('skills'),
     ]).subscribe(([projectsResponse, skillsResponse]) => {
@@ -100,8 +100,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     if (request$) {
       request$
         .pipe(
-          takeUntil(this.destroy$),
-          finalize(() => this.form.enable())
+          finalize(() => this.form.enable()),
+          takeUntil(this.destroy$)
         )
         .subscribe(() => {
           const text = this.isNew
