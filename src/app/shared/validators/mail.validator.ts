@@ -5,10 +5,9 @@ import { FormControl } from '@angular/forms';
   providedIn: 'root',
 })
 export class MailValidatorService {
-  checkMailFormat(contol: FormControl) {
+  checkMailFormat(control: FormControl) {
     const myReg = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$');
-    const ok = myReg.exec(contol.value);
-    if (!ok) {
+    if (!myReg.exec(control.value)) {
       return {
         mailFormatError: true,
       };
