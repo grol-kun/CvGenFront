@@ -1,28 +1,37 @@
-<nz-modal [nzVisible]="isVisible" [nzTitle]="'employees.actions.cv_modal.title' | translate" (nzOnCancel)="handleCancel()">
+<nz-modal
+  [nzVisible]="isVisible"
+  [nzTitle]="'employees.actions.cv_modal.title' | translate"
+  (nzOnCancel)="handleCancel()"
+>
   <ng-container *nzModalContent>
-    <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
-      <thead>
-        <tr>
-          <th
-            *ngFor="let column of listOfColumns"
-            [nzSortOrder]="column.sortOrder"
-            [nzSortFn]="column.sortFn"
-            [nzSortDirections]="column.sortDirections"
-          >
-            {{ column.name | translate }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of filterTable.data" (click)="selectCv(data)">
-          <td>{{ data.attributes.name }}</td>
-          <td>{{ data.attributes.description }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
+    <div *ngIf="(cvList$ | async)!.length > currentCvList.length; else emptyList">
+      <nz-table #filterTable [nzData]="cvList" nzTableLayout="fixed" *ngIf="cvList$ | async as cvList">
+        <thead>
+          <tr>
+            <th
+              *ngFor="let column of listOfColumns"
+              [nzSortOrder]="column.sortOrder"
+              [nzSortFn]="column.sortFn"
+              [nzSortDirections]="column.sortDirections"
+            >
+              {{ column.name | translate }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filterTable.data | cvModalFilter: currentCvList" (click)="selectCv(data)">
+            <td>{{ data.attributes.name }}</td>
+            <td>{{ data.attributes.description }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <ng-template #emptyList>
+      <div class="empty"></div>
+    </ng-template>
   </ng-container>
 
   <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">{{'modals.actions.close' | translate}}</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'modals.actions.close' | translate }}</button>
   </div>
 </nz-modal>

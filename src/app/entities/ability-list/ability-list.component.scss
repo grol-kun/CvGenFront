@@ -1,7 +1,7 @@
 .button-block {
   display: flex;
   justify-content: flex-end;
-  margin: 0 10px 20px;
+  margin: 0 0 20px;
 }
 .td-wrapper {
   display: flex;
@@ -36,6 +36,7 @@
         height: 100%;
 
         &__nz-menu-item {
+          padding: 0 0 0 24px !important;
           width: 100%;
           border: dashed 1px var(--borders-light-gray);
 
