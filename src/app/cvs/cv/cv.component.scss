@@ -12,6 +12,12 @@
     }
   }
 
+  &__project-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+  }
+
   &__buttons-block {
     display: flex;
     justify-content: flex-end;
