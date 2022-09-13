@@ -1,4 +1,10 @@
+@import "../../../styles.scss";
+
 .form {
+  height: 80vh;
+  overflow: overlay;
+  padding-right: 14px;
+
   &__collapse-panel {
     font-weight: 800;
 
@@ -18,6 +24,18 @@
 
     &__button {
       margin: 10px 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
+  }
+}
+
+@media (max-width: $view-768) {
+  .form {
+    height: 100%;
+    overflow: visible;
+    padding: 0;
   }
 }

@@ -3,15 +3,17 @@
 .page {
   display: flex;
   height: 100%;
+  overflow: auto;
 
   &__menu {
+    padding: 5px;
     max-width: 240px;
     min-height: 100%;
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 0.5px solid var(--borders-light-gray);
+    border: solid 1px var(--borders-light-gray);
 
     &__first-block {
       &__nz-input {
@@ -64,11 +66,18 @@
 @media (max-width: $view-768) {
   .page {
     flex-wrap: wrap;
+    overflow: visible;
 
     &__menu {
       max-width: 100%;
       min-height: 30vh;
       width: 100vw;
+    }
+
+    &__wrapper {
+      &__list {
+        padding: 5px 1px 0 0;
+      }
     }
   }
 }

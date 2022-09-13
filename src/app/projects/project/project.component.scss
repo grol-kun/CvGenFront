@@ -1,7 +1,8 @@
 @import "../../../styles.scss";
 
 .container {
-  margin-top: 30px;
+  height: 80vh;
+  overflow: auto;
 
   &__form-wrapper {
     &__first-block {
@@ -63,6 +64,10 @@
 
       &__button {
         margin: 10px 5px;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -70,6 +75,9 @@
 
 @media (max-width: $view-768) {
   .container {
+    height: 100%;
+    overflow: visible;
+
     &__form-wrapper {
       &__first-block {
         width: 100%;
