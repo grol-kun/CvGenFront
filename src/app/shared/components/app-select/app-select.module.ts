@@ -4,7 +4,7 @@ import { AppSelectComponent } from './app-select.component';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TranslateControlModule } from '../../translate/translate-control.module';
+import { TranslateControlModule } from '../translate/translate-control.module';
 
 @NgModule({
   declarations: [AppSelectComponent],

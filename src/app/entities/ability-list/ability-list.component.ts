@@ -10,7 +10,7 @@ import { AbilityService } from 'src/app/shared/services/ability.service';
   selector: 'app-ability-list',
   templateUrl: './ability-list.component.html',
   styleUrls: ['./ability-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() abilityType!: string;
@@ -21,10 +21,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   isModalVisible = false;
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private abilityService: AbilityService,
-    private message: NzMessageService
-  ) {}
+  constructor(private abilityService: AbilityService, private message: NzMessageService) {}
 
   ngOnInit() {
     this.initSearch();
@@ -44,8 +41,8 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
     this.abilityService
       .deleteItemById(this.abilityType, id)
       .pipe(
-        takeUntil(this.destroy$),
-        switchMap(() => this.getAbilities())
+        switchMap(() => this.getAbilities()),
+        takeUntil(this.destroy$)
       )
       .subscribe((data) => {
         this.abilitiesList$.next(data.data);
@@ -56,8 +53,10 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges() {
     this.abilitiesListSubject
       .asObservable()
-      .pipe(switchMap(() => this.getAbilities()))
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        switchMap(() => this.getAbilities()),
+        takeUntil(this.destroy$)
+      )
       .subscribe((data) => {
         this.abilitiesList$.next(data.data);
       });

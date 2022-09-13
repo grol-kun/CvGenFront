@@ -7,7 +7,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { TranslateControlModule } from '../shared/translate/translate-control.module';
+import { TranslateControlModule } from '../shared/components/translate/translate-control.module';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApplicationPipesModule } from '../shared/pipes/application-pipes.module';
 import { NzInputModule } from 'ng-zorro-antd/input';

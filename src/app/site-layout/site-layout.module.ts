@@ -10,8 +10,8 @@ import { RouterModule } from '@angular/router';
 import { LoaderModule } from '../shared/components/loader/loader.module';
 import { DropdownMenuModule } from './dropdown-menu/dropdown-menu.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
-import { ThemeModule } from '../shared/theme/theme.module';
-import { TranslateControlModule } from '../shared/translate/translate-control.module';
+import { ThemeModule } from '../shared/components/theme/theme.module';
+import { TranslateControlModule } from '../shared/components/translate/translate-control.module';
 
 @NgModule({
   imports: [

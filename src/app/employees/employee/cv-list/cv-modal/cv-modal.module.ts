@@ -6,7 +6,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { CvModalComponent } from './cv-modal.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
+import { TranslateControlModule } from 'src/app/shared/components/translate/translate-control.module';
 import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.module';
 
 @NgModule({

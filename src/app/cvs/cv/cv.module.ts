@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { FormArrayBlockModule } from 'src/app/shared/components/form-array-block/form-array-block.module';
-import { TranslateControlModule } from 'src/app/shared/translate/translate-control.module';
+import { TranslateControlModule } from 'src/app/shared/components/translate/translate-control.module';
 
 @NgModule({
   declarations: [CvComponent],
@@ -21,7 +21,7 @@ import { TranslateControlModule } from 'src/app/shared/translate/translate-contr
     NzButtonModule,
     NzCollapseModule,
     FormArrayBlockModule,
-    TranslateControlModule
+    TranslateControlModule,
   ],
 })
 export class CvModule {}

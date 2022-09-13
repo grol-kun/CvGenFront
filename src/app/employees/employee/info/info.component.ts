@@ -67,8 +67,8 @@ export class InfoComponent implements OnInit, OnChanges {
       this.userService
         .updateUser(user.id, user)
         .pipe(
-          takeUntil(this.destroy$),
-          finalize(() => this.form.enable())
+          finalize(() => this.form.enable()),
+          takeUntil(this.destroy$)
         )
         .subscribe(() => {
           this.message.create('success', `User ${user.firstName} was updated successfully!`);

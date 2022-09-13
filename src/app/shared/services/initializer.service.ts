@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
-import { ThemeService } from '../theme/theme.service';
-import { TranslateControlService } from '../translate/translate-control.service';
+import { ThemeService } from '../components/theme/theme.service';
+import { TranslateControlService } from '../components/translate/translate-control.service';
 import { AuthService } from './auth.service';
 
 @Injectable({
