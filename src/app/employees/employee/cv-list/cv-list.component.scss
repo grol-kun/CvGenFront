@@ -2,16 +2,19 @@
 
 .page {
   display: flex;
+  height: 75vh;
+  overflow: overlay;
+  padding-right: 14px;
 
   &__menu {
+    padding: 5px 5px 0 5px;
     position: fixed;
     max-width: 240px;
-    height: 75vh;
-    width: 30%;
+    height: 74vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 0.5px solid var(--borders-light-gray);
+    border: solid 1px var(--borders-light-gray);
 
     &__first-block {
       &__nz-input {
@@ -54,13 +57,12 @@
   &__wrapper {
     margin-left: 240px;
     width: 100%;
-    max-height: 100%;
     position: relative;
 
     &__button-block {
       display: flex;
       justify-content: flex-end;
-      margin: 10px 10px 20px 0;
+      margin: 10px 0 20px 0;
     }
 
     &__form {
@@ -98,6 +100,7 @@
       &__buttons-block {
         display: flex;
         justify-content: flex-end;
+        margin: 0 0 20px 0;
 
         &__button {
           margin: 10px 5px;
@@ -110,17 +113,22 @@
 @media (max-width: $view-768) {
   .page {
     flex-wrap: wrap;
+    height: 100%;
+    overflow: hidden;
+    padding-right: 0;
 
     &__menu {
+      padding: 5px;
       position: static;
       max-width: 100%;
       width: 100vw;
-      height: 0;
-      min-height: 25vh;
+      height: auto;
+      min-height: 15vh;
     }
 
     &__wrapper {
       margin-left: 0;
+      height: 100%;
     }
   }
 }
