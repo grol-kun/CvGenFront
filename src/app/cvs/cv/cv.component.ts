@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { finalize, Subject, takeUntil, switchMap, of } from 'rxjs';
+import { finalize, Subject, takeUntil, switchMap, of, filter, map } from 'rxjs';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { Project } from 'src/app/shared/models/interfaces/project';
 import { CvService } from 'src/app/shared/services/cv.service';
@@ -42,12 +42,8 @@ export class CvComponent implements OnInit, OnDestroy {
   }
 
   patchProjects(project: Project) {
-    let projects = this.form.get('projects')?.getRawValue();
-    if (projects?.length) {
-      projects.push(project);
-    } else {
-      projects = [project];
-    }
+    const formValue = this.form.get('projects')?.getRawValue();
+    const projects = [...(formValue ?? []), project];
     this.form.patchValue({ projects }, { emitEvent: false });
   }
 
@@ -69,14 +65,16 @@ export class CvComponent implements OnInit, OnDestroy {
           this.isNew = true;
           return of(null);
         }),
+        filter((data) => !!data),
+        map((data) => data?.data ?? null),
         takeUntil(this.destroy$)
       )
       .subscribe((data) => {
-        if (data) {
-          this.cv = data.data;
-          const projects = data.data.attributes.projects?.data?.length ? data.data.attributes.projects.data : [];
-          this.form.patchValue({ ...this.cv.attributes, projects: projects }, { emitEvent: false });
-        }
+        console.log('data: ', data);
+
+        this.cv = data!;
+        const projects = this.cv.attributes.projects?.data ?? [];
+        this.form.patchValue({ ...this.cv.attributes, projects }, { emitEvent: false });
       });
   }
 
@@ -122,9 +120,9 @@ export class CvComponent implements OnInit, OnDestroy {
       projects = null,
     } = { ...this.form.getRawValue() };
 
-    return this.isNew
-      ? { data: { name, description, skills, languages, projects: { data: projects } } }
-      : { data: { ...this.cv.attributes, name, description, skills, languages, projects: { data: projects } } };
+    const data = { name, description, skills, languages, projects: { data: projects } };
+
+    return this.isNew ? { data } : { data: { ...this.cv.attributes, ...data } };
   }
 
   onCancel() {
