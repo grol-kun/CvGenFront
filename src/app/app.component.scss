@@ -1,6 +1,26 @@
+@import "../styles.scss";
+
 :host {
   display: block;
   height: 100%;
   width: 100%;
   overflow: hidden;
+}
+
+@media (max-width: $view-768) {
+  ::ng-deep .ant-table-tbody {
+    tr {
+      td {
+        padding: 5px !important;
+      }
+    }
+  }
+
+  ::ng-deep .ant-table-thead {
+    tr {
+      th {
+        padding: 5px !important;
+      }
+    }
+  }
 }
