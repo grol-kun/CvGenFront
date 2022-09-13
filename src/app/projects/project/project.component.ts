@@ -9,6 +9,7 @@ import { AbilityService } from 'src/app/shared/services/ability.service';
 import { ProjectService } from 'src/app/shared/services/project.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DateValidator } from 'src/app/shared/validators/date.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project',
@@ -30,7 +31,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private abilityService: AbilityService,
     private router: Router,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -105,8 +107,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => {
           const text = this.isNew
-            ? `New project was created successfully!`
-            : `Project "${this.project.attributes.name}" was updated successfully!`;
+            ? this.translateService.instant('message_box.success_project_new')
+            : this.translateService.instant('message_box.success_project_update');
 
           this.message.create('success', text);
         });

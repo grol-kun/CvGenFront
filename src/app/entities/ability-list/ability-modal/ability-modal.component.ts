@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
@@ -21,7 +22,7 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private abilityService: AbilityService, private fb: FormBuilder, private message: NzMessageService) {}
+  constructor(private abilityService: AbilityService, private fb: FormBuilder, private message: NzMessageService, private translateService: TranslateService) {}
 
   ngOnInit(): void {
     this.abilityService
@@ -42,7 +43,7 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
     }
     if (this.abilityList.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())) {
       this.form.reset();
-      this.message.create('error', 'Cannot add ability that already exists!');
+      this.message.create('error', this.translateService.instant('message_box.error_ability_exists'));
       return;
     }
     this.abilityService
@@ -50,7 +51,7 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.form.reset();
-        this.message.create('success', 'New ability was created successfully!');
+        this.message.create('success', this.translateService.instant('message_box.success_ability'));
       });
     this.handleCancel();
   }

@@ -8,6 +8,7 @@ import { updateMyInfo } from '../../../core/store/actions/auth.actions';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MailValidatorService } from 'src/app/shared/validators/mail.validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-info',
@@ -26,7 +27,8 @@ export class InfoComponent implements OnInit, OnChanges {
     private message: NzMessageService,
     private userService: UserService,
     private store: Store,
-    private mailValidatorService: MailValidatorService
+    private mailValidatorService: MailValidatorService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +73,7 @@ export class InfoComponent implements OnInit, OnChanges {
           takeUntil(this.destroy$)
         )
         .subscribe(() => {
-          this.message.create('success', `User ${user.firstName} was updated successfully!`);
+          this.message.create('success', this.translateService.instant('message_box.success_user_update'));
           this.store.dispatch(updateMyInfo());
         });
     }

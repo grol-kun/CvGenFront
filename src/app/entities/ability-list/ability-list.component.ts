@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
@@ -21,7 +22,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   isModalVisible = false;
   private destroy$ = new Subject<void>();
 
-  constructor(private abilityService: AbilityService, private message: NzMessageService) {}
+  constructor(private abilityService: AbilityService, private message: NzMessageService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.initSearch();
@@ -46,7 +47,7 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
       )
       .subscribe((data) => {
         this.abilitiesList$.next(data.data);
-        this.message.create('success', `Item has just been deleted!`);
+        this.message.create('success', this.translateService.instant('message_box.success_delete'));
       });
   }
 

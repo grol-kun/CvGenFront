@@ -11,6 +11,7 @@ import {
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, finalize, takeUntil, Observable, debounceTime } from 'rxjs';
 import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
@@ -50,7 +51,8 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     private messageService: NzMessageService,
     private userService: UserService,
     private store: Store,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -116,7 +118,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
       )
       .subscribe(() => {
         if (isFormCalled) {
-          this.messageService.create('success', `User ${user.firstName} was updated successfully!`);
+          this.messageService.create('success', this.translateService.instant('message_box.success_user_update'));
         }
         this.store.dispatch(updateMyInfo());
       });
