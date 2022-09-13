@@ -44,36 +44,40 @@ export class PdfObjectBuilderService {
   }
 
   private buildProjectsList(cvObj: Cv) {
-    return cvObj.attributes.projects?.data.reduce(
-      (a: object[], c) => [
-        ...a,
-        {
-          stack: [
-            { text: c.attributes.name, style: 'listItemHeader' },
+    const projects = cvObj.attributes.projects;
+
+    return projects
+      ? projects.data.reduce(
+          (a: object[], c) => [
+            ...a,
             {
-              text: `${this.buildDate(c.attributes.from)} ${
-                this.buildDate(c.attributes.to) && `- ${this.buildDate(c.attributes.to)}`
-              }`,
-              style: 'listItemSubHeader',
-            },
-            { text: c.attributes.description, style: 'listItemDesc' },
-            { text: 'Responsibilities', fontSize: 8 },
-            c.attributes.responsibilities.data.reduce(
-              (a: object[], c) => [
-                ...a,
+              stack: [
+                { text: c.attributes.name, style: 'listItemHeader' },
                 {
-                  stack: [{ text: c.attributes.name }],
-                  style: 'listItem',
+                  text: `${this.buildDate(c.attributes.from)} ${
+                    this.buildDate(c.attributes.to) && `- ${this.buildDate(c.attributes.to)}`
+                  }`,
+                  style: 'listItemSubHeader',
                 },
+                { text: c.attributes.description, style: 'listItemDesc' },
+                { text: 'Responsibilities', fontSize: 8 },
+                c.attributes.responsibilities.data.reduce(
+                  (a: object[], c) => [
+                    ...a,
+                    {
+                      stack: [{ text: c.attributes.name }],
+                      style: 'listItem',
+                    },
+                  ],
+                  []
+                ),
               ],
-              []
-            ),
+              style: 'listItem',
+            },
           ],
-          style: 'listItem',
-        },
-      ],
-      []
-    );
+          []
+        )
+      : [];
   }
 
   private buildEducationList(userObj: UserInfo) {
