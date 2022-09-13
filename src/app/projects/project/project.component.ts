@@ -20,6 +20,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   skills: Skill[] = [];
   options: string[] = [];
+  isDisabledDate = true;
+  startDate: Date | number | null = null;
 
   private isNew = false;
   private destroy$ = new Subject<void>();
@@ -37,7 +39,51 @@ export class ProjectComponent implements OnInit, OnDestroy {
     if (!this.form) {
       this.initForm();
     }
+    this.initData();
+    this.subscribeOnFormChanges();
+  }
 
+  subscribeOnFormChanges() {
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      if (data.dateGroup.from) {
+        this.undisableEndDate();
+        this.startDate = new Date(data.dateGroup.from);
+      } else {
+        this.handleDisable();
+      }
+
+      const errors = this.form.get('dateGroup')?.errors;
+      if (errors) {
+        if (errors && Object.keys(errors)[0] === 'dates') {
+          this.handleDisable();
+        }
+      }
+    });
+  }
+
+  handleDisable() {
+    this.disableEndDate();
+    this.form.patchValue({ dateGroup: { from: null, to: null } }, { emitEvent: false });
+  }
+
+  private initForm(): void {
+    this.form = this.fb.group({
+      internalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      dateGroup: this.fb.group(
+        {
+          from: ['', [Validators.required]],
+          to: ['', [Validators.required]],
+        },
+        { validator: DateValidator }
+      ),
+      skills: [[], [Validators.required]],
+      domain: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      description: ['', [Validators.required]],
+    });
+  }
+
+  initData() {
     combineLatest([
       this.route.params.pipe(
         switchMap(({ id }) => {
@@ -62,6 +108,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
           { internalName, name, dateGroup: { from, to }, domain, description, skills: skillsNames },
           { emitEvent: false }
         );
+
+        if (from) {
+          this.undisableEndDate();
+        }
       }
 
       if (this.skills.length === 0) {
@@ -72,21 +122,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initForm(): void {
-    this.form = this.fb.group({
-      internalName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      dateGroup: this.fb.group(
-        {
-          from: ['', [Validators.required]],
-          to: ['', [Validators.required]],
-        },
-        { validator: DateValidator }
-      ),
-      skills: [[], [Validators.required]],
-      domain: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      description: ['', [Validators.required]],
-    });
+  undisableEndDate() {
+    this.isDisabledDate = false;
+  }
+
+  disableEndDate() {
+    this.isDisabledDate = true;
   }
 
   onAuthSubmit() {
