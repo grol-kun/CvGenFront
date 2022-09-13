@@ -64,7 +64,7 @@
         background: var(--background-quaternary);
         position: relative;
         height: 92%;
-        overflow-y: auto;
+        overflow-y: hidden;
         overflow-x: hidden;
 
         &__loader_wrapper {
@@ -83,32 +83,77 @@
 }
 
 @media screen and (max-width: $view-768) {
-  .nz-layout__nz-sider {
-    display: none;
-  }
+  .nz-layout {
+    &__nz-sider {
+      display: none;
 
-  .nz-layout__nz-layout__nz-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+      &__logo {
+        cursor: pointer;
+        height: $header-logo-size-64;
+        margin: 0;
+        padding: 0 0 0 10px;
 
-    &__menu-wrapper {
-      display: flex;
-      justify-content: flex-end;
-
-      &__controls {
-        max-width: 50%;
-      }
-      &__user-hi {
-        display: none;
+        &__inner {
+          width: 100%;
+          height: 100%;
+          color: $simple-white;
+        }
       }
     }
 
-    &__adaptive {
-      min-width: max-content;
-      display: flex;
-      flex-direction: row;
+    &__nz-layout {
+      &__nz-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__menu-wrapper {
+          display: flex;
+          justify-content: flex-end;
+
+          &__controls {
+            max-width: 50%;
+          }
+          &__user-hi {
+            display: none;
+          }
+        }
+
+        &__adaptive {
+          min-width: max-content;
+          display: flex;
+          flex-direction: row;
+        }
+      }
+
+      &__nz-content {
+        margin: 0 16px;
+
+        &__nz-breadcrumb {
+          margin: 16px 0;
+        }
+
+        &__inner-content {
+          padding: 24px;
+          background: var(--background-quaternary);
+          position: relative;
+          height: 92%;
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          &__loader_wrapper {
+            margin: -24px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: $overlay-bg-color;
+          }
+        }
+      }
     }
   }
 
