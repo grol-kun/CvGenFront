@@ -1,13 +1,4 @@
-import { DataProject } from './data-project';
-import { Language } from './language';
-import { Skill } from './skill';
-
+import { CvData } from './cv-data';
 export interface CvBody {
-  data: {
-    name: string;
-    description: string;
-    projects: DataProject | null;
-    languages: Language[];
-    skills: Skill[];
-  };
+  data: CvData;
 }

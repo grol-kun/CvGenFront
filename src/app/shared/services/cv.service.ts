@@ -18,11 +18,11 @@ export class CvService {
     return this.httpClient.get<Response<Cv>>(`/api/cvs${POPULATE}`).pipe(map((data) => data.data));
   }
 
-  getCvById(id: string | number): Observable<ResponseOneEntity<Cv>> {
+  getCvById(id: number): Observable<ResponseOneEntity<Cv>> {
     return this.httpClient.get<ResponseOneEntity<Cv>>(`/api/cvs/${id}${POPULATE}`);
   }
 
-  updateCv(id: string | number, body: CvBody) {
+  updateCv(id: number, body: CvBody) {
     return this.httpClient.put<Project>(`/api/cvs/${id}`, body);
   }
 
@@ -30,7 +30,7 @@ export class CvService {
     return this.httpClient.post(`/api/cvs`, body);
   }
 
-  deleteCvById(id: string | number) {
+  deleteCvById(id: number) {
     return this.httpClient.delete(`/api/cvs/${id}`);
   }
 }
