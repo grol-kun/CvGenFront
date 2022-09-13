@@ -19,11 +19,11 @@ export class ProjectService {
     return this.httpClient.get<Response<Project>>(`/api/projects${POPULATE}`);
   }
 
-  getProjectById(id: string | number): Observable<ResponseOneEntity<Project>> {
+  getProjectById(id: number): Observable<ResponseOneEntity<Project>> {
     return this.httpClient.get<ResponseOneEntity<Project>>(`/api/projects/${id}${POPULATE}`);
   }
 
-  updateProject(id: string | number, body: ProjectBody) {
+  updateProject(id: number, body: ProjectBody) {
     return this.httpClient.put<Project>(`/api/projects/${id}`, body);
   }
 
@@ -31,7 +31,7 @@ export class ProjectService {
     return this.httpClient.post(`/api/projects`, body);
   }
 
-  deleteProjectById(id: string | number) {
+  deleteProjectById(id: number) {
     return this.httpClient.delete(`/api/projects/${id}`);
   }
 

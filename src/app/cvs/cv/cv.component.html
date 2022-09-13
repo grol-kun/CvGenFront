@@ -44,6 +44,14 @@
     </nz-collapse-panel>
   </nz-collapse>
 
+  <div class="form__project-button-wrapper">
+    <button type="button" nz-button nzType="text" (click)="showProjectModal()">
+      {{ 'form_array_block.actions.add_projects' | translate }}
+    </button>
+  </div>
+
+  <app-projects-array formControlName="projects"></app-projects-array>
+
   <div class="form__buttons-block">
     <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
       {{ 'buttons.save' | translate }}
@@ -53,3 +61,10 @@
     </button>
   </div>
 </form>
+
+<app-project-modal
+  [isVisible]="isProjectModalVisible"
+  (projectSelected)="onProjectSelected($event)"
+  (hideModals)="onHideModals()"
+>
+</app-project-modal>
