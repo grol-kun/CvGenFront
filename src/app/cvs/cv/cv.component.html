@@ -1,9 +1,17 @@
 <form class="form" [formGroup]="form" (ngSubmit)="onAuthSubmit()">
   <nz-collapse>
-    <nz-collapse-panel [nzHeader]="'cvs.actions.info_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'cvs.actions.info_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <div class="form__collapse-panel__inner__block">
-          <app-input formControlName="name" [label]="'cvs.labels.name' | translate" [placeholder]="'cvs.placeholders.name' | translate"></app-input>
+          <app-input
+            formControlName="name"
+            [label]="'cvs.labels.name' | translate"
+            [placeholder]="'cvs.placeholders.name' | translate"
+          ></app-input>
           <app-textarea
             formControlName="description"
             [label]="'cvs.labels.description' | translate"
@@ -15,18 +23,34 @@
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel [nzHeader]="'cvs.actions.skills_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'cvs.actions.skills_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="skills" datatype="skills"></app-form-array-block>
       </div>
     </nz-collapse-panel>
 
-    <nz-collapse-panel [nzHeader]="'cvs.actions.languages_collapse'| translate" [nzActive]="true" class="form__collapse-panel">
+    <nz-collapse-panel
+      [nzHeader]="'cvs.actions.languages_collapse' | translate"
+      [nzActive]="true"
+      class="form__collapse-panel"
+    >
       <div class="form__collapse-panel__inner">
         <app-form-array-block formControlName="languages" datatype="languages"></app-form-array-block>
       </div>
     </nz-collapse-panel>
   </nz-collapse>
+
+  <div class="form__project-button-wrapper">
+    <button type="button" nz-button nzType="text" (click)="showProjectModal()">
+      {{ 'form_array_block.actions.add_projects' | translate }}
+    </button>
+  </div>
+
+  <app-projects-array formControlName="projects"></app-projects-array>
 
   <div class="form__buttons-block">
     <button type="submit" class="form__buttons-block__button" nz-button nzType="primary" [disabled]="!form.valid">
@@ -37,3 +61,10 @@
     </button>
   </div>
 </form>
+
+<app-project-modal
+  [isVisible]="isProjectModalVisible"
+  (projectSelected)="onProjectSelected($event)"
+  (hideModals)="onHideModals()"
+>
+</app-project-modal>

@@ -1,3 +1,17 @@
-.search-box {
-  padding: 8px;
+@import "../../styles.scss";
+
+.page {
+  height: 80vh;
+  overflow: auto;
+
+  .search-box {
+    padding: 8px;
+  }
+}
+
+@media (max-width: $view-768) {
+  .page {
+    height: 100%;
+    overflow: hidden;
+  }
 }

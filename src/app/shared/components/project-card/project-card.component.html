@@ -28,6 +28,8 @@
             [label]="'project_card.labels.end_date' | translate"
             [placeholder]="'project_card.placeholders.end_date' | translate"
             class="container__form-wrapper__first-block__date_wrapper__date_group__control"
+            [isDisabled]="isDisabledDate"
+            [startDate]="startDate"
           ></app-app-data-picker>
         </div>
         <div class="input-component__error-wrapper">

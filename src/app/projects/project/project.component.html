@@ -29,6 +29,8 @@
               [label]="'projects.forms.labels.to' | translate"
               [placeholder]="'projects.forms.placeholders.to' | translate"
               class="container__form-wrapper__first-block__date_wrapper__date_group__control"
+              [isDisabled]="isDisabledDate"
+              [startDate]="startDate"
             ></app-app-data-picker>
           </div>
           <div class="input-component__error-wrapper">
