@@ -70,8 +70,6 @@ export class CvComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe((data) => {
-        console.log('data: ', data);
-
         this.cv = data!;
         const projects = this.cv.attributes.projects?.data ?? [];
         this.form.patchValue({ ...this.cv.attributes, projects }, { emitEvent: false });
