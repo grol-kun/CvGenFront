@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { finalize, Subject, takeUntil, switchMap, of, filter, map } from 'rxjs';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
@@ -25,7 +26,8 @@ export class CvComponent implements OnInit, OnDestroy {
     private router: Router,
     private message: NzMessageService,
     private cvService: CvService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -101,8 +103,8 @@ export class CvComponent implements OnInit, OnDestroy {
         )
         .subscribe(() => {
           const text = this.isNew
-            ? `New CV was created successfully!`
-            : `CV "${this.cv.attributes.name}" was updated successfully!`;
+            ? this.translateService.instant('message_box.success_cv_new')
+            : this.translateService.instant('message_box.success_cv_update', { cv: this.cv.attributes.name });
 
           this.message.create('success', text);
         });

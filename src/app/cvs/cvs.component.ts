@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { takeUntil, Subject, BehaviorSubject, switchMap, debounceTime } from 'rxjs';
 import { CV_COLUMNS } from '../shared/models/constants/cv-columns';
@@ -22,7 +23,12 @@ export class CvsComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  constructor(private messageService: NzMessageService, private cdr: ChangeDetectorRef, private cvService: CvService) {}
+  constructor(
+    private messageService: NzMessageService,
+    private cdr: ChangeDetectorRef,
+    private cvService: CvService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.getCvList()
@@ -58,7 +64,7 @@ export class CvsComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => {
         this.cvList$.next(data);
-        this.messageService.create('success', `CV has just been deleted!`);
+        this.messageService.create('success', this.translateService.instant('message_box.success_cv_delete'));
       });
   }
 

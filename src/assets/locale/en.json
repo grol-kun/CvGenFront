@@ -215,5 +215,17 @@
     "CVs": "CVs list",
     "CV": "CV",
     "Entities": "Entities list"
+  },
+  "message_box":{
+    "error_ability_exists": "Cannot add ability that already exists!",
+    "success_ability": "New ability was created successfully!",
+    "success_project_new": "New project was created successfully!",
+    "success_project_update": "Project {{project}} was updated successfully!",
+    "success_project_delete": "Project has just been deleted!",
+    "success_cv_delete": "CV has just been deleted!",
+    "success_cv_new": "New CV was created successfully!",
+    "success_cv_update": "CV {{cv}} was updated successfully!",
+    "success_user_update": "User {{firstName}} was updated successfully!",
+    "success_delete": "Item has just been deleted!"
   }
 }

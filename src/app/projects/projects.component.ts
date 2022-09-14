@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
 import { PROJECT_COLUMNS } from '../shared/models/constants/project-columns';
@@ -25,7 +26,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   constructor(
     private projectService: ProjectService,
     private message: NzMessageService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       .deleteProjectById(id)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.message.create('success', `Project has just been deleted!`);
+        this.message.create('success', this.translateService.instant('message_box.success_delete'));
         this.getProjectList();
         this.cdr.detectChanges();
       });
