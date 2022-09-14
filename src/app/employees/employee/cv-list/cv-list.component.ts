@@ -118,7 +118,10 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
       )
       .subscribe(() => {
         if (isFormCalled) {
-          this.messageService.create('success', this.translateService.instant('message_box.success_user_update'));
+          this.messageService.create(
+            'success',
+            this.translateService.instant('message_box.success_user_update', { firstName: user.firstName })
+          );
         }
         this.store.dispatch(updateMyInfo());
       });

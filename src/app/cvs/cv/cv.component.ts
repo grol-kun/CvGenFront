@@ -104,7 +104,7 @@ export class CvComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           const text = this.isNew
             ? this.translateService.instant('message_box.success_cv_new')
-            : this.translateService.instant('message_box.success_cv_update');
+            : this.translateService.instant('message_box.success_cv_update', { cv: this.cv.attributes.name });
 
           this.message.create('success', text);
         });

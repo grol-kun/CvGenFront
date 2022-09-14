@@ -73,7 +73,10 @@ export class InfoComponent implements OnInit, OnChanges {
           takeUntil(this.destroy$)
         )
         .subscribe(() => {
-          this.message.create('success', this.translateService.instant('message_box.success_user_update'));
+          this.message.create(
+            'success',
+            this.translateService.instant('message_box.success_user_update', { firstName: user.firstName })
+          );
           this.store.dispatch(updateMyInfo());
         });
     }

@@ -149,7 +149,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           const text = this.isNew
             ? this.translateService.instant('message_box.success_project_new')
-            : this.translateService.instant('message_box.success_project_update');
+            : this.translateService.instant('message_box.success_project_update', {
+                project: this.project.attributes.name,
+              });
 
           this.message.create('success', text);
         });
