@@ -29,7 +29,8 @@
     "title": "User Information",
     "actions": {
       "user": "User",
-      "logout": "Logout"
+      "logout": "Logout",
+      "close": "Close"
     },
     "text": {
       "user_id": "User ID:",
@@ -216,7 +217,7 @@
     "CV": "CV",
     "Entities": "Entities list"
   },
-  "message_box":{
+  "message_box": {
     "error_ability_exists": "Cannot add ability that already exists!",
     "success_ability": "New ability was created successfully!",
     "success_project_new": "New project was created successfully!",

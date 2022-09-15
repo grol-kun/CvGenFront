@@ -4,21 +4,21 @@
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu>
-    <li nz-menu-item (click)="showModal()">{{ 'user_modal.actions.user' | translate}}</li>
-    <li nz-menu-item (click)="logout()">{{ 'user_modal.actions.logout'| translate }}</li>
+    <li nz-menu-item (click)="showModal()">{{ 'user_modal.actions.user' | translate }}</li>
+    <li nz-menu-item (click)="logout()">{{ 'user_modal.actions.logout' | translate }}</li>
   </ul>
 </nz-dropdown-menu>
 
 <nz-modal [nzVisible]="isVisible" [nzTitle]="'user_modal.title' | translate" (nzOnCancel)="handleCancel()">
   <ng-container *nzModalContent>
-    <p>{{'user_modal.text.user_id' | translate}} {{ (info$ | async)?.id }}</p>
-    <p>{{'user_modal.text.username' | translate}} {{ (info$ | async)?.username }}</p>
-    <p>{{'user_modal.text.email' | translate}} {{ (info$ | async)?.email }}</p>
-    <p>{{'user_modal.text.first_name' | translate}} {{ (info$ | async)?.firstName }}</p>
-    <p>{{'user_modal.text.last_name' | translate}} {{ (info$ | async)?.lastName }}</p>
+    <p>{{ 'user_modal.text.user_id' | translate }} {{ (info$ | async)?.id }}</p>
+    <p>{{ 'user_modal.text.username' | translate }} {{ (info$ | async)?.username }}</p>
+    <p>{{ 'user_modal.text.email' | translate }} {{ (info$ | async)?.email }}</p>
+    <p>{{ 'user_modal.text.first_name' | translate }} {{ (info$ | async)?.firstName }}</p>
+    <p>{{ 'user_modal.text.last_name' | translate }} {{ (info$ | async)?.lastName }}</p>
   </ng-container>
 
   <div *nzModalFooter>
-    <button nz-button nzType="default" (click)="handleCancel()">Close</button>
+    <button nz-button nzType="default" (click)="handleCancel()">{{ 'user_modal.actions.close' | translate }}</button>
   </div>
 </nz-modal>
