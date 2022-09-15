@@ -14,7 +14,6 @@ import { AuthService } from '../shared/services/auth.service';
 export class AuthComponent implements OnInit {
   private destroy$ = new Subject<void>();
   form!: FormGroup;
-  currentForm?: FormGroup;
   loading = false;
 
   constructor(
@@ -39,33 +38,28 @@ export class AuthComponent implements OnInit {
 
   onAuthSubmit() {
     const { identifier, password, remember } = this.form.getRawValue();
-    if (!this.form.valid) {
-      return;
-    }
     this.loading = true;
     this.form.disable();
+
     this.authService
       .login({
         identifier,
         password,
       })
       .pipe(
-        finalize(() => this.form.enable()),
+        finalize(() => {
+          this.form.enable();
+          this.loading = false;
+        }),
         takeUntil(this.destroy$)
       )
-      .subscribe({
-        next: (data) => {
-          this.authService.setToken(data.jwt);
-          this.store.dispatch(updateMyInfo());
-          if (remember) {
-            this.authService.setTokenToCookies(data.jwt);
-          }
-          this.router.navigate(['/employees']);
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-        },
+      .subscribe((data) => {
+        this.authService.setToken(data.jwt);
+        this.store.dispatch(updateMyInfo());
+        if (remember) {
+          this.authService.setTokenToCookies(data.jwt);
+        }
+        this.router.navigate(['/employees']);
       });
   }
 }

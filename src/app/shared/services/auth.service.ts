@@ -8,7 +8,7 @@ import { loginInfo } from '../models/interfaces/login-info';
 import { CookieService } from 'ngx-cookie';
 import { ExpireDateService } from './expire-date.service';
 import { Store } from '@ngrx/store';
-import { removeToken, setToken } from 'src/app/core/store/actions/auth.actions';
+import { removeToken, setToken, updateMyInfo } from 'src/app/core/store/actions/auth.actions';
 import { tokenSelector } from 'src/app/core/store/selectors/auth.selector';
 import { MyInfo } from '../models/interfaces/my-info';
 import { SessionStorageService } from './session-storage.service';
@@ -66,5 +66,11 @@ export class AuthService {
 
   getMyInfo(): Observable<MyInfo> {
     return this.httpClient.get<MyInfo>(`/api/users/me`);
+  }
+
+  updateMyInfoIfAvailable(): void {
+    if (this.getTokenFromCookies()) {
+      this.store.dispatch(updateMyInfo());
+    }
   }
 }
