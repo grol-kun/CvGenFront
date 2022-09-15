@@ -10,6 +10,7 @@
     [nzPlaceHolder]="placeholder"
     [nzDisabledDate]="disabledDate"
     [nzDisabled]="isDisabled"
+    [nzStatus]="ngControl.control?.errors && control.touched ? 'error' : ''"
   ></nz-date-picker>
 
   <div class="input-component__error-wrapper">

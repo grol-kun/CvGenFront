@@ -1,19 +1,20 @@
 <div class="input-component">
   <div class="input-component__label-wrapper">
-    <label
-      class="input-component__label-wrapper__label"
-      [textContent]="label"
-    ></label>
+    <label class="input-component__label-wrapper__label" [textContent]="label"></label>
     <span class="input-component__label-wrapper__asterisk">*</span>
   </div>
 
-  <nz-input-group [nzSuffix]="isPassword ? passwordSuffix : ''">
+  <nz-input-group
+    [nzSuffix]="isPassword ? passwordSuffix : ''"
+    [nzStatus]="ngControl.control?.errors && control.touched ? 'error' : ''"
+  >
     <input
       class="nz-input"
       nz-input
       [placeholder]="placeholder"
       [formControl]="control"
       [type]="textVisible ? 'text' : 'password'"
+      [nzStatus]="ngControl.control?.errors && control.touched ? 'error' : ''"
     />
   </nz-input-group>
 
@@ -22,10 +23,7 @@
   </ng-template>
 
   <div class="input-component__error-wrapper">
-    <span
-      class="input-component__error-wrapper__error-message"
-      *ngIf="ngControl.control?.errors && control.touched"
-    >
+    <span class="input-component__error-wrapper__error-message" *ngIf="ngControl.control?.errors && control.touched">
       {{ ngControl.control?.errors | errorMessage | translate }}
     </span>
   </div>
