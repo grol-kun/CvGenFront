@@ -43,4 +43,9 @@
   </ul>
 </div>
 
-<app-ability-modal [isVisible]="isModalVisible" [type]="abilityType" (hideModal)="onHideModal()"></app-ability-modal>
+<app-ability-modal
+  [isVisible]="isModalVisible"
+  [type]="abilityType"
+  [abilitiesList]="abilitiesList$ | async"
+  (hideModal)="onHideModal()"
+></app-ability-modal>

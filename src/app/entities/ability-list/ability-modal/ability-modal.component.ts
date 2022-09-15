@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
-import { Response } from 'src/app/shared/models/interfaces/response';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 
 @Component({
@@ -16,21 +15,25 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
   @Output() hideModal = new EventEmitter<boolean>();
   @Input() isVisible = false;
   @Input() type = '';
+  @Input() abilitiesList: Ability[] | null = null;
+
   ability!: Ability;
   form!: FormGroup;
-  abilityList!: Ability[];
 
   private destroy$ = new Subject<void>();
 
-  constructor(private abilityService: AbilityService, private fb: FormBuilder, private message: NzMessageService, private translateService: TranslateService) {}
+  constructor(
+    private abilityService: AbilityService,
+    private fb: FormBuilder,
+    private message: NzMessageService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
-    this.abilityService
-      .getFullList<Response<Ability>>(this.type)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.abilityList = data.data;
-      });
+    this.initForm();
+  }
+
+  initForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     });
@@ -38,14 +41,19 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
 
   onAbilityFormSubmit() {
     this.form.markAllAsTouched();
+
     if (!this.form.valid) {
       return;
     }
-    if (this.abilityList.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())) {
+
+    if (
+      this.abilitiesList?.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())
+    ) {
       this.form.reset();
       this.message.create('error', this.translateService.instant('message_box.error_ability_exists'));
       return;
     }
+
     this.abilityService
       .addItem(this.type, { data: this.form.getRawValue() })
       .pipe(takeUntil(this.destroy$))
