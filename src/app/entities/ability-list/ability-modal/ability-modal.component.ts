@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Ability } from 'src/app/shared/models/interfaces/ability';
 import { AbilityService } from 'src/app/shared/services/ability.service';
 
@@ -15,11 +15,10 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
   @Output() hideModal = new EventEmitter<boolean>();
   @Input() isVisible = false;
   @Input() type = '';
-  @Input() abilitiesList$: BehaviorSubject<Ability[]> | null = null;
+  @Input() abilitiesList: Ability[] | null = null;
 
   ability!: Ability;
   form!: FormGroup;
-  abilityList!: Ability[];
 
   private destroy$ = new Subject<void>();
 
@@ -32,22 +31,12 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.makeAbilityList();
   }
 
   initForm() {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
     });
-  }
-
-  makeAbilityList() {
-    this.abilitiesList$
-      ?.asObservable()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.abilityList = data;
-      });
   }
 
   onAbilityFormSubmit() {
@@ -57,7 +46,9 @@ export class AbilityModalComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.abilityList.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())) {
+    if (
+      this.abilitiesList?.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())
+    ) {
       this.form.reset();
       this.message.create('error', this.translateService.instant('message_box.error_ability_exists'));
       return;

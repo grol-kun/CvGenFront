@@ -46,6 +46,6 @@
 <app-ability-modal
   [isVisible]="isModalVisible"
   [type]="abilityType"
-  [abilitiesList$]="abilitiesList$"
+  [abilitiesList]="abilitiesList$ | async"
   (hideModal)="onHideModal()"
 ></app-ability-modal>
