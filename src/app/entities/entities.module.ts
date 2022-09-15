@@ -16,9 +16,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { AbilityModalComponent } from './ability-list/ability-modal/ability-modal.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { EditAbilityModalComponent } from './ability-list/edit-ability-modal/edit-ability-modal.component';
 
 @NgModule({
-  declarations: [EntitiesComponent, AbilityListComponent, AbilityModalComponent],
+  declarations: [EntitiesComponent, AbilityListComponent, AbilityModalComponent, EditAbilityModalComponent],
   imports: [
     CommonModule,
     EntitiesRoutingModule,

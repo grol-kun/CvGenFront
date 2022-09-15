@@ -19,10 +19,17 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
   searchControl = new FormControl<string>('');
   searchAbility = '';
   abilitiesList$ = new BehaviorSubject<Ability[]>([]);
-  isModalVisible = false;
+  isAddModalVisible = false;
+  isEditModalVisible = false;
+  abilityId = 0;
+  abilityData = '';
   private destroy$ = new Subject<void>();
 
-  constructor(private abilityService: AbilityService, private message: NzMessageService, private translateService: TranslateService) {}
+  constructor(
+    private abilityService: AbilityService,
+    private message: NzMessageService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.initSearch();
@@ -67,12 +74,19 @@ export class AbilityListComponent implements OnInit, OnChanges, OnDestroy {
     return ability.id;
   }
 
-  showModal() {
-    this.isModalVisible = true;
+  showAddModal() {
+    this.isAddModalVisible = true;
+  }
+
+  showEditModal(id: number, data: string) {
+    this.abilityId = id;
+    this.abilityData = data;
+    this.isEditModalVisible = true;
   }
 
   onHideModal() {
-    this.isModalVisible = false;
+    this.isAddModalVisible = false;
+    this.isEditModalVisible = false;
     this.forceAbilitiesListSubject();
   }
 
