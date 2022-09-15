@@ -46,21 +46,24 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   subscribeOnFormChanges() {
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((data) => {
-      if (data.dateGroup.from) {
-        this.undisableEndDate();
-        this.startDate = new Date(data.dateGroup.from);
-      } else {
-        this.handleDisable();
-      }
-
-      const errors = this.form.get('dateGroup')?.errors;
-      if (errors) {
-        if (errors && Object.keys(errors)[0] === 'dates') {
+    this.form
+      .get('dateGroup')
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data?.from) {
+          this.undisableEndDate();
+          this.startDate = new Date(data.from);
+        } else {
           this.handleDisable();
         }
-      }
-    });
+
+        const errors = this.form.get('dateGroup')?.errors;
+        if (errors) {
+          if (errors && Object.keys(errors)[0] === 'dates') {
+            this.handleDisable();
+          }
+        }
+      });
   }
 
   handleDisable() {
