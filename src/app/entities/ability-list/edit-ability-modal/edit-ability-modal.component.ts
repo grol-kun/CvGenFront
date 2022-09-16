@@ -42,8 +42,8 @@ export class EditAbilityModalComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (simpleChanges?.hasOwnProperty('data') && simpleChanges?.['data'].currentValue != '') {
-      const name = simpleChanges?.['data'].currentValue;
+    if (simpleChanges['data']?.currentValue) {
+      const name = simpleChanges['data'].currentValue;
       this.form.patchValue({ name }, { emitEvent: false });
     }
   }
