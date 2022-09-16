@@ -17,8 +17,9 @@ import { ProjectService } from '../shared/services/project.service';
 export class ProjectsComponent implements OnInit, OnDestroy {
   projectList$!: Observable<Project[]>;
   searchField = '';
-  searchValue = '';
+  searchData: string | Date[] = '';
   searchControl = new FormControl<string>('');
+  searchDateContorl = new FormControl<Date[]>([]);
   listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
 
   private destroy$ = new Subject<void>();
@@ -37,7 +38,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   initSearch() {
     this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
-      this.searchValue = data ?? '';
+      this.searchData = data ?? '';
+      this.cdr.detectChanges();
+    });
+
+    this.searchDateContorl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+      this.searchData = data ?? [];
       this.cdr.detectChanges();
     });
   }
@@ -48,7 +54,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   onFilterTrigger(searchField: string) {
     if (this.searchField !== searchField) {
-      this.searchValue = '';
+      this.searchData = '';
     }
     this.searchField = searchField;
   }
