@@ -80,12 +80,12 @@ export class PdfObjectBuilderService {
       : [];
   }
 
-  private buildEducationList(userObj: UserInfo) {
+  private buildDescriptionList(cvObj: Cv) {
     return [
       {
         stack: [
           {
-            text: `${userObj.education}`,
+            text: `${cvObj.attributes.user.description}`,
             style: 'listItemSubHeader',
           },
         ],
@@ -94,8 +94,22 @@ export class PdfObjectBuilderService {
     ];
   }
 
-  private buildSkillList(userObj: UserInfo) {
-    return userObj.skills.reduce(
+  private buildEducationList(cvObj: Cv) {
+    return [
+      {
+        stack: [
+          {
+            text: `${cvObj.attributes.user.education}`,
+            style: 'listItemSubHeader',
+          },
+        ],
+        style: 'listItem',
+      },
+    ];
+  }
+
+  private buildSkillList(cvObj: Cv) {
+    return cvObj.attributes.skills.reduce(
       (a: object[], c) => [
         ...a,
         {
@@ -107,8 +121,8 @@ export class PdfObjectBuilderService {
     );
   }
 
-  private buildLanguagesList(userObj: UserInfo) {
-    return userObj.languages.reduce(
+  private buildLanguagesList(cvObj: Cv) {
+    return cvObj.attributes.languages.reduce(
       (a: object[], c) => [
         ...a,
         {
@@ -132,13 +146,13 @@ export class PdfObjectBuilderService {
       : [];
   }
 
-  private buildHeader(userObj: UserInfo) {
+  private buildHeader(cvObj: Cv, userObj: UserInfo) {
     return [
       {
         width: '*',
         stack: [
           {
-            text: `${userObj.firstName} ${userObj.lastName}`,
+            text: `${cvObj.attributes.user.firstName} ${cvObj.attributes.user.lastName}`,
             style: 'name',
           },
           { text: '', style: 'title' },
@@ -152,23 +166,29 @@ export class PdfObjectBuilderService {
     return [{ stack: this.buildLogo(), style: 'headerLinks' }];
   }
 
-  private buildSkillsSection(userObj: UserInfo) {
+  private buildSkillsSection(cvObj: Cv) {
     return [
       { text: 'Skills', style: 'sectionTitle' },
-      { stack: this.buildSkillList(userObj), style: 'list' },
+      { stack: this.buildSkillList(cvObj), style: 'list' },
     ];
   }
 
-  private buildLanguagesSection(userObj: UserInfo) {
+  private buildLanguagesSection(cvObj: Cv) {
     return [
       { text: 'Languages', style: 'sectionTitle' },
-      { stack: this.buildLanguagesList(userObj), style: 'list' },
+      { stack: this.buildLanguagesList(cvObj), style: 'list' },
     ];
   }
-  private buildEducationSection(userObj: UserInfo) {
+  private buildDescriptionSection(cvObj: Cv) {
+    return [
+      { text: 'Profile', style: 'sectionTitle' },
+      { stack: this.buildDescriptionList(cvObj), style: 'list' },
+    ];
+  }
+  private buildEducationSection(cvObj: Cv) {
     return [
       { text: 'Education', style: 'sectionTitle' },
-      { stack: this.buildEducationList(userObj), style: 'list' },
+      { stack: this.buildEducationList(cvObj), style: 'list' },
     ];
   }
   private buildProjectsSection(cvObj: Cv) {
@@ -182,12 +202,12 @@ export class PdfObjectBuilderService {
     return [this.buildLogoSection()];
   }
 
-  private buildMain(userObj: UserInfo, cvObj: Cv) {
-    return [this.buildEducationSection(userObj), this.buildProjectsSection(cvObj)];
+  private buildMain(cvObj: Cv) {
+    return [this.buildDescriptionSection(cvObj), this.buildEducationSection(cvObj), this.buildProjectsSection(cvObj)];
   }
 
-  private buildSide(userObj: UserInfo) {
-    return [this.buildSkillsSection(userObj), this.buildLanguagesSection(userObj)];
+  private buildSide(cvObj: Cv) {
+    return [this.buildSkillsSection(cvObj), this.buildLanguagesSection(cvObj)];
   }
 
   public buildDocDefinition(cvObj: Cv, userObj: UserInfo) {
@@ -206,7 +226,7 @@ export class PdfObjectBuilderService {
             },
             {
               width: '75%',
-              stack: this.buildHeader(userObj),
+              stack: this.buildHeader(cvObj, userObj),
               style: 'headerMain',
             },
           ],
@@ -216,12 +236,12 @@ export class PdfObjectBuilderService {
           columns: [
             {
               width: '25%',
-              stack: this.buildSide(userObj),
+              stack: this.buildSide(cvObj),
               style: 'side',
             },
             {
               width: '75%',
-              stack: this.buildMain(userObj, cvObj),
+              stack: this.buildMain(cvObj),
             },
           ],
           columnGap: 56,
