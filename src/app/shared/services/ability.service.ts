@@ -24,4 +24,8 @@ export class AbilityService {
   deleteItemById<T>(type: string, id: number): Observable<T> {
     return this.httpClient.delete<T>(`/api/${type}/${id}`);
   }
+
+  updateItemById<T>(id: number, type: string, body: ResponseOneEntity<T>) {
+    return this.httpClient.put<T>(`/api/${type}/${id}`, body);
+  }
 }

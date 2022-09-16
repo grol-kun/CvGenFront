@@ -43,7 +43,11 @@
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
+
+            :first-child{
+              margin-right: auto;
+            }
 
             &__nz-icon {
               padding: 10px;
