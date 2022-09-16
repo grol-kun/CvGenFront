@@ -41,12 +41,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   initSearch() {
     this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
       this.searchData = data ?? '';
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     });
 
     this.searchDateContorl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
       this.searchData = data ?? [];
-      this.cdr.detectChanges();
+      this.cdr.markForCheck();
     });
   }
 
