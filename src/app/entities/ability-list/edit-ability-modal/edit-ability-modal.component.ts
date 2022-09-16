@@ -55,10 +55,11 @@ export class EditAbilityModalComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
 
-    if (
-      this.abilitiesList?.some((e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase())
-    ) {
-      this.form.reset();
+    const exists = this.abilitiesList?.some(
+      (e) => e.attributes.name.toLowerCase() === this.form.getRawValue().name.toLowerCase()
+    );
+
+    if (exists) {
       this.message.create('error', this.translateService.instant('message_box.error_ability_exists'));
       return;
     }
