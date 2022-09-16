@@ -81,7 +81,7 @@ export class FormArrayBlockComponent implements ControlValueAccessor, OnInit, Va
   }
 
   public writeValue(value: any[]): void {
-    this.items.reset();
+    this.items.clear();
     if (value) {
       value.forEach((item) => this.items.push(new FormControl(item, [Validators.required])));
     }

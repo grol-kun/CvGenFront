@@ -1,11 +1,16 @@
+import { CvUser } from './cv-user';
+import { DataProject } from './data-project';
 import { Language } from './language';
-import { Project } from './project';
 import { Skill } from './skill';
 
-export interface CVAttributes {
+export interface CvAttributes {
   name: string;
   description: string;
-  projects: Project[];
+  projects: DataProject;
   languages: Language[];
   skills: Skill[];
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  user: CvUser;
 }
