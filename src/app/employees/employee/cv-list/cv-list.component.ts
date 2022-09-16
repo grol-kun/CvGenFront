@@ -10,13 +10,15 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, finalize, takeUntil, Observable, debounceTime } from 'rxjs';
-import { updateMyInfo } from 'src/app/core/store/actions/auth.actions';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
+import { CvAttributes } from 'src/app/shared/models/interfaces/cv-attributes';
+import { CvUser } from 'src/app/shared/models/interfaces/cv-user';
+import { Language } from 'src/app/shared/models/interfaces/language';
 import { Project } from 'src/app/shared/models/interfaces/project';
+import { Skill } from 'src/app/shared/models/interfaces/skill';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -50,7 +52,6 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
     private router: Router,
     private messageService: NzMessageService,
     private userService: UserService,
-    private store: Store,
     private cdr: ChangeDetectorRef,
     private translateService: TranslateService
   ) {}
@@ -123,21 +124,13 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
             this.translateService.instant('message_box.success_user_update', { firstName: user.firstName })
           );
         }
-        this.store.dispatch(updateMyInfo());
       });
   }
 
   getNewUser(newCvs: Cv[]): UserInfo | null {
-    const { firstName, lastName, education, skills, languages, description } = this.form.getRawValue();
     if (this.user?.id) {
       return {
         ...this.user,
-        firstName,
-        lastName,
-        education,
-        skills,
-        languages,
-        description,
         cvs: newCvs,
       };
     }
@@ -146,7 +139,7 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
 
   getNewCvs(currentCv: Cv): Cv[] {
     const cvs = [...this.cvs];
-    if (this?.currentCv?.id) {
+    if (this.currentCv?.id) {
       return cvs.map((cv) => (cv.id === this.currentCv!.id ? currentCv : cv));
     }
     return cvs;
@@ -155,17 +148,18 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
   getNewCurrentCv(): Cv {
     const currentCv = { ...this.currentCv };
 
-    if (this.form.get('projects')?.value) {
-      const projects = this.form.get('projects')!.value;
+    const projects: Project[] = this.form.get('projects')?.value;
+    currentCv.attributes.projects.data = projects?.length ? [...projects] : null;
 
-      if (currentCv?.attributes?.projects) {
-        if (projects.length > 0) {
-          currentCv.attributes.projects.data = [...projects];
-        } else {
-          currentCv.attributes.projects = null;
-        }
-      }
-    }
+    const skills: Skill[] = this.form.get('skills')?.value;
+    currentCv.attributes.skills = skills ? skills : [];
+
+    const languages: Language[] = this.form.get('languages')?.value;
+    currentCv.attributes.languages = languages ? languages : [];
+
+    const { description, education, firstName, lastName } = this.form.getRawValue();
+    const cvUser: CvUser = { description, education, firstName, lastName };
+    currentCv.attributes.user = cvUser;
 
     return currentCv;
   }
@@ -175,13 +169,37 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
       cv.attributes.projects = { data: [] };
     }
     this.currentCv = cv;
-    this.patchProjects();
+
+    const attributes = this.currentCv.attributes;
+    this.patchProjects(attributes);
+    this.patchUserInfo(attributes);
+    this.patchSkills(attributes);
+    this.patchLanguages(attributes);
+
     this.isFormVisible = true;
   }
 
-  patchProjects() {
-    if (this.currentCv && this.currentCv.attributes.projects) {
-      const { data: projects } = this.currentCv.attributes.projects;
+  patchLanguages(attributes: CvAttributes) {
+    if (attributes.languages) {
+      this.form.patchValue({ languages: attributes.languages }, { emitEvent: false });
+    }
+  }
+
+  patchSkills(attributes: CvAttributes) {
+    if (attributes.skills) {
+      this.form.patchValue({ skills: attributes.skills }, { emitEvent: false });
+    }
+  }
+
+  patchUserInfo(attributes: CvAttributes) {
+    const source = attributes.user ? attributes.user : this.user;
+    const { firstName, lastName, education, description } = source!;
+    this.form.patchValue({ firstName, lastName, education, description }, { emitEvent: false });
+  }
+
+  patchProjects(attributes: CvAttributes) {
+    if (attributes.projects) {
+      const { data: projects } = attributes.projects;
       this.form.patchValue({ projects }, { emitEvent: false });
     }
   }
@@ -206,14 +224,15 @@ export class CvListComponent implements OnInit, OnDestroy, OnChanges {
 
   onProjectSelected(project: Project) {
     this.isProjectModalVisible = false;
+    const attributes = this.currentCv.attributes;
 
-    if (this.currentCv && this.currentCv.attributes.projects) {
-      this.currentCv.attributes.projects.data.push(project);
+    if (attributes.projects.data) {
+      attributes.projects.data.push(project);
     } else if (this.currentCv) {
-      this.currentCv.attributes.projects = { data: [project] };
+      attributes.projects = { data: [project] };
     }
 
-    this.patchProjects();
+    this.patchProjects(attributes);
   }
 
   onHideModals() {

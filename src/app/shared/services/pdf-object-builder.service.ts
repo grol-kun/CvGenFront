@@ -44,10 +44,10 @@ export class PdfObjectBuilderService {
   }
 
   private buildProjectsList(cvObj: Cv) {
-    const projects = cvObj.attributes.projects;
+    const projects = cvObj.attributes.projects.data;
 
     return projects
-      ? projects.data.reduce(
+      ? projects.reduce(
           (a: object[], c) => [
             ...a,
             {
