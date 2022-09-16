@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -41,9 +41,9 @@ export class EditAbilityModalComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnChanges() {
-    if (this.data) {
-      const name = this.data;
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges?.hasOwnProperty('data') && simpleChanges?.['data'].currentValue != '') {
+      const name = simpleChanges?.['data'].currentValue;
       this.form.patchValue({ name }, { emitEvent: false });
     }
   }
