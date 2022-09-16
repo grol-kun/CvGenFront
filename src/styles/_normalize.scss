@@ -179,3 +179,7 @@ ul {
 ::ng-deep .ant-table-thead th.ant-table-column-has-sorters:hover {
   background-color: var(--table-head) !important;
 }
+
+::ng-deep .ant-picker-content th {
+  background-color: var(--table-head);
+}
