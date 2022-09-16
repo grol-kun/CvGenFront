@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as _ from 'lodash';
+//import * as _ from 'lodash';
+import { cloneDeep } from 'lodash';
 
 @Pipe({
   name: 'tableFilter',
@@ -36,7 +37,7 @@ export class TableFilterPipe implements PipeTransform {
     let arrayOfParams = params.split('.');
 
     return data.filter((item) => {
-      let value = _.cloneDeep(item);
+      let value = cloneDeep(item);
 
       let result = arrayOfParams.reduce((previous, current) => previous[current], value);
 
