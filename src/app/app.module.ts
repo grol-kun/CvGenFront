@@ -5,8 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
+import { ru_RU } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import ru from '@angular/common/locales/ru';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
@@ -34,6 +36,7 @@ import { reducers, metaReducers } from './core/store/reducers';
 import { AuthEffects } from './core/store/effects/auth.effects';
 
 registerLocaleData(en);
+registerLocaleData(ru);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -78,7 +81,19 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesi
       deps: [Initializer],
       multi: true,
     },
-    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: NZ_I18N,
+      useFactory: (localId: string) => {
+        switch (localId) {
+          case 'en':
+            return en_US;
+          case 'ru':
+            return ru_RU;
+          default:
+            return en_US;
+        }
+      },
+    },
     { provide: NZ_ICONS, useValue: icons },
     {
       provide: HTTP_INTERCEPTORS,
