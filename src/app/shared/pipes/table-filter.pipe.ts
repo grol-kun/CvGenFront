@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { SimpleObject } from '../models/interfaces/simple-object';
+import * as _ from 'lodash';
 
 @Pipe({
   name: 'tableFilter',
@@ -12,7 +12,10 @@ export class TableFilterPipe implements PipeTransform {
       }
 
       if (params.indexOf('.') === -1) {
-        return data.filter((item) => searchData[0] <= new Date(item) && new Date(item) <= searchData[1]);
+        return data.filter((item) => {
+          const date = new Date(item);
+          return searchData[0] <= date && date <= searchData[1];
+        });
       }
 
       return this.resolveDifficultParams(data, searchData, params);
@@ -33,28 +36,16 @@ export class TableFilterPipe implements PipeTransform {
     let arrayOfParams = params.split('.');
 
     return data.filter((item) => {
-      let value = this.deepClone(item);
+      let value = _.cloneDeep(item);
+
       let result = arrayOfParams.reduce((previous, current) => previous[current], value);
 
       if (typeof searchData === 'string') {
-        return result['toLowerCase']().indexOf(searchData?.toLowerCase()) !== -1;
+        return result.toLowerCase().indexOf(searchData?.toLowerCase()) !== -1;
       }
-      if (typeof result === 'string') {
-        return searchData[0] <= new Date(result) && new Date(result) <= searchData[1];
-      }
-      return item;
-    });
-  }
 
-  private deepClone(obj: SimpleObject) {
-    const clObj: SimpleObject = new Object();
-    for (let i in obj) {
-      if (obj[i] instanceof Object) {
-        clObj[i] = this.deepClone(obj[i]);
-        continue;
-      }
-      clObj[i] = obj[i];
-    }
-    return clObj;
+      const date = new Date(result);
+      return searchData[0] <= date && date <= searchData[1];
+    });
   }
 }

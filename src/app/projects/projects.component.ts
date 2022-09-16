@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
 import { PROJECT_COLUMNS } from '../shared/models/constants/project-columns';
+import { SearchTypeEnum } from '../shared/models/emuns/search-type.enum';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { Project } from '../shared/models/interfaces/project';
 import { ProjectService } from '../shared/services/project.service';
@@ -15,6 +16,7 @@ import { ProjectService } from '../shared/services/project.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
+  searchTypeEnum = SearchTypeEnum;
   projectList$!: Observable<Project[]>;
   searchField = '';
   searchData: string | Date[] = '';

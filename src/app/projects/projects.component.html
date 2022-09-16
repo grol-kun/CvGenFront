@@ -17,7 +17,7 @@
           {{ column.name | translate }}
 
           <nz-filter-trigger
-            *ngIf="column.searchType === 'text'"
+            *ngIf="column.searchType === searchTypeEnum.text"
             [nzActive]="searchData.length > 0"
             [nzDropdownMenu]="menu"
           >
@@ -25,7 +25,7 @@
           </nz-filter-trigger>
 
           <nz-filter-trigger
-            *ngIf="column.searchType === 'date'"
+            *ngIf="column.searchType === searchTypeEnum.date"
             [nzActive]="searchData.length > 0"
             [nzDropdownMenu]="datemenu"
           >
