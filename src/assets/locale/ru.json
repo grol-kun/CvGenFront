@@ -139,7 +139,8 @@
       "new_ability": "Добавить сущность"
     },
     "modal": {
-      "title": "Новая сущность"
+      "title": "Новая сущность",
+      "title_edit": "Редактирование сущности"
     }
   },
   "errors": {
@@ -219,7 +220,8 @@
   },
   "message_box": {
     "error_ability_exists": "Невозможно добавить уже имеющуюся сущность!",
-    "success_ability": "Новая сущность была успешно добавлена!",
+    "success_ability_new": "Новая сущность была успешно добавлена!",
+    "success_ability_update": "Сущность была успешно обновлена!",
     "success_project_new": "Новый проект был успешно создан!",
     "success_project_update": "Проект {{project}} был успешно обновлен!",
     "success_project_delete": "Проект был успешно удален!",

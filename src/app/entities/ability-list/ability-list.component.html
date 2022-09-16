@@ -1,5 +1,5 @@
 <div class="button-block">
-  <button nz-button nzType="primary" (click)="showModal()">
+  <button nz-button nzType="primary" (click)="showAddModal()">
     {{ 'entities.actions.new_ability' | translate }}
   </button>
 </div>
@@ -25,7 +25,14 @@
       *ngFor="let ability of abilities | filter: searchAbility:'attributes.name'; trackBy: trackByFn"
     >
       <div class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper">
-        {{ ability.attributes.name }}
+        <span>{{ ability.attributes.name }}</span>
+        <i
+          nz-icon
+          nzType="edit"
+          nzTheme="outline"
+          class="page__menu__first-block__nz-menu__nz-menu-item__inner-wrapper__nz-icon"
+          (click)="showEditModal(ability.id, ability.attributes.name)"
+        ></i>
         <i
           nz-icon
           nzType="delete"
@@ -44,8 +51,18 @@
 </div>
 
 <app-ability-modal
-  [isVisible]="isModalVisible"
+  [isVisible]="isAddModalVisible"
   [type]="abilityType"
   [abilitiesList]="abilitiesList$ | async"
   (hideModal)="onHideModal()"
 ></app-ability-modal>
+
+<app-edit-ability-modal
+  [isVisible]="isEditModalVisible"
+  [id]="abilityId"
+  [data]="abilityData"
+  [type]="abilityType"
+  [abilitiesList]="abilitiesList$ | async"
+  (hideModal)="onHideModal()"
+>
+</app-edit-ability-modal>

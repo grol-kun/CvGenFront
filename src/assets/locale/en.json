@@ -139,7 +139,8 @@
       "new_ability": "New entity"
     },
     "modal": {
-      "title": "New entity"
+      "title": "New entity",
+      "title_edit": "Edit entity"
     }
   },
   "errors": {
@@ -219,7 +220,8 @@
   },
   "message_box": {
     "error_ability_exists": "Cannot add ability that already exists!",
-    "success_ability": "New ability was created successfully!",
+    "success_ability_new": "New ability was created successfully!",
+    "success_ability_update": "Ability was updated successfully!",
     "success_project_new": "New project was created successfully!",
     "success_project_update": "Project {{project}} was updated successfully!",
     "success_project_delete": "Project has just been deleted!",
