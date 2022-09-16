@@ -11,6 +11,7 @@ import { TranslateControlModule } from '../shared/components/translate/translate
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApplicationPipesModule } from '../shared/pipes/application-pipes.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [ProjectsComponent],
@@ -26,6 +27,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     ApplicationPipesModule,
     NzInputModule,
     TranslateControlModule,
+    NzDatePickerModule,
   ],
 })
 export class ProjectsModule {}

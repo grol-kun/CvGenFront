@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
 import { PROJECT_COLUMNS } from '../shared/models/constants/project-columns';
+import { SearchTypeEnum } from '../shared/models/emuns/search-type.enum';
 import { ColumnItem } from '../shared/models/interfaces/column-item';
 import { Project } from '../shared/models/interfaces/project';
 import { ProjectService } from '../shared/services/project.service';
@@ -15,10 +16,12 @@ import { ProjectService } from '../shared/services/project.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
+  searchTypeEnum = SearchTypeEnum;
   projectList$!: Observable<Project[]>;
   searchField = '';
-  searchValue = '';
+  searchData: string | Date[] = '';
   searchControl = new FormControl<string>('');
+  searchDateContorl = new FormControl<Date[]>([]);
   listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
 
   private destroy$ = new Subject<void>();
@@ -37,8 +40,13 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   initSearch() {
     this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
-      this.searchValue = data ?? '';
-      this.cdr.detectChanges();
+      this.searchData = data ?? '';
+      this.cdr.markForCheck();
+    });
+
+    this.searchDateContorl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
+      this.searchData = data ?? [];
+      this.cdr.markForCheck();
     });
   }
 
@@ -48,7 +56,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   onFilterTrigger(searchField: string) {
     if (this.searchField !== searchField) {
-      this.searchValue = '';
+      this.searchData = '';
     }
     this.searchField = searchField;
   }
