@@ -1,5 +1,5 @@
 <nz-modal
-  nzWidth='60%'
+  nzWidth="60%"
   [nzVisible]="isVisible"
   [nzTitle]="'employees.actions.cv_preview.title' | translate"
   (nzOnCancel)="handleCancel()"
@@ -11,7 +11,10 @@
           <img src="/assets/svgs/logo.svg" alt="Innowise" />
         </div>
         <div class="preview-container__head__right" *ngIf="user">
-          <p class="preview-container__head__right__username">{{ user.firstName }} {{ user.lastName }}</p>
+          <p class="preview-container__head__right__username">
+            {{ previewCv.attributes.user.firstName ?? user.firstName }}
+            {{ previewCv.attributes.user.lastName ?? user.lastName }}
+          </p>
           <p class="preview-container__head__right__email">
             {{ user.email }}
           </p>
@@ -22,7 +25,10 @@
           <div class="preview-container__body__left__skills" *ngIf="previewCv?.attributes?.skills">
             <p class="preview-container__body__left__skills__heading">Skills</p>
             <ul class="preview-container__body__left__skills__list">
-              <li class="preview-container__body__left__skills__list__item" *ngFor="let skill of user?.skills">
+              <li
+                class="preview-container__body__left__skills__list__item"
+                *ngFor="let skill of previewCv.attributes?.skills"
+              >
                 <p class="preview-container__body__left__skills__list__item__name">{{ skill.attributes.name }}</p>
                 <div
                   class="preview-container__body__left__skills__list__item__level"
@@ -40,10 +46,13 @@
               </li>
             </ul>
           </div>
-          <div class="preview-container__body__left__languages" *ngIf="previewCv?.attributes?.languages">
+          <div class="preview-container__body__left__languages" *ngIf="previewCv.attributes?.languages">
             <p class="preview-container__body__left__languages__heading">Languages</p>
             <ul class="preview-container__body__left__languages__list">
-              <li class="preview-container__body__left__languages__list__item" *ngFor="let language of user?.languages">
+              <li
+                class="preview-container__body__left__languages__list__item"
+                *ngFor="let language of previewCv.attributes?.languages"
+              >
                 <p class="preview-container__body__left__languages__list__item__name">{{ language.attributes.name }}</p>
                 <div
                   class="preview-container__body__left__languages__list__item__level"
@@ -63,9 +72,19 @@
           </div>
         </div>
         <div class="preview-container__body__right">
-          <div class="preview-container__body__right__education" *ngIf="user?.education">
+          <div
+            class="preview-container__body__right__education"
+            *ngIf="previewCv.attributes.user?.description as description"
+          >
+            <p class="preview-container__body__right__education__heading">Profile</p>
+            <p class="preview-container__body__right__education__info">{{ description }}</p>
+          </div>
+          <div
+            class="preview-container__body__right__education"
+            *ngIf="previewCv.attributes.user?.education as education"
+          >
             <p class="preview-container__body__right__education__heading">Education</p>
-            <p class="preview-container__body__right__education__info">{{ user?.education }}</p>
+            <p class="preview-container__body__right__education__info">{{ education }}</p>
           </div>
           <div class="preview-container__body__right__projects" *ngIf="previewCv?.attributes?.projects">
             <p class="preview-container__body__right__projects__heading">Projects</p>
