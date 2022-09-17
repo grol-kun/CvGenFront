@@ -12,6 +12,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApplicationPipesModule } from '../shared/pipes/application-pipes.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { AppTableModule } from '../shared/components/app-table/app-table.module';
 
 @NgModule({
   declarations: [ProjectsComponent],
@@ -28,6 +29,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzInputModule,
     TranslateControlModule,
     NzDatePickerModule,
+    AppTableModule,
   ],
 })
 export class ProjectsModule {}

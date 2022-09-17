@@ -1,0 +1,39 @@
+@import "../../../../styles.scss";
+
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 20px;
+}
+
+.td-wrapper {
+  &__nz-icon {
+    display: none;
+    z-index: 5;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--status-error);
+    }
+  }
+
+  &:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .td-wrapper__nz-icon {
+      display: flex;
+      z-index: 5;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--status-error);
+      }
+    }
+  }
+}
+
+.search-box {
+  padding: 8px;
+}

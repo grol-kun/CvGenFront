@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { takeUntil, Subject, BehaviorSubject, switchMap, debounceTime } from 'rxjs';
+import { takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
 import { CV_COLUMNS } from '../shared/models/constants/cv-columns';
-import { ColumnItem } from '../shared/models/interfaces/column-item';
+import { DataTypeEnum } from '../shared/models/emuns/data-type.enum';
 import { Cv } from '../shared/models/interfaces/cv';
 import { CvService } from '../shared/services/cv.service';
 
@@ -12,20 +11,16 @@ import { CvService } from '../shared/services/cv.service';
   selector: 'app-cvs',
   templateUrl: './cvs.component.html',
   styleUrls: ['./cvs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvsComponent implements OnInit, OnDestroy {
   cvList$ = new BehaviorSubject<Cv[]>([]);
-  searchField = '';
-  searchValue = '';
-  searchControl = new FormControl<string>('');
-  listOfColumns: ColumnItem[] = CV_COLUMNS;
+  CV_COLUMNS = CV_COLUMNS;
+  dataTypeEnum = DataTypeEnum;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private messageService: NzMessageService,
-    private cdr: ChangeDetectorRef,
     private cvService: CvService,
     private translateService: TranslateService
   ) {}
@@ -34,21 +29,6 @@ export class CvsComponent implements OnInit, OnDestroy {
     this.getCvList()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => this.cvList$.next(data));
-    this.initSearch();
-  }
-
-  initSearch() {
-    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
-      this.searchValue = data ?? '';
-      this.cdr.detectChanges();
-    });
-  }
-
-  onFilterTrigger(searchField: string) {
-    if (this.searchField !== searchField) {
-      this.searchValue = '';
-    }
-    this.searchField = searchField;
   }
 
   getCvList() {
@@ -66,10 +46,6 @@ export class CvsComponent implements OnInit, OnDestroy {
         this.cvList$.next(data);
         this.messageService.create('success', this.translateService.instant('message_box.success_cv_delete'));
       });
-  }
-
-  onClick(event: Event) {
-    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

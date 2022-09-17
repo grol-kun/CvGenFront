@@ -3,10 +3,6 @@
 .page {
   height: 80vh;
   overflow: auto;
-
-  .search-box {
-    padding: 8px;
-  }
 }
 
 @media (max-width: $view-768) {

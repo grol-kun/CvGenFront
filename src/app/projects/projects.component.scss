@@ -9,24 +9,6 @@
     justify-content: flex-end;
     margin: 0 0 20px;
   }
-  .td-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &__nz-icon {
-      z-index: 5;
-      cursor: pointer;
-
-      &:hover {
-        color: var(--status-error);
-      }
-    }
-  }
-
-  .search-box {
-    padding: 8px;
-  }
 }
 
 @media (max-width: $view-768) {
