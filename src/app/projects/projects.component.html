@@ -5,10 +5,21 @@
     </button>
   </div>
 
-  <app-table
-    [listOfColumns]="PROJECT_COLUMNS"
-    [data]="projectList$ | async"
-    [datatype]="dataTypeEnum.projects"
-    (deleteEntity)="deleteItem($event)"
-  ></app-table>
+  <app-table [listOfColumns]="PROJECT_COLUMNS" [data]="projectList$ | async" (redirection)="redirect($event)">
+    <ng-template let-data #nz_icon>
+      <i
+        nz-icon
+        nzType="delete"
+        nzTheme="outline"
+        class="nz-icon"
+        nz-popconfirm
+        [nzPopconfirmTitle]="'popconfirm.title' | translate"
+        [nzOkText]="'popconfirm.ok' | translate"
+        [nzCancelText]="'popconfirm.cancel' | translate"
+        nzPopconfirmPlacement="left"
+        (nzOnConfirm)="deleteItem(data.id)"
+        (click)="onClick($event)"
+      ></i>
+    </ng-template>
+  </app-table>
 </div>

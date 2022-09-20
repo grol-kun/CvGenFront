@@ -7,30 +7,10 @@
 }
 
 .td-wrapper {
-  &__nz-icon {
-    display: none;
-    z-index: 5;
-    cursor: pointer;
-
-    &:hover {
-      color: var(--status-error);
-    }
-  }
-
   &:last-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .td-wrapper__nz-icon {
-      display: flex;
-      z-index: 5;
-      cursor: pointer;
-
-      &:hover {
-        color: var(--status-error);
-      }
-    }
   }
 }
 

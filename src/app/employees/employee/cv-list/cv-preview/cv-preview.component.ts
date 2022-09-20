@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cv } from 'src/app/shared/models/interfaces/cv';
 import { UserInfo } from 'src/app/shared/models/interfaces/user-info';
 import { PdfService } from 'src/app/shared/services/pdf.service';
@@ -7,6 +7,7 @@ import { PdfService } from 'src/app/shared/services/pdf.service';
   selector: 'app-cv-preview',
   templateUrl: './cv-preview.component.html',
   styleUrls: ['./cv-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvPreviewComponent {
   @Output() hideModal = new EventEmitter<boolean>();
@@ -28,7 +29,7 @@ export class CvPreviewComponent {
     this.hideModal.emit();
   }
 
-  exportPdf() {  
+  exportPdf() {
     this.pdf.generatePdf(this.previewCv, this.user!);
   }
 }

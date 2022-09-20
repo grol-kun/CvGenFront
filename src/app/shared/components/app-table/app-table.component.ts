@@ -1,22 +1,34 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { DataTypeEnum } from '../../models/emuns/data-type.enum';
 import { SearchTypeEnum } from '../../models/emuns/search-type.enum';
 import { ColumnItem } from '../../models/interfaces/column-item';
-import { Datatype } from '../../models/types/data-type';
+import { Entity } from '../../models/types/entity';
 
 @Component({
   selector: 'app-table',
   templateUrl: './app-table.component.html',
   styleUrls: ['./app-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppTableComponent implements OnInit {
   @Input() listOfColumns: ColumnItem[] = [];
-  @Input() data: any[] | null = null;
-  @Input() datatype!: Datatype;
+  @Input() data: Entity[] | null = null;
 
-  @Output() deleteEntity = new EventEmitter<number>();
+  @ContentChild('nz_icon', { static: false }) iconTemplateRef: TemplateRef<any> | undefined;
+
+  @Output() redirection = new EventEmitter<Entity>();
 
   searchTypeEnum = SearchTypeEnum;
   dataTypeEnum = DataTypeEnum;
@@ -45,19 +57,15 @@ export class AppTableComponent implements OnInit {
     });
   }
 
+  redirect(data: Entity) {
+    this.redirection.emit(data);
+  }
+
   onFilterTrigger(searchField: string) {
     if (this.searchField !== searchField) {
       this.searchData = '';
     }
     this.searchField = searchField;
-  }
-
-  deleteItem(id: number) {
-    this.deleteEntity.emit(id);
-  }
-
-  onClick(event: Event) {
-    event.stopPropagation();
   }
 
   ngOnDestroy(): void {

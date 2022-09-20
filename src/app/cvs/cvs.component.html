@@ -3,10 +3,21 @@
     <button nz-button nzType="primary" [routerLink]="['/cvs/new']">{{ 'cvs.actions.new_cv' | translate }}</button>
   </div>
 
-  <app-table
-    [listOfColumns]="CV_COLUMNS"
-    [data]="cvList$ | async"
-    [datatype]="dataTypeEnum.cvs"
-    (deleteEntity)="deleteItem($event)"
-  ></app-table>
+  <app-table [listOfColumns]="CV_COLUMNS" [data]="cvList$ | async" (redirection)="redirect($event)">
+    <ng-template let-data #nz_icon>
+      <i
+        nz-icon
+        nzType="delete"
+        nzTheme="outline"
+        class="nz-icon"
+        nz-popconfirm
+        [nzPopconfirmTitle]="'popconfirm.title' | translate"
+        [nzOkText]="'popconfirm.ok' | translate"
+        [nzCancelText]="'popconfirm.cancel' | translate"
+        nzPopconfirmPlacement="left"
+        (nzOnConfirm)="deleteItem(data.id)"
+        (click)="onClick($event)"
+      ></i>
+    </ng-template>
+  </app-table>
 </div>

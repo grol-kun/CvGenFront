@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CV_COLUMNS } from 'src/app/shared/models/constants/cv-columns';
 import { ColumnItem } from 'src/app/shared/models/interfaces/column-item';
@@ -9,6 +9,7 @@ import { CvService } from 'src/app/shared/services/cv.service';
   selector: 'app-cv-modal',
   templateUrl: './cv-modal.component.html',
   styleUrls: ['./cv-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvModalComponent implements OnInit {
   @Output()

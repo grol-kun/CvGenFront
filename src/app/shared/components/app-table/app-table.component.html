@@ -29,26 +29,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr
-      *ngFor="let data of filterTable.data | tableFilter: searchData:searchField"
-      [routerLink]="['/' + datatype + '/', data.id]"
-    >
-      <td *ngFor="let column of listOfColumns" class="td-wrapper">
+    <tr *ngFor="let data of filterTable.data | tableFilter: searchData:searchField" (click)="redirect(data)">
+      <td *ngFor="let column of listOfColumns; let i = index" class="td-wrapper">
         {{ data | getField: column.fieldName }}
-        <i
-          *ngIf="datatype !== dataTypeEnum.employees"
-          nz-icon
-          nzType="delete"
-          nzTheme="outline"
-          class="td-wrapper__nz-icon"
-          nz-popconfirm
-          [nzPopconfirmTitle]="'popconfirm.title' | translate"
-          [nzOkText]="'popconfirm.ok' | translate"
-          [nzCancelText]="'popconfirm.cancel' | translate"
-          nzPopconfirmPlacement="left"
-          (nzOnConfirm)="deleteItem(data.id)"
-          (click)="onClick($event)"
-        ></i>
+        <ng-container
+          *ngIf="iconTemplateRef && i === listOfColumns.length - 1"
+          [ngTemplateOutlet]="iconTemplateRef"
+          [ngTemplateOutletContext]="{ $implicit: data }"
+        >
+        </ng-container>
       </td>
     </tr>
   </tbody>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,6 +12,7 @@ import { CvService } from 'src/app/shared/services/cv.service';
   selector: 'app-cv',
   templateUrl: './cv.component.html',
   styleUrls: ['./cv.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvComponent implements OnInit, OnDestroy {
   cv!: Cv;
