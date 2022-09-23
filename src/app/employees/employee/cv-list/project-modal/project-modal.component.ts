@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { PROJECT_COLUMNS } from 'src/app/shared/models/constants/project-columns';
 import { ColumnItem } from 'src/app/shared/models/interfaces/column-item';
@@ -9,6 +9,7 @@ import { ProjectService } from 'src/app/shared/services/project.service';
   selector: 'app-project-modal',
   templateUrl: './project-modal.component.html',
   styleUrls: ['./project-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectModalComponent implements OnInit {
   @Output()

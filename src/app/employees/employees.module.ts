@@ -9,6 +9,7 @@ import { ApplicationPipesModule } from 'src/app/shared/pipes/application-pipes.m
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { TranslateControlModule } from '../shared/components/translate/translate-control.module';
+import { AppTableModule } from '../shared/components/app-table/app-table.module';
 
 @NgModule({
   declarations: [EmployeesComponent],
@@ -22,6 +23,7 @@ import { TranslateControlModule } from '../shared/components/translate/translate
     ApplicationPipesModule,
     NzIconModule,
     NzInputModule,
+    AppTableModule,
   ],
 })
 export class EmployeesModule {}

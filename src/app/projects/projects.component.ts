@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, map, takeUntil, Subject, debounceTime } from 'rxjs';
+import { map, takeUntil, Subject, BehaviorSubject, switchMap } from 'rxjs';
 import { PROJECT_COLUMNS } from '../shared/models/constants/project-columns';
-import { SearchTypeEnum } from '../shared/models/emuns/search-type.enum';
-import { ColumnItem } from '../shared/models/interfaces/column-item';
+import { DataTypeEnum } from '../shared/models/emuns/data-type.enum';
 import { Project } from '../shared/models/interfaces/project';
+import { Entity } from '../shared/models/types/entity';
 import { ProjectService } from '../shared/services/project.service';
 
 @Component({
@@ -16,60 +16,44 @@ import { ProjectService } from '../shared/services/project.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
-  searchTypeEnum = SearchTypeEnum;
-  projectList$!: Observable<Project[]>;
-  searchField = '';
-  searchData: string | Date[] = '';
-  searchControl = new FormControl<string>('');
-  searchDateContorl = new FormControl<Date[]>([]);
-  listOfColumns: ColumnItem[] = PROJECT_COLUMNS;
+  projectList$ = new BehaviorSubject<Project[]>([]);
+  PROJECT_COLUMNS = PROJECT_COLUMNS;
+  dataTypeEnum = DataTypeEnum;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private projectService: ProjectService,
     private message: NzMessageService,
-    private cdr: ChangeDetectorRef,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.getProjectList();
-    this.initSearch();
-  }
-
-  initSearch() {
-    this.searchControl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
-      this.searchData = data ?? '';
-      this.cdr.markForCheck();
-    });
-
-    this.searchDateContorl.valueChanges.pipe(debounceTime(200), takeUntil(this.destroy$)).subscribe((data) => {
-      this.searchData = data ?? [];
-      this.cdr.markForCheck();
-    });
+    this.getProjectList()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => this.projectList$.next(data));
   }
 
   getProjectList() {
-    this.projectList$ = this.projectService.getProjects().pipe(map((data) => data.data));
-  }
-
-  onFilterTrigger(searchField: string) {
-    if (this.searchField !== searchField) {
-      this.searchData = '';
-    }
-    this.searchField = searchField;
+    return this.projectService.getProjects().pipe(map((data) => data.data));
   }
 
   deleteItem(id: number) {
     this.projectService
       .deleteProjectById(id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
+      .pipe(
+        switchMap(() => this.getProjectList()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((data) => {
+        this.projectList$.next(data);
         this.message.create('success', this.translateService.instant('message_box.success_delete'));
-        this.getProjectList();
-        this.cdr.detectChanges();
       });
+  }
+
+  redirect(data: Entity) {
+    this.router.navigate([`/${this.dataTypeEnum.projects}/`, data.id]);
   }
 
   onClick(event: Event) {

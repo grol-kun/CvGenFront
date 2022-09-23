@@ -1,0 +1,19 @@
+@import "../../../../styles.scss";
+
+.button-block {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 20px;
+}
+
+.td-wrapper {
+  &:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.search-box {
+  padding: 8px;
+}

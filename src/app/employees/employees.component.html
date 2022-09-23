@@ -1,44 +1,7 @@
 <div class="page">
-  <nz-table #filterTable [nzData]="userList" nzTableLayout="fixed" *ngIf="usersList$ | async as userList">
-    <thead>
-      <tr>
-        <th
-          *ngFor="let column of listOfColumns"
-          nzCustomFilter
-          [nzSortOrder]="column.sortOrder"
-          [nzSortFn]="column.sortFn"
-          [nzSortDirections]="column.sortDirections"
-        >
-          {{ column.name | translate }}
-
-          <nz-filter-trigger [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <span nz-icon nzType="search" (click)="onFilterTrigger(column.searchField)"></span>
-          </nz-filter-trigger>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let data of filterTable.data | filter: searchValue:searchField"
-        [routerLink]="['/employees/', data.id]"
-      >
-        <td>{{ data.firstName }}</td>
-        <td>{{ data.lastName }}</td>
-        <td>{{ data.email }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
-
-  <nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input
-          type="text"
-          nz-input
-          [placeholder]="'table_filter.placeholder' | translate"
-          [formControl]="searchControl"
-        />
-      </div>
-    </div>
-  </nz-dropdown-menu>
+  <app-table
+    [listOfColumns]="EMPLOYEE_COLUMNS"
+    [data]="usersList$ | async"
+    (redirection)="redirect($event)"
+  ></app-table>
 </div>

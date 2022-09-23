@@ -13,7 +13,7 @@ export class TableFilterPipe implements PipeTransform {
 
       if (params.indexOf('.') === -1) {
         return data.filter((item) => {
-          const date = new Date(item);
+          const date = new Date(item[params]);
           return searchData[0] <= date && date <= searchData[1];
         });
       }

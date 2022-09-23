@@ -5,6 +5,6 @@ export interface ColumnItem {
   sortOrder: NzTableSortOrder | null;
   sortFn: NzTableSortFn<any> | null;
   sortDirections: NzTableSortOrder[];
-  searchField: string;
   searchType: SearchType;
+  fieldName: string;
 }

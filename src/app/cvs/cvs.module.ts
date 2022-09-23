@@ -11,6 +11,7 @@ import { TranslateControlModule } from '../shared/components/translate/translate
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApplicationPipesModule } from '../shared/pipes/application-pipes.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { AppTableModule } from '../shared/components/app-table/app-table.module';
 @NgModule({
   declarations: [CvsComponent],
   imports: [
@@ -25,6 +26,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzDropDownModule,
     ApplicationPipesModule,
     NzInputModule,
+    AppTableModule,
   ],
 })
 export class CvsModule {}

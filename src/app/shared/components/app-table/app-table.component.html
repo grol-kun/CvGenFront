@@ -1,0 +1,61 @@
+<nz-table #filterTable [nzData]="dataList" nzTableLayout="fixed" *ngIf="data as dataList">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        nzCustomFilter
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+      >
+        {{ column.name | translate }}
+
+        <nz-filter-trigger
+          *ngIf="column.searchType === searchTypeEnum.text"
+          [nzActive]="searchData.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search" (click)="onFilterTrigger(column.fieldName)"></span>
+        </nz-filter-trigger>
+
+        <nz-filter-trigger
+          *ngIf="column.searchType === searchTypeEnum.date"
+          [nzActive]="searchData.length > 0"
+          [nzDropdownMenu]="datemenu"
+        >
+          <span nz-icon nzType="search" (click)="onFilterTrigger(column.fieldName)"></span>
+        </nz-filter-trigger>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data | tableFilter: searchData:searchField" (click)="redirect(data)">
+      <td *ngFor="let column of listOfColumns; let i = index" class="td-wrapper">
+        {{ data | getField: column.fieldName }}
+        <ng-container
+          *ngIf="iconTemplateRef && i === listOfColumns.length - 1"
+          [ngTemplateOutlet]="iconTemplateRef"
+          [ngTemplateOutletContext]="{ $implicit: data }"
+        >
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        [placeholder]="'table_filter.placeholder' | translate"
+        [formControl]="searchControl"
+      />
+    </div>
+  </div>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #datemenu="nzDropdownMenu">
+  <nz-range-picker [formControl]="searchDateContorl"></nz-range-picker>
+</nz-dropdown-menu>

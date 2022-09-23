@@ -9,23 +9,15 @@
     justify-content: flex-end;
     margin: 0 0 20px;
   }
-  .td-wrapper {
+
+  .nz-icon {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    z-index: 5;
+    cursor: pointer;
 
-    &__nz-icon {
-      margin-left: 10px;
-      z-index: 5;
-      cursor: pointer;
-
-      &:hover {
-        color: var(--status-error);
-      }
+    &:hover {
+      color: var(--status-error);
     }
-  }
-  .search-box {
-    padding: 8px;
   }
 }
 
